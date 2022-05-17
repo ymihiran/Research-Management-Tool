@@ -19,3 +19,5 @@ app.use(cors());
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+const topicRouter = require("./routes/topicregs.js");
+app.use("/topicReg",topicRouter);
