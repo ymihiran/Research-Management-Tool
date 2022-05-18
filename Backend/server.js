@@ -22,3 +22,6 @@ app.listen(PORT, () => {
 
 const topicRouter = require("./routes/topicregs.js");
 app.use("/topicReg",topicRouter);
+
+const markingRouter = require("./routes/markingschemes.js");
+app.use("/marking",markingRouter);
