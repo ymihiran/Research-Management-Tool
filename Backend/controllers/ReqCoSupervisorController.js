@@ -1,3 +1,3 @@
-import RequestCoSupervisor from "../models/CoSupervisor";
+import CoSupervisor from "../models/CoSupervisor";
 
-export const RequestCoSupervisor = async (req, res) => {};
+export const ReqCoSupervisor = async (req, res) => {};

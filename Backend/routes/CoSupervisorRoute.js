@@ -1,7 +1,7 @@
 import express from "express";
-import { RequestCoSupervisor } from "../controllers/ReqCoSupervisorController";
+import { ReqCoSupervisor } from "../controllers/ReqCoSupervisorController";
 const router = express.Router;
 
-router.post("/coSupervisor", RequestCoSupervisor);
+router.post("/coSupervisor", ReqCoSupervisor);
 
 export default router;
