@@ -1,6 +1,6 @@
 import express from "express";
-import { ReqCoSupervisor } from "../controllers/ReqCoSupervisorController";
-const router = express.Router;
+import { ReqCoSupervisor } from "../controllers/ReqCoSupervisorController.js";
+const router = express.Router();
 
 router.post("/coSupervisor", ReqCoSupervisor);
 

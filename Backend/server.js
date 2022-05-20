@@ -16,6 +16,9 @@ connectDB();
 app.use(express.json());
 app.use(cors());
 
+import router from "./routes/DocumentEvaluationRoute.js";
+app.use("/points", router);
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

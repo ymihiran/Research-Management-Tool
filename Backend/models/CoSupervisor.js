@@ -23,7 +23,7 @@ const CoSupervisorSchema = new Schema(
 );
 const CoSupervisor = mongoose.model(
   "Request Co Supervisor",
-  RequestCoSupervisorSchema
+  CoSupervisorSchema
 );
 
 export default CoSupervisor;
