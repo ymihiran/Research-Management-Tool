@@ -22,5 +22,6 @@ app.use("/points", router);
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-const topicRouter = require("./routes/topicregs.js");
-app.use("/topicReg",topicRouter);
+
+import topicRouter from "./routes/topicregs.js";
+app.use("/topicReg", topicRouter);
