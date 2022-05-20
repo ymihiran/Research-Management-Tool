@@ -1,9 +1,10 @@
 import React from "react";
+import SubmitTopic from "./components/SubmitTopic";
 
 function App() {
   return (
     <div>
-      <h1>Hello World</h1>
+      <SubmitTopic/>
     </div>
   );
 }
