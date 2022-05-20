@@ -1,7 +1,7 @@
-const express = require("express");
-const cors = require("cors");
-const dotenv = require("dotenv");
-const connectDB = require("./db");
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import connectDB from "./db.js";
 
 const app = express();
 
@@ -15,6 +15,9 @@ connectDB();
 
 app.use(express.json());
 app.use(cors());
+
+import router from "./routes/DocumentEvaluationRoute.js";
+app.use("/points", router);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

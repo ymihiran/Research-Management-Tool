@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
-const RequestCoSupervisorSchema = new Schema(
+const CoSupervisorSchema = new Schema(
   {
     requestId: {
       type: String,
@@ -21,8 +21,9 @@ const RequestCoSupervisorSchema = new Schema(
   },
   { timestamps: true }
 );
-const RequestCoSupervisor = mongoose.model(
-  "RequestCoSupervisor",
-  RequestCoSupervisorSchema
+const CoSupervisor = mongoose.model(
+  "Request Co Supervisor",
+  CoSupervisorSchema
 );
-module.exports = RequestCoSupervisor;
+
+export default CoSupervisor;
