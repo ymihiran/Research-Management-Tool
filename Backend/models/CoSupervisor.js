@@ -22,7 +22,7 @@ const CoSupervisorSchema = new Schema(
   { timestamps: true }
 );
 const CoSupervisor = mongoose.model(
-  "RequestCoSupervisor",
+  "Request Co Supervisor",
   RequestCoSupervisorSchema
 );
 
