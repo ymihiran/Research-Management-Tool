@@ -5,12 +5,26 @@ export default function SubmitTopic()  {
 
     return(
         <div className="topic-container">
-            <div style={{backgroundColor:"#0F0934"}}>Panel 1
-                <div  className="t-title-container">
-                    <h1>Submit </h1>
+            <div style={{backgroundColor:"#0F0934"}}>
+
+                <div>
+                    <img className="img-side" src="https://res.cloudinary.com/sliit-yasantha/image/upload/v1653068950/logo11_ggebb3.png"></img>
                 </div>
+
+                <div  className="t-title-container">
+                    <label className="sideLable" style={{color:"#FF5631"}}>Submit </label> <br className="br1" />
+                    <label className="sideLable" >Research</label><br className="br1" />
+                    <label className="sideLable" >Topic </label> <br className="br1" />
+                </div>
+
+                <div className="sublable-container">
+                    <label className="subLable">Submit topic of your research project. You can check again the status of the approval.</label>
+                </div>
+                <br/>
+                <lable className="side-btn"> Register Now</lable>
+
             </div>
-            <div style={{backgroundColor:"white"}}>Panel 2
+            <div style={{backgroundColor:"white"}}>
             
             <div className="t-from-container">
                 <form >
@@ -57,15 +71,20 @@ export default function SubmitTopic()  {
 
                         <div className="mb-3">
                             <label className="t-form-label">Comments (Optional)</label>
-                            <input type="text"  style={{width:"450px", height:"150px"}}  id="cName"
+                            <input type="text"  style={{width:"450px", height:"100px"}}  id="cName"
                                 
                             />
                         </div>
 
 
 
-                        <button type="submit" className="btn btn-primary" style={{backgroundColor:"#0F0934"}} >Submit</button>
+                        <button type="submit" className="btn btn-primary" style={{backgroundColor:"#0F0934",width:"200px",fontWeight:"bold"}} >Submit</button>
                     </form>
+
+                    <div className="bottom-t-container">
+                        <label className="bottom-t" style={{color:"#FF5631"}}> SLIIT</label> <label className="bottom-t"> Research</label> <br />
+                        <label className="bottom-t"> Management Tool</label>
+                    </div>
             
                 </div>
 

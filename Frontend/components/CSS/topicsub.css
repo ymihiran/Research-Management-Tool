@@ -29,6 +29,7 @@ input{
 .t-from-container{
     align-content : center;
     margin-left: 30%;
+    margin-top: 40px;
 }
 
 .t-form-label {
@@ -39,11 +40,54 @@ input{
 .t-title-container{
     align-content : center;
     margin-left: 30%;
-    margin-top: 50%;
+    margin-top: 10%;
 }
 
 
-h1{
+.sideLable{
     color:#fff;
-    margin-top: 50%;
+    font-size:5rem ;
+    font-weight:200;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+.br1{
+    display: block;
+    margin-bottom: -2em;
+}
+
+.subLable{
+    color:#B7B5C2; 
+}
+
+.sublable-container{
+    width: 300px;
+    margin-left: 30%;
+    margin-top: 20px;
+}
+
+.side-btn{
+    background-color: #00D8B6;
+    font-size:2rem ;
+    color:#fff;
+    border-radius: 2px;
+    padding: 5px 10px 5px;
+    margin-left: 30%;
+}
+
+.img-side{
+    width: 150px;
+    height: 150px;
+    margin-left: 20px;
+}
+
+.bottom-t-container{
+    position: absolute;
+    bottom: 0px;
+    right: 10px;
+}
+
+.bottom-t{
+    font-weight: bold;
+    font-size: 1rem;
 }
