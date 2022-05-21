@@ -1,7 +1,56 @@
 import "./CSS/topicsub.css";
 import "./CSS/btrap.css";
+import React, {useState, useEffect}  from 'react';
+import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 export default function SubmitTopic()  {
+
+    let history = useHistory();
+
+    
+    const [tid, settid] = useState();
+    const [groupID, setgroupID] = useState();
+    const [groupName, setvgroupName] = useState();
+    const [rField, setrField] = useState();
+    const [rTopic, setrTopic] = useState();
+    const [leaderEmail, setleaderEmail] = useState();
+    const [comment, setacomment] = useState();
+
+
+    function submitData(e) {
+        e.preventDefault();
+        settid("1111");
+        const newTopic = {
+              
+            tid,
+            groupID,
+            groupName,
+            rField,
+            rTopic,
+            leaderEmail,
+            comment,
+        }
+
+        axios.post("http://localhost:8070/topicReg/",newTopic).then(()=>{
+
+            alert("Topic added");
+            e.target.reset();
+            history.push('/StdTopicList');
+            
+    
+         }).catch((err)=>{
+    
+            alert(err);
+         })
+    
+
+    }
+
+
+
+
+
 
     return(
         <div className="topic-container">
@@ -27,25 +76,33 @@ export default function SubmitTopic()  {
             <div style={{backgroundColor:"white"}}>
             
             <div className="t-from-container">
-                <form >
+                <form onSubmit={submitData}>
                         <div className="mb-3">
                             <label className="t-form-label" style={{color:"#322B5F"}}>Group ID</label>
                             <input type="text"  style={{width:"450px"}} className="t-form-control" id="cUName"
-                                
+                                onChange={e=>{
+                                    setgroupID(e.target.value);
+                                }}
                             />
                         </div>
 
                         <div className="mb-3">
                             <label className="t-form-label">Group Name</label>
                             <input type="text"  style={{width:"450px"}}  id="cName"
-                                
+                                onChange={e=>{
+                                    setvgroupName(e.target.value);
+                                }}
                             />
                         </div>
 
                         <div className="mb-3">
                             <label className="t-form-label">Research Field</label>
                             
-                            <select className='form-control' name="Field" id="Field" style={{width:"450px",border: "2px solid #ced4da"}}>
+                            <select className='form-control' name="Field" id="Field" style={{width:"450px",border: "2px solid #ced4da"}}
+                                onChange={e=>{
+                                    setrField(e.target.value);
+                                }}
+                            >
                                 <option value="Default">Select one</option>
                                 <option value="Artificial Interligance">Artificial Interligance</option>
                                 <option value="Machine Learning">Machine Learning</option>
@@ -58,6 +115,9 @@ export default function SubmitTopic()  {
                         <div className="mb-3">
                             <label className="t-form-label">Research Topic</label>
                             <input type="text"  style={{width:"450px"}}  id="cName"   
+                                onChange={e=>{
+                                    setrTopic(e.target.value);
+                                }}
                             />
                            
                         </div>
@@ -65,14 +125,18 @@ export default function SubmitTopic()  {
                         <div className="mb-3">
                             <label className="t-form-label">Group Leader's email</label>
                             <input type="text"  style={{width:"450px"}}  id="cName"
-                                
+                                onChange={e=>{
+                                    setleaderEmail(e.target.value);
+                                }}
                             />
                         </div>
 
                         <div className="mb-3">
                             <label className="t-form-label">Comments (Optional)</label>
                             <input type="text"  style={{width:"450px", height:"100px"}}  id="cName"
-                                
+                                onChange={e=>{
+                                    setacomment(e.target.value);
+                                }}
                             />
                         </div>
 
