@@ -1,9 +1,10 @@
 import React from "react";
+import DocumentEvaluation from "./components/DocumentEvaluation";
 
 function App() {
   return (
     <div>
-      <h1>Hello World</h1>
+      <DocumentEvaluation />
     </div>
   );
 }
