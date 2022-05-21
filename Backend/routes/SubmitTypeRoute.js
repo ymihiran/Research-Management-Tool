@@ -1,6 +1,6 @@
 import express from "express";
 
-import { SubmitType } from "../controllers/SubmitTypeController";
+import { SubmitType } from "../controllers/SubmitTypeController.js";
 const router = express.Router();
 
 

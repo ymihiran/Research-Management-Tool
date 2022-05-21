@@ -18,6 +18,9 @@ connectDB();
 app.use(express.json());
 app.use(cors());
 
+import router from "./routes/SubmitTypeRoute.js";
+app.use("/docType", router);
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
