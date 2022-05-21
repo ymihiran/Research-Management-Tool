@@ -21,7 +21,7 @@ const userSchema = new Schema({
 
     avatar: {
         type: String,
-        default:"https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png"
+        default:"https://res.cloudinary.com/dl99x/image/upload/v1646240499/images_hiwgpp.png"
     },
 
     mobile: {
@@ -30,6 +30,7 @@ const userSchema = new Schema({
     },
 
     user_role: {
+        required: [true,"Please select the user role"],
         type: String,
         default:"Student"
     },
