@@ -1,7 +1,7 @@
 import "./CSS/topicsub.css";
 import "./CSS/btrap.css";
 
-export default function StdTopicList()  {
+export default function TopicList()  {
 
     return(
         <div className="t-list-container">
@@ -63,7 +63,7 @@ export default function StdTopicList()  {
 
                     <div>
                         <button className="t-nav-btn">
-                            Go to Questions
+                            Ask A Question
                         </button>
                     </div>
                 
