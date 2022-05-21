@@ -16,8 +16,13 @@ connectDB();
 app.use(express.json());
 app.use(cors());
 
+// Document/ presentation Evaluate Route
 import evaluationRouter from "./routes/EvaluationRoute.js";
 app.use("/evaluation", evaluationRouter);
+
+// Supervisor/Co supervisor Route
+import supervisorRouter from "./routes/SupervisorRoute.js";
+app.use("/supervisor", supervisorRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
