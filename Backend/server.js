@@ -1,7 +1,9 @@
-import express from ("express");
-import cors from ("cors");
-import dotenv from ("dotenv");
-import connectDB from "./db";
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import connectDB from "./db.js";
+
+
 
 const app = express();
 
