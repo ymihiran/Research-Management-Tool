@@ -31,8 +31,8 @@ const DocumentSchema = new Schema(
   { timestamps: true }
 );
 
-const DocumentEvaluavation = mongoose.model(
+const DocumentEvaluation = mongoose.model(
   "Document Evaluation",
   DocumentSchema
 );
-export default DocumentEvaluavation;
+export default DocumentEvaluation;
