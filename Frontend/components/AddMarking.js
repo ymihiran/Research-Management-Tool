@@ -97,6 +97,52 @@ export default function AddMarking()  {
             </div>
 
             <div style={{backgroundColor:'#D5D3E2'}}>
+                <div className="t-list-head-container">
+                        <label className="h-text"> <label style={{color:"#FF5631"}}> 80%</label> MARKS</label> <br className="br1" />
+                        <label className="h-text">TO ALLOCATE</label>       
+                </div>
+
+                <div className="t-list-tb-container">
+
+                    <table className="t-table table-striped table-hover">
+                        <thead>
+                            <tr>
+                            <th scope="col">#</th>
+                            <th scope="col" style={{width:'220px'}}>Criteria</th>
+                            <th scope="col">Marks (%)</th>
+                            <th scope="col" >Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>
+                                <button className="btn" style={{color:"#0F0934"}}> Remove </button>
+                            </td>
+                            </tr>
+                            <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td><button className="btn" style={{color:"#0F0934"}}> Remove </button></td>
+                            </tr>
+                            <tr>
+                            <th scope="row">3</th>
+                            <td>Larry</td>
+                            <td>the Bird</td>
+                            <td>
+                            <button className="btn" style={{color:"#0F0934"}}> Remove </button>
+                            </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                                
+
+                
+                </div>
 
             </div>
 
