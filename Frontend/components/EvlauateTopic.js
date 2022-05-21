@@ -66,50 +66,23 @@ export default function EvaluateTopic()  {
 
 
             <div style={{backgroundColor:"white"}}>
+
+            <div className="t-list-head-container">
+                    <label className="h-text" > EVALUATE</label> <br  />
+                    <label className="h-text"> <label style={{color:"#FF5631"}}> RESEARCH</label> PROJECT</label> <br />
+                    <label className="h-text">TOPIC</label>
+            </div>
             
-            <div className="t-from-container">
+            <div className="t-from-container" style={{marginLeft:'20%'}}>
+
+
+                <button className="btn btn-success" style={{backgroundColor:"#00D8BE",fontSize:"2rem",marginLeft:"10%" }}>
+                    Download Topic Details
+                </button> <br/> <br/>
+
+
                 <form >
-                        <div className="mb-3">
-                            <label className="t-form-label" style={{color:"#322B5F"}}>Group ID</label>
-                            <input type="text"  style={{width:"450px"}} className="t-form-control" id="cUName"
-                                
-                            />
-                        </div>
-
-                        <div className="mb-3">
-                            <label className="t-form-label">Group Name</label>
-                            <input type="text"  style={{width:"450px"}}  id="cName"
-                                
-                            />
-                        </div>
-
-                        <div className="mb-3">
-                            <label className="t-form-label">Research Field</label>
-                            
-                            <select className='form-control' name="Field" id="Field" style={{width:"450px",border: "2px solid #ced4da"}}>
-                                <option value="Default">Select one</option>
-                                <option value="Artificial Interligance">Artificial Interligance</option>
-                                <option value="Machine Learning">Machine Learning</option>
-                                <option value="Games">Games</option>
-                                <option value="Robotics">Robotics</option>
-                            </select>
-
-                        </div>
-
-                        <div className="mb-3">
-                            <label className="t-form-label">Research Topic</label>
-                            <input type="text"  style={{width:"450px"}}  id="cName"   
-                            />
-                           
-                        </div>
-
-                        <div className="mb-3">
-                            <label className="t-form-label">Group Leader's email</label>
-                            <input type="text"  style={{width:"450px"}}  id="cName"
-                                
-                            />
-                        </div>
-
+                        
                         <div className="mb-3">
                             <label className="t-form-label">Comments (Optional)</label>
                             <input type="text"  style={{width:"450px", height:"100px"}}  id="cName"
@@ -119,7 +92,7 @@ export default function EvaluateTopic()  {
 
 
 
-                        <button type="submit" className="btn btn-primary" style={{backgroundColor:"#0F0934",width:"200px",fontWeight:"bold"}} >Submit</button>
+                        <button type="submit" className="btn btn-primary" style={{backgroundColor:"#0F0934",width:"200px",fontWeight:"bold",marginLeft:"45%"}} >Submit</button>
                     </form>
 
                     <div className="bottom-t-container">

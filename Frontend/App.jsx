@@ -8,7 +8,7 @@ import StdTopicList from "./components/StdTopicList";
 function App() {
   return (
     <div>
-      <StdTopicList/>
+      <EvaluateTopic/>
     </div>
   );
 }

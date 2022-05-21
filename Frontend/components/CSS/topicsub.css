@@ -119,7 +119,7 @@ input{
 .purpled{
     background-color: #0F0934;
     height: 35px;
-   width: 80px;
+    width: 180px;
 }
 
 .head-container{
@@ -194,6 +194,11 @@ input{
       padding: 10px 10px 10px;
       background-color: #0F0934;
       color: #fff;
+  }
+
+  .down-btn{
+      background-color: #00D8BE;
+      font-size: 3rem;
   }
 
   

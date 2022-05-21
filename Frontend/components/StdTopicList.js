@@ -29,7 +29,7 @@ export default function TopicList()  {
                             <th scope="col">Group_ID</th>
                             <th scope="col">Research Topic</th>
                             <th scope="col">Status</th>
-                            <th scope="col" style={{width:'100px'}}>Action</th>
+                            <th scope="col" style={{width:'200px'}}>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,7 +39,7 @@ export default function TopicList()  {
                             <td>Otto</td>
                             <td>@mdo</td>
                             <td>
-                                <button className="btn btn-success purpled" style={{backgroundColor:"#0F0934",color:"white"}}> Review </button>
+                                <button className="btn btn-success purpled" style={{backgroundColor:"#0F0934",color:"white"}}> View </button>
                             </td>
                             </tr>
                             <tr>
@@ -47,7 +47,7 @@ export default function TopicList()  {
                             <td>Jacob</td>
                             <td>Thornton</td>
                             <td>@fat</td>
-                            <td><button className="btn btn-success purpled" style={{backgroundColor:"#0F0934",color:"white"}}> Review </button></td>
+                            <td><button className="btn btn-success purpled" style={{backgroundColor:"#00D8BE",color:"white"}}> Re-Submit </button></td>
                             </tr>
                             <tr>
                             <th scope="row">3</th>
@@ -55,7 +55,7 @@ export default function TopicList()  {
                             <td>the Bird</td>
                             <td>@twitter</td>
                             <td>
-                                <button className="btn btn-success purpled" style={{backgroundColor:"#0F0934",color:"white"}}> Review </button>
+                                <button className="btn btn-success purpled" style={{backgroundColor:"#0F0934",color:"white"}}> View </button>
                             </td>
                             </tr>
                         </tbody>
