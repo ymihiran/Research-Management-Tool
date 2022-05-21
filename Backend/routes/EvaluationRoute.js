@@ -1,7 +1,9 @@
 import express from "express";
-import { EvaluateDoc } from "../controllers/EvaluateDoc.js";
+import { EvaluateDoc } from "../controllers/EvaluateDocController.js";
+import { EvaluatePresentation } from "../controllers/EvaluatePresentation.js";
 const router = express.Router();
 
-router.post("/doc", EvaluateDoc);
+router.post("/document", EvaluateDoc);
+router.post("/presentation", EvaluatePresentation);
 
 export default router;
