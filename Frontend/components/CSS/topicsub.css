@@ -82,9 +82,10 @@ input{
 }
 
 .bottom-t-container{
-    position: absolute;
+    position:absolute;
     bottom: 0px;
     right: 10px;
+
 }
 
 .bottom-t{
@@ -107,3 +108,23 @@ input{
 .s-input{
     background-color: #84809F;
 }
+
+.side-panel{
+    background-color: #0F0934;
+    background-image: url('https://res.cloudinary.com/sliit-yasantha/image/upload/v1653115770/Tinted_yzseh1.jpg');
+    background-repeat: no-repeat, repeat;
+    background-size:cover;
+}
+
+.head-container{
+    margin-top: 20px;
+    margin-left: 20%;
+}
+
+.h-text{
+    color: #0F0934;
+    font-size: 3rem;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+

@@ -5,28 +5,23 @@ export default function AcceptTopic()  {
 
     return(
         <div className="topic-container">
-            <div style={{backgroundColor:"#0F0934"}}>
+            <div className="side-panel">
 
                 <div>
                     <img className="img-side" src="https://res.cloudinary.com/sliit-yasantha/image/upload/v1653068950/logo11_ggebb3.png"></img>
                 </div>
 
-                <div  className="t-title-container">
-                    <label className="sideLable" style={{color:"#FF5631"}}>Submit </label> <br className="br1" />
-                    <label className="sideLable" >Research</label><br className="br1" />
-                    <label className="sideLable" >Topic </label> <br className="br1" />
-                </div>
-
-                <div className="sublable-container">
-                    <label className="subLable">Submit topic of your research project. You can check again the status of the approval.</label>
-                </div>
-                <br/>
-                <lable className="side-btn"> Register Now</lable>
+                
 
             </div>
             <div style={{backgroundColor:"white"}}>
+
+                <div className="head-container">
+                    <label className="h-text" style={{color:"#FF5631"}}> APPROVE</label> <br className="br1" />
+                    <label className="h-text">RESEARCH TOPIC</label>
+                </div>
             
-            <div className="t-from-container">
+            <div className="t-from-container" style={{marginTop:"0px"}}>
             <form > 
                         <div className="mb-3">
                             <label className="s-form-label" >Group ID</label>
@@ -81,11 +76,7 @@ export default function AcceptTopic()  {
                         </button>
                     </form>  
 
-                    <div className="bottom-t-container">
-                        <label className="bottom-t" style={{color:"#FF5631"}}> SLIIT</label> <label className="bottom-t"> Research</label> <br />
-                        <label className="bottom-t"> Management Tool</label>
-                    </div>
-            
+                    <br/>            
                 </div>
 
             </div>
