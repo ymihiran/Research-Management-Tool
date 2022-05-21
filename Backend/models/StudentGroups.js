@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const StudentGroupSchema = new Schema({
@@ -71,4 +71,4 @@ const StudentGroupSchema = new Schema({
 },{ timestamps: true })
 
 const StudentGroup = mongoose.model("StudentGroup", StudentGroupSchema);
-module.exports = StudentGroup;
+export default StudentGroup;
