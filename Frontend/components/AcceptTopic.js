@@ -1,26 +1,32 @@
 import "./CSS/topicsub.css";
 import "./CSS/btrap.css";
+import React, {useState,useEffect} from "react";
+import axios from 'axios';
+import { useHistory } from 'react-router';
 
 export default function AcceptTopic()  {
 
-    const history = useHistory();
-    const [pid, setPid] = useState();
-    const [name,setName] = useState();
-    const [phone,setPhone] = useState();
-    const [email,setEmail] = useState();
-    const [address,setAddress] = useState();
-    const [username,setUsername] = useState();
-    const [password,setPassword] = useState();
+    const [tid, settid] = useState();
+    const [id, setid] = useState();
+    const [groupID, setgroupID] = useState();
+    const [groupName, setgroupName] = useState();
+    const [rField, setrField] = useState();
+    const [rTopic, setrTopic] = useState();
+    const [leaderEmail, setleaderEmail] = useState();
+    const [comment, setacomment] = useState();
+    const [status, setstatus] = useState();
 
     useEffect(()=>{
 
-        setPid(localStorage.getItem('ID'));
-        setName(localStorage.getItem('name'));
-        setPhone(localStorage.getItem('phone'));
-        setUsername(localStorage.getItem('username'));
-        setEmail(localStorage.getItem('email'));
-        setAddress(localStorage.getItem('address'));
-        setPassword(localStorage.getItem('password'));
+        settid(localStorage.getItem('ID'));
+        setid(localStorage.getItem('tid'));
+        setgroupID(localStorage.getItem('groupID'));
+        setgroupName(localStorage.getItem('groupName'));
+        setrField(localStorage.getItem('rField'));
+        setrTopic(localStorage.getItem('rTopic'));
+        setleaderEmail(localStorage.getItem('leaderEmail'));
+        setacomment(localStorage.getItem('comment'));
+        setstatus(localStorage.getItem('status'));
 
 
 
@@ -49,14 +55,14 @@ export default function AcceptTopic()  {
                         <div className="mb-3">
                             <label className="s-form-label" >Group ID</label>
                             <input className="s-input" disabled type="text"  style={{width:"450px"}}  id="cUName"
-                                
+                                value={groupID}
                             />
                         </div>
 
                         <div className="mb-3">
                             <label className="s-form-label">Group Name</label>
                             <input  className="s-input" disabled  type="text"  style={{width:"450px"}}  id="cName"
-                                
+                                value={groupName}
                             />
                         </div>
 
@@ -64,7 +70,7 @@ export default function AcceptTopic()  {
                             <label className="s-form-label">Research Field</label>
                             
                             <input  className="s-input" disabled  type="text"  style={{width:"450px"}}  id="cName"
-                                
+                                value={rField}
                                 />
 
                         </div>
@@ -72,6 +78,7 @@ export default function AcceptTopic()  {
                         <div className="mb-3">
                             <label className="s-form-label">Research Topic</label>
                             <input className="s-input" disabled type="text"  style={{width:"450px"}}  id="cName"   
+                                value={rTopic}
                             />
                            
                         </div>
@@ -79,14 +86,14 @@ export default function AcceptTopic()  {
                         <div className="mb-3">
                             <label className="s-form-label">Group Leader's email</label>
                             <input className="s-input" disabled type="text"  style={{width:"450px"}}  id="cName"
-                                
+                                value={leaderEmail}
                             />
                         </div>
 
                         <div className="mb-3">
                             <label className="s-form-label">Comments (Optional)</label>
                             <input className="s-input" disabled type="text"  style={{width:"450px", height:"100px"}}  id="cName"
-                                
+                                value={comment}
                             />
                         </div>
                         <br />
