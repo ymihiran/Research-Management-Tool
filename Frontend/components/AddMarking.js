@@ -166,28 +166,24 @@ export default function AddMarking()  {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>
+
+                        {criteria.map((data,index)=>(
+
+                            <tr key={index}>
+                                <th scope="row">{index+1}</th>
+                                <td>
+                                    {data.des}
+                                </td>
+                                <td>
+                                    {data.mark}
+                                </td>
+                                                                
+                                <td>
                                 <button className="btn" style={{color:"#0F0934"}}> Remove </button>
-                            </td>
+                                </td>
                             </tr>
-                            <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td><button className="btn" style={{color:"#0F0934"}}> Remove </button></td>
-                            </tr>
-                            <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>
-                            <button className="btn" style={{color:"#0F0934"}}> Remove </button>
-                            </td>
-                            </tr>
+                        ))}
+                        
                         </tbody>
                     </table>
 
