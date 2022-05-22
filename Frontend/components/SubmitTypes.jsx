@@ -7,26 +7,26 @@ import "./CSS/st.css"
 
 export default function SubmitTypes(){
 
-    // const[Submission_Type_Name,setSubmissiontType] = useState("");
-    // const[Description,setDescription] = useState("");
+    const[Submission_Type_Name,setSubmissiontType] = useState("");
+    const[Description,setDescription] = useState("");
 
 
-    // function sendData(e){
+    function sendData(e){
 
-    //     e.preventDefault();
+        e.preventDefault();
         
-    //     const newType = {
+        const newType = {
     
-    //         Submission_Type_Name,
-    //         Description,
-    //     }
+            Submission_Type_Name,
+            Description,
+        }
        
-    //     axios.post("http://localhost:8070/docType/type",newType).then(()=> {
-    //         alert("Added New Submit Type")
-    //         e.target.reset(); // to clear input fiels after submission
-    //     }).catch((err)=>{
-    //         alert("err")
-    //     })
+        axios.post("http://localhost:8070/docType/type",newType).then(()=> {
+            alert("Added New Submit Type")
+            e.target.reset(); // to clear input fiels after submission
+        }).catch((err)=>{
+            alert("err")
+        })
    
 
 
