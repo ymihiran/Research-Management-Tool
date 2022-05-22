@@ -1,7 +1,53 @@
 import "./CSS/topicsub.css";
 import "./CSS/btrap.css";
+import React, { useState } from "react";
+import axios from "axios";
 
 export default function AddMarking()  {
+
+    const [sid, setSid] = useState("Sample");
+    const [specialization, setSpecialization] = useState(null);
+    const [schemeType, setschemeType] = useState(null);
+    const [marks, setMarks] = useState(null);
+    const [criteria, setCriteria] = useState([]);
+    const [extra, setExtra] = useState(null);
+
+    
+    const handleExtraInput = (e) => {
+        setExtra({ ...extra, [e.target.name]: e.target.value });
+    };
+
+    const handleExtra = (e) => {
+        alert("New Criteria Added");
+        setCriteria((prev) => [...prev, extra]);
+        document.getElementsByName('des').value = "";
+    };
+
+    const handleCreate = async () => {
+        const data = new FormData();
+        
+        const newMarking = {
+            sid,
+            specialization,
+            schemeType,
+            marks,
+            criteria,
+        };
+
+        axios.post("http://localhost:8070/marking/",newMarking).then(()=>{
+
+            alert("Marking Scheme Saved Successfully");
+            
+    
+         }).catch((err)=>{
+    
+            alert(err);
+         })
+    };
+
+
+
+
 
     return(
         <div className="marking-container">
@@ -29,7 +75,9 @@ export default function AddMarking()  {
                         <div className="mb-3">
                             <label className="m-form-label">Specialization</label>
                             
-                            <select className='form-control m-select' name="Field" id="Field" style={{fontSize:'0.8rem', width:"450px",border: "2px solid #ced4da", height:"30px"}}>
+                            <select className='form-control m-select' name="Field" id="Field" style={{fontSize:'0.8rem', width:"450px",border: "2px solid #ced4da", height:"30px"}}
+                                onChange={(e) => setSpecialization(e.target.value)}
+                            >
                                 <option value="Default">Select one</option>
                                 <option value="Artificial Interligance">Artificial Interligance</option>
                                 <option value="Machine Learning">Machine Learning</option>
@@ -43,10 +91,14 @@ export default function AddMarking()  {
 
                         <div className="m-sub-container">
                             <div className="mb-3">
-                                <label className="m-form-label" style={{color:"#322B5F"}}>Project name</label>
-                                <input type="text"  style={{width:"280px", height:"30px"}} className="t-form-control" id="cUName"
-                                    
-                                />
+                                <label className="m-form-label" style={{color:"#322B5F"}}>Scheme Type</label>
+                                <select className='form-control m-select' name="Field" id="Field" style={{fontSize:'0.8rem', width:"280px",border: "2px solid #ced4da", height:"30px"}}
+                                    onChange={(e) => setschemeType(e.target.value)}
+                                >
+                                <option value="Default">Select one</option>
+                                <option value="Document">Document</option>
+                                <option value="Persentation">Persentation</option>
+                            </select>
                             </div>
 
                         </div>
@@ -54,7 +106,7 @@ export default function AddMarking()  {
                             <div className="mb-3">
                                 <label className="m-form-label" style={{color:"#322B5F"}}>Total Marks</label>
                                 <input type="text"  style={{width:"150px", height:"30px"}} className="t-form-control" id="cUName"
-                                    
+                                    onChange={(e) => setMarks(e.target.value)}
                                 />
                             </div>
 
@@ -65,16 +117,16 @@ export default function AddMarking()  {
 
                         <div className="mb-3">
                             <label className="m-form-label">Criteria Name</label>
-                            <input type="text"  style={{width:"450px", height:"30px"}}  id="cName"
-                                
+                            <input type="text" name="des" style={{width:"450px", height:"30px"}}  id="cName"
+                                onChange={handleExtraInput}
                             />
                         </div>
 
         
                         <div className="mb-3">
                             <label className="m-form-label">Mark Percentage (%)</label>
-                            <input type="text"  style={{width:"450px", height:"30px"}}  id="cName"
-                                
+                            <input type="text" name="mark" style={{width:"450px", height:"30px"}}  id="cName"
+                                onChange={handleExtraInput}
                             />
                         </div>
 
@@ -82,10 +134,10 @@ export default function AddMarking()  {
 
 
 
-                            <button type="submit" className="btn btn-primary" style={{backgroundColor:"#84809F",width:"200px",fontWeight:"bold"}} >+ Add criteria</button>
-                            <button type="submit" className="btn btn-primary" style={{backgroundColor:"#0F0934",width:"200px",fontWeight:"bold",marginLeft:'20px'}} > Save</button>
-
                     </form>
+
+                    <button  className="btn btn-primary" style={{backgroundColor:"#84809F",width:"200px",fontWeight:"bold"}} onClick={handleExtra} >+ Add criteria</button>
+                            <button  className="btn btn-primary" style={{backgroundColor:"#0F0934",width:"200px",fontWeight:"bold",marginLeft:'20px'}} onClick={handleCreate} > Save</button>
 
                     <div className="bottom-t-container">
                         <label className="bottom-t" style={{color:"#FF5631"}}> SLIIT</label> <label className="bottom-t"> Research</label> <br />

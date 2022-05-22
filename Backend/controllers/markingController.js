@@ -3,7 +3,7 @@ import Marking from "../models/MarkingScheme.js";
 export const addMarking = async (req,res)=>{
     const sid = req.body.sid;
     const specialization = req.body.specialization;
-    const pName = req.body.pName;
+    const schemeType = req.body.schemeType;
     const marks = req.body.marks;
     const criteria = req.body.criteria;
 
@@ -12,7 +12,7 @@ export const addMarking = async (req,res)=>{
     const newTopic = new Marking({
         sid,
         specialization,
-        pName,
+        schemeType,
         marks,
         criteria
     })
@@ -58,12 +58,12 @@ export const getSingleMarking = async (req,res)=>{
 
 export const updateMarking = async (req, res)=>{
     let mid = req.params.id;
-    const {sid,specialization,pName,marks,criteria} = req.body;
+    const {sid,specialization,schemeType,marks,criteria} = req.body;
 
     const updateMarking = {
         sid,
         specialization,
-        pName,
+        schemeType,
         marks,
         criteria
     }

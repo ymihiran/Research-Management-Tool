@@ -17,7 +17,7 @@ const MarkingSchema = new Schema({
         required : true
     },
 
-    pName: {
+    schemeType: {
         type: String,
         required : true
     },
