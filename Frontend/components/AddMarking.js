@@ -11,7 +11,7 @@ export default function AddMarking()  {
     const [marks, setMarks] = useState(null);
     const [criteria, setCriteria] = useState([]);
     const [extra, setExtra] = useState(null);
-
+    
     
     const handleCriteriaInput = (e) => {
         setExtra({ ...extra, [e.target.name]: e.target.value });
@@ -19,9 +19,10 @@ export default function AddMarking()  {
 
     const handleCriteria = (e) => {
         alert("New Criteria Added");
-        console.log(e);
         setCriteria((prev) => [...prev, extra]);
+
     };
+
 
     const handleCreate = async () => {
         const data = new FormData();
@@ -125,7 +126,7 @@ export default function AddMarking()  {
         
                         <div className="mb-3">
                             <label className="m-form-label">Mark Percentage (%)</label>
-                            <input type="text" name="mark" style={{width:"450px", height:"30px"}}  id="cName"
+                            <input type="number" name="mark" style={{width:"450px", height:"30px"}}  id="cName"
                                 onChange={handleCriteriaInput}
                             />
                         </div>
@@ -150,7 +151,7 @@ export default function AddMarking()  {
 
             <div style={{backgroundColor:'#D5D3E2'}}>
                 <div className="t-list-head-container">
-                        <label className="h-text"> <label style={{color:"#FF5631"}}> 80%</label> MARKS</label> <br className="br1" />
+                        <label className="h-text"> <label style={{color:"#FF5631"}}> {100 -criteria.map((data)=> Number(data.mark.replace("$",""))).reduce((prev,curr)=>prev+curr,0)} %</label> MARKS</label> <br className="br1" />
                         <label className="h-text">TO ALLOCATE</label>       
                 </div>
 
