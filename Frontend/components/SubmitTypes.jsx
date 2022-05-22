@@ -1,7 +1,9 @@
 import React,{useState} from "react";
 import axios from "axios";
 import { ClassNames } from "@emotion/react";
-import "./CSS/temp.css"
+import "./CSS/st.css"
+
+
 
 export default function SubmitTypes(){
 
@@ -58,7 +60,7 @@ export default function SubmitTypes(){
                         </div>
 
                         <div className="mb-3">
-                            <label className="t-form-label"><b>Submission Type Description:</b> </label>
+                            <label className="t-form-label"><b>Submission Type Description:</b></label>
                             <input type="text"  style={{width:"450px", height:"100px"}}  id="cName"
                                 onChange={e=>{
                                     setacomment(e.target.value);
@@ -73,6 +75,7 @@ export default function SubmitTypes(){
 
                     </div>
 
+                    
                 <div className="bottom-t-container">
                     <label className="bottom-t" style={{color:"#FF5631"}}> SLIIT</label> <label className="bottom-t"> Research</label> <br />
                     <label className="bottom-t"> Management Tool</label>
