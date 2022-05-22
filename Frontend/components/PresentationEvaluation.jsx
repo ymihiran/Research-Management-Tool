@@ -1,13 +1,12 @@
 import React from "react";
-import "./Styles/styles.css";
 
-export default function DocumentEvaluation() {
+export default function PresentationEvaluation() {
   return (
     <div className="body_container">
       {/*left side column */}
       <div className="left_container">
         <h1 className="mb-5 fw-bold">
-          Document <br></br> Evaluation
+          Presentation <br></br> Evaluation
         </h1>
         <form>
           <div className="form-group mb-3">
@@ -34,7 +33,7 @@ export default function DocumentEvaluation() {
             />
           </div>
           <button type="submit" className="btn btn-success ">
-            Download Document
+            Download Presentation
           </button>
         </form>
       </div>
