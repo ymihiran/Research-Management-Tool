@@ -3,6 +3,29 @@ import "./CSS/btrap.css";
 
 export default function AcceptTopic()  {
 
+    const history = useHistory();
+    const [pid, setPid] = useState();
+    const [name,setName] = useState();
+    const [phone,setPhone] = useState();
+    const [email,setEmail] = useState();
+    const [address,setAddress] = useState();
+    const [username,setUsername] = useState();
+    const [password,setPassword] = useState();
+
+    useEffect(()=>{
+
+        setPid(localStorage.getItem('ID'));
+        setName(localStorage.getItem('name'));
+        setPhone(localStorage.getItem('phone'));
+        setUsername(localStorage.getItem('username'));
+        setEmail(localStorage.getItem('email'));
+        setAddress(localStorage.getItem('address'));
+        setPassword(localStorage.getItem('password'));
+
+
+
+    },[])
+
     return(
         <div className="topic-container">
             <div className="side-panel">
