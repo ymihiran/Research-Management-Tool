@@ -16,10 +16,11 @@ export default function AcceptTopic()  {
     const [comment, setacomment] = useState();
     const [status, setstatus] = useState();
 
+
     useEffect(()=>{
 
-        settid(localStorage.getItem('ID'));
-        setid(localStorage.getItem('tid'));
+        settid(localStorage.getItem('tid'));
+        setid(localStorage.getItem('ID'));
         setgroupID(localStorage.getItem('groupID'));
         setgroupName(localStorage.getItem('groupName'));
         setrField(localStorage.getItem('rField'));
@@ -31,6 +32,47 @@ export default function AcceptTopic()  {
 
 
     },[])
+
+    async function  submitData(e) {
+        
+        e.preventDefault();
+
+        const btnName = e.nativeEvent.submitter.name;
+        let sts="";
+
+
+
+        if (btnName=="Accept") {
+            sts= "Accepted";
+        } else if (btnName=="Reject") {
+            sts= "Rejected";
+        } else {
+            //no button pressed
+        }
+
+        const updateTopic = {
+            tid,
+            groupID,
+            groupName,
+            rField,
+            rTopic,
+            leaderEmail,
+            comment,
+            status:sts
+        }
+
+        let ans = 1;
+
+        if (ans) {
+
+            await axios.put(`http://localhost:8070/topicReg/${id}`, updateTopic).then(() => {
+                alert("Status Update successfully");
+            }).catch((err) => {
+                alert(err);
+            })
+
+        }
+    }
 
     return(
         <div className="topic-container">
@@ -51,7 +93,7 @@ export default function AcceptTopic()  {
                 </div>
             
             <div className="t-from-container" style={{marginTop:"0px"}}>
-            <form > 
+            <form onSubmit={submitData}> 
                         <div className="mb-3">
                             <label className="s-form-label" >Group ID</label>
                             <input className="s-input" disabled type="text"  style={{width:"450px"}}  id="cUName"
@@ -97,11 +139,11 @@ export default function AcceptTopic()  {
                             />
                         </div>
                         <br />
-                        <button type="submit" className="btn btn-primary" style={{backgroundColor:"#0F0934",width:"200px",fontSize:"2rem"}} >
+                        <button name="Accept" type="submit" className="btn btn-primary" style={{backgroundColor:"#0F0934",width:"200px",fontSize:"2rem"}} value="Accepted">
                             Accept
                         </button>
 
-                        <button type="submit" className="btn btn-primary" style={{backgroundColor:"#84809F",width:"200px", marginLeft:"40px",fontSize:"2rem"}}>
+                        <button name="Reject" type="submit" className="btn btn-primary" style={{backgroundColor:"#84809F",width:"200px", marginLeft:"40px",fontSize:"2rem"}} value="Rejected">
                             Reject
                         </button>
                     </form>  
