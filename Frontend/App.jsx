@@ -1,6 +1,8 @@
 import React from "react";
+import "/node_modules/bootstrap/dist/css/bootstrap.css";
+import SubmitTypes from "./components/SubmitTypes.jsx"
+import Template from "./components/Template.jsx";
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-
 import SubmitTopic from "./components/SubmitTopic";
 import EvaluateTopic from "./components/EvlauateTopic";
 import AcceptTopic from "./components/AcceptTopic";
@@ -8,10 +10,10 @@ import TopicList from "./components/TopicList";
 import StdTopicList from "./components/StdTopicList";
 import AddMarking from "./components/AddMarking";
 
+
 function App() {
   return (
     <div>
-
 
       <Router>
         <Route path="/SubmitTopic" component={SubmitTopic}/>
@@ -20,9 +22,11 @@ function App() {
         <Route path="/TopicList" component={TopicList}/>
         <Route path="/StdTopicList" component={StdTopicList}/>
         <Route path="/AddMarking" component={AddMarking}/>
+         <Route path="/SubmitTypes" component={SubmitTypes}/>
       </Router>
 
      
+
     </div>
   );
 }
