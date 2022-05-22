@@ -7,7 +7,7 @@ export const SubmitType = async(req,res)=>{
     
 
 
-  const newType = new SubmitType({
+  const newType = new SubmitTypeRoute({
         
     Submission_Type_Name,
     Description,
