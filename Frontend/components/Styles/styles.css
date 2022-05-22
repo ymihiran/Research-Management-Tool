@@ -1,0 +1,58 @@
+.body_container {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: 50% auto;
+}
+
+.left_container {
+  background-color: #0f0934;
+  color: #ffffff;
+  padding: 100px 150px;
+}
+
+.right_container {
+  background-color: #ffffff;
+  color: black;
+  padding: 100px 150px;
+}
+
+.criteria_row {
+  align-items: center;
+  justify-content: center;
+}
+
+.btn_submit {
+  background-color: #0f0934 !important;
+  color: #ffffff;
+  width: 150px;
+
+  margin-left: 75%;
+}
+
+.criteria_box {
+  border: none;
+  padding: 25px 10px;
+  width: 100%;
+  height: 410px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  border: 1px solid #84809f;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #84809f;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0f0934;
+}
