@@ -45,3 +45,4 @@ const TopicRegSchema = new Schema({
 
 const TopicReg = mongoose.model("topicReg", TopicRegSchema);
 export default TopicReg;
+

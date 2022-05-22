@@ -1,3 +1,4 @@
+
 import express from "express";
 const router = express.Router();
 import TopicReg from "../models/TopicReg.js";
@@ -23,3 +24,4 @@ router.put("/:id", updateSingleRecord);
 router.delete("/:id", deleteTopic);
 
 export default router;
+

@@ -30,6 +30,9 @@ app.use("/supervisor", supervisorRouter);
 import topicRouter from "./routes/topicregs.js";
 app.use("/topicReg", topicRouter);
 
+import markingRouter from "./routes/markingschemes.js";
+app.use("/marking",markingRouter);
+
 //User Routes
 import userRouter from "./routes/userRoute.js";
 app.use("/user",userRouter);
