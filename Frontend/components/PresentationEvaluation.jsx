@@ -5,11 +5,17 @@ export default function PresentationEvaluation() {
     <div className="body_container">
       {/*left side column */}
       <div className="left_container">
-        <h1 className="mb-5 fw-bold">
-          Presentation <br></br> Evaluation
-        </h1>
+        <div>
+          <label className="h-text br1" style={{ color: "#FF5631" }}>
+            PRESENTATION
+          </label>
+          <br />
+          <label className="h-text" style={{ color: "#ffffff" }}>
+            EVALUATION
+          </label>
+        </div>
         <form>
-          <div className="form-group mb-3">
+          <div className="form-group mb-3 mt-5">
             <label>Group ID</label>
             <input type="text" disabled className="form-control" id="groupID" />
           </div>
@@ -54,7 +60,7 @@ export default function PresentationEvaluation() {
                   <input
                     type="number"
                     min="0"
-                    max="99"
+                    max="25"
                     className="form-control"
                   />
                 </div>
@@ -68,7 +74,12 @@ export default function PresentationEvaluation() {
                   <label>25</label>
                 </div>
                 <div className="col-2">
-                  <input type="number" className="form-control" />
+                  <input
+                    type="number"
+                    min="0"
+                    max="25"
+                    className="form-control"
+                  />
                 </div>
               </div>
 
@@ -80,7 +91,12 @@ export default function PresentationEvaluation() {
                   <label>25</label>
                 </div>
                 <div className="col-2">
-                  <input type="number" className="form-control" />
+                  <input
+                    type="number"
+                    min="0"
+                    max="25"
+                    className="form-control"
+                  />
                 </div>
               </div>
 
