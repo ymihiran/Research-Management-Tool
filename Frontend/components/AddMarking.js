@@ -13,14 +13,14 @@ export default function AddMarking()  {
     const [extra, setExtra] = useState(null);
 
     
-    const handleExtraInput = (e) => {
+    const handleCriteriaInput = (e) => {
         setExtra({ ...extra, [e.target.name]: e.target.value });
     };
 
-    const handleExtra = (e) => {
+    const handleCriteria = (e) => {
         alert("New Criteria Added");
+        console.log(e);
         setCriteria((prev) => [...prev, extra]);
-        document.getElementsByName('des').value = "";
     };
 
     const handleCreate = async () => {
@@ -118,7 +118,7 @@ export default function AddMarking()  {
                         <div className="mb-3">
                             <label className="m-form-label">Criteria Name</label>
                             <input type="text" name="des" style={{width:"450px", height:"30px"}}  id="cName"
-                                onChange={handleExtraInput}
+                                onChange={handleCriteriaInput}
                             />
                         </div>
 
@@ -126,7 +126,7 @@ export default function AddMarking()  {
                         <div className="mb-3">
                             <label className="m-form-label">Mark Percentage (%)</label>
                             <input type="text" name="mark" style={{width:"450px", height:"30px"}}  id="cName"
-                                onChange={handleExtraInput}
+                                onChange={handleCriteriaInput}
                             />
                         </div>
 
@@ -136,7 +136,7 @@ export default function AddMarking()  {
 
                     </form>
 
-                    <button  className="btn btn-primary" style={{backgroundColor:"#84809F",width:"200px",fontWeight:"bold"}} onClick={handleExtra} >+ Add criteria</button>
+                    <button  className="btn btn-primary" style={{backgroundColor:"#84809F",width:"200px",fontWeight:"bold"}} onClick={handleCriteria} >+ Add criteria</button>
                             <button  className="btn btn-primary" style={{backgroundColor:"#0F0934",width:"200px",fontWeight:"bold",marginLeft:'20px'}} onClick={handleCreate} > Save</button>
 
                     <div className="bottom-t-container">
