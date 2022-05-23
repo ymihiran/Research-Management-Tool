@@ -1,17 +1,64 @@
 import React from "react";
+import { useTheme } from "@mui/material/styles";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
-export default function PresentationEvaluation() {
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
+const names = [
+  "Oliver Hansen",
+  "Van Henry",
+  "April Tucker",
+  "Ralph Hubbard",
+  "Omar Alexander",
+  "Carlos Abbott",
+];
+
+function getStyles(name, personName, theme) {
+  const theme = useTheme();
+  const [personName, setPersonName] = React.useState([]);
+
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setPersonName(
+      // On autofill we get a stringified value.
+      typeof value === "string" ? value.split(",") : value
+    );
+  };
+  return {
+    fontWeight:
+      personName.indexOf(name) === -1
+        ? theme.typography.fontWeightRegular
+        : theme.typography.fontWeightMedium,
+  };
+}
+
+export default function RequestCoSupervisor() {
   return (
     <div className="body_container">
       {/*left side column */}
       <div className="left_container">
         <div>
           <label className="h-text text_space" style={{ color: "#FF5631" }}>
-            PRESENTATION
+            REQUEST
           </label>
           <br />
           <label className="h-text" style={{ color: "#ffffff" }}>
-            EVALUATION
+            CO-SUPERVISOR
           </label>
         </div>
         <form>
@@ -30,16 +77,32 @@ export default function PresentationEvaluation() {
             />
           </div>
           <div className="form-group mb-5">
-            <label>Group Members</label>
-            <textarea
-              className="form-control"
-              disabled
-              id="groupMembers"
-              rows={4}
-            />
+            <label>Research Field</label>
+            <FormControl sx={{ m: 1, width: 300 }}>
+              <InputLabel id="demo-multiple-name-label">Name</InputLabel>
+              <Select
+                labelId="demo-multiple-name-label"
+                id="demo-multiple-name"
+                multiple
+                value={personName}
+                onChange={handleChange}
+                input={<OutlinedInput label="Name" />}
+                MenuProps={MenuProps}
+              >
+                {names.map((name) => (
+                  <MenuItem
+                    key={name}
+                    value={name}
+                    style={getStyles(name, personName, theme)}
+                  >
+                    {name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </div>
           <button type="submit" className="btn btn-success ">
-            Download Presentation
+            Find Co-Supervisor
           </button>
         </form>
       </div>
@@ -91,12 +154,7 @@ export default function PresentationEvaluation() {
                   <label>25</label>
                 </div>
                 <div className="col-2">
-                  <input
-                    type="number"
-                    min="0"
-                    max="25"
-                    className="form-control"
-                  />
+                  <input type="number" className="form-control" />
                 </div>
               </div>
 

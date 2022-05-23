@@ -1,6 +1,13 @@
+import axios from "axios";
 import React from "react";
+import "./Styles/styles.css";
 
 export default function AllDocuments() {
+  // useEffect(() => {
+  //   axios.get()
+
+  // }, []);
+
   return (
     <div className="allDoc_body_container">
       {/*left side column */}
@@ -9,7 +16,7 @@ export default function AllDocuments() {
       {/*right side column */}
       <div className="allDoc_right_container">
         <div>
-          <label className="h-text br1" style={{ color: "#FF5631" }}>
+          <label className="h-text text_space" style={{ color: "#FF5631" }}>
             SUBMITTED
           </label>
           <br />

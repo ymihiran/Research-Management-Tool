@@ -7,7 +7,7 @@ export default function DocumentEvaluation() {
       {/*left side column */}
       <div className="left_container">
         <div>
-          <label className="h-text br1" style={{ color: "#FF5631" }}>
+          <label className="h-text text_space" style={{ color: "#FF5631" }}>
             DOCUMENT
           </label>
           <br />
