@@ -15,7 +15,6 @@ const UploadTemplateSchema = new Schema(
 
     Template: {
       type: String,
-      required: true,
     },
 
     Description: {

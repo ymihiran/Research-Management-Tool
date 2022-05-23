@@ -4,7 +4,7 @@ import { ClassNames } from "@emotion/react";
 import "./CSS/st.css";
 
 export default function UploadTemplate() {
-  const [Admin_Name, , setAdminName] = useState("");
+  const [Admin_Name, setAdminName] = useState("");
   const [Title, setTitle] = useState("");
   const [Template, setTemplate] = useState("");
   const [Description, setDescription] = useState("");
@@ -82,11 +82,11 @@ export default function UploadTemplate() {
                 />
               </div>
 
-              <div class="mb-3">
-                <label for="formFile" className="t-form-label">
+              <div className="mb-3">
+                <label htmlFor="formFile" className="t-form-label">
                   <b>Upload Template/Document</b>
                 </label>
-                <div class="col-sm-4">
+                <div className="col-sm-4">
                   <input
                     className="form-control"
                     style={{ width: "450px" }}
