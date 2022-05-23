@@ -11,6 +11,7 @@ import AcceptTopic from "./components/AcceptTopic";
 import TopicList from "./components/TopicList";
 import StdTopicList from "./components/StdTopicList";
 import AddMarking from "./components/AddMarking";
+import SubmitDocs from "./components/SubmitDocs";
 
 function App() {
   return (
@@ -23,8 +24,9 @@ function App() {
         <Route path="/StdTopicList" component={StdTopicList} />
         <Route path="/AddMarking" component={AddMarking} />
         <Route path="/SubmitTypes" component={SubmitTypes} />
-        <Route path="/UploadTemplate" component={UploadTemplate} />
         <Route path="/StudentGroup" component={StudentGroup} />
+        <Route path="/SubmitDocs" component={SubmitDocs} />
+        <Route path="/UploadTemplate" component={UploadTemplate} />
       </Router>
     </div>
   );

@@ -43,6 +43,12 @@ app.use("/docType", router);
 import createRouter from "./routes/StudentGroupRoute.js";
 app.use("/create", createRouter);
 
+import docRouter from "./routes/SubmitDocRoute.js";
+app.use("/submitDoc", docRouter);
+
+import uploadRouter from "./routes/UploadTemplateRoute.js";
+app.use("/template", uploadRouter);
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

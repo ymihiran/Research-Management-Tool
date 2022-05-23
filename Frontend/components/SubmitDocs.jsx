@@ -3,23 +3,23 @@ import axios from "axios";
 import { ClassNames } from "@emotion/react";
 import "./CSS/st.css";
 
-export default function UploadTemplate() {
-  const [Admin_Name, , setAdminName] = useState("");
-  const [Title, setTitle] = useState("");
-  const [Template, setTemplate] = useState("");
-  const [Description, setDescription] = useState("");
+export default function SubmitDocs() {
+  const [Group_ID, setGroupID] = useState("");
+  const [Research_Field, setResearch_Field] = useState("");
+  const [Document, setDocument] = useState("");
+  const [Comment, setComment] = useState("");
 
   function sendData(e) {
     e.preventDefault();
 
     const newDoc = {
-      Admin_Name,
-      Title,
-      Template,
-      Description,
+      Group_ID,
+      Research_Field,
+      Document,
+      Comment,
     };
     axios
-      .post("http://localhost:8070/template/docTemplate", newDoc)
+      .post("http://localhost:8070/submitDoc/document", newDoc)
       .then(() => {
         alert("Added New Submit Type");
         e.target.reset(); // to clear input fiels after submission
@@ -45,48 +45,56 @@ export default function UploadTemplate() {
             <div className="t-list-head-container">
               <label className="h-text" style={{ color: "#FF5631" }}>
                 {" "}
-                UPLOAD
+                DOCUMENT
               </label>{" "}
               <br className="br1" />
-              <label className="h-text">Document/Presentation Template</label>
+              <label className="h-text">SUBMISSION</label>
             </div>
 
-            <div className="t-list-tb-container mt-2">
+            <div className="t-list-tb-container mt-3">
               <div className="mb-3">
                 <label className="t-form-label">
-                  <b>Admin Name:</b>
+                  <b>Group ID :</b>
                 </label>
                 <input
                   type="text"
                   style={{ width: "450px" }}
                   id="cName"
-                  required
                   onChange={(e) => {
-                    setAdminName(e.target.value);
+                    setGroupID(e.target.value);
                   }}
                 />
               </div>
 
               <div className="mb-3">
                 <label className="t-form-label">
-                  <b>Document/Presentation Title:</b>
+                  <b>Research Field:</b>
                 </label>
-                <input
-                  type="text"
-                  style={{ width: "450px" }}
-                  id="cName"
-                  required
+
+                <select
+                  className="form-control"
+                  name="Field"
+                  id="Field"
+                  style={{ width: "450px", border: "2px solid #ced4da" }}
                   onChange={(e) => {
-                    setTitle(e.target.value);
+                    setResearch_Field(e.target.value);
                   }}
-                />
+                >
+                  <option value="Default">Select one</option>
+                  <option value="Artificial Interligance">
+                    Artificial Interligance
+                  </option>
+                  <option value="Machine Learning">Machine Learning</option>
+                  <option value="Games">Games</option>
+                  <option value="Robotics">Robotics</option>
+                </select>
               </div>
 
-              <div class="mb-3">
-                <label for="formFile" className="t-form-label">
+              <div className="mb-3">
+                <label htmlFor="formFile" className="t-form-label">
                   <b>Upload Template/Document</b>
                 </label>
-                <div class="col-sm-4">
+                <div className="col-sm-4">
                   <input
                     className="form-control"
                     style={{ width: "450px" }}
@@ -99,18 +107,17 @@ export default function UploadTemplate() {
 
               <div className="mb-3">
                 <label className="t-form-label">
-                  <b>Description about the Template/Document:</b>
+                  <b>Comments:</b>
                 </label>
                 <input
                   type="text"
                   style={{ width: "450px", height: "100px" }}
                   id="cName"
                   onChange={(e) => {
-                    setDescription(e.target.value);
+                    setComment(e.target.value);
                   }}
                 />
               </div>
-              <br></br>
 
               <button
                 type="submit"
@@ -122,7 +129,7 @@ export default function UploadTemplate() {
                   marginLeft: "50%",
                 }}
               >
-                UPLOAD
+                CREATE
               </button>
             </div>
 

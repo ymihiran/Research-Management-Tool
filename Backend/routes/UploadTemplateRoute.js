@@ -3,10 +3,6 @@ import express from "express";
 import { UploadTemplate } from "../controllers/UploadTemplateController.js";
 const router = express.Router();
 
-
-router.post("/template", UploadTemplate);
+router.post("/docTemplate", UploadTemplate);
 
 export default router;
-
-
-

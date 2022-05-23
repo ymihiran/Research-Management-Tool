@@ -1,23 +1,28 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
-const SubmitDocSchema = new Schema({
-
+const SubmitDocSchema = new Schema(
+  {
     Group_ID: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
 
-    Document:{
-        type:String,
-        required: true
+    Research_Field: {
+      type: String,
+      required: true,
+    },
+
+    Document: {
+      type: String,
     },
 
     Comment: {
-        type: String,
+      type: String,
+    },
+  },
+  { timestamps: true }
+);
 
-    } 
-},{ timestamps: true })
-
-const SubmitDoc = mongoose.model("SubmitType", SubmitDocSchema);
+const SubmitDoc = mongoose.model("SubmitDoc", SubmitDocSchema);
 export default SubmitDoc;
