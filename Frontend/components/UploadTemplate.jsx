@@ -3,27 +3,7 @@ import axios from "axios";
 import { ClassNames } from "@emotion/react";
 import "./CSS/st.css";
 
-export default function SubmitTypes() {
-  // const[Submission_Type_Name,setSubmissiontType] = useState("");
-  // const[Description,setDescription] = useState("");
-
-  // function sendData(e){
-
-  //     e.preventDefault();
-
-  //     const newType = {
-
-  //         Submission_Type_Name,
-  //         Description,
-  //     }
-
-  //     axios.post("http://localhost:8070/docType/type",newType).then(()=> {
-  //         alert("Added New Submit Type")
-  //         e.target.reset(); // to clear input fiels after submission
-  //     }).catch((err)=>{
-  //         alert("err")
-  //     })
-
+export default function UploadTemplate() {
   return (
     <div className="t-list-container">
       <div style={{ backgroundColor: "#0F0934" }}>
@@ -38,16 +18,16 @@ export default function SubmitTypes() {
         <div className="t-list-head-container">
           <label className="h-text" style={{ color: "#FF5631" }}>
             {" "}
-            CREATE
+            UPLOAD
           </label>{" "}
           <br className="br1" />
-          <label className="h-text">SUBMIT TYPES</label>
+          <label className="h-text">Document/Presentation Template</label>
         </div>
 
         <div className="t-list-tb-container">
           <div className="mb-3">
             <label className="t-form-label">
-              <b>Submission Type Name:</b>
+              <b>Admin Name:</b>
             </label>
             <input
               type="text"
@@ -61,7 +41,36 @@ export default function SubmitTypes() {
 
           <div className="mb-3">
             <label className="t-form-label">
-              <b>Submission Type Description:</b>
+              <b>Document/Presentation Title:</b>
+            </label>
+            <input
+              type="text"
+              style={{ width: "450px" }}
+              id="cName"
+              onChange={(e) => {
+                setvgroupName(e.target.value);
+              }}
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="formFile" className="t-form-label">
+              <b>Upload Template/Document</b>
+            </label>
+            <div class="col-sm-4">
+              <input
+                className="form-control"
+                style={{ width: "450px" }}
+                type="file"
+                accept="image/png, image/jpeg"
+                id="image"
+              />
+            </div>
+          </div>
+
+          <div className="mb-3">
+            <label className="t-form-label">
+              <b>Description about the Template/Document:</b>
             </label>
             <input
               type="text"
@@ -73,7 +82,6 @@ export default function SubmitTypes() {
             />
           </div>
           <br></br>
-          <br></br>
 
           <button
             type="submit"
@@ -84,7 +92,7 @@ export default function SubmitTypes() {
               fontWeight: "bold",
             }}
           >
-            CREATE
+            UPLOAD
           </button>
         </div>
 
