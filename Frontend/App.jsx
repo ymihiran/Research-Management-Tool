@@ -1,8 +1,9 @@
 import React from "react";
 import "/node_modules/bootstrap/dist/css/bootstrap.css";
 
-import UploadTemplate from "./components/UploadTemplate.jsx";
-import SubmitTypes from "./components/SubmitTypes.jsx";
+import UploadTemplate from "./components/UploadTemplate";
+import SubmitTypes from "./components/SubmitTypes";
+import StudentGroup from "./components/StudentGroup";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import SubmitTopic from "./components/SubmitTopic";
 import EvaluateTopic from "./components/EvlauateTopic";
@@ -23,6 +24,7 @@ function App() {
         <Route path="/AddMarking" component={AddMarking} />
         <Route path="/SubmitTypes" component={SubmitTypes} />
         <Route path="/UploadTemplate" component={UploadTemplate} />
+        <Route path="/StudentGroup" component={StudentGroup} />
       </Router>
     </div>
   );

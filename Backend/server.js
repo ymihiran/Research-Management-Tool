@@ -1,4 +1,3 @@
-
 dotenv.config();
 import express from "express";
 import cors from "cors";
@@ -32,18 +31,18 @@ import topicRouter from "./routes/topicregs.js";
 app.use("/topicReg", topicRouter);
 
 import markingRouter from "./routes/markingschemes.js";
-app.use("/marking",markingRouter);
+app.use("/marking", markingRouter);
 
 //User Routes
 import userRouter from "./routes/userRoute.js";
-app.use("/user",userRouter);
+app.use("/user", userRouter);
 
 import router from "./routes/SubmitTypeRoute.js";
 app.use("/docType", router);
 
+import createRouter from "./routes/StudentGroupRoute.js";
+app.use("/create", createRouter);
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-
-
-
