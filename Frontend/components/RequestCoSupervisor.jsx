@@ -24,9 +24,21 @@ const names = [
   "Ralph Hubbard",
   "Omar Alexander",
   "Carlos Abbott",
+  "Miriam Wagner",
+  "Bradley Wilkerson",
+  "Virginia Andrews",
+  "Kelly Snyder",
 ];
 
 function getStyles(name, personName, theme) {
+  return {
+    fontWeight:
+      personName.indexOf(name) === -1
+        ? theme.typography.fontWeightRegular
+        : theme.typography.fontWeightMedium,
+  };
+}
+export default function RequestCoSupervisor() {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
 
@@ -39,15 +51,6 @@ function getStyles(name, personName, theme) {
       typeof value === "string" ? value.split(",") : value
     );
   };
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
-
-export default function RequestCoSupervisor() {
   return (
     <div className="body_container">
       {/*left side column */}
@@ -76,19 +79,30 @@ export default function RequestCoSupervisor() {
               id="researchTopic"
             />
           </div>
-          <div className="form-group mb-5">
+          <div className=" mb-5 ">
             <label>Research Field</label>
-            <FormControl sx={{ m: 1, width: 300 }}>
-              <InputLabel id="demo-multiple-name-label">Name</InputLabel>
+            <FormControl
+              sx={{ width: 300, height: 45 }}
+              className="form-control me-5 "
+            >
               <Select
-                labelId="demo-multiple-name-label"
-                id="demo-multiple-name"
-                multiple
+                displayEmpty
                 value={personName}
                 onChange={handleChange}
-                input={<OutlinedInput label="Name" />}
+                input={<OutlinedInput />}
+                renderValue={(selected) => {
+                  if (selected.length === 0) {
+                    return <em>Your Research Field</em>;
+                  }
+
+                  return selected.join(", ");
+                }}
                 MenuProps={MenuProps}
+                inputProps={{ "aria-label": "Without label" }}
               >
+                <MenuItem disabled value="">
+                  <em>Your Research Field</em>
+                </MenuItem>
                 {names.map((name) => (
                   <MenuItem
                     key={name}

@@ -49,7 +49,7 @@ export default function DocumentEvaluation() {
       <div className="right_container">
         <form>
           <ul className="list-group">
-            <div className="criteria_box mb-5 fw-bold">
+            <div className="criteria_box mb-4 fw-bold">
               <div className="form-group row mb-4 criteria_row">
                 <div className="col ">
                   <label>Criteria Name </label>
@@ -157,6 +157,18 @@ export default function DocumentEvaluation() {
               </div>
             </div>
           </ul>
+          {/* Total marks */}
+          <div className="form-group row mb-4 criteria_row ps-5 fw-bold fs-4">
+            <div className="col">
+              <label>Total Marks </label>
+            </div>
+            <div className="col">
+              <label></label>
+            </div>
+            <div className="col-3 ps-4">
+              <label>100</label>
+            </div>
+          </div>
           <button type="submit" className="btn btn-success btn_submit mt-3">
             Submit
           </button>
