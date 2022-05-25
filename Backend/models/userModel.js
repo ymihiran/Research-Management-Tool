@@ -34,10 +34,6 @@ const userSchema = new Schema({
         type: String,
         default:"Student"
     },
-    specialization: {
-        type: String,
-        default:""
-    },
     research_area: {
         type: String,
         default:""
