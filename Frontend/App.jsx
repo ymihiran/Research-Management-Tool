@@ -8,11 +8,14 @@ import AcceptTopic from "./components/AcceptTopic";
 import TopicList from "./components/TopicList";
 import StdTopicList from "./components/StdTopicList";
 import AddMarking from "./components/AddMarking";
+import MarkingList from "./components/MarkingList";
+
 import DocumentEvaluation from "./components/DocumentEvaluation";
 import PresentationEvaluation from "./components/PresentationEvaluation";
 import AllDocuments from "./components/AllDocuments";
 import SubmitTypes from "./components/SubmitTypes.jsx";
 import RequestCoSupervisor from "./components/RequestCoSupervisor";
+
 
 function App() {
   return (
@@ -24,6 +27,7 @@ function App() {
         <Route path="/TopicList" component={TopicList} />
         <Route path="/StdTopicList" component={StdTopicList} />
         <Route path="/AddMarking" component={AddMarking} />
+        <Route path="/MarkingList" component={MarkingList} />
         <Route path="/SubmitTypes" component={SubmitTypes} />
         <Route exact path="/doc" component={DocumentEvaluation} />
         <Route path="/presentation" component={PresentationEvaluation} />

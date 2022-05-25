@@ -35,7 +35,7 @@ export default function AddMarking()  {
             criteria,
         };
 
-        axios.post("http://localhost:8070/marking/",newMarking).then(()=>{
+        axios.post("http://localhost:8070/markingScheme/",newMarking).then(()=>{
 
             alert("Marking Scheme Saved Successfully");
             
