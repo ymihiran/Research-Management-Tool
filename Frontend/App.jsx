@@ -12,6 +12,8 @@ import TopicList from "./components/TopicList";
 import StdTopicList from "./components/StdTopicList";
 import AddMarking from "./components/AddMarking";
 import SubmitDocs from "./components/SubmitDocs";
+import AllStudentGroup from "./components/AllStudentGroup";
+import AllTypes from "./components/AllTypes";
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
         <Route path="/StudentGroup" component={StudentGroup} />
         <Route path="/SubmitDocs" component={SubmitDocs} />
         <Route path="/UploadTemplate" component={UploadTemplate} />
+        <Route path="/AllStudentGroup" component={AllStudentGroup} />
+        <Route path="/AllTypes" component={AllTypes} />
       </Router>
     </div>
   );

@@ -91,9 +91,11 @@ export default function UploadTemplate() {
                     className="form-control"
                     style={{ width: "450px" }}
                     type="file"
-                    accept="image/png, image/jpeg"
                     id="image"
+                    required
                   />
+
+                  <br></br>
                 </div>
               </div>
 

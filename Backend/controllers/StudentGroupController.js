@@ -31,12 +31,22 @@ export const StudentGroup = async (req, res) => {
     Feedback,
   });
 
-  newGroup
+  await newGroup
     .save()
     .then(() => {
       res.json("Create Group Successfully");
     })
     .catch((err) => {
       console.log(err);
+    });
+};
+
+export const getAllGroup = async (req, res) => {
+  await StudentGroupRoute.find()
+    .then((groupregisters) => {
+      res.json(groupregisters);
+    })
+    .catch((err) => {
+      console.catch.log(err);
     });
 };
