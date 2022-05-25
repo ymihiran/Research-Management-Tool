@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import "./Styles/styles.css";
+import { useHistory } from "react-router";
 
 export default function AllDocuments() {
   const [docList, setDocList] = useState([]);
+  const history = useHistory();
   useEffect(() => {
     axios
       .get(`http://localhost:8070/document/`)
@@ -15,6 +17,13 @@ export default function AllDocuments() {
         alert("Can't get Document details: " + err.message);
       });
   }, []);
+
+  const setData = (data) => {
+    let { Group_ID } = data;
+    localStorage.setItem("Group_ID", Group_ID);
+    console.log(Group_ID);
+    history.push("/Doc");
+  };
 
   return (
     <div className="allDoc_body_container">
@@ -42,15 +51,15 @@ export default function AllDocuments() {
             </thead>
             <tbody>
               {docList.map((docList, index) => (
-                <tr key={index}>
+                <tr key={index} className="">
                   <td>{docList.Group_ID}</td>
                   <td>{docList.Research_Field}</td>
                   <td>{docList.Comment}</td>
                   <td>
                     <button
                       type="submit"
-                      className="btn btn-success "
-                      style={{ backgroundColor: "#84809f" }}
+                      className="btn allDoc_button "
+                      onClick={() => setData(docList)}
                     >
                       Evaluate
                     </button>
