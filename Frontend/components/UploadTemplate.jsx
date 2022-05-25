@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { ClassNames } from "@emotion/react";
 import "./CSS/st.css";
+import FileInput from "./FileInput/file";
 
 export default function UploadTemplate() {
   const [Admin_Name, setAdminName] = useState("");
@@ -9,7 +10,35 @@ export default function UploadTemplate() {
   const [Template, setTemplate] = useState("");
   const [Description, setDescription] = useState("");
 
-  function sendData(e) {
+  //file upload
+  const [data, setData] = useState({
+    name: "upload",
+  });
+
+  const handleInputState = (name, value) => {
+    setData((prev) => ({ ...prev, [name]: value }));
+    console.log("21 ", data);
+  };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const url = process.env.REACT_APP_API_URL + "/songs";
+  //     const { data: res } = await axios.post(url, data);
+  //     console.log(res);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  const sendData = async (e) => {
+    try {
+      const url = process.env.REACT_APP_API_URL + "/songs";
+      const { data: res } = await axios.post(url, data);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
     e.preventDefault();
 
     const newDoc = {
@@ -27,7 +56,7 @@ export default function UploadTemplate() {
       .catch((err) => {
         alert("err");
       });
-  }
+  };
 
   return (
     <div>
@@ -81,20 +110,20 @@ export default function UploadTemplate() {
                   }}
                 />
               </div>
+              <div className="mb-3"></div>
 
               <div className="mb-3">
                 <label htmlFor="formFile" className="t-form-label">
                   <b>Upload Template/Document</b>
                 </label>
+                <FileInput
+                  name="song"
+                  label="Choose File"
+                  handleInputState={handleInputState}
+                  type="file"
+                  value={data.song}
+                />
                 <div className="col-sm-4">
-                  <input
-                    className="form-control"
-                    style={{ width: "450px" }}
-                    type="file"
-                    id="image"
-                    required
-                  />
-
                   <br></br>
                 </div>
               </div>

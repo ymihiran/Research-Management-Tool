@@ -49,6 +49,9 @@ app.use("/submitDoc", docRouter);
 import uploadRouter from "./routes/UploadTemplateRoute.js";
 app.use("/template", uploadRouter);
 
+import fileRouter from "./routes/FileRoute.js";
+app.use("/file", fileRouter);
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
