@@ -34,7 +34,7 @@ export default function MarkingList()  {
         localStorage.setItem('specialization', specialization);
         localStorage.setItem('schemeType', schemeType);
         localStorage.setItem('marks', marks);
-        localStorage.setItem('criteria', criteria);
+        localStorage.setItem('criteria', JSON.stringify(criteria));
         
 
         history.push('/EditMarking')

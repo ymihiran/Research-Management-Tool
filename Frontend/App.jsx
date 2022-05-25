@@ -9,6 +9,7 @@ import TopicList from "./components/TopicList";
 import StdTopicList from "./components/StdTopicList";
 import AddMarking from "./components/AddMarking";
 import MarkingList from "./components/MarkingList";
+import EditMarking from "./components/EditMarking";
 
 import DocumentEvaluation from "./components/DocumentEvaluation";
 import PresentationEvaluation from "./components/PresentationEvaluation";
@@ -28,6 +29,7 @@ function App() {
         <Route path="/StdTopicList" component={StdTopicList} />
         <Route path="/AddMarking" component={AddMarking} />
         <Route path="/MarkingList" component={MarkingList} />
+        <Route path="/EditMarking" component={EditMarking} />
         <Route path="/SubmitTypes" component={SubmitTypes} />
         <Route exact path="/doc" component={DocumentEvaluation} />
         <Route path="/presentation" component={PresentationEvaluation} />

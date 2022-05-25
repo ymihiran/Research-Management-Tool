@@ -1,16 +1,30 @@
 import "./CSS/topicsub.css";
 import "./CSS/btrap.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useHistory } from 'react-router';
 
-export default function AddMarking()  {
+export default function EditMarking()  {
 
+    const [id, setId] = useState(null);
     const [sid, setSid] = useState("Sample"); //set admin ID
     const [specialization, setSpecialization] = useState(null);
     const [schemeType, setschemeType] = useState(null);
     const [marks, setMarks] = useState(null);
     const [criteria, setCriteria] = useState([]);
     const [extra, setExtra] = useState(null);
+
+    useEffect(()=>{
+        setId(localStorage.getItem('ID'));
+        setSid(localStorage.getItem('sid'));
+        setSpecialization(localStorage.getItem('specialization'));
+        setschemeType(localStorage.getItem('schemeType'));
+        setMarks(localStorage.getItem('marks'));
+        setCriteria((JSON.parse(localStorage.getItem('criteria')|| "[]")));
+        
+    },[])
+
+    console.log(criteria);
     
     
     const handleCriteriaInput = (e) => {
@@ -20,6 +34,7 @@ export default function AddMarking()  {
     const handleCriteria = (e) => {
         alert("New Criteria Added");
         setCriteria((prev) => [...prev, extra]);
+
     };
 
 
@@ -159,7 +174,7 @@ export default function AddMarking()  {
 
             <div style={{backgroundColor:'#D5D3E2'}}>
                 <div className="t-list-head-container">
-                        <label className="h-text"> <label style={{color:"#FF5631"}}> {100 -criteria?.map((data)=> Number(data.mark.replace("$",""))).reduce((prev,curr)=>prev+curr,0)} %</label> MARKS</label> <br className="br1" />
+                        <label className="h-text"> <label style={{color:"#FF5631"}}> XX %</label> MARKS</label> <br className="br1" />
                         <label className="h-text">TO ALLOCATE</label>       
                 </div>
 
@@ -176,7 +191,7 @@ export default function AddMarking()  {
                         </thead>
                         <tbody>
 
-                        {criteria.map((data,index)=>(
+                        {criteria?.map((data,index)=>(
 
                             <tr key={index}>
                                 <th scope="row">{index+1}</th>
