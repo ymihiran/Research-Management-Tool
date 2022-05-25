@@ -16,7 +16,7 @@ const userCtrl={
 
     register: async (req, res) => {
         try {
-            const {name, email, password,mobile,user_role,specialization,
+            const {name, email, password,mobile,user_role,
                    research_area,reg_number
             
             } = req.body
@@ -37,7 +37,7 @@ const userCtrl={
             const passwordHash = await bcrypt.hash(password, 12)
 
             const newUser = {
-                name, email, password: passwordHash,mobile,user_role,specialization,
+                name, email, password: passwordHash,mobile,user_role,
                 research_area,reg_number
             }
             
@@ -57,14 +57,14 @@ const userCtrl={
             const {activation_token} = req.body
             const user = jwt.verify(activation_token, process.env.ACTIVATION_TOKEN_SECRET)
 
-            const {name, email, password,mobile,user_role,specialization,
+            const {name, email, password,mobile,user_role,
                    research_area,reg_number} = user
 
             const check = await Users.findOne({email})
             if(check) return res.status(400).json({msg:"This email already exists."})
 
             const newUser = new Users({
-               name, email, password,mobile,user_role,specialization,
+               name, email, password,mobile,user_role,
                research_area,reg_number
             })
 
