@@ -25,5 +25,5 @@ const SubmitDocSchema = new Schema(
   { timestamps: true }
 );
 
-const SubmitDoc = mongoose.model("SubmitType", SubmitDocSchema);
+const SubmitDoc = mongoose.model("SubmitDoc", SubmitDocSchema);
 export default SubmitDoc;

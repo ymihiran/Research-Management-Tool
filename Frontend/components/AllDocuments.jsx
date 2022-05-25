@@ -1,12 +1,20 @@
 import axios from "axios";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Styles/styles.css";
 
 export default function AllDocuments() {
-  // useEffect(() => {
-  //   axios.get()
-
-  // }, []);
+  const [docList, setDocList] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8070/document/`)
+      .then((res) => {
+        setDocList(res.data);
+        console.log(docList);
+      })
+      .catch((err) => {
+        alert("Can't get Document details: " + err.message);
+      });
+  }, []);
 
   return (
     <div className="allDoc_body_container">
@@ -33,34 +41,22 @@ export default function AllDocuments() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>
-                  <button
-                    type="submit"
-                    className="btn btn-success "
-                    style={{ backgroundColor: "#84809f" }}
-                  >
-                    Evaluate
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>
-                  <button
-                    type="submit"
-                    className="btn btn-success "
-                    style={{ backgroundColor: "#0f0934" }}
-                  >
-                    Evaluate
-                  </button>
-                </td>
-              </tr>
+              {docList.map((docList, index) => (
+                <tr key={index}>
+                  <td>{docList.Group_ID}</td>
+                  <td>{docList.Research_Field}</td>
+                  <td>{docList.Comment}</td>
+                  <td>
+                    <button
+                      type="submit"
+                      className="btn btn-success "
+                      style={{ backgroundColor: "#84809f" }}
+                    >
+                      Evaluate
+                    </button>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
 

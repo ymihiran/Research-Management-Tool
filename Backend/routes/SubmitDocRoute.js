@@ -1,12 +1,9 @@
 import express from "express";
 
-import { SubmitDoc } from "../controllers/SubmitDocController.js";
+import { SubmitDoc, getDocs } from "../controllers/SubmitDocController.js";
 const router = express.Router();
 
-
-router.post("/document", SubmitDoc);
+router.post("/", SubmitDoc);
+router.get("/", getDocs);
 
 export default router;
-
-
-
