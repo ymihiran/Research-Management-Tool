@@ -5,7 +5,7 @@ import axios from "axios";
 
 export default function AddMarking()  {
 
-    const [sid, setSid] = useState("Sample");
+    const [sid, setSid] = useState("Sample"); //set admin ID
     const [specialization, setSpecialization] = useState(null);
     const [schemeType, setschemeType] = useState(null);
     const [marks, setMarks] = useState(null);
