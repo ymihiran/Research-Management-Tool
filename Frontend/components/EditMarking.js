@@ -38,10 +38,10 @@ export default function EditMarking()  {
     };
 
 
-    const handleCreate = async () => {
+    const handleSave = async () => {
         const data = new FormData();
         
-        const newMarking = {
+        const updateMarking = {
             sid,
             specialization,
             schemeType,
@@ -49,9 +49,9 @@ export default function EditMarking()  {
             criteria,
         };
 
-        axios.post("http://localhost:8070/markingScheme/",newMarking).then(()=>{
+        axios.put(`http://localhost:8070/markingscheme/${id}`,updateMarking).then(()=>{
 
-            alert("Marking Scheme Saved Successfully");
+            alert("Marking Scheme Updated Successfully");
             
     
          }).catch((err)=>{
@@ -100,6 +100,7 @@ export default function EditMarking()  {
                             <label className="m-form-label">Specialization</label>
                             
                             <select className='form-control m-select' name="Field" id="Field" style={{fontSize:'0.8rem', width:"450px",border: "2px solid #ced4da", height:"30px"}}
+                                value={specialization}
                                 onChange={(e) => setSpecialization(e.target.value)}
                             >
                                 <option value="Default">Select one</option>
@@ -117,7 +118,8 @@ export default function EditMarking()  {
                             <div className="mb-3">
                                 <label className="m-form-label" style={{color:"#322B5F"}}>Scheme Type</label>
                                 <select className='form-control m-select' name="Field" id="Field" style={{fontSize:'0.8rem', width:"280px",border: "2px solid #ced4da", height:"30px"}}
-                                    onChange={(e) => setschemeType(e.target.value)}
+                                   value={schemeType}
+                                   onChange={(e) => setschemeType(e.target.value)}
                                 >
                                 <option value="Default">Select one</option>
                                 <option value="Document">Document</option>
@@ -130,6 +132,7 @@ export default function EditMarking()  {
                             <div className="mb-3">
                                 <label className="m-form-label" style={{color:"#322B5F"}}>Total Marks</label>
                                 <input type="text"  style={{width:"150px", height:"30px"}} className="t-form-control" id="cUName"
+                                    value={marks}
                                     onChange={(e) => setMarks(e.target.value)}
                                 />
                             </div>
@@ -161,7 +164,7 @@ export default function EditMarking()  {
                     </form>
 
                     <button  className="btn btn-primary" style={{backgroundColor:"#84809F",width:"200px",fontWeight:"bold"}} onClick={handleCriteria} >+ Add criteria</button>
-                            <button  className="btn btn-primary" style={{backgroundColor:"#0F0934",width:"200px",fontWeight:"bold",marginLeft:'20px'}} onClick={handleCreate} > Save</button>
+                            <button  className="btn btn-primary" style={{backgroundColor:"#0F0934",width:"200px",fontWeight:"bold",marginLeft:'20px'}} onClick={handleSave} > Save</button>
 
                     <div className="bottom-t-container">
                         <label className="bottom-t" style={{color:"#FF5631"}}> SLIIT</label> <label className="bottom-t"> Research</label> <br />
