@@ -1,3 +1,4 @@
+
 import express from 'express';
 import { addMarking, getAllMarkings, getSingleMarking, updateMarking , deleteMarking } from '../controllers/markingController.js';
 const router = express.Router()
@@ -9,6 +10,7 @@ router.post("/",addMarking)
 
 //get all topics
 router.get("/",getAllMarkings)
+
 
 
   //get single topic

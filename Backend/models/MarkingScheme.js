@@ -1,21 +1,22 @@
 
+
 import mongoose from 'mongoose';
+
 
 const Schema = mongoose.Schema;
 
-const MarkingSchema = new Schema({
-
-
-
+const MarkingSchema = new Schema(
+  {
     sid: {
-        type: String,
-        default:'AA1'
+      type: String,
+      default: "AA1",
     },
-    
+
     specialization: {
-        type: String,
-        required : true
+      type: String,
+      required: true,
     },
+
 
     schemeType: {
         type: String,
@@ -23,22 +24,21 @@ const MarkingSchema = new Schema({
     },
 
     marks: {
-        type: Number,
-        required : true
+      type: Number,
+      required: true,
     },
 
     criteria: {
-        type: [
-          {
-            des: { type: String, required: true },
-            mark: { type: Number, required: true },
-          },
-        ],
-      },
-
-
-},{ timestamps: true })
-
+      type: [
+        {
+          des: { type: String, required: true },
+          mark: { type: Number, required: true },
+        },
+      ],
+    },
+  },
+  { timestamps: true }
+);
 
 
 const Marking = mongoose.model("marking",MarkingSchema);

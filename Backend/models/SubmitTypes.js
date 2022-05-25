@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const SubmitTypeSchema = new Schema({
@@ -15,4 +15,4 @@ const SubmitTypeSchema = new Schema({
 },{ timestamps: true })
 
 const SubmitType = mongoose.model("SubmitType", SubmitTypeSchema);
-module.exports = SubmitType;
+export default SubmitType;
