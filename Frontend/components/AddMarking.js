@@ -46,6 +46,15 @@ export default function AddMarking()  {
          })
     };
 
+    const handleDelete = async (e,desc) =>{
+        e.preventDefault();
+        if(desc!=""){
+            const newList = criteria.filter((data) => data.des !== desc);
+            setCriteria(newList);
+        }
+        
+    };
+
 
 
 
@@ -180,7 +189,10 @@ export default function AddMarking()  {
                                 </td>
                                                                 
                                 <td>
-                                <button className="btn" style={{color:"#0F0934"}}> Remove </button>
+                                <button className="btn" style={{color:"#0F0934"}} 
+                                onClick={(e) =>handleDelete(e,data.des)}> 
+                                    Remove 
+                                </button>
                                 </td>
                             </tr>
                         ))}

@@ -219,14 +219,11 @@ input{
 }
 
 .m-select{
-    font-size: 0.6rem;
-    color: red;
+    font-size: 0.6rem; 
 }
 
 
-.m-sub{
-    
-}
+
 
 .m-sub-container{
     float: left;
