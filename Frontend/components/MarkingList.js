@@ -5,22 +5,18 @@ import axios from 'axios';
 import { useHistory } from 'react-router';
 
 
-export default function TopicList()  {
+export default function MarkingList()  {
 
     const[request,setRequest] = useState([]);
     let history = useHistory();
-
-    let col = "";
-    let btnColor="";
-    let btnText=""
 
     
 
     useEffect(()=>{
 
         
-        axios.get("http://localhost:8070/topic").then((res)=>{
-            setRequest(res.data.topicRouter);
+        axios.get("http://localhost:8070/markingScheme").then((res)=>{
+            setRequest(res.data.markingRouter);
             }).catch((err)=>{
                 alert(err.message);
             })
@@ -29,42 +25,19 @@ export default function TopicList()  {
 
     console.log(request);
 
-    function colorProduce(data){
-        let val= "l-accepted";
-        if(data == "pending"){
-           val= "l-pending";
-           btnColor= "l-btn-accepted";
-           btnText="Review"  
-        }
-        else if(data == "Rejected"){
-            val= "l-rejected";
-            btnColor= "l-btn-pending";
-            btnText="Edit"   
-        }
-        else{
-            val= "l-accepted";
-            btnColor= "l-btn-pending";
-            btnText="Edit"   
-        }
-        col = val;
-
-    };
-
 
     const setData = (data) => {
-        let { _id,tid, groupID, groupName, rField, rTopic,leaderEmail, comment,status} = data;
+        let { _id,sid, specialization, schemeType, marks, criteria} = data;
 
         localStorage.setItem('ID',_id);
-        localStorage.setItem('tid', tid);
-        localStorage.setItem('groupID', groupID);
-        localStorage.setItem('groupName', groupName);
-        localStorage.setItem('rField', rField);
-        localStorage.setItem('rTopic', rTopic);
-        localStorage.setItem('leaderEmail', leaderEmail);
-        localStorage.setItem('comment', comment);
-        localStorage.setItem('status', status);
+        localStorage.setItem('sid', sid);
+        localStorage.setItem('specialization', specialization);
+        localStorage.setItem('schemeType', schemeType);
+        localStorage.setItem('marks', marks);
+        localStorage.setItem('criteria', JSON.stringify(criteria));
+        
 
-        history.push('/AcceptTopic')
+        history.push('/EditMarking')
         
     }
 
@@ -83,7 +56,7 @@ export default function TopicList()  {
 
                 <div className="t-list-head-container">
                     <label className="h-text" style={{color:"#FF5631"}}> SUBMITTED</label> <br className="br1" />
-                    <label className="h-text">RESEARCH TOPICS</label>
+                    <label className="h-text">MARKING SCHEMES</label>
                 </div>
             
                 <div className="t-list-tb-container">
@@ -92,9 +65,9 @@ export default function TopicList()  {
                         <thead>
                             <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Group_ID</th>
-                            <th scope="col">Research Topic</th>
-                            <th scope="col">Status</th>
+                            <th scope="col">Specialization</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Marks</th>
                             <th scope="col" style={{width:'100px'}}>Action</th>
                             </tr>
                         </thead>
@@ -105,18 +78,17 @@ export default function TopicList()  {
                                 <tr key={index}>
                                     <th scope="row">{index+1}</th>
                                     <td>
-                                        {data.groupID}
+                                        {data.specialization}
                                     </td>
                                     <td>
-                                        {data.rTopic}
+                                        {data.schemeType}
                                     </td>
                                     <td>
-                                        {colorProduce(data.status)}
-                                        <span className={col} >{data.status}</span>
+                                        {data.marks}
                                     </td>
                                     
                                     <td>
-                                    <button className={btnColor} onClick={() => setData(data)}> {btnText} </button>
+                                        <button className="btn btn-success purpled" style={{backgroundColor:"#0F0934",color:"white"}} onClick={() => setData(data)}> View </button>
                                     </td>
                                 </tr>
                             ))}
