@@ -65,7 +65,7 @@ export default function AcceptTopic()  {
 
         if (ans) {
 
-            await axios.put(`http://localhost:8070/topicReg/${id}`, updateTopic).then(() => {
+            await axios.put(`http://localhost:8070/topic/${id}`, updateTopic).then(() => {
                 alert("Status Update successfully");
             }).catch((err) => {
                 alert(err);

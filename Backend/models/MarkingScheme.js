@@ -1,4 +1,7 @@
-import mongoose from "mongoose";
+
+
+import mongoose from 'mongoose';
+
 
 const Schema = mongoose.Schema;
 
@@ -14,9 +17,10 @@ const MarkingSchema = new Schema(
       required: true,
     },
 
-    pName: {
-      type: String,
-      required: true,
+
+    schemeType: {
+        type: String,
+        required : true
     },
 
     marks: {
@@ -36,5 +40,6 @@ const MarkingSchema = new Schema(
   { timestamps: true }
 );
 
-const Marking = mongoose.model("marking", MarkingSchema);
+
+const Marking = mongoose.model("marking",MarkingSchema);
 export default Marking;
