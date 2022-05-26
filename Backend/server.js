@@ -37,7 +37,12 @@ app.use("/markingScheme",markingRouter);
 
 //User Routes
 import userRouter from "./routes/userRoute.js";
-app.use("/user", userRouter);
+app.use("/user",userRouter);
+
+import uploadRouter from './routes/uploadRoute.js';
+app.use('/api',uploadRouter);
+
+
 
 import router from "./routes/SubmitTypeRoute.js";
 app.use("/docType", router);
