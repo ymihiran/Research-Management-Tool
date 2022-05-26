@@ -11,7 +11,7 @@ export default function AllDocuments() {
       .get(`http://localhost:8070/document/`)
       .then((res) => {
         setDocList(res.data);
-        console.log(res);
+        console.log(res.data);
       })
       .catch((err) => {
         alert("Can't get Document details: " + err.message);
@@ -19,9 +19,9 @@ export default function AllDocuments() {
   }, []);
 
   const setData = (data) => {
-    let { Group_ID } = data;
+    let { Group_ID, Research_Field } = data;
     localStorage.setItem("Group_ID", Group_ID);
-    console.log(Group_ID);
+    localStorage.setItem("Research_Field", Research_Field);
     history.push("/Doc");
   };
 

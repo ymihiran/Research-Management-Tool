@@ -1,5 +1,6 @@
 import express from "express";
 const router = express.Router();
+import { getMarkingScheme } from "../controllers/markingController.js";
 import Marking from "../models/MarkingScheme.js";
 
 router.route("/").post((req, res) => {
@@ -94,5 +95,8 @@ router.route("/:id").delete(async (req, res) => {
       res.status(500).send({ status: "Error delete" });
     });
 });
+
+//Get a marking scheme for specific field
+router.get("/one/:field", getMarkingScheme);
 
 export default router;

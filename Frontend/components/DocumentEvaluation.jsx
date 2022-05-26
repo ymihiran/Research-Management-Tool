@@ -4,14 +4,31 @@ import "./Styles/styles.css";
 
 export default function DocumentEvaluation() {
   const [groupID, setGroupID] = useState();
+  const [researchField, setResearchField] = useState();
   const [criteria, setCriteria] = useState([]);
-  useEffect(() => {
-    setGroupID(localStorage.getItem("Group_ID"));
+  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
-    axios.get(`http://localhost:8070/markingScheme`).then((res) => {
-      console.table(res.data.markingRouter);
-    });
+  useEffect(() => {
+    const fetchData = async () => {
+      setGroupID(localStorage.getItem("Group_ID"));
+      setResearchField(localStorage.getItem("Research_Field"));
+
+      await axios
+        .get(
+          `http://localhost:8070/markingScheme/one/${localStorage.getItem(
+            "Research_Field"
+          )}`
+        )
+        .then((res) => {
+          console.log(res.data.criteria);
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    };
+    fetchData();
   }, []);
+
   return (
     <div className="body_container">
       {/*left side column */}
@@ -28,7 +45,7 @@ export default function DocumentEvaluation() {
         <form>
           <div className="form-group mb-3 mt-5">
             <label>Group ID</label>
-
+            {console.log("43 RF", researchField)}
             <input
               type="text"
               disabled
