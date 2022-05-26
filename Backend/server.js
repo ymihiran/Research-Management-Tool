@@ -33,6 +33,8 @@ app.use("/topicReg", topicRouter);
 //User Routes
 import userRouter from "./routes/userRoute.js";
 app.use("/user",userRouter);
+import uploadRouter from './routes/uploadRoute.js';
+app.use('/api',uploadRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

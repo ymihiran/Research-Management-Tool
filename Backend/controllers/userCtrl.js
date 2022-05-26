@@ -113,11 +113,41 @@ const userCtrl={
             return res.status(500).json({msg: err.message})
         }
     },
+
+    resetPassword: async (req, res) => {
+        try {
+            const {password} = req.body
+            
+            const passwordHash = await bcrypt.hash(password, 12)
+
+            await Users.findOneAndUpdate({_id: req.user.id}, {
+                password: passwordHash
+            })
+
+            res.json({msg: "Password successfully changed!"})
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
+
     getUserInfor: async (req, res) => {
         try {
             const user = await Users.findById(req.user.id).select('-password')
 
             res.json(user)
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
+
+    updateUser: async (req, res) => {
+        try {
+            const {name, avatar} = req.body
+            await Users.findOneAndUpdate({_id: req.user.id}, {
+                name, avatar
+            })
+
+            res.json({msg: "Update Success!"})
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
