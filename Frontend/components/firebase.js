@@ -2,16 +2,14 @@ import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA6FeAaDnZz7_1w5ilvp055aduo_yh-eYk",
-  authDomain: "research-management-tool-b408a.firebaseapp.com",
-  projectId: "research-management-tool-b408a",
-  storageBucket: "research-management-tool-b408a.appspot.com",
-  messagingSenderId: "258719151653",
-  appId: "1:258719151653:web:33b45d817ac877d24f71cc",
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
-
-const storage = getStorage(app);
-
-export { storage, app };
+const storage = getStorage(app, process.env.REACT_APP_BUCKET_URL);
+export default storage;

@@ -14,6 +14,7 @@ import AddMarking from "./components/AddMarking";
 import SubmitDocs from "./components/SubmitDocs";
 import AllStudentGroup from "./components/AllStudentGroup";
 import AllTypes from "./components/AllTypes";
+import SongForm from "./components/SongForm";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/UploadTemplate" component={UploadTemplate} />
         <Route path="/AllStudentGroup" component={AllStudentGroup} />
         <Route path="/AllTypes" component={AllTypes} />
+        <Route exact path="/" component={SongForm} />
       </Router>
     </div>
   );

@@ -1,6 +1,7 @@
 import UplaodTemplateRoute from "../models/UploadTemplate.js";
 
 export const UploadTemplate = async (req, res) => {
+  console.log(req);
   const Admin_Name = req.body.Admin_Name;
   const Title = req.body.Title;
   const Template = req.body.Template;

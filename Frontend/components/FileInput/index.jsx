@@ -1,12 +1,14 @@
 import { useRef, useState } from "react";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import storage from "../firebase";
-import check from "../FileInput/check.png";
+import check from "../check.png";
+import styles from "./styles.module.css";
 
 const FileInput = ({ name, label, value, type, handleInputState, ...rest }) => {
   const inputRef = useRef();
   const [progress, setProgress] = useState(0);
   const [progressShow, setProgressShow] = useState(false);
+  console.log("check");
 
   const handleUpload = () => {
     setProgressShow(true);
@@ -37,18 +39,29 @@ const FileInput = ({ name, label, value, type, handleInputState, ...rest }) => {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <input
         type="file"
         ref={inputRef}
         onChange={(e) => handleInputState(name, e.currentTarget.files[0])}
         vlaue={value}
+        className={styles.input}
         {...rest}
       />
-      <button type="button" onClick={() => inputRef.current.click()}>
+      <button
+        type="button"
+        onClick={() => inputRef.current.click()}
+        className={styles.button}
+      >
         {label}
       </button>
-
+      {/* {type === "image" && value && (
+				<img
+					src={typeof value === "string" ? value : URL.createObjectURL(value)}
+					alt="file"
+					className={styles.preview_img}
+				/>
+			)} */}
       {type === "file" && value && (
         <document
           src={typeof value === "string" ? value : URL.createObjectURL(value)}
@@ -56,16 +69,18 @@ const FileInput = ({ name, label, value, type, handleInputState, ...rest }) => {
         />
       )}
       {value !== null && !progressShow && typeof value !== "string" && (
-        <button onClick={handleUpload}>Upload</button>
+        <button onClick={handleUpload} className={styles.button}>
+          Upload
+        </button>
       )}
       {progressShow && progress < 100 && (
-        <div>
+        <div className={styles.progress_container}>
           <p>{progress}%</p>
         </div>
       )}
       {progress === 100 && (
-        <div>
-          <img src={check} alt="check circle" />
+        <div className={styles.progress_container}>
+          <img src={check} alt="check circle" className={styles.check_img} />
         </div>
       )}
     </div>

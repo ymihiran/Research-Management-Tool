@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { ClassNames } from "@emotion/react";
 import "./CSS/st.css";
-import FileInput from "./FileInput/file";
+import FileInput from "./FileInput";
 
 export default function UploadTemplate() {
   const [Admin_Name, setAdminName] = useState("");
@@ -20,8 +20,18 @@ export default function UploadTemplate() {
     console.log("21 ", data);
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const url = process.env.REACT_APP_API_URL + "/template";
+      const { data: res } = await axios.post(url, data);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // const sendData = async (e) => {
   //   try {
   //     const url = process.env.REACT_APP_API_URL + "/songs";
   //     const { data: res } = await axios.post(url, data);
@@ -29,38 +39,28 @@ export default function UploadTemplate() {
   //   } catch (error) {
   //     console.log(error);
   //   }
+  //   e.preventDefault();
+
+  //   const newDoc = {
+  //     Admin_Name,
+  //     Title,
+  //     Template,
+  //     Description,
+  //   };
+  //   axios
+  //     .post("http://localhost:8070/template/docTemplate", newDoc)
+  //     .then(() => {
+  //       alert("Added New Submit Type");
+  //       e.target.reset(); // to clear input fiels after submission
+  //     })
+  //     .catch((err) => {
+  //       alert("err");
+  //     });
   // };
-
-  const sendData = async (e) => {
-    try {
-      const url = process.env.REACT_APP_API_URL + "/songs";
-      const { data: res } = await axios.post(url, data);
-      console.log(res);
-    } catch (error) {
-      console.log(error);
-    }
-    e.preventDefault();
-
-    const newDoc = {
-      Admin_Name,
-      Title,
-      Template,
-      Description,
-    };
-    axios
-      .post("http://localhost:8070/template/docTemplate", newDoc)
-      .then(() => {
-        alert("Added New Submit Type");
-        e.target.reset(); // to clear input fiels after submission
-      })
-      .catch((err) => {
-        alert("err");
-      });
-  };
 
   return (
     <div>
-      <form onSubmit={sendData}>
+      <form onSubmit={handleSubmit}>
         <div className="t-list-container">
           <div style={{ backgroundColor: "#0F0934" }}>
             <div>
