@@ -20,6 +20,7 @@ export default function AddMarking()  {
     const handleCriteria = (e) => {
         alert("New Criteria Added");
         setCriteria((prev) => [...prev, extra]);
+        console.log(criteria);
     };
 
 

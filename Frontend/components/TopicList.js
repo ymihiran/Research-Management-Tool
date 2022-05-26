@@ -10,6 +10,10 @@ export default function TopicList()  {
     const[request,setRequest] = useState([]);
     let history = useHistory();
 
+    let col = "";
+    let btnColor="";
+    let btnText=""
+
     
 
     useEffect(()=>{
@@ -24,6 +28,27 @@ export default function TopicList()  {
     },[])
 
     console.log(request);
+
+    function colorProduce(data){
+        let val= "l-accepted";
+        if(data == "pending"){
+           val= "l-pending";
+           btnColor= "l-btn-accepted";
+           btnText="Review"  
+        }
+        else if(data == "Rejected"){
+            val= "l-rejected";
+            btnColor= "l-btn-pending";
+            btnText="Edit"   
+        }
+        else{
+            val= "l-accepted";
+            btnColor= "l-btn-pending";
+            btnText="Edit"   
+        }
+        col = val;
+
+    };
 
 
     const setData = (data) => {
@@ -86,11 +111,12 @@ export default function TopicList()  {
                                         {data.rTopic}
                                     </td>
                                     <td>
-                                        {data.status}
+                                        {colorProduce(data.status)}
+                                        <span className={col} >{data.status}</span>
                                     </td>
                                     
                                     <td>
-                                        <button className="btn btn-success purpled" style={{backgroundColor:"#0F0934",color:"white"}} onClick={() => setData(data)}> Review </button>
+                                    <button className={btnColor} onClick={() => setData(data)}> {btnText} </button>
                                     </td>
                                 </tr>
                             ))}

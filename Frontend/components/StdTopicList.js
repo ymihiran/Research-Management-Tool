@@ -9,6 +9,8 @@ export default function TopicList()  {
 
     const[request,setRequest] = useState([]);
     let col = "";
+    let btnColor="";
+    let btnText=""
     let history = useHistory();
 
     
@@ -27,16 +29,22 @@ export default function TopicList()  {
     function colorProduce(data){
         let val= "l-accepted";
         if(data == "pending"){
-           val= "l-pending";   
+           val= "l-pending";
+           btnColor= "l-btn-pending";
+           btnText="Req Co-Supervisor"  
         }
         else if(data == "Rejected"){
-            val= "l-pending";
+            val= "l-rejected";
+            btnColor= "l-btn-resubmit";
+            btnText="Re-submit"   
         }
         else{
-            val= "l-rejected";
+            val= "l-accepted";
+            btnColor= "l-btn-accepted";
+            btnText="Req Co-Supervisor"   
         }
         col = val;
-       //setCol(val);
+
     };
 
     console.log(request);
@@ -55,7 +63,16 @@ export default function TopicList()  {
         localStorage.setItem('comment', comment);
         localStorage.setItem('status', status);
 
-        history.push('/AcceptTopic')
+        if(status=="Accepted"){
+            history.push('/reqCoSuper');
+        }
+        else if(status=="Rejected"){
+            history.push('/SubmitTopic')
+        }
+        else{
+            alert("Your submission has not evaluated yet!");
+        }
+        
         
     }
 
@@ -107,37 +124,11 @@ export default function TopicList()  {
                                 </td>
                                 
                                 <td>
-                                    <button className="btn btn-success purpled" style={{backgroundColor:"#0F0934",color:"white"}} onClick={() => setData(data)}> View </button>
+                                    <button className={btnColor} onClick={() => setData(data)}> {btnText} </button>
                                 </td>
                             </tr>
                             ))}
 
-
-                            <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>
-                                <button className="btn btn-success purpled" style={{backgroundColor:"#0F0934",color:"white"}}> View </button>
-                            </td>
-                            </tr>
-                            <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                            <td><button className="btn btn-success purpled" style={{backgroundColor:"#00D8BE",color:"white"}}> Re-Submit </button></td>
-                            </tr>
-                            <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                            <td>
-                                <button className="btn btn-success purpled" style={{backgroundColor:"#0F0934",color:"white"}}> View </button>
-                            </td>
-                            </tr>
                         </tbody>
                     </table>
 
