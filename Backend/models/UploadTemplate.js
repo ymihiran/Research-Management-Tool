@@ -3,14 +3,12 @@ const Schema = mongoose.Schema;
 
 const UploadTemplateSchema = new Schema(
   {
-    Admin_Name: {
+    AdminName: {
       type: String,
-      required: true,
     },
 
     Title: {
       type: String,
-      required: true,
     },
 
     Template: {
@@ -19,7 +17,6 @@ const UploadTemplateSchema = new Schema(
 
     Description: {
       type: String,
-      required: true,
     },
   },
   { timestamps: true }

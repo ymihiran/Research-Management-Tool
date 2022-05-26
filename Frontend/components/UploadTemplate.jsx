@@ -5,15 +5,18 @@ import "./CSS/st.css";
 import FileInput from "./FileInput";
 
 export default function UploadTemplate() {
-  const [Admin_Name, setAdminName] = useState("");
-  const [Title, setTitle] = useState("");
-  const [Template, setTemplate] = useState("");
-  const [Description, setDescription] = useState("");
-
   //file upload
   const [data, setData] = useState({
     name: "upload",
+    Template: "",
+    AdminName: "",
+    Title: "",
+    Description: "",
   });
+
+  const handleChange = ({ currentTarget: input }) => {
+    setData({ ...data, [input.name]: input.value });
+  };
 
   const handleInputState = (name, value) => {
     setData((prev) => ({ ...prev, [name]: value }));
@@ -23,40 +26,14 @@ export default function UploadTemplate() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = process.env.REACT_APP_API_URL + "/template";
+      const url = process.env.REACT_APP_API_URL + "template";
       const { data: res } = await axios.post(url, data);
       console.log(res);
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
   };
-
-  // const sendData = async (e) => {
-  //   try {
-  //     const url = process.env.REACT_APP_API_URL + "/songs";
-  //     const { data: res } = await axios.post(url, data);
-  //     console.log(res);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  //   e.preventDefault();
-
-  //   const newDoc = {
-  //     Admin_Name,
-  //     Title,
-  //     Template,
-  //     Description,
-  //   };
-  //   axios
-  //     .post("http://localhost:8070/template/docTemplate", newDoc)
-  //     .then(() => {
-  //       alert("Added New Submit Type");
-  //       e.target.reset(); // to clear input fiels after submission
-  //     })
-  //     .catch((err) => {
-  //       alert("err");
-  //     });
-  // };
 
   return (
     <div>
@@ -90,9 +67,9 @@ export default function UploadTemplate() {
                   style={{ width: "450px" }}
                   id="cName"
                   required
-                  onChange={(e) => {
-                    setAdminName(e.target.value);
-                  }}
+                  name="AdminName"
+                  onChange={handleChange}
+                  value={data.AdminName}
                 />
               </div>
 
@@ -105,9 +82,9 @@ export default function UploadTemplate() {
                   style={{ width: "450px" }}
                   id="cName"
                   required
-                  onChange={(e) => {
-                    setTitle(e.target.value);
-                  }}
+                  name="Title"
+                  onChange={handleChange}
+                  value={data.Title}
                 />
               </div>
               <div className="mb-3"></div>
@@ -116,13 +93,15 @@ export default function UploadTemplate() {
                 <label htmlFor="formFile" className="t-form-label">
                   <b>Upload Template/Document</b>
                 </label>
-                <FileInput
-                  name="song"
-                  label="Choose File"
-                  handleInputState={handleInputState}
-                  type="file"
-                  value={data.song}
-                />
+                <div style={{ width: "470px" }}>
+                  <FileInput
+                    name="song"
+                    label="Choose File"
+                    handleInputState={handleInputState}
+                    type="file"
+                    value={data.song}
+                  />
+                </div>
                 <div className="col-sm-4">
                   <br></br>
                 </div>
@@ -136,16 +115,16 @@ export default function UploadTemplate() {
                   type="text"
                   style={{ width: "450px", height: "100px" }}
                   id="cName"
-                  onChange={(e) => {
-                    setDescription(e.target.value);
-                  }}
+                  name="Description"
+                  onChange={handleChange}
+                  value={data.Description}
                 />
               </div>
               <br></br>
 
               <button
                 type="submit"
-                className="btn btn-primary"
+                className="btn btn-primary mb-5"
                 style={{
                   backgroundColor: "#0F0934",
                   width: "200px",
@@ -156,18 +135,17 @@ export default function UploadTemplate() {
                 UPLOAD
               </button>
             </div>
-
-            <div className="bottom-t-container">
-              <label className="bottom-t" style={{ color: "#FF5631" }}>
-                {" "}
-                SLIIT
-              </label>{" "}
-              <label className="bottom-t"> Research</label> <br />
-              <label className="bottom-t"> Management Tool</label>
-            </div>
           </div>
         </div>
       </form>
+      <div className="bottom-t-container " style={{ marginBottom: "-6em" }}>
+        <label className="bottom-t" style={{ color: "#FF5631" }}>
+          {" "}
+          SLIIT
+        </label>{" "}
+        <label className="bottom-t"> Research</label> <br />
+        <label className="bottom-t"> Management Tool</label>
+      </div>
     </div>
   );
 }
