@@ -29,11 +29,12 @@ app.use("/supervisor", supervisorRouter);
 
 // Topic Register Route
 import topicRouter from "./routes/topicregs.js";
-app.use("/topicReg", topicRouter);
+app.use("/topic", topicRouter);
 
 // Marking Schema Route
 import markingRouter from "./routes/markingschemes.js";
-app.use("/markingScheme", markingRouter);
+app.use("/markingScheme",markingRouter);
+
 
 //User Routes
 import userRouter from "./routes/userRoute.js";
@@ -43,9 +44,23 @@ app.use("/user", userRouter);
 import SubmitTypeRouter from "./routes/SubmitTypeRoute.js";
 app.use("/docType", SubmitTypeRouter);
 
-//Document Router
+
+import uploadImgRouter from './routes/uploadRoute.js';
+app.use('/api',uploadImgRouter);
+
+import router from "./routes/SubmitTypeRoute.js";
+app.use("/docType", router);
+
+//Student Group Route
+import createRouter from "./routes/StudentGroupRoute.js";
+app.use("/stdGroup", createRouter);
+
+//Submit Doc Route
 import docRouter from "./routes/SubmitDocRoute.js";
 app.use("/document", docRouter);
+
+import uploadRouter from "./routes/UploadTemplateRoute.js";
+app.use("/template", uploadRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

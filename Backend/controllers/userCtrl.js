@@ -16,7 +16,7 @@ const userCtrl={
 
     register: async (req, res) => {
         try {
-            const {name, email, password,mobile,user_role,specialization,
+            const {name, email, password,mobile,user_role,
                    research_area,reg_number
             
             } = req.body
@@ -37,7 +37,7 @@ const userCtrl={
             const passwordHash = await bcrypt.hash(password, 12)
 
             const newUser = {
-                name, email, password: passwordHash,mobile,user_role,specialization,
+                name, email, password: passwordHash,mobile,user_role,
                 research_area,reg_number
             }
             
@@ -57,14 +57,14 @@ const userCtrl={
             const {activation_token} = req.body
             const user = jwt.verify(activation_token, process.env.ACTIVATION_TOKEN_SECRET)
 
-            const {name, email, password,mobile,user_role,specialization,
+            const {name, email, password,mobile,user_role,
                    research_area,reg_number} = user
 
             const check = await Users.findOne({email})
             if(check) return res.status(400).json({msg:"This email already exists."})
 
             const newUser = new Users({
-               name, email, password,mobile,user_role,specialization,
+               name, email, password,mobile,user_role,
                research_area,reg_number
             })
 
@@ -113,11 +113,41 @@ const userCtrl={
             return res.status(500).json({msg: err.message})
         }
     },
+
+    resetPassword: async (req, res) => {
+        try {
+            const {password} = req.body
+            
+            const passwordHash = await bcrypt.hash(password, 12)
+
+            await Users.findOneAndUpdate({_id: req.user.id}, {
+                password: passwordHash
+            })
+
+            res.json({msg: "Password successfully changed!"})
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
+
     getUserInfor: async (req, res) => {
         try {
             const user = await Users.findById(req.user.id).select('-password')
 
             res.json(user)
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
+
+    updateUser: async (req, res) => {
+        try {
+            const {name, avatar} = req.body
+            await Users.findOneAndUpdate({_id: req.user.id}, {
+                name, avatar
+            })
+
+            res.json({msg: "Update Success!"})
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }

@@ -8,15 +8,25 @@ const SubmitDocSchema = new Schema(
       required: true,
     },
 
+
     Document: {
+
       type: String,
       required: true,
     },
+
+
+    Status: {
+      type: String,
+      default: "Pending",
+    },
+
 
     ResearchField: {
       type: String,
       required: true,
     },
+
 
     Comment: {
       type: String,

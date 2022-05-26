@@ -6,4 +6,5 @@ const router = express.Router();
 router.post("/", SubmitDoc);
 router.get("/", getDocs);
 
+
 export default router;

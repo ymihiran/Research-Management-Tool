@@ -14,6 +14,8 @@ router.post('/refresh_token', userCtrl.getAccessToken)
 
 router.get('/infor',auth, userCtrl.getUserInfor)
 
+router.patch('/update',auth, userCtrl.updateUser)
+
 // router.post('/reset', auth, userCtrl.resetPassword)
 
 router.get('/logout', userCtrl.logout)
