@@ -19,7 +19,7 @@ export default function SubmitDocs() {
       Comment,
     };
     axios
-      .post("http://localhost:8070/submitDoc/document", newDoc)
+      .post("http://localhost:8070/document/", newDoc)
       .then(() => {
         alert("Added New Submit Type");
         e.target.reset(); // to clear input fiels after submission

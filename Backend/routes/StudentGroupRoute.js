@@ -6,8 +6,8 @@ import {
 } from "../controllers/StudentGroupController.js";
 const router = express.Router();
 
-router.post("/group", StudentGroup);
+router.post("/", StudentGroup);
 
-router.get("/group", getAllGroup);
+router.get("/", getAllGroup);
 
 export default router;

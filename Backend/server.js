@@ -40,11 +40,13 @@ app.use("/user", userRouter);
 import router from "./routes/SubmitTypeRoute.js";
 app.use("/docType", router);
 
+//Student Group Route
 import createRouter from "./routes/StudentGroupRoute.js";
-app.use("/create", createRouter);
+app.use("/stdGroup", createRouter);
 
+//Submit Doc Route
 import docRouter from "./routes/SubmitDocRoute.js";
-app.use("/submitDoc", docRouter);
+app.use("/document", docRouter);
 
 import uploadRouter from "./routes/UploadTemplateRoute.js";
 app.use("/template", uploadRouter);

@@ -39,7 +39,7 @@ export default function StudentGroup() {
     };
 
     axios
-      .post("http://localhost:8070/create/group", newGroup)
+      .post("http://localhost:8070/stdGroup", newGroup)
       .then(() => {
         alert("Added New Submit Type");
         e.target.reset(); // to clear input fiels after submission

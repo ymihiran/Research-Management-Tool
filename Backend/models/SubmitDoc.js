@@ -17,6 +17,11 @@ const SubmitDocSchema = new Schema(
       type: String,
     },
 
+    Status: {
+      type: String,
+      default: "Pending",
+    },
+
     Comment: {
       type: String,
     },
