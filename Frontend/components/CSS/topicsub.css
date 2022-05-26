@@ -235,6 +235,17 @@ input{
     padding-left: 20%;
 }
 
+.l-rejected{
+    color:red;
+}
+
+.l-pending{
+    color:yellow
+}
+
+.l-accepted{
+    color:green;
+}
 
 
   

@@ -28,10 +28,13 @@ export default function EditMarking()  {
     
     
     const handleCriteriaInput = (e) => {
+        console.log(e.target.name +":"+ e.target.value)
         setExtra({ ...extra, [e.target.name]: e.target.value });
+        console.log(extra);
     };
 
     const handleCriteria = (e) => {
+        document.getElementById('markBox').focus();
         alert("New Criteria Added");
         setCriteria((prev) => [...prev, extra]);
 
@@ -69,7 +72,29 @@ export default function EditMarking()  {
         
     };
 
+    const handleEdit = async (e,desc,mark) =>{
+        e.preventDefault();
 
+        document.getElementById('desBox').value=desc;
+        document.getElementById('markBox').value=mark;
+
+        const event = new Event("change", { bubbles: true });
+        document.getElementById('desBox').focus();
+        //document.getElementById('markBox').focus();
+
+
+        // setExtra({ ...extra, ["des"]: desc});
+        // setExtra({ ...extra, ["mark"]: mark});
+        
+
+        if(desc!=""){
+            const newList = criteria.filter((data) => data.des !== desc);
+            setCriteria(newList);
+        }
+        
+    };
+
+   
 
 
 
@@ -88,7 +113,7 @@ export default function EditMarking()  {
 
             <div style={{backgroundColor:"white"}}>
             <div className="t-list-head-container">
-                    <label className="h-text"> <label style={{color:"#FF5631"}}> CREATE</label> MARKING</label> <br className="br1" />
+                    <label className="h-text"> <label style={{color:"#FF5631"}}> UPDATE</label> MARKING</label> <br className="br1" />
                     <label className="h-text">SCHEME</label>
                     <hr />
             </div>
@@ -144,7 +169,8 @@ export default function EditMarking()  {
 
                         <div className="mb-3">
                             <label className="m-form-label">Criteria Name</label>
-                            <input type="text" name="des" style={{width:"450px", height:"30px"}}  id="cName"
+                            <input type="text" name="des" style={{width:"450px", height:"30px"}}  id="desBox"
+                                onFocus={handleCriteriaInput}
                                 onChange={handleCriteriaInput}
                             />
                         </div>
@@ -152,7 +178,8 @@ export default function EditMarking()  {
         
                         <div className="mb-3">
                             <label className="m-form-label">Mark Percentage (%)</label>
-                            <input type="number" name="mark" style={{width:"450px", height:"30px"}}  id="cName"
+                            <input type="text" name="mark" style={{width:"450px", height:"30px"}}  id="markBox"
+                                onFocus={handleCriteriaInput}
                                 onChange={handleCriteriaInput}
                             />
                         </div>
@@ -190,6 +217,7 @@ export default function EditMarking()  {
                             <th scope="col" style={{width:'220px'}}>Criteria</th>
                             <th scope="col">Marks (%)</th>
                             <th scope="col" >Action</th>
+                            <th scope="col" ></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -207,8 +235,15 @@ export default function EditMarking()  {
                                                                 
                                 <td>
                                 <button className="btn" style={{color:"#0F0934"}} 
+                                onClick={(e) =>handleEdit(e,data.des,data.mark)}> 
+                                    Edit 
+                                </button>
+                                </td>
+
+                                <td>
+                                <button className="btn" style={{color:"#0F0934"}} 
                                 onClick={(e) =>handleDelete(e,data.des)}> 
-                                    Remove 
+                                    X 
                                 </button>
                                 </td>
                             </tr>
