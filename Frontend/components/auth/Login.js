@@ -1,13 +1,10 @@
 import React, {useState} from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
-import {showErrMsg, showSuccessMsg} from '../../utils/notification/Notification'
-import {dispatchLogin} from '../../../redux/actions/authAction'
+import {showErrMsg, showSuccessMsg} from '../utils/notification/Notification'
+import {dispatchLogin} from '../../redux/actions/authAction.js'
 import {useDispatch} from 'react-redux'
-import { GoogleLogin } from 'react-google-login';
-import FacebookLogin from 'react-facebook-login';
 
-import './body.css'
 
 
 const initialState = {
@@ -49,41 +46,7 @@ function Login() {
         }
     }
 
-    const responseGoogle = async (response) => {
-
-      console.log(response)
-      try {
-                  
-          const res = await axios.post('/user/google_login', {tokenId: response.tokenId})
-         
-          setUser({...user, err:'', success: res.data.msg})
-          localStorage.setItem('firstLogin', true)
-
-          dispatch(dispatchLogin())
-          history.push("/")
-      } catch (err) {
-          err.response.data.msg && 
-          setUser({...user, err: err.response.data.msg, success: ''})
-      }
-  }
-
-  const responseFacebook = async (response) => {
-    try {
-        const {accessToken, userID} = response
-        const res = await axios.post('/user/facebook_login', {accessToken, userID})
-
-        setUser({...user, err:'', success: res.data.msg})
-        localStorage.setItem('firstLogin', true)
-
-        dispatch(dispatchLogin())
-        history.push('/')
-    } catch (err) {
-        err.response.data.msg && 
-        setUser({...user, err: err.response.data.msg, success: ''})
-    }
-}
-  
-    
+      
   return (
   
    
@@ -139,30 +102,7 @@ function Login() {
        </form>
        <br/>
 
-      
-       <div >
-         <div className='social'>   
-        <GoogleLogin
-        clientId="389472249003-m71iinf8p0reaih8q9hdo6qdjs78gfhq.apps.googleusercontent.com"
-        buttonText="Login With Google"
-        onSuccess={responseGoogle}
-        cookiePolicy={'single_host_origin'}
-       
-       /> </div> 
-       <br/>
-
-      <div className='social'> 
-        <FacebookLogin
-        appId="5086754768049630"
-        autoLoad={false}
-        fields="name,email,picture"
-       
-        callback={responseFacebook} />
-      </div>  
-
-   
-
-       <hr className="col-md-12 mb-2" /> 
+ <hr className="col-md-12 mb-2" /> 
    
    <br/>
       <center><h3>Don't Have an account?</h3></center> 
@@ -177,12 +117,7 @@ function Login() {
            </Link>
            </center>
    
-          </div>
-
-
-        </div>  
-
-  
+          </div> 
  )
 }
 export default Login
