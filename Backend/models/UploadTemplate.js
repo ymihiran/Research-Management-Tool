@@ -1,28 +1,26 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
-const UploadTemplateSchema = new Schema({
-
-    Admin_Name: {
-        type: String,
-        required: true
+const UploadTemplateSchema = new Schema(
+  {
+    AdminName: {
+      type: String,
     },
 
     Title: {
-        type: String,
-        required:true
+      type: String,
     },
-    
+
     Template: {
-        type: String,
-        required:true
+      type: String,
     },
 
     Description: {
-        type: String,
-        required:true
-    } 
-},{ timestamps: true })
+      type: String,
+    },
+  },
+  { timestamps: true }
+);
 
-const UploadTemplate = mongoose.model("SubmitType", UploadTemplateSchema);
+const UploadTemplate = mongoose.model("UploadTemplate", UploadTemplateSchema);
 export default UploadTemplate;

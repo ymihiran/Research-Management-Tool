@@ -1,9 +1,13 @@
 import express from "express";
 
-import { StudentGroup } from "../controllers/StudentGroupController.js";
+import {
+  StudentGroup,
+  getAllGroup,
+} from "../controllers/StudentGroupController.js";
 const router = express.Router();
 
+router.post("/", StudentGroup);
 
-router.post("/group", StudentGroup);
+router.get("/", getAllGroup);
 
 export default router;
