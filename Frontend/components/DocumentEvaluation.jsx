@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Styles/styles.css";
 
 export default function DocumentEvaluation() {
+  const [groupID, setGroupID] = useState();
+  useEffect(() => {
+    setGroupID(localStorage.getItem("Group_ID"));
+  }, []);
   return (
     <div className="body_container">
       {/*left side column */}
@@ -18,7 +22,14 @@ export default function DocumentEvaluation() {
         <form>
           <div className="form-group mb-3 mt-5">
             <label>Group ID</label>
-            <input type="text" disabled className="form-control" id="groupID" />
+            {console.log(groupID)}
+            <input
+              type="text"
+              disabled
+              className="form-control"
+              id="groupID"
+              value={groupID}
+            />
           </div>
 
           <div className="form-group mb-3">
