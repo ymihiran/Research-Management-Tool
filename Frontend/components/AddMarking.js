@@ -2,8 +2,12 @@ import "./CSS/topicsub.css";
 import "./CSS/btrap.css";
 import React, { useState } from "react";
 import axios from "axios";
+import { useHistory } from 'react-router';
+
 
 export default function AddMarking()  {
+
+    let history = useHistory();
 
     const [sid, setSid] = useState("Sample"); //set admin ID
     const [specialization, setSpecialization] = useState(null);
@@ -25,7 +29,18 @@ export default function AddMarking()  {
 
 
     const handleCreate = async () => {
-        const data = new FormData();
+
+        let suma = document.getElementById('pCon').textContent;
+        let sum = suma.substring(1,3);
+
+        if(sum > 0){
+            alert("Error: You have not added all marks!");
+        }
+        else if (sum < 0){
+            alert("Error: You have added marks over the limit!");
+        }
+        else{
+            const data = new FormData();
         
         const newMarking = {
             sid,
@@ -38,12 +53,15 @@ export default function AddMarking()  {
         axios.post("http://localhost:8070/markingScheme/",newMarking).then(()=>{
 
             alert("Marking Scheme Saved Successfully");
+            history.push('/MarkingList')
             
     
          }).catch((err)=>{
     
             alert(err);
          })
+        }
+        
     };
 
     const handleDelete = async (e,desc) =>{
@@ -160,7 +178,7 @@ export default function AddMarking()  {
 
             <div style={{backgroundColor:'#D5D3E2'}}>
                 <div className="t-list-head-container">
-                        <label className="h-text"> <label style={{color:"#FF5631"}}> {100 -criteria?.map((data)=> Number(data.mark.replace("$",""))).reduce((prev,curr)=>prev+curr,0)} %</label> MARKS</label> <br className="br1" />
+                        <label className="h-text"> <label id="pCon" style={{color:"#FF5631"}}> {100 -criteria?.map((data)=> Number(data.mark.replace("$",""))).reduce((prev,curr)=>prev+curr,0)} %</label> MARKS</label> <br className="br1" />
                         <label className="h-text">TO ALLOCATE</label>       
                 </div>
 

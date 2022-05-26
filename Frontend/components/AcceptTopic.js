@@ -3,6 +3,9 @@ import "./CSS/btrap.css";
 import React, {useState,useEffect} from "react";
 import axios from 'axios';
 import { useHistory } from 'react-router';
+import emailjs from "emailjs-com";
+
+
 
 export default function AcceptTopic()  {
 
@@ -15,6 +18,8 @@ export default function AcceptTopic()  {
     const [leaderEmail, setleaderEmail] = useState();
     const [comment, setacomment] = useState();
     const [status, setstatus] = useState();
+
+    let history = useHistory();
 
 
     useEffect(()=>{
@@ -72,7 +77,31 @@ export default function AcceptTopic()  {
             })
 
         }
+
+        document.getElementById("subBut").click();
+
+        
     }
+
+    function sendEmail(e) {
+        e.preventDefault();
+
+        emailjs
+        .sendForm(
+            'service_tc03vnm',
+            'template_viacnc5',
+            e.currentTarget,
+            '-utNmr2eLLLW4jLyR'
+        )
+        .then(
+            (result) => {
+            history.push("/topiclist");
+            },
+            (error) => {
+            console.log(error.text);
+            }
+        );
+      }
 
     return(
         <div className="topic-container">
@@ -139,6 +168,9 @@ export default function AcceptTopic()  {
                             />
                         </div>
                         <br />
+
+                        <input type="hidden" name="mail" value={leaderEmail} />
+
                         <button name="Accept" type="submit" className="btn btn-primary" style={{backgroundColor:"#0F0934",width:"200px",fontSize:"2rem"}} value="Accepted">
                             Accept
                         </button>
@@ -147,6 +179,13 @@ export default function AcceptTopic()  {
                             Reject
                         </button>
                     </form>  
+
+                    <form onSubmit={sendEmail}>
+                            <input type="hidden" name="mail" value={leaderEmail} />
+                            <input type="hidden" name="to_name" value={groupName} />
+                            <input type="hidden" name="status" value={status} />
+                            <button hidden id="subBut">Send Email</button>
+                    </form>
 
                     <br/>            
                 </div>
