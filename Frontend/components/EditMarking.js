@@ -14,6 +14,8 @@ export default function EditMarking()  {
     const [criteria, setCriteria] = useState([]);
     const [extra, setExtra] = useState(null);
 
+    let history = useHistory();
+
     useEffect(()=>{
         setId(localStorage.getItem('ID'));
         setSid(localStorage.getItem('sid'));
@@ -91,6 +93,24 @@ export default function EditMarking()  {
             const newList = criteria.filter((data) => data.des !== desc);
             setCriteria(newList);
         }
+        
+    };
+
+    const handleFullDelete = async () => {
+
+        let text = "Are you sure you want to delete?";
+        if (confirm(text) == true) {
+            axios.delete(`http://localhost:8070/markingscheme/${id}`).then(()=>{
+
+            alert("Marking Scheme Deleted!");
+            history.push('/MarkingList');
+            
+    
+         }).catch((err)=>{
+    
+            alert(err);
+         })
+        } 
         
     };
 
@@ -191,7 +211,10 @@ export default function EditMarking()  {
                     </form>
 
                     <button  className="btn btn-primary" style={{backgroundColor:"#84809F",width:"200px",fontWeight:"bold"}} onClick={handleCriteria} >+ Add criteria</button>
-                            <button  className="btn btn-primary" style={{backgroundColor:"#0F0934",width:"200px",fontWeight:"bold",marginLeft:'20px'}} onClick={handleSave} > Save</button>
+                    <br/>
+                    <button  className="btn btn-primary" style={{backgroundColor:"#0F0934",width:"200px",fontWeight:"bold",marginTop:'20px'}} onClick={handleSave} > Save</button>
+                    
+                    <button  className="btn btn-danger" style={{width:"200px",fontWeight:"bold",marginLeft:'20px',marginTop:'20px'}} onClick={handleFullDelete} > Delete</button>
 
                     <div className="bottom-t-container">
                         <label className="bottom-t" style={{color:"#FF5631"}}> SLIIT</label> <label className="bottom-t"> Research</label> <br />
