@@ -3,12 +3,12 @@ import fs from 'fs';
 
 export default async function(req, res, next) {
     try {
-        if(!req.files || Object.keys(req.files).length === 0)
+        if(!req.files || Object.keys(req.files).length == 0)
             return res.status(400).json({msg: "No files were uploaded."})
             
         const file = req.files.file;
 
-        console.log(file)
+         console.log(file)
 
         if(file.mimetype !== 'image/jpeg' && file.mimetype !== 'image/png'){
             removeTmp(file.tempFilePath)

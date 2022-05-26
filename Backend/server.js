@@ -37,6 +37,7 @@ app.use("/marking",markingRouter);
 //User Routes
 import userRouter from "./routes/userRoute.js";
 app.use("/user",userRouter);
+
 import uploadRouter from './routes/uploadRoute.js';
 app.use('/api',uploadRouter);
 
