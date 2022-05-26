@@ -1,6 +1,6 @@
 
 import express from 'express';
-import { addMarking, getAllMarkings, getSingleMarking, updateMarking , deleteMarking } from '../controllers/markingController.js';
+import { addMarking, getAllMarkings, getSingleMarking, updateMarking , deleteMarking, getMarkingScheme } from '../controllers/markingController.js';
 const router = express.Router()
 import Marking from "../models/MarkingScheme.js";
 
@@ -24,5 +24,8 @@ router.get("/",getAllMarkings)
 router.delete("/:id",deleteMarking)
 
 
+
+//Get a marking scheme for specific field
+router.get("/one/:field", getMarkingScheme);
 
 export default router;

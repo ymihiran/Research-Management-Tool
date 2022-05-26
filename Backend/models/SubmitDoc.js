@@ -36,6 +36,4 @@ const SubmitDocSchema = new Schema(
 );
 
 const SubmitDoc = mongoose.model("SubmitDoc", SubmitDocSchema);
-
-
 export default SubmitDoc;

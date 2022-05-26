@@ -1,7 +1,34 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import "./Styles/styles.css";
 
 export default function DocumentEvaluation() {
+  const [groupID, setGroupID] = useState();
+  const [researchField, setResearchField] = useState();
+  const [criteria, setCriteria] = useState([]);
+  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setGroupID(localStorage.getItem("Group_ID"));
+      setResearchField(localStorage.getItem("Research_Field"));
+
+      await axios
+        .get(
+          `http://localhost:8070/markingScheme/one/${localStorage.getItem(
+            "Research_Field"
+          )}`
+        )
+        .then((res) => {
+          console.log(res.data.criteria);
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    };
+    fetchData();
+  }, []);
+
   return (
     <div className="body_container">
       {/*left side column */}
@@ -18,7 +45,14 @@ export default function DocumentEvaluation() {
         <form>
           <div className="form-group mb-3 mt-5">
             <label>Group ID</label>
-            <input type="text" disabled className="form-control" id="groupID" />
+            {console.log("43 RF", researchField)}
+            <input
+              type="text"
+              disabled
+              className="form-control"
+              id="groupID"
+              value={groupID}
+            />
           </div>
 
           <div className="form-group mb-3">
