@@ -33,7 +33,7 @@ app.use("/topicReg", topicRouter);
 
 // Marking Schema Route
 import markingRouter from "./routes/markingschemes.js";
-app.use("/marking", markingRouter);
+app.use("/markingScheme", markingRouter);
 
 //User Routes
 import userRouter from "./routes/userRoute.js";

@@ -11,7 +11,7 @@ export default function AllDocuments() {
       .get(`http://localhost:8070/document/`)
       .then((res) => {
         setDocList(res.data);
-        console.log(docList);
+        console.log(res);
       })
       .catch((err) => {
         alert("Can't get Document details: " + err.message);

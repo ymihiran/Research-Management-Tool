@@ -1,10 +1,16 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./Styles/styles.css";
 
 export default function DocumentEvaluation() {
   const [groupID, setGroupID] = useState();
+  const [criteria, setCriteria] = useState([]);
   useEffect(() => {
     setGroupID(localStorage.getItem("Group_ID"));
+
+    axios.get(`http://localhost:8070/markingScheme`).then((res) => {
+      console.table(res.data.markingRouter);
+    });
   }, []);
   return (
     <div className="body_container">
@@ -22,7 +28,7 @@ export default function DocumentEvaluation() {
         <form>
           <div className="form-group mb-3 mt-5">
             <label>Group ID</label>
-            {console.log(groupID)}
+
             <input
               type="text"
               disabled
