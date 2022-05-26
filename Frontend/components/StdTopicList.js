@@ -1,7 +1,80 @@
 import "./CSS/topicsub.css";
 import "./CSS/btrap.css";
+import React, {useState,useEffect} from "react";
+import axios from 'axios';
+import { useHistory } from 'react-router';
+
 
 export default function TopicList()  {
+
+    const[request,setRequest] = useState([]);
+    let col = "";
+    let btnColor="";
+    let btnText=""
+    let history = useHistory();
+
+    
+
+    useEffect(()=>{
+
+        
+        axios.get("http://localhost:8070/topic").then((res)=>{
+            setRequest(res.data.topicRouter);
+            }).catch((err)=>{
+                alert(err.message);
+            })
+
+    },[])
+
+    function colorProduce(data){
+        let val= "l-accepted";
+        if(data == "pending"){
+           val= "l-pending";
+           btnColor= "l-btn-pending";
+           btnText="Req Co-Supervisor"  
+        }
+        else if(data == "Rejected"){
+            val= "l-rejected";
+            btnColor= "l-btn-resubmit";
+            btnText="Re-submit"   
+        }
+        else{
+            val= "l-accepted";
+            btnColor= "l-btn-accepted";
+            btnText="Req Co-Supervisor"   
+        }
+        col = val;
+
+    };
+
+    console.log(request);
+
+
+    const setData = (data) => {
+        let { _id,tid, groupID, groupName, rField, rTopic,leaderEmail, comment,status} = data;
+
+        localStorage.setItem('ID',_id);
+        localStorage.setItem('tid', tid);
+        localStorage.setItem('groupID', groupID);
+        localStorage.setItem('groupName', groupName);
+        localStorage.setItem('rField', rField);
+        localStorage.setItem('rTopic', rTopic);
+        localStorage.setItem('leaderEmail', leaderEmail);
+        localStorage.setItem('comment', comment);
+        localStorage.setItem('status', status);
+
+        if(status=="Accepted"){
+            history.push('/reqCoSuper');
+        }
+        else if(status=="Rejected"){
+            history.push('/SubmitTopic')
+        }
+        else{
+            alert("Your submission has not evaluated yet!");
+        }
+        
+        
+    }
 
     return(
         <div className="t-list-container">
@@ -33,31 +106,29 @@ export default function TopicList()  {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>
-                                <button className="btn btn-success purpled" style={{backgroundColor:"#0F0934",color:"white"}}> View </button>
-                            </td>
+
+                        {request.map((data,index)=>(
+
+                            <tr key={index}>
+                                <th scope="row">{index+1}</th>
+                                <td>
+                                    {data.groupID}
+                                </td>
+                                <td>
+                                    {data.rTopic}
+                                </td>
+                                <td>
+                                    {colorProduce(data.status)}
+                                    <span className={col} >{data.status}</span>
+                                    
+                                </td>
+                                
+                                <td>
+                                    <button className={btnColor} onClick={() => setData(data)}> {btnText} </button>
+                                </td>
                             </tr>
-                            <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                            <td><button className="btn btn-success purpled" style={{backgroundColor:"#00D8BE",color:"white"}}> Re-Submit </button></td>
-                            </tr>
-                            <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                            <td>
-                                <button className="btn btn-success purpled" style={{backgroundColor:"#0F0934",color:"white"}}> View </button>
-                            </td>
-                            </tr>
+                            ))}
+
                         </tbody>
                     </table>
 
