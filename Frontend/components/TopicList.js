@@ -9,6 +9,7 @@ export default function TopicList()  {
 
     const[request,setRequest] = useState([]);
     let history = useHistory();
+    const[searchTerm,setSearchTerm] = useState("");
 
     let col = "";
     let btnColor="";
@@ -68,6 +69,10 @@ export default function TopicList()  {
         
     }
 
+    function search(rows){
+        return rows.filter(row => row.groupID.toLowerCase().indexOf(q))
+    }
+
 
     return(
         <div className="t-list-container">
@@ -87,6 +92,9 @@ export default function TopicList()  {
                 </div>
             
                 <div className="t-list-tb-container">
+                    <div>
+                        <input type="text" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} />
+                    </div>
 
                     <table className="t-table table-striped table-hover">
                         <thead>
@@ -100,7 +108,12 @@ export default function TopicList()  {
                         </thead>
                         <tbody>
 
-                            {request.map((data,index)=>(
+                            {request.filter(val=>{
+                                if(searchTerm ===""){
+                                    return val;
+                                }
+                                else if(val.groupID.toLowerCase().includes(searchTerm.toLocaleLowerCase())){return val}
+                            }).map((data,index)=>(
 
                                 <tr key={index}>
                                     <th scope="row">{index+1}</th>
