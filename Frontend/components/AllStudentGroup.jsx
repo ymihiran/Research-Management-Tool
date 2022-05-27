@@ -10,7 +10,7 @@ export default function AllStudentGroup() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8070/create/group")
+      .get("http://localhost:8070/stdGroup")
       .then((res) => {
         setGroups(res.data);
       })
@@ -18,39 +18,6 @@ export default function AllStudentGroup() {
         alert(err.message);
       });
   }, []);
-
-  //   const setData = (data) => {
-  //     let {
-  //       Group_Leader_Name,
-  //       Student_ID,
-  //       Group_Leader_Email,
-  //       Member2_Name,
-  //       Member2_ID,
-  //       Member2_Email,
-  //       Member3_Name,
-  //       Member3_ID,
-  //       Member3_Email,
-  //       Member4_Name,
-  //       Member4_ID,
-  //       Member4_Email,
-  //       Feedback,
-  //     } = data;
-  //     localStorage.setItem("Group_Leader_Name", Group_Leader_Name);
-  //     localStorage.setItem("Student_ID", Student_ID);
-  //     localStorage.setItem("Group_Leader_Email", Group_Leader_Email);
-  //     localStorage.setItem("Member2_Name", Member2_Name);
-  //     localStorage.setItem("Member2_ID", Member2_ID);
-  //     localStorage.setItem("Member2_Email", Member2_Email);
-  //     localStorage.setItem("Member3_Name", Member3_Name);
-  //     localStorage.setItem("Member3_ID", Member3_ID);
-  //     localStorage.setItem("Member3_Email", Member3_Email);
-  //     localStorage.setItem("Member4_Name", Member4_Name);
-  //     localStorage.setItem("Member4_ID", Member4_ID);
-  //     localStorage.setItem("Member4_Email", Member4_Email);
-  //     localStorage.setItem("Feedback", Feedback);
-
-  //     console.log(data);
-  //   };
 
   return (
     <div>

@@ -1,5 +1,6 @@
 import React from "react";
 import "/node_modules/bootstrap/dist/css/bootstrap.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 import UploadTemplate from "./components/UploadTemplate";
 import SubmitTypes from "./components/SubmitTypes";
@@ -14,6 +15,7 @@ import AddMarking from "./components/AddMarking";
 import SubmitDocs from "./components/SubmitDocs";
 import AllStudentGroup from "./components/AllStudentGroup";
 import AllTypes from "./components/AllTypes";
+import AllCreateTypes from "./components/AllCreateTypes";
 
 function App() {
   return (
@@ -31,6 +33,7 @@ function App() {
         <Route path="/UploadTemplate" component={UploadTemplate} />
         <Route path="/AllStudentGroup" component={AllStudentGroup} />
         <Route path="/AllTypes" component={AllTypes} />
+        <Route path="/AllCreateTypes" component={AllCreateTypes} />
       </Router>
     </div>
   );

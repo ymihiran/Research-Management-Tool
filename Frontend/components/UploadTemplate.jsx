@@ -10,6 +10,7 @@ export default function UploadTemplate() {
     name: "upload",
     Template: "",
     AdminName: "",
+    SchemaType: "",
     Title: "",
     Description: "",
   });
@@ -30,6 +31,9 @@ export default function UploadTemplate() {
       const { data: res } = await axios.post(url, data);
       console.log(res);
       console.log(data);
+
+      alert("Create New Type Successfully");
+      e.target.reset(); // to clear input fiels after submission
     } catch (error) {
       console.log(error);
     }
@@ -71,6 +75,50 @@ export default function UploadTemplate() {
                   onChange={handleChange}
                   value={data.AdminName}
                 />
+              </div>
+
+              <div className="mb-3 ">
+                <label className="t-form-label">
+                  <b>Schema Type:</b>
+                </label>
+
+                <select
+                  className="form-control m-select"
+                  id="Field"
+                  style={{
+                    fontSize: "1rem",
+                    width: "450px",
+                    border: "2px solid #ced4da",
+                    height: "40px",
+                  }}
+                  name="SchemaType"
+                  onChange={handleChange}
+                  value={data.SchemaType}
+                >
+                  <option value="Default">Select one</option>
+                  <option value="Proposal Presentation">
+                    Proposal Presentation
+                  </option>
+                  <option value="Progress Presentation">
+                    Progress Presentation
+                  </option>
+                  <option value="Final Presentation">Final Presentation</option>
+                  <option value="Chater Documentation">
+                    Chater Documentation
+                  </option>
+                  <option value="Scrum Documentation">
+                    Scrum Documentation
+                  </option>
+                  <option value="Proposal Documentation">
+                    Proposal Documentation
+                  </option>
+                  <option value="Progress Documentation">
+                    Progress Documentation
+                  </option>
+                  <option value="Final Documentation">
+                    Final Documentation
+                  </option>
+                </select>
               </div>
 
               <div className="mb-3">

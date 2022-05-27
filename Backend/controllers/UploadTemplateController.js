@@ -4,6 +4,7 @@ export const UploadTemplate = async (req, res) => {
   console.log(req.body);
   const AdminName = req.body.AdminName;
   const Title = req.body.Title;
+  const SchemaType = req.body.SchemaType;
   const Template = req.body.song;
   const Description = req.body.Description;
 
@@ -11,6 +12,7 @@ export const UploadTemplate = async (req, res) => {
     AdminName,
     Title,
     Template,
+    SchemaType,
     Description,
   });
 
@@ -21,5 +23,15 @@ export const UploadTemplate = async (req, res) => {
     })
     .catch((err) => {
       console.log(err);
+    });
+};
+
+export const getAllTypes = async (req, res) => {
+  await UplaodTemplateRoute.find()
+    .then((createtypes) => {
+      res.json(createtypes);
+    })
+    .catch((err) => {
+      console.catch.log(err);
     });
 };
