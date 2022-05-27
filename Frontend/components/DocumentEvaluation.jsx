@@ -5,36 +5,31 @@ import "./Styles/styles.css";
 export default function DocumentEvaluation() {
   const [groupID, setGroupID] = useState();
   const [researchField, setResearchField] = useState();
-  const [criteria, setCriteria] = useState([]);
+  const [request, setRequest] = useState([]);
   const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
   useEffect(() => {
-    const fetchData = async () => {
-      setGroupID(localStorage.getItem("Group_ID"));
-      setResearchField(localStorage.getItem("Research_Field"));
+    setGroupID(localStorage.getItem("Group_ID"));
+    setResearchField(localStorage.getItem("Research_Field"));
 
-      await axios
-        .get(
-          `http://localhost:8070/markingScheme/one/${localStorage.getItem(
-            "Research_Field"
-          )}/${"Document"}`
-        )
-        .then((res) => {
-          function replacer(key, value) {
-            // Filtering out properties
-            if (typeof value == []) {
-              return undefined;
-            }
-            return value;
-          }
-          setCriteria(res.data.criteria);
-          console.log(JSON.stringify(res.data.criteria, replacer, " "));
-        })
-        .catch((err) => {
-          alert(err);
-        });
-    };
-    fetchData();
+    axios
+      .get(
+        `http://localhost:8070/markingScheme/one/${localStorage.getItem(
+          "Research_Field"
+        )}/${"Document"}`
+      )
+      .then((res) => {
+        setRequest(res.data);
+
+        console.log("res.data", res.data);
+        console.log("request", request.sid);
+        let { _id, sid, specialization, schemeType, marks, criteria } = request;
+        console.log("sid", sid);
+        console.log("criteria", JSON.stringify(criteria));
+      })
+      .catch((err) => {
+        alert(err);
+      });
   }, []);
 
   return (
@@ -53,7 +48,6 @@ export default function DocumentEvaluation() {
         <form>
           <div className="form-group mb-3 mt-5">
             <label>Group ID</label>
-            {console.log("43 RF", researchField)}
             <input
               type="text"
               disabled
