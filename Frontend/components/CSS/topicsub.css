@@ -389,5 +389,21 @@ input{
     background-color: #d80000;
     border-color: #b02a37;
   }
+
+  .l-sbox{
+      width: 200px;
+      height: 30px;
+  }
+
+  .l-sbox:hover{
+    background-color: #dfdee8;
+    }
+
+    .l-s-spec{
+        width: 200px;
+        height: 30px;
+        border: 2px solid #ced4da;
+        font-size:0.8rem
+    }
   
   

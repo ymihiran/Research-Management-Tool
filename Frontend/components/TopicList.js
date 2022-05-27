@@ -10,6 +10,7 @@ export default function TopicList()  {
     const[request,setRequest] = useState([]);
     let history = useHistory();
     const[searchTerm,setSearchTerm] = useState("");
+    const[spec,setSpec] = useState("");
 
     let col = "";
     let btnColor="";
@@ -92,8 +93,20 @@ export default function TopicList()  {
                 </div>
             
                 <div className="t-list-tb-container">
-                    <div>
-                        <input type="text" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} />
+                    <div className="m-sub-container">
+                        <input className="l-sbox" type="text" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} />
+                    </div>
+
+                    <div className="m-sub-container2">
+                        <select className='l-s-spec' name="Field" id="Field"
+                                onChange={(e) => setSpec(e.target.value)}
+                            >
+                                <option value="">All</option>
+                                <option value="Accepted">Accepted</option>
+                                <option value="pending">Pending</option>
+                                <option value="Rejected">Rejected</option>
+                                
+                        </select>
                     </div>
 
                     <table className="t-table table-striped table-hover">
@@ -109,10 +122,11 @@ export default function TopicList()  {
                         <tbody>
 
                             {request.filter(val=>{
-                                if(searchTerm ===""){
+                                if(searchTerm ==="" && spec===""){
                                     return val;
                                 }
-                                else if(val.groupID.toLowerCase().includes(searchTerm.toLocaleLowerCase())){return val}
+                                else if(val.groupID.toLowerCase().includes(searchTerm.toLocaleLowerCase()) && val.status.toLowerCase().includes(spec.toLocaleLowerCase())){
+                                    return val}
                             }).map((data,index)=>(
 
                                 <tr key={index}>
