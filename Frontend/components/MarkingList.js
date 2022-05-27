@@ -8,6 +8,11 @@ import { useHistory } from 'react-router';
 export default function MarkingList()  {
 
     const[request,setRequest] = useState([]);
+
+    const[spec,setSpec] = useState("");
+    const[type,setType] = useState("");
+
+
     let history = useHistory();
 
     
@@ -61,6 +66,37 @@ export default function MarkingList()  {
             
                 <div className="t-list-tb-container">
 
+                <div className="l-filter-container" style={{backgroundColor:"#b3b3e6", paddingTop: "5px",paddingLeft: "10px", paddingRight: "10px",paddingBottom: "5px"}}>
+
+                    <div className="m-sub-container">
+                    <label> Specialization:  </label>
+                    <select style={{marginLeft:"20px", backgroundColor:"white"}}  className='l-s-spec'  name="Field" id="rField"
+                                onChange={(e) => setSpec(e.target.value)}
+                            >
+                                <option value="">All</option>
+                                <option value="Artificial Interligance">Artificial Interligance</option>
+                                <option value="Machine Learning">Machine Learning</option>
+                                <option value="Games">Games</option>
+                                <option value="Robotics">Robotics</option>
+                                
+                        </select>
+
+                        <label style={{marginLeft:"20px"}} > Scheme Type: </label>
+
+                        <select className='l-s-spec' style={{marginLeft:"20px", backgroundColor:"white"}} name="Field" id="Field"
+                                onChange={(e) => setType(e.target.value)}
+                            >
+                                <option value="">All</option>
+                                <option value="Document">Document</option>
+                                <option value="Persentation">Persentation</option>
+                                
+                        </select>
+                    </div>
+
+                    
+
+                    </div>
+
                     <table className="t-table table-striped table-hover">
                         <thead>
                             <tr>
@@ -73,7 +109,13 @@ export default function MarkingList()  {
                         </thead>
                         <tbody>
 
-                            {request.map((data,index)=>(
+                            {request.filter(val=>{
+                                if(spec==="" && type===""){
+                                    return val;
+                                }
+                                else if(val.specialization.toLowerCase().includes(spec.toLocaleLowerCase()) && val.schemeType.toLowerCase().includes(type.toLocaleLowerCase()) ){
+                                    return val}
+                            }).map((data,index)=>(
 
                                 <tr key={index}>
                                     <th scope="row">{index+1}</th>
