@@ -1,5 +1,5 @@
 import React from 'react';
-import {createStore} from 'redux';
+import {createStore} from 'redux'
 import rootReducer from './reducers/';
 import {Provider} from 'react-redux';
 
@@ -17,4 +17,4 @@ function DataProvider({children}) {
     )
 }
 
-export default DataProvider
+export default DataProvider;

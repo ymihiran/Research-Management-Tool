@@ -31,8 +31,9 @@ function Login() {
     const handleSubmit = async e => {
         e.preventDefault()
         try {
-            const res = await axios.post('/user/login', {email, password})
+            const res = await axios.post('http://localhost:8070/user/login', {email, password})
             
+
             setUser({...user, err: '', success: res.data.msg})
 
             localStorage.setItem('firstLogin', true)
@@ -91,7 +92,7 @@ function Login() {
        </div>
        <br/>
        &nbsp; 
-       < button type="submit" class="btn btn-success btn-lg">
+       < button type="submit" className="btn btn-success btn-lg">
              
              Login
             
@@ -109,7 +110,7 @@ function Login() {
    
      <center> 
      <Link to="/register">
-       < button type="submit" class="btn btn-success btn-lg">
+       < button type="submit" className="btn btn-success btn-lg">
              
            Sign Up Here
             
@@ -120,5 +121,5 @@ function Login() {
           </div> 
  )
 }
-export default Login
+export default Login;
 

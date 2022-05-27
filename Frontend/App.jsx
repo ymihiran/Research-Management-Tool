@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {dispatchLogin, fetchUser, dispatchGetUser} from './redux/actions/authAction.js'
 import axios from 'axios';
 
+
 //Users
 import Body from './components/profile/Body.js';
 
@@ -41,13 +42,13 @@ function App() {
   const dispatch = useDispatch()
   const token = useSelector(state => state.token)
   const auth = useSelector(state => state.auth)
-
+  
 
   useEffect(() => {
     const firstLogin = localStorage.getItem('firstLogin')
     if(firstLogin){
       const getToken = async () => {
-        const res = await axios.post('/user/refresh_token', null)
+        const res = await axios.post('http://localhost:8070/user/refresh_token', null)
         dispatch({type: 'GET_TOKEN', payload: res.data.access_token})
       }
       getToken()
@@ -74,6 +75,9 @@ function App() {
   return (
     <div>
       <Router>
+        
+        <Body/>
+        
         <Route path="/SubmitTopic" component={SubmitTopic} />
         <Route path="/EvaluateTopic" component={EvaluateTopic} />
         <Route path="/AcceptTopic" component={AcceptTopic} />

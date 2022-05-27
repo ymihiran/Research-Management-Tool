@@ -5,7 +5,7 @@ import {showErrMsg,showSuccessMsg} from '../utils/Notification.js';
 
 
 function ActivationEmail() {
-    const {activation_token} = useParams()
+    const {activation_token} = useParams('')
     const [err, setErr] = useState('')
     const [success, setSuccess] = useState('')
 
@@ -13,7 +13,7 @@ function ActivationEmail() {
         if(activation_token){
             const activationEmail = async () => {
                 try {
-                    const res = await axios.post('/user/activation', {activation_token})
+                    const res = await axios.post('http://localhost:8070/user/activation', {activation_token})
                     setSuccess(res.data.msg)
                 } catch (err) {
                     err.response.data.msg && setErr(err.response.data.msg)
@@ -31,4 +31,4 @@ function ActivationEmail() {
     )
 }
 
-export default ActivationEmail
+export default ActivationEmail;

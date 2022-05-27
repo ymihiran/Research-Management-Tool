@@ -2,13 +2,7 @@ import Users from '../models/userModel.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import sendMail from'./sendMail.js';
-import {google} from 'googleapis';
 
-const {OAuth2} = google.auth
-
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
-
-const client = new OAuth2(process.env.MAILING_SERVICE_CLIENT_ID)
 
 const {CLIENT_URL} = process.env
 
@@ -88,7 +82,7 @@ const userCtrl={
             const refresh_token = createRefreshToken({id: user._id})
             res.cookie('refreshtoken', refresh_token, {
                 httpOnly: true,
-                path: '/user/refresh_token',
+                path: 'http:localhost:8070/user/refresh_token',
                 maxAge: 7*24*60*60*1000               // 7 days
             })
 

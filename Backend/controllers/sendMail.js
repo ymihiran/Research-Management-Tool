@@ -40,7 +40,7 @@ const sendEmail = (to, url,txt) => {
     })
         
     const mailOptions = {
-        from: SENDER_EMAIL_ADDRESS,
+        from: 'Research Management Tool',
         to: to,
         subject: "Varify Email",
         html: `

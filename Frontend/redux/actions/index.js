@@ -5,4 +5,4 @@ const ACTIONS = {
     
 }
 
-export default ACTIONS
+export default ACTIONS;
