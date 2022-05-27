@@ -95,7 +95,7 @@ export default function TopicList()  {
             
                 <div className="t-list-tb-container">
 
-                    <div className="l-filter-container" style={{backgroundColor:"#b3b3e6", paddingTop: "5px",paddingLeft: "10px", paddingRight: "10px",paddingBottom: "5px"}}>
+                    <div className="l-filter-container" style={{backgroundColor:"#D3D3D3", paddingTop: "5px",paddingLeft: "10px", paddingRight: "10px",paddingBottom: "5px"}}>
 
                         <div className="m-sub-container">
                             <input placeholder="Group ID" className="l-sbox" type="text" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} />
