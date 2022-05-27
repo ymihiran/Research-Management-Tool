@@ -231,6 +231,12 @@ input{
 }
 
 .m-sub-container2{
+    float: left;
+    margin-left: 50px;
+    padding-left: 20%;
+}
+.m-sub-container3{
+    float: left;
     margin-left: 50px;
     padding-left: 20%;
 }
@@ -403,7 +409,13 @@ input{
         width: 200px;
         height: 30px;
         border: 2px solid #ced4da;
-        font-size:0.8rem
+        font-size:0.8rem;
+        background-color: #ced4da;
+    }
+
+    .l-filter-container{
+        background-color: #d80000;
+        padding: 10px, 10px, 10px;
     }
   
   
