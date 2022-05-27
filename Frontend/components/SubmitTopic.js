@@ -32,7 +32,7 @@ export default function SubmitTopic()  {
             comment,
         }
 
-        axios.post("http://localhost:8070/topicReg/",newTopic).then(()=>{
+        axios.post("http://localhost:8070/topic/",newTopic).then(()=>{
 
             alert("Topic added");
             e.target.reset();

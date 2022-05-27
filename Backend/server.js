@@ -28,10 +28,12 @@ import supervisorRouter from "./routes/SupervisorRoute.js";
 app.use("/supervisor", supervisorRouter);
 
 import topicRouter from "./routes/topicregs.js";
-app.use("/topicReg", topicRouter);
+app.use("/topic", topicRouter);
 
 import markingRouter from "./routes/markingschemes.js";
-app.use("/marking", markingRouter);
+
+app.use("/markingScheme",markingRouter);
+
 
 //User Routes
 import userRouter from "./routes/userRoute.js";
