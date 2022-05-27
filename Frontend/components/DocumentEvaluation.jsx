@@ -17,10 +17,18 @@ export default function DocumentEvaluation() {
         .get(
           `http://localhost:8070/markingScheme/one/${localStorage.getItem(
             "Research_Field"
-          )}`
+          )}/${"Document"}`
         )
         .then((res) => {
-          console.log(res.data.criteria);
+          function replacer(key, value) {
+            // Filtering out properties
+            if (typeof value == []) {
+              return undefined;
+            }
+            return value;
+          }
+          setCriteria(res.data.criteria);
+          console.log(JSON.stringify(res.data.criteria, replacer, " "));
         })
         .catch((err) => {
           alert(err);
