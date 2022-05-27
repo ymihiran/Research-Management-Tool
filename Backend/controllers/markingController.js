@@ -4,7 +4,7 @@ export const getMarkingScheme = async (req, res) => {
   const field = req.params.field;
   const type = req.params.schemeType;
   console.log(req.params);
-  Marking.find({ specialization: field, schemeType: type })
+  Marking.findOne({ specialization: field, schemeType: type })
     .then((data) => {
       res.json(data);
     })

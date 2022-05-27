@@ -1,3 +1,4 @@
+import { map } from "@firebase/util";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./Styles/styles.css";
@@ -6,6 +7,7 @@ export default function DocumentEvaluation() {
   const [groupID, setGroupID] = useState();
   const [researchField, setResearchField] = useState();
   const [request, setRequest] = useState([]);
+  const [markingCriteria, setMarkingCriteria] = useState([]);
   const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
   useEffect(() => {
@@ -22,10 +24,10 @@ export default function DocumentEvaluation() {
         setRequest(res.data);
 
         console.log("res.data", res.data);
-        console.log("request", request.sid);
-        let { _id, sid, specialization, schemeType, marks, criteria } = request;
-        console.log("sid", sid);
-        console.log("criteria", JSON.stringify(criteria));
+        let { _id, sid, specialization, schemeType, marks, criteria } =
+          res.data;
+        console.log(criteria);
+        setMarkingCriteria(criteria);
       })
       .catch((err) => {
         alert(err);
@@ -87,109 +89,37 @@ export default function DocumentEvaluation() {
           <ul className="list-group">
             <div className="criteria_box mb-4 fw-bold">
               <div className="form-group row mb-4 criteria_row">
-                <div className="col ">
-                  <label>Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input
-                    type="number"
-                    min="0"
-                    max="25"
-                    className="form-control"
-                  />
-                </div>
-              </div>
+                <table className="table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col" className="col-2">
+                        No
+                      </th>
+                      <th scope="col" className="col">
+                        Criteria Name
+                      </th>
+                      <th scope="col" className="col">
+                        Total Marks
+                      </th>
+                      <th scope="col" className="col-1">
+                        Given Marks
+                      </th>
+                    </tr>
+                  </thead>
 
-              <div className="form-group row mb-4 criteria_row">
-                <div className="col">
-                  <label>Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input
-                    type="number"
-                    min="0"
-                    max="25"
-                    className="form-control"
-                  />
-                </div>
-              </div>
-
-              <div className="form-group row mb-4 criteria_row">
-                <div className="col">
-                  <label>Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input type="number" className="form-control" />
-                </div>
-              </div>
-
-              <div className="form-group row mb-4 criteria_row">
-                <div className="col">
-                  <label>Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input type="number" className="form-control" />
-                </div>
-              </div>
-
-              <div className="form-group row mb-4 criteria_row">
-                <div className="col">
-                  <label>Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input type="number" className="form-control" />
-                </div>
-              </div>
-
-              <div className="form-group row mb-4 criteria_row">
-                <div className="col">
-                  <label>Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input type="number" className="form-control" />
-                </div>
-              </div>
-
-              <div className="form-group row mb-4 criteria_row">
-                <div className="col">
-                  <label>Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input type="number" className="form-control" />
-                </div>
-              </div>
-
-              <div className="form-group row mb-4 criteria_row ">
-                <div className="col">
-                  <label>Criteria Name Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input type="number" className="form-control" />
-                </div>
+                  <tbody>
+                    {markingCriteria?.map((data, index) => (
+                      <tr key={index}>
+                        <th scope="row">{index + 1}</th>
+                        <td> {data.des}</td>
+                        <td className="ps-3">{data.mark}</td>
+                        <td>
+                          <input type="number" className="form-control" />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
           </ul>
