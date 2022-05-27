@@ -231,7 +231,7 @@ input{
 }
 
 .m-sub-container2{
-    float: left;
+    
     margin-left: 50px;
     padding-left: 20%;
 }
@@ -414,8 +414,7 @@ input{
     }
 
     .l-filter-container{
-        background-color: #d80000;
-        padding: 10px, 10px, 10px;
+        height: 40px;
     }
   
   

@@ -102,8 +102,9 @@ export default function TopicList()  {
                         </div>
 
                         <div className="m-sub-container2">
-                            <label> Research Field:  </label>
-                            <select style={{marginLeft:"20px", backgroundColor:"white"}}  className='l-s-spec'  name="Field" id="Field"
+                            
+                        <label> Research Field:  </label>
+                        <select style={{marginLeft:"20px", backgroundColor:"white"}}  className='l-s-spec'  name="Field" id="rField"
                                     onChange={(e) => setField(e.target.value)}
                                 >
                                     <option value="">All</option>
@@ -126,6 +127,7 @@ export default function TopicList()  {
                                     
                             </select>
                         </div>
+  
                     </div>
 
                     
