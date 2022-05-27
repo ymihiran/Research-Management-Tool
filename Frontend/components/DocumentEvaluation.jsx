@@ -5,14 +5,12 @@ import "./Styles/styles.css";
 
 export default function DocumentEvaluation() {
   const [groupID, setGroupID] = useState();
-  const [researchField, setResearchField] = useState();
-  const [request, setRequest] = useState([]);
   const [markingCriteria, setMarkingCriteria] = useState([]);
-  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+  const [inputValue, setInputValue] = useState("");
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     setGroupID(localStorage.getItem("Group_ID"));
-    setResearchField(localStorage.getItem("Research_Field"));
 
     axios
       .get(
@@ -21,8 +19,6 @@ export default function DocumentEvaluation() {
         )}/${"Document"}`
       )
       .then((res) => {
-        setRequest(res.data);
-
         console.log("res.data", res.data);
         let { _id, sid, specialization, schemeType, marks, criteria } =
           res.data;
@@ -33,6 +29,15 @@ export default function DocumentEvaluation() {
         alert(err);
       });
   }, []);
+
+  // const total = request
+  //   .map((data) => Number(data.price.replace("$", "")))
+  //   .reduce((prev, curr) => prev + curr, 0);
+
+  const handleMarks = (e, marks) => {
+    setTotal((prev) => [...prev, marks]);
+    console.log(total);
+  };
 
   return (
     <div className="body_container">
@@ -114,7 +119,12 @@ export default function DocumentEvaluation() {
                         <td> {data.des}</td>
                         <td className="ps-3">{data.mark}</td>
                         <td>
-                          <input type="number" className="form-control" />
+                          <input
+                            value={inputValue}
+                            type="number"
+                            className="form-control"
+                            onChange={(e) => handleMarks(e, e.target.value)}
+                          />
                         </td>
                       </tr>
                     ))}
