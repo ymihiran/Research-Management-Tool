@@ -171,11 +171,11 @@ export default function AcceptTopic()  {
 
                         <input type="hidden" name="mail" value={leaderEmail} />
 
-                        <button name="Accept" type="submit" className="btn btn-primary" style={{backgroundColor:"#0F0934",width:"200px",fontSize:"2rem"}} value="Accepted">
+                        <button name="Accept" type="submit" className="l-btn-accept" style={{width:"200px",fontSize:"2rem"}} value="Accepted">
                             Accept
                         </button>
 
-                        <button name="Reject" type="submit" className="btn btn-primary" style={{backgroundColor:"#84809F",width:"200px", marginLeft:"40px",fontSize:"2rem"}} value="Rejected">
+                        <button name="Reject" type="submit" className="l-btn-reject" style={{width:"200px", marginLeft:"40px",fontSize:"2rem"}} value="Rejected">
                             Reject
                         </button>
                     </form>  
