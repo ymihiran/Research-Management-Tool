@@ -1,46 +1,55 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { GroupOutlined } from "@mui/icons-material";
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
+// const ITEM_HEIGHT = 48;
+// const ITEM_PADDING_TOP = 8;
+// const MenuProps = {
+//   PaperProps: {
+//     style: {
+//       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+//       width: 250,
+//     },
+//   },
+// };
 
-const names = [
-  "Oliver Hansen",
-  "Van Henry",
-  "April Tucker",
-  "Ralph Hubbard",
-  "Omar Alexander",
-  "Carlos Abbott",
-  "Miriam Wagner",
-  "Bradley Wilkerson",
-  "Virginia Andrews",
-  "Kelly Snyder",
-];
+// const names = [
+//   "Oliver Hansen",
+//   "Van Henry",
+//   "April Tucker",
+//   "Ralph Hubbard",
+//   "Omar Alexander",
+//   "Carlos Abbott",
+//   "Miriam Wagner",
+//   "Bradley Wilkerson",
+//   "Virginia Andrews",
+//   "Kelly Snyder",
+// ];
 
-function getStyles(name, personName, theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
+// function getStyles(name, personName, theme) {
+//   return {
+//     fontWeight:
+//       personName.indexOf(name) === -1
+//         ? theme.typography.fontWeightRegular
+//         : theme.typography.fontWeightMedium,
+//   };
+// }
 export default function RequestCoSupervisor() {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
+  const [groupID, setGroupID] = useState();
+  const [topic, setTopic] = useState();
+  const [researchField, setResearchField] = useState();
+
+  useEffect(() => {
+    setGroupID(localStorage.getItem("groupID"));
+    setTopic(localStorage.getItem("rTopic"));
+    setResearchField(localStorage.getItem("rField"));
+  }, []);
 
   const handleChange = (event) => {
     const {
@@ -60,20 +69,27 @@ export default function RequestCoSupervisor() {
             REQUEST
           </label>
           <br />
-          <label className="h-text" style={{ color: "#ffffff" }}>
+          <label className="h-text mb-5" style={{ color: "#ffffff" }}>
             CO-SUPERVISOR
           </label>
         </div>
-        <form>
+        <form className=" pe-5">
           <div className="form-group mb-3 mt-5">
             <label>Group ID</label>
-            <input type="text" disabled className="form-control" id="groupID" />
+            <input
+              type="text"
+              value={groupID}
+              disabled
+              className="form-control"
+              id="groupID"
+            />
           </div>
 
           <div className="form-group mb-3">
             <label>Research Topic</label>
             <input
               type="text"
+              value={topic}
               disabled
               className="form-control"
               id="researchTopic"
@@ -81,7 +97,14 @@ export default function RequestCoSupervisor() {
           </div>
           <div className=" mb-5 ">
             <label>Research Field</label>
-            <FormControl
+            <input
+              type="text"
+              value={researchField}
+              disabled
+              className="form-control"
+              id="researchTopic"
+            />
+            {/* <FormControl
               sx={{ width: 300, height: 45 }}
               className="form-control me-5 "
             >
@@ -113,7 +136,7 @@ export default function RequestCoSupervisor() {
                   </MenuItem>
                 ))}
               </Select>
-            </FormControl>
+            </FormControl> */}
           </div>
           <button type="submit" className="btn btn-success ">
             Find Co-Supervisor
