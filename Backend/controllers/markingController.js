@@ -1,5 +1,18 @@
 import Marking from "../models/MarkingScheme.js";
 
+
+export const getMarkingScheme = async (req, res) => {
+  const field = req.params.field;
+  console.log(field);
+  Marking.findOne({ specialization: field })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 export const addMarking = async (req,res)=>{
     const sid = req.body.sid;
     const specialization = req.body.specialization;
@@ -87,3 +100,4 @@ export const deleteMarking = async (req,res)=>{
         res.status(500).send({status: "Error delete"})
     })
 } 
+

@@ -1,5 +1,16 @@
 import SubmitDocRoute from "../models/SubmitDoc.js";
 
+//Get submitted documents details
+export const getDocs = async (req, res) => {
+  SubmitDocRoute.find()
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.catch.log(err);
+    });
+};
+
 export const SubmitDoc = async (req, res) => {
   const Group_ID = req.body.Group_ID;
   const Research_Field = req.body.Research_Field;
