@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import axios from "axios";
+import SendIcon from "@mui/icons-material/Send";
 
 export default function RequestCoSupervisor() {
   const theme = useTheme();
@@ -8,6 +9,7 @@ export default function RequestCoSupervisor() {
   const [groupID, setGroupID] = useState();
   const [topic, setTopic] = useState();
   const [researchField, setResearchField] = useState();
+  const [coSupervisor, setCoSupervisor] = useState();
 
   useEffect(() => {
     setGroupID(localStorage.getItem("groupID"));
@@ -22,6 +24,7 @@ export default function RequestCoSupervisor() {
       )
       .then((res) => {
         console.log(res.data);
+        setCoSupervisor(res.data);
       });
   }, []);
 
@@ -80,117 +83,51 @@ export default function RequestCoSupervisor() {
       <div className="right_container">
         <form>
           <ul className="list-group">
-            <div className="criteria_box mb-5 fw-bold">
-              <div className="form-group row mb-4 criteria_row">
-                <div className="col ">
-                  <label>Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input
-                    type="number"
-                    min="0"
-                    max="25"
-                    className="form-control"
-                  />
-                </div>
-              </div>
+            <div className="criteria_box mb-5">
+              <table className="table-hover ms-4">
+                <thead>
+                  <tr>
+                    <th scope="col" className="col">
+                      No
+                    </th>
+                    <th scope="col" className="col-2 ps-5">
+                      Name
+                    </th>
+                    <th scope="col" className="col ms-5">
+                      <center>Email</center>
+                    </th>
+                    <th scope="col-1" className="col-5"></th>
+                  </tr>
+                </thead>
 
-              <div className="form-group row mb-4 criteria_row">
-                <div className="col">
-                  <label>Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input
-                    type="number"
-                    min="0"
-                    max="25"
-                    className="form-control"
-                  />
-                </div>
-              </div>
-
-              <div className="form-group row mb-4 criteria_row">
-                <div className="col">
-                  <label>Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input type="number" className="form-control" />
-                </div>
-              </div>
-
-              <div className="form-group row mb-4 criteria_row">
-                <div className="col">
-                  <label>Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input type="number" className="form-control" />
-                </div>
-              </div>
-
-              <div className="form-group row mb-4 criteria_row">
-                <div className="col">
-                  <label>Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input type="number" className="form-control" />
-                </div>
-              </div>
-
-              <div className="form-group row mb-4 criteria_row">
-                <div className="col">
-                  <label>Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input type="number" className="form-control" />
-                </div>
-              </div>
-
-              <div className="form-group row mb-4 criteria_row">
-                <div className="col">
-                  <label>Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input type="number" className="form-control" />
-                </div>
-              </div>
-
-              <div className="form-group row mb-4 criteria_row ">
-                <div className="col">
-                  <label>Criteria Name Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input type="number" className="form-control" />
-                </div>
-              </div>
+                <tbody>
+                  {coSupervisor?.map((data, index) => (
+                    <tr key={index}>
+                      <th scope="row">{index + 1}</th>
+                      <td className=" ps-5"> {data.name}</td>
+                      <td className="">{data.email}</td>
+                      <td>
+                        <center>
+                          <div className="col-3 ms-5 ">
+                            <a
+                              type="number"
+                              min="0"
+                              max="25"
+                              className="form-control "
+                            >
+                              <div className="ps-2">
+                                <SendIcon fontSize="large" />
+                              </div>
+                            </a>
+                          </div>
+                        </center>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </ul>
-          <button type="submit" className="btn btn-success btn_submit mt-3">
-            Submit
-          </button>
         </form>
       </div>
     </div>
