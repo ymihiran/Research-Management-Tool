@@ -2,13 +2,7 @@ import Users from '../models/userModel.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import sendMail from'./sendMail.js';
-import {google} from 'googleapis';
 
-const {OAuth2} = google.auth
-
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
-
-const client = new OAuth2(process.env.MAILING_SERVICE_CLIENT_ID)
 
 const {CLIENT_URL} = process.env
 
@@ -84,6 +78,7 @@ const userCtrl={
 
             const isMatch = await bcrypt.compare(password, user.password)
             if(!isMatch) return res.status(400).json({msg: "Password is incorrect."})
+
 
             const token = jwt.sign({reg: user.email, id: user._id}, process.env.REFRESH_TOKEN_SECRET, {expiresIn:"1h"} )
 
