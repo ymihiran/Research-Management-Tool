@@ -142,7 +142,7 @@ export default function SubmitTopic()  {
 
 
 
-                        <button type="submit" className="btn btn-primary" style={{backgroundColor:"#0F0934",width:"200px",fontWeight:"bold"}} >Submit</button>
+                        <button type="submit" className="l-btn-accept" style={{width:"200px",fontWeight:"bold"}} >Submit</button>
                     </form>
 
                     <div className="bottom-t-container">

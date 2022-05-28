@@ -7,7 +7,7 @@ import emailjs from "emailjs-com";
 
 
 
-export default function AcceptTopic()  {
+export default function EditTopic()  {
 
     const [tid, settid] = useState();
     const [id, setid] = useState();
@@ -42,18 +42,6 @@ export default function AcceptTopic()  {
         
         e.preventDefault();
 
-        const btnName = e.nativeEvent.submitter.name;
-        let sts="";
-
-
-
-        if (btnName=="Accept") {
-            sts= "Accepted";
-        } else if (btnName=="Reject") {
-            sts= "Rejected";
-        } else {
-            //no button pressed
-        }
 
         const updateTopic = {
             tid,
@@ -63,7 +51,7 @@ export default function AcceptTopic()  {
             rTopic,
             leaderEmail,
             comment,
-            status:sts
+            status
         }
 
         let ans = 1;
@@ -71,37 +59,20 @@ export default function AcceptTopic()  {
         if (ans) {
 
             await axios.put(`http://localhost:8070/topic/${id}`, updateTopic).then(() => {
-                alert("Status Update successfully");
+                alert("Topic Update successfully");
+                history.push('/StdTopicList');
             }).catch((err) => {
                 alert(err);
             })
 
         }
-
-        document.getElementById("subBut").click();
-
-        
     }
 
-    function sendEmail(e) {
-        e.preventDefault();
+    async function  goList(){
 
-        emailjs
-        .sendForm(
-            'service_tc03vnm',
-            'template_viacnc5',
-            e.currentTarget,
-            '-utNmr2eLLLW4jLyR'
-        )
-        .then(
-            (result) => {
-            history.push("/topiclist");
-            },
-            (error) => {
-            console.log(error.text);
-            }
-        );
-      }
+    }
+
+    
 
     return(
         <div className="topic-container">
@@ -117,7 +88,7 @@ export default function AcceptTopic()  {
             <div style={{backgroundColor:"white"}}>
 
                 <div className="head-container">
-                    <label className="h-text" style={{color:"#FF5631"}}> APPROVE</label> <br className="br1" />
+                    <label className="h-text" style={{color:"#FF5631"}}> UPDATE</label> <br className="br1" />
                     <label className="h-text">RESEARCH TOPIC</label>
                 </div>
             
@@ -125,46 +96,52 @@ export default function AcceptTopic()  {
             <form onSubmit={submitData}> 
                         <div className="mb-3">
                             <label className="s-form-label" >Group ID</label>
-                            <input className="s-input" disabled type="text"  style={{width:"450px"}}  id="cUName"
+                            <input type="text"  style={{width:"450px"}}  id="cUName"
                                 value={groupID}
+                                onChange={(e) => setgroupID(e.target.value)}
                             />
                         </div>
 
                         <div className="mb-3">
                             <label className="s-form-label">Group Name</label>
-                            <input  className="s-input" disabled  type="text"  style={{width:"450px"}}  id="cName"
+                            <input   type="text"  style={{width:"450px"}}  id="cName"
                                 value={groupName}
+                                onChange={(e) => setgroupName(e.target.value)}
                             />
                         </div>
 
                         <div className="mb-3">
                             <label className="s-form-label">Research Field</label>
                             
-                            <input  className="s-input" disabled  type="text"  style={{width:"450px"}}  id="cName"
+                            <input  type="text"  style={{width:"450px"}}  id="cName"
                                 value={rField}
+                                onChange={(e) => setrField(e.target.value)}
                                 />
 
                         </div>
 
                         <div className="mb-3">
                             <label className="s-form-label">Research Topic</label>
-                            <input className="s-input" disabled type="text"  style={{width:"450px"}}  id="cName"   
+                            <input type="text"  style={{width:"450px"}}  id="cName"   
                                 value={rTopic}
+                                onChange={(e) => setrTopic(e.target.value)}
                             />
                            
                         </div>
 
                         <div className="mb-3">
                             <label className="s-form-label">Group Leader's email</label>
-                            <input className="s-input" disabled type="text"  style={{width:"450px"}}  id="cName"
+                            <input type="text"  style={{width:"450px"}}  id="cName"
                                 value={leaderEmail}
+                                onChange={(e) => setleaderEmail(e.target.value)}
                             />
                         </div>
 
                         <div className="mb-3">
                             <label className="s-form-label">Comments (Optional)</label>
-                            <input className="s-input" disabled type="text"  style={{width:"450px", height:"100px"}}  id="cName"
+                            <input type="text"  style={{width:"450px", height:"100px"}}  id="cName"
                                 value={comment}
+                                onChange={(e) => setacomment(e.target.value)}
                             />
                         </div>
                         <br />
@@ -172,20 +149,16 @@ export default function AcceptTopic()  {
                         <input type="hidden" name="mail" value={leaderEmail} />
 
                         <button name="Accept" type="submit" className="l-btn-accept" style={{width:"200px",fontSize:"2rem"}} value="Accepted">
-                            Accept
+                            Update
                         </button>
 
-                        <button name="Reject" type="submit" className="l-btn-reject" style={{width:"200px", marginLeft:"40px",fontSize:"2rem"}} value="Rejected">
-                            Reject
-                        </button>
                     </form>  
 
-                    <form onSubmit={sendEmail}>
-                            <input type="hidden" name="mail" value={leaderEmail} />
-                            <input type="hidden" name="to_name" value={groupName} />
-                            <input type="hidden" name="status" value={status} />
-                            <button hidden id="subBut">Send Email</button>
-                    </form>
+                    <a href="/stdTopicList">
+                            <button name="Reject" onClick={goList} className="l-btn-reject" style={{backgroundColor:"#84809F", width:"200px", marginLeft:"240px",fontSize:"2rem",marginTop:"-90px"}} value="Rejected">
+                                Cancel
+                            </button>
+                        </a>
 
                     <br/>            
                 </div>
