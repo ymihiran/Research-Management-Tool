@@ -1,12 +1,39 @@
-import { map } from "@firebase/util";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./Styles/styles.css";
+import Icon from "@mui/material/Icon";
 
 export default function DocumentEvaluation() {
   const [groupID, setGroupID] = useState();
   const [markingCriteria, setMarkingCriteria] = useState([]);
-  const [inputValue, setInputValue] = useState("");
+  // const [inputValue, setInputValue] = useState({
+  //   1: 0,
+  //   2: 0,
+  //   3: 0,
+  //   4: 0,
+  //   5: 0,
+  //   6: 0,
+  //   7: 0,
+  //   8: 0,
+  //   9: 0,
+  //   10: 0,
+  // });
+
+  const [inputValue, setInputValue] = useState([
+    { id: 1, mark: 0 },
+    { id: 2, mark: 0 },
+    { id: 3, mark: 0 },
+    { id: 4, mark: "" },
+    { id: 5, mark: "" },
+    { id: 6, mark: "" },
+    { id: 7, mark: "" },
+    { id: 8, mark: "" },
+    { id: 9, mark: "" },
+    { id: 10, mark: "" },
+    { id: 11, mark: "" },
+    { id: 12, mark: "" },
+  ]);
+
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
@@ -24,19 +51,34 @@ export default function DocumentEvaluation() {
           res.data;
         console.log(criteria);
         setMarkingCriteria(criteria);
+        console.log(inputValue);
       })
       .catch((err) => {
         alert(err);
       });
   }, []);
 
-  // const total = request
-  //   .map((data) => Number(data.price.replace("$", "")))
-  //   .reduce((prev, curr) => prev + curr, 0);
+  const handleInputState = (name, value) => {
+    setData((prev) => ({ ...prev, [name]: value }));
+    console.log("21 ", data);
+  };
 
-  const handleMarks = (e, marks) => {
-    setTotal((prev) => [...prev, marks]);
-    console.log(total);
+  const handleAdd = (e) => {
+    e.preventDefault();
+    console.log("click");
+  };
+
+  const handleMarks = (e, index) => {
+    console.log(
+      "inputValue[index].id " + inputValue[index].id,
+      "index + 1 " + index + 1,
+      "value " + e.target.value
+    );
+
+    if (inputValue[index].id == index + 1) {
+      setInputValue(e.target.value);
+      console.log("inputValue " + inputValue);
+    }
   };
 
   return (
@@ -106,9 +148,10 @@ export default function DocumentEvaluation() {
                       <th scope="col" className="col">
                         Total Marks
                       </th>
-                      <th scope="col" className="col-1">
+                      <th scope="col" className="col-2">
                         Given Marks
                       </th>
+                      <th scope="col" className="col-2"></th>
                     </tr>
                   </thead>
 
@@ -120,11 +163,17 @@ export default function DocumentEvaluation() {
                         <td className="ps-3">{data.mark}</td>
                         <td>
                           <input
-                            value={inputValue}
                             type="number"
                             className="form-control"
-                            onChange={(e) => handleMarks(e, e.target.value)}
+                            onChange={(e) => handleMarks(e, index)}
                           />
+                        </td>
+                        <td>
+                          <div className="ps-5 ">
+                            <button type="submit" className="form-control">
+                              Add
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     ))}
@@ -145,9 +194,13 @@ export default function DocumentEvaluation() {
               <label>100</label>
             </div>
           </div>
-          <button type="submit" className="btn btn-success btn_submit mt-3">
+          <a
+            type="submit"
+            className="btn btn-success btn_submit mt-3"
+            onClick={(e) => handleAdd}
+          >
             Submit
-          </button>
+          </a>
         </form>
       </div>
     </div>

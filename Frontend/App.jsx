@@ -1,6 +1,6 @@
 import React from "react";
 import "/node_modules/bootstrap/dist/css/bootstrap.css";
-
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 import UploadTemplate from "./components/UploadTemplate";
 import SubmitTypes from "./components/SubmitTypes";
@@ -14,7 +14,6 @@ import TopicList from "./components/TopicList";
 import StdTopicList from "./components/StdTopicList";
 import AddMarking from "./components/AddMarking";
 
-
 import SubmitDocs from "./components/SubmitDocs";
 import AllStudentGroup from "./components/AllStudentGroup";
 import AllTypes from "./components/AllTypes";
@@ -27,8 +26,6 @@ import PresentationEvaluation from "./components/PresentationEvaluation";
 import AllDocuments from "./components/AllDocuments";
 import SubmitTypes from "./components/SubmitTypes.jsx";
 import RequestCoSupervisor from "./components/RequestCoSupervisor";
-
-
 
 function App() {
   return (
@@ -55,7 +52,6 @@ function App() {
         <Route path="/presentation" component={PresentationEvaluation} />
         <Route path="/allDoc" component={AllDocuments} />
         <Route path="/reqCoSuper" component={RequestCoSupervisor} />
-
       </Router>
     </div>
   );
