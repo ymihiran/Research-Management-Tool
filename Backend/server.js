@@ -29,22 +29,26 @@ app.use("/evaluation", evaluationRouter);
 import supervisorRouter from "./routes/SupervisorRoute.js";
 app.use("/supervisor", supervisorRouter);
 
+// Topic Register Route
 import topicRouter from "./routes/topicregs.js";
 app.use("/topic", topicRouter);
 
+// Marking Schema Route
 import markingRouter from "./routes/markingschemes.js";
-
 app.use("/markingScheme",markingRouter);
 
 
 //User Routes
 import userRouter from "./routes/userRoute.js";
-app.use("/user",userRouter);
+app.use("/user", userRouter);
+
+//Submit Type Route
+import SubmitTypeRouter from "./routes/SubmitTypeRoute.js";
+app.use("/docType", SubmitTypeRouter);
+
 
 import uploadImgRouter from './routes/uploadRoute.js';
 app.use('/api',uploadImgRouter);
-
-
 
 import router from "./routes/SubmitTypeRoute.js";
 app.use("/docType", router);

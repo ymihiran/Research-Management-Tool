@@ -1,28 +1,30 @@
-
-import express from 'express';
-import { addMarking, getAllMarkings, getSingleMarking, updateMarking , deleteMarking } from '../controllers/markingController.js';
-const router = express.Router()
+import express from "express";
+import {
+  addMarking,
+  getAllMarkings,
+  getSingleMarking,
+  updateMarking,
+  deleteMarking,
+  getMarkingScheme,
+} from "../controllers/markingController.js";
+const router = express.Router();
 import Marking from "../models/MarkingScheme.js";
 
-
-
-router.post("/",addMarking)
+router.post("/", addMarking);
 
 //get all topics
-router.get("/",getAllMarkings)
+router.get("/", getAllMarkings);
 
+//get single topic
+router.get("/:id", getSingleMarking);
 
+//update single record
 
-  //get single topic
-  router.get("/:id",getSingleMarking)
+router.put("/:id", updateMarking);
 
-  //update single record
+router.delete("/:id", deleteMarking);
 
-  router.put("/:id",updateMarking)    
-
-
-router.delete("/:id",deleteMarking)
-
-
+//Get a marking scheme for specific field
+router.get("/one/:field/:schemeType", getMarkingScheme);
 
 export default router;
