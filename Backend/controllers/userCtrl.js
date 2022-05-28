@@ -79,7 +79,6 @@ const userCtrl={
             const isMatch = await bcrypt.compare(password, user.password)
             if(!isMatch) return res.status(400).json({msg: "Password is incorrect."})
 
-
             const token = jwt.sign({reg: user.email, id: user._id}, process.env.REFRESH_TOKEN_SECRET, {expiresIn:"1h"} )
 
             res.status(200).json({result: user, token,msg: "Login success!"})
