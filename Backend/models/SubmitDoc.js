@@ -8,25 +8,19 @@ const SubmitDocSchema = new Schema(
       required: true,
     },
 
-
     Document: {
-
       type: String,
       required: true,
     },
-
 
     Status: {
       type: String,
       default: "Pending",
     },
 
-
-    ResearchField: {
+    Research_Field: {
       type: String,
-      required: true,
     },
-
 
     Comment: {
       type: String,
@@ -36,6 +30,4 @@ const SubmitDocSchema = new Schema(
 );
 
 const SubmitDoc = mongoose.model("SubmitDoc", SubmitDocSchema);
-
-
 export default SubmitDoc;

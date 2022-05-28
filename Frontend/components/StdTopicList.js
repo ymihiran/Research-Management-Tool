@@ -31,7 +31,7 @@ export default function TopicList()  {
         if(data == "pending"){
            val= "l-pending";
            btnColor= "l-btn-pending";
-           btnText="Req Co-Supervisor"  
+           btnText="Edit"  
         }
         else if(data == "Rejected"){
             val= "l-rejected";
@@ -70,7 +70,7 @@ export default function TopicList()  {
             history.push('/SubmitTopic')
         }
         else{
-            alert("Your submission has not evaluated yet!");
+            history.push('/EditTopic');
         }
         
         
