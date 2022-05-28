@@ -277,7 +277,7 @@ export default function EditMarking()  {
                     </table>
 
                     <div>
-                        <button className="btn btn-primary" onClick={()=>generatePDF(criteria,"specialization",schemeType,marks)}> Print</button>
+                        <button className="btn btn-primary" onClick={()=>generatePDF(criteria,specialization,schemeType,marks)}> Print</button>
                     </div>
 
                                 
