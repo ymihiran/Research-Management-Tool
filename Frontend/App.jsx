@@ -13,6 +13,7 @@ import AcceptTopic from "./components/AcceptTopic";
 import TopicList from "./components/TopicList";
 import StdTopicList from "./components/StdTopicList";
 import AddMarking from "./components/AddMarking";
+import EditTopic from "./components/EditTopic";
 
 import SubmitDocs from "./components/SubmitDocs";
 import AllStudentGroup from "./components/AllStudentGroup";
@@ -37,6 +38,7 @@ function App() {
         <Route path="/TopicList" component={TopicList} />
         <Route path="/StdTopicList" component={StdTopicList} />
         <Route path="/AddMarking" component={AddMarking} />
+        <Route path="/EditTopic" component={EditTopic} />
 
         <Route path="/SubmitTypes" component={SubmitTypes} />
         <Route path="/StudentGroup" component={StudentGroup} />
