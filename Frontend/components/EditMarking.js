@@ -211,9 +211,9 @@ export default function EditMarking()  {
 
                     </form>
 
-                    <button  className="btn btn-primary" style={{backgroundColor:"#84809F",width:"200px",fontWeight:"bold"}} onClick={handleCriteria} >+ Add criteria</button>
+                    <button  className="btn l-btn-pending" style={{width:"200px",fontWeight:"bold"}} onClick={handleCriteria} >+ Add criteria</button>
                     <br/>
-                    <button  className="btn btn-primary" style={{backgroundColor:"#0F0934",width:"200px",fontWeight:"bold",marginTop:'20px'}} onClick={handleSave} > Save</button>
+                    <button  className="btn l-btn-accepted" style={{width:"200px",fontWeight:"bold",marginTop:'20px'}} onClick={handleSave} > Save</button>
                     
                     <button  className="btn btn-danger" style={{width:"200px",fontWeight:"bold",marginLeft:'20px',marginTop:'20px'}} onClick={handleFullDelete} > Delete</button>
 

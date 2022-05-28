@@ -164,8 +164,8 @@ export default function AddMarking()  {
 
                     </form>
 
-                    <button  className="btn btn-primary" style={{backgroundColor:"#84809F",width:"200px",fontWeight:"bold"}} onClick={handleCriteria} >+ Add criteria</button>
-                            <button  className="btn btn-primary" style={{backgroundColor:"#0F0934",width:"200px",fontWeight:"bold",marginLeft:'20px'}} onClick={handleCreate} > Save</button>
+                    <button  className="btn l-btn-pending" style={{width:"200px",fontWeight:"bold"}} onClick={handleCriteria} >+ Add criteria</button>
+                            <button  className="btn l-btn-accepted " style={{width:"200px",fontWeight:"bold",marginLeft:'20px'}} onClick={handleCreate} > Save</button>
 
                     <div className="bottom-t-container">
                         <label className="bottom-t" style={{color:"#FF5631"}}> SLIIT</label> <label className="bottom-t"> Research</label> <br />
