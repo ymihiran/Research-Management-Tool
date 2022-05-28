@@ -2,9 +2,7 @@ import React from "react";
 import "/node_modules/bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
-import UploadTemplate from "./components/UploadTemplate";
 import SubmitTypes from "./components/SubmitTypes";
-import StudentGroup from "./components/StudentGroup";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import SubmitTopic from "./components/SubmitTopic";
@@ -14,19 +12,19 @@ import TopicList from "./components/TopicList";
 import StdTopicList from "./components/StdTopicList";
 import AddMarking from "./components/AddMarking";
 import EditTopic from "./components/EditTopic";
-
 import SubmitDocs from "./components/SubmitDocs";
 import AllStudentGroup from "./components/AllStudentGroup";
 import AllTypes from "./components/AllTypes";
-
 import MarkingList from "./components/MarkingList";
 import EditMarking from "./components/EditMarking";
+import SubmitTypes from "./components/SubmitTypes.jsx";
 
 import DocumentEvaluation from "./components/DocumentEvaluation";
 import PresentationEvaluation from "./components/PresentationEvaluation";
 import AllDocuments from "./components/AllDocuments";
-import SubmitTypes from "./components/SubmitTypes.jsx";
 import RequestCoSupervisor from "./components/RequestCoSupervisor";
+import StudentGroup from "./components/StudentGroup";
+import UploadTemplate from "./components/UploadTemplate";
 
 function App() {
   return (
@@ -39,14 +37,9 @@ function App() {
         <Route path="/StdTopicList" component={StdTopicList} />
         <Route path="/AddMarking" component={AddMarking} />
         <Route path="/EditTopic" component={EditTopic} />
-
-        <Route path="/SubmitTypes" component={SubmitTypes} />
-        <Route path="/StudentGroup" component={StudentGroup} />
         <Route path="/SubmitDocs" component={SubmitDocs} />
-        <Route path="/UploadTemplate" component={UploadTemplate} />
         <Route path="/AllStudentGroup" component={AllStudentGroup} />
         <Route path="/AllTypes" component={AllTypes} />
-
         <Route path="/MarkingList" component={MarkingList} />
         <Route path="/EditMarking" component={EditMarking} />
         <Route path="/SubmitTypes" component={SubmitTypes} />
@@ -54,6 +47,8 @@ function App() {
         <Route path="/presentation" component={PresentationEvaluation} />
         <Route path="/allDoc" component={AllDocuments} />
         <Route path="/reqCoSuper" component={RequestCoSupervisor} />
+        <Route path="/StudentGroup" component={StudentGroup} />
+        <Route path="/UploadTemplate" component={UploadTemplate} />
       </Router>
     </div>
   );
