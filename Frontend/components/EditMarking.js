@@ -3,6 +3,7 @@ import "./CSS/btrap.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from 'react-router';
+import generatePDF from "./Report";
 
 export default function EditMarking()  {
 
@@ -274,6 +275,10 @@ export default function EditMarking()  {
                         
                         </tbody>
                     </table>
+
+                    <div>
+                        <button className="btn btn-primary" onClick={()=>generatePDF(criteria,"specialization",schemeType,marks)}> Print</button>
+                    </div>
 
                                 
 
