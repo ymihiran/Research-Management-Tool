@@ -1,10 +1,13 @@
-import React from "react";
+import React, {useEffect} from 'react';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import "/node_modules/bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import axios from 'axios';
 
+
+
+import UploadTemplate from "./components/UploadTemplate";
 import SubmitTypes from "./components/SubmitTypes";
-
-import { BrowserRouter as Router, Route } from "react-router-dom";
 import SubmitTopic from "./components/SubmitTopic";
 import EvaluateTopic from "./components/EvlauateTopic";
 import AcceptTopic from "./components/AcceptTopic";
@@ -28,7 +31,8 @@ import UploadTemplate from "./components/UploadTemplate";
 import Login from './components/Login';
 
 function App() {
-  return (
+
+ return (
     <div>
       <Router>
 

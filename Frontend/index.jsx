@@ -1,6 +1,17 @@
 import React from "react";
-import { createRoot } from "react-dom/client";
-import App from "./App";
+import ReactDOM from 'react-dom';
+import App from "./App.jsx";
 import '/node_modules/bootstrap/dist/css/bootstrap.css';
+import DataProvider from './redux/store.js'
 
-createRoot(document.getElementById("app")).render(<App />);
+ReactDOM.render(
+    <React.StrictMode>
+        <DataProvider>
+         <App/>
+        </DataProvider>
+    </React.StrictMode>,
+    document.getElementById('app')
+  
+);
+
+
