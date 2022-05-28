@@ -154,9 +154,59 @@ export default function MarkingList()  {
                 </div>
             
             </div>
+
         </div>
-    );
-        
 
+        <div className="t-list-tb-container">
+          <table className="t-table table-striped table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Specialization</th>
+                <th scope="col">Type</th>
+                <th scope="col">Marks</th>
+                <th scope="col" style={{ width: "100px" }}>
+                  Action
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {request.map((data, index) => (
+                <tr key={index}>
+                  <th scope="row">{index + 1}</th>
+                  <td>{data.specialization}</td>
+                  <td>{data.schemeType}</td>
+                  <td>{data.marks}</td>
 
+                  <td>
+                    <button
+                      className="btn btn-success purpled"
+                      style={{ backgroundColor: "#0F0934", color: "white" }}
+                      onClick={() => setData(data)}
+                    >
+                      {" "}
+                      View{" "}
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          <div>
+            <button className="t-nav-btn">Go to Questions</button>
+          </div>
+        </div>
+
+        <div className="bottom-t-container">
+          <label className="bottom-t" style={{ color: "#FF5631" }}>
+            {" "}
+            SLIIT
+          </label>{" "}
+          <label className="bottom-t"> Research</label> <br />
+          <label className="bottom-t"> Management Tool</label>
+        </div>
+      </div>
+    </div>
+  );
 }

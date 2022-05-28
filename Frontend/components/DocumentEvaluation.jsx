@@ -1,33 +1,85 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./Styles/styles.css";
+import Icon from "@mui/material/Icon";
 
 export default function DocumentEvaluation() {
   const [groupID, setGroupID] = useState();
-  const [researchField, setResearchField] = useState();
-  const [criteria, setCriteria] = useState([]);
-  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+  const [markingCriteria, setMarkingCriteria] = useState([]);
+  // const [inputValue, setInputValue] = useState({
+  //   1: 0,
+  //   2: 0,
+  //   3: 0,
+  //   4: 0,
+  //   5: 0,
+  //   6: 0,
+  //   7: 0,
+  //   8: 0,
+  //   9: 0,
+  //   10: 0,
+  // });
+
+  const [inputValue, setInputValue] = useState([
+    { id: 1, mark: 0 },
+    { id: 2, mark: 0 },
+    { id: 3, mark: 0 },
+    { id: 4, mark: "" },
+    { id: 5, mark: "" },
+    { id: 6, mark: "" },
+    { id: 7, mark: "" },
+    { id: 8, mark: "" },
+    { id: 9, mark: "" },
+    { id: 10, mark: "" },
+    { id: 11, mark: "" },
+    { id: 12, mark: "" },
+  ]);
+
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    const fetchData = async () => {
-      setGroupID(localStorage.getItem("Group_ID"));
-      setResearchField(localStorage.getItem("Research_Field"));
+    setGroupID(localStorage.getItem("Group_ID"));
 
-      await axios
-        .get(
-          `http://localhost:8070/markingScheme/one/${localStorage.getItem(
-            "Research_Field"
-          )}`
-        )
-        .then((res) => {
-          console.log(res.data.criteria);
-        })
-        .catch((err) => {
-          alert(err);
-        });
-    };
-    fetchData();
+    axios
+      .get(
+        `http://localhost:8070/markingScheme/one/${localStorage.getItem(
+          "Research_Field"
+        )}/${"Document"}`
+      )
+      .then((res) => {
+        console.log("res.data", res.data);
+        let { _id, sid, specialization, schemeType, marks, criteria } =
+          res.data;
+        console.log(criteria);
+        setMarkingCriteria(criteria);
+        console.log(inputValue);
+      })
+      .catch((err) => {
+        alert(err);
+      });
   }, []);
+
+  const handleInputState = (name, value) => {
+    setData((prev) => ({ ...prev, [name]: value }));
+    console.log("21 ", data);
+  };
+
+  const handleAdd = (e) => {
+    e.preventDefault();
+    console.log("click");
+  };
+
+  const handleMarks = (e, index) => {
+    console.log(
+      "inputValue[index].id " + inputValue[index].id,
+      "index + 1 " + index + 1,
+      "value " + e.target.value
+    );
+
+    if (inputValue[index].id == index + 1) {
+      setInputValue(e.target.value);
+      console.log("inputValue " + inputValue);
+    }
+  };
 
   return (
     <div className="body_container">
@@ -45,7 +97,6 @@ export default function DocumentEvaluation() {
         <form>
           <div className="form-group mb-3 mt-5">
             <label>Group ID</label>
-            {console.log("43 RF", researchField)}
             <input
               type="text"
               disabled
@@ -85,109 +136,49 @@ export default function DocumentEvaluation() {
           <ul className="list-group">
             <div className="criteria_box mb-4 fw-bold">
               <div className="form-group row mb-4 criteria_row">
-                <div className="col ">
-                  <label>Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input
-                    type="number"
-                    min="0"
-                    max="25"
-                    className="form-control"
-                  />
-                </div>
-              </div>
+                <table className="table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col" className="col-2">
+                        No
+                      </th>
+                      <th scope="col" className="col">
+                        Criteria Name
+                      </th>
+                      <th scope="col" className="col">
+                        Total Marks
+                      </th>
+                      <th scope="col" className="col-2">
+                        Given Marks
+                      </th>
+                      <th scope="col" className="col-2"></th>
+                    </tr>
+                  </thead>
 
-              <div className="form-group row mb-4 criteria_row">
-                <div className="col">
-                  <label>Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input
-                    type="number"
-                    min="0"
-                    max="25"
-                    className="form-control"
-                  />
-                </div>
-              </div>
-
-              <div className="form-group row mb-4 criteria_row">
-                <div className="col">
-                  <label>Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input type="number" className="form-control" />
-                </div>
-              </div>
-
-              <div className="form-group row mb-4 criteria_row">
-                <div className="col">
-                  <label>Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input type="number" className="form-control" />
-                </div>
-              </div>
-
-              <div className="form-group row mb-4 criteria_row">
-                <div className="col">
-                  <label>Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input type="number" className="form-control" />
-                </div>
-              </div>
-
-              <div className="form-group row mb-4 criteria_row">
-                <div className="col">
-                  <label>Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input type="number" className="form-control" />
-                </div>
-              </div>
-
-              <div className="form-group row mb-4 criteria_row">
-                <div className="col">
-                  <label>Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input type="number" className="form-control" />
-                </div>
-              </div>
-
-              <div className="form-group row mb-4 criteria_row ">
-                <div className="col">
-                  <label>Criteria Name Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input type="number" className="form-control" />
-                </div>
+                  <tbody>
+                    {markingCriteria?.map((data, index) => (
+                      <tr key={index}>
+                        <th scope="row">{index + 1}</th>
+                        <td> {data.des}</td>
+                        <td className="ps-3">{data.mark}</td>
+                        <td>
+                          <input
+                            type="number"
+                            className="form-control"
+                            onChange={(e) => handleMarks(e, index)}
+                          />
+                        </td>
+                        <td>
+                          <div className="ps-5 ">
+                            <button type="submit" className="form-control">
+                              Add
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
           </ul>
@@ -203,9 +194,13 @@ export default function DocumentEvaluation() {
               <label>100</label>
             </div>
           </div>
-          <button type="submit" className="btn btn-success btn_submit mt-3">
+          <a
+            type="submit"
+            className="btn btn-success btn_submit mt-3"
+            onClick={(e) => handleAdd}
+          >
             Submit
-          </button>
+          </a>
         </form>
       </div>
     </div>
