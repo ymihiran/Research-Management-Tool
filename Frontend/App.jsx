@@ -25,11 +25,14 @@ import AllDocuments from "./components/AllDocuments";
 import RequestCoSupervisor from "./components/RequestCoSupervisor";
 import StudentGroup from "./components/StudentGroup";
 import UploadTemplate from "./components/UploadTemplate";
+import Login from './components/Login';
 
 function App() {
   return (
     <div>
       <Router>
+
+        <Route path="/login" component={Login} />
         <Route path="/SubmitTopic" component={SubmitTopic} />
         <Route path="/EvaluateTopic" component={EvaluateTopic} />
         <Route path="/AcceptTopic" component={AcceptTopic} />
