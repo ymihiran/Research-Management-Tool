@@ -3,19 +3,6 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 
 
-
-// Date Fns is used to format the dates we receive
-
-// from our API call
-
-//import { format } from "date-fns";
-
-//import { report } from "../../../BACKEND/routes/delivery/deliverydetails";
-
-
-
-// define a generatePDF function that accepts a tickets argument
-
 const generatePDF = (report,specialization,schemeType,marks) => {
 
   // initialize jsPDF
@@ -23,6 +10,8 @@ const generatePDF = (report,specialization,schemeType,marks) => {
   const doc = new jsPDF();
 
   const spec = specialization;
+  const Type = schemeType;
+  const TMark = marks;
   alert(spec);
 
 
@@ -69,8 +58,27 @@ const generatePDF = (report,specialization,schemeType,marks) => {
 
 
   // startY is basically margin-top
+  var img = new Image()
+  img.src = 'https://res.cloudinary.com/sliit-yasantha/image/upload/v1653753258/bg-marking_gkgvjz.png'
+  doc.addImage(img, 'png', 10, 10, 180, 50)
 
-  doc.autoTable(tableColumn, tableRows, { startY: 20 });
+  //doc.autoTable(tableColumn, tableRows, { startY: 70 });
+
+  doc.autoTable({
+    head: [tableColumn],
+    body: tableRows,
+    headerStyles: {
+      lineWidth: 0.1,
+      lineColor: [0, 0, 0],
+      fillColor: [168, 168, 168],
+    },
+    bodyStyles: {
+      lineWidth: 0.1,
+      lineColor: [0, 0, 0],
+      fillColor: [255, 255,255],
+  },
+  startY: 70
+  });
 
   const date = Date().split(" ");
 
@@ -80,7 +88,12 @@ const generatePDF = (report,specialization,schemeType,marks) => {
 
   // ticket title. and margin-top + margin-left
 
-  doc.text("Closed report within the last one month."+spec, 14, 15);
+  //doc.text("Marking Scheme", 80, 15);
+  doc.text(Type, 80, 50);
+  doc.setFontSize(10);
+  doc.text("This is the marking guidelines for "+Type+". You will be evaluated according to this. " , 15, 60, );
+  doc.text("Total marks allocated for this assesment : "+TMark, 15, 64 );
+  doc.text("Please refer the 'Research Management Tool' for further details.", 15, 68 );
 
 
   // we define the name of our PDF file.
