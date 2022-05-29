@@ -14,6 +14,7 @@ import TopicList from "./components/TopicList";
 import StdTopicList from "./components/StdTopicList";
 import AddMarking from "./components/AddMarking";
 import EditTopic from "./components/EditTopic";
+import { ReactNotifications } from "react-notifications-component";
 
 
 import SubmitDocs from "./components/SubmitDocs";
@@ -34,6 +35,7 @@ import RequestCoSupervisor from "./components/RequestCoSupervisor";
 function App() {
   return (
     <div>
+      <ReactNotifications />
       <Router>
         <Route path="/SubmitTopic" component={SubmitTopic} />
         <Route path="/EvaluateTopic" component={EvaluateTopic} />

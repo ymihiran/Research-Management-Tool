@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from 'react-router';
 import generatePDF from "./Report";
+import { Store } from 'react-notifications-component';
 
 export default function EditMarking()  {
 
@@ -39,7 +40,23 @@ export default function EditMarking()  {
 
     const handleCriteria = (e) => {
         document.getElementById('markBox').focus();
-        alert("New Criteria Added");
+        Store.addNotification({
+            title: "New Criteria Added!",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            type: "default",
+            insert: "top",
+            container: "top-right",
+            
+            dismiss: {
+              duration: 1500,
+              onScreen: true,
+              showIcon: true
+            },
+
+            width:400
+        });
+
         setCriteria((prev) => [...prev, extra]);
         
 
@@ -52,10 +69,42 @@ export default function EditMarking()  {
         let sum = suma.substring(1,3);
 
         if(sum > 0){
-            alert("Error: You have not added all marks!");
+            Store.addNotification({
+                title: "Error: You haven't set all marks.",
+                message: "Marks to allocate should be '0' before you save.",
+                animationIn: ["animate__animated", "animate__fadeIn"],
+                animationOut: ["animate__animated", "animate__fadeOut"],
+                type: "warning",
+                insert: "top",
+                container: "top-right",
+                
+                dismiss: {
+                  duration: 5000,
+                  onScreen: true,
+                  showIcon: true
+                },
+    
+                width:400
+            });
         }
         else if (sum < 0){
-            alert("Error: You have added marks over the limit!");
+            Store.addNotification({
+                title: "Error: You have set marks over the limit.",
+                message: "Marks to allocate should be '0' before you save.",
+                animationIn: ["animate__animated", "animate__fadeIn"],
+                animationOut: ["animate__animated", "animate__fadeOut"],
+                type: "warning",
+                insert: "top",
+                container: "top-right",
+                
+                dismiss: {
+                  duration: 5000,
+                  onScreen: true,
+                  showIcon: true
+                },
+    
+                width:400
+            });
         }
         else{
             const data = new FormData();
@@ -70,7 +119,23 @@ export default function EditMarking()  {
 
             axios.put(`http://localhost:8070/markingscheme/${id}`,updateMarking).then(()=>{
 
-                alert("Marking Scheme Updated Successfully");
+                Store.addNotification({
+                    title: "Marking Scheme Updated Successfully.",
+                    animationIn: ["animate__animated", "animate__fadeIn"],
+                    animationOut: ["animate__animated", "animate__fadeOut"],
+                    type: "success",
+                    insert: "top",
+                    container: "top-right",
+                    
+                    dismiss: {
+                      duration: 1500,
+                      onScreen: true,
+                      showIcon: true
+                    },
+        
+                    width:400
+                });
+                history.push('/MarkingList')
                 
         
             }).catch((err)=>{
@@ -118,7 +183,22 @@ export default function EditMarking()  {
         if (confirm(text) == true) {
             axios.delete(`http://localhost:8070/markingscheme/${id}`).then(()=>{
 
-            alert("Marking Scheme Deleted!");
+                Store.addNotification({
+                    title: "Marking Scheme deleted successfully",
+                    animationIn: ["animate__animated", "animate__fadeIn"],
+                    animationOut: ["animate__animated", "animate__fadeOut"],
+                    type: "danger",
+                    insert: "top",
+                    container: "top-right",
+                    
+                    dismiss: {
+                      duration: 1500,
+                      onScreen: true,
+                      showIcon: true
+                    },
+        
+                    width:400
+                });
             history.push('/MarkingList');
             
     
@@ -127,6 +207,8 @@ export default function EditMarking()  {
             alert(err);
          })
         } 
+
+        
         
     };
 
