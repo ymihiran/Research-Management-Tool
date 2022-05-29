@@ -62,7 +62,7 @@ export const getSingleTopic = async (req, res) => {
 export const getSingleTopicData = async (req, res) => {
   let gid = req.params.id;
 
-  await TopicReg.find({ groupID: gid }).exec((err, Topic) => {
+  await TopicReg.findOne({ groupID: gid }).exec((err, Topic) => {
     if (err) {
       return res.status(400).json({
         error: err,
