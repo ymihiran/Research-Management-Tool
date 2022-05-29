@@ -9,7 +9,6 @@ function Login() {
     const [password, setPassword] = useState("");
     const history  = useHistory();
       
-    //if the authentication is already available do not need to login again
 
     async function signIn(event){
         event.preventDefault();
@@ -24,12 +23,11 @@ function Login() {
             //getting data from backend
             const {data} = await axios.post("http://localhost:8070/user/login", {email, password}, config);
 
-            //setting the patient authorization token
             localStorage.setItem("userAuthToken", `User ${data.token}`)
             localStorage.setItem("user",JSON.stringify(data.result))
             localStorage.setItem('firstLogin', true)
         
-            history.push('/submittopic')
+            history.push('/profile')
         } catch (error) {
             if(error.response.status === 404){
                 alert("Invalid Registration Number")
