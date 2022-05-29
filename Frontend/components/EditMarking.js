@@ -3,6 +3,8 @@ import "./CSS/btrap.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from 'react-router';
+import generatePDF from "./Report";
+import { Store } from 'react-notifications-component';
 
 export default function EditMarking()  {
 
@@ -26,7 +28,8 @@ export default function EditMarking()  {
         
     },[])
 
-    console.log(criteria);
+    console.log("C print " , criteria);
+    
     
     
     const handleCriteriaInput = (e) => {
@@ -37,32 +40,110 @@ export default function EditMarking()  {
 
     const handleCriteria = (e) => {
         document.getElementById('markBox').focus();
-        alert("New Criteria Added");
+        Store.addNotification({
+            title: "New Criteria Added!",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            type: "default",
+            insert: "top",
+            container: "top-right",
+            
+            dismiss: {
+              duration: 1500,
+              onScreen: true,
+              showIcon: true
+            },
+
+            width:400
+        });
+
         setCriteria((prev) => [...prev, extra]);
+        
 
     };
 
 
     const handleSave = async () => {
-        const data = new FormData();
-        
-        const updateMarking = {
-            sid,
-            specialization,
-            schemeType,
-            marks,
-            criteria,
-        };
 
-        axios.put(`http://localhost:8070/markingscheme/${id}`,updateMarking).then(()=>{
+        let suma = document.getElementById('pCon').textContent;
+        let sum = suma.substring(1,3);
 
-            alert("Marking Scheme Updated Successfully");
+        if(sum > 0){
+            Store.addNotification({
+                title: "Error: You haven't set all marks.",
+                message: "Marks to allocate should be '0' before you save.",
+                animationIn: ["animate__animated", "animate__fadeIn"],
+                animationOut: ["animate__animated", "animate__fadeOut"],
+                type: "warning",
+                insert: "top",
+                container: "top-right",
+                
+                dismiss: {
+                  duration: 5000,
+                  onScreen: true,
+                  showIcon: true
+                },
+    
+                width:400
+            });
+        }
+        else if (sum < 0){
+            Store.addNotification({
+                title: "Error: You have set marks over the limit.",
+                message: "Marks to allocate should be '0' before you save.",
+                animationIn: ["animate__animated", "animate__fadeIn"],
+                animationOut: ["animate__animated", "animate__fadeOut"],
+                type: "warning",
+                insert: "top",
+                container: "top-right",
+                
+                dismiss: {
+                  duration: 5000,
+                  onScreen: true,
+                  showIcon: true
+                },
+    
+                width:400
+            });
+        }
+        else{
+            const data = new FormData();
             
-    
-         }).catch((err)=>{
-    
-            alert(err);
-         })
+            const updateMarking = {
+                sid,
+                specialization,
+                schemeType,
+                marks,
+                criteria,
+            };
+
+            axios.put(`http://localhost:8070/markingscheme/${id}`,updateMarking).then(()=>{
+
+                Store.addNotification({
+                    title: "Marking Scheme Updated Successfully.",
+                    animationIn: ["animate__animated", "animate__fadeIn"],
+                    animationOut: ["animate__animated", "animate__fadeOut"],
+                    type: "success",
+                    insert: "top",
+                    container: "top-right",
+                    
+                    dismiss: {
+                      duration: 1500,
+                      onScreen: true,
+                      showIcon: true
+                    },
+        
+                    width:400
+                });
+                history.push('/MarkingList')
+                
+        
+            }).catch((err)=>{
+        
+                alert(err);
+            })
+
+        } 
     };
 
     const handleDelete = async (e,desc) =>{
@@ -102,7 +183,22 @@ export default function EditMarking()  {
         if (confirm(text) == true) {
             axios.delete(`http://localhost:8070/markingscheme/${id}`).then(()=>{
 
-            alert("Marking Scheme Deleted!");
+                Store.addNotification({
+                    title: "Marking Scheme deleted successfully",
+                    animationIn: ["animate__animated", "animate__fadeIn"],
+                    animationOut: ["animate__animated", "animate__fadeOut"],
+                    type: "danger",
+                    insert: "top",
+                    container: "top-right",
+                    
+                    dismiss: {
+                      duration: 1500,
+                      onScreen: true,
+                      showIcon: true
+                    },
+        
+                    width:400
+                });
             history.push('/MarkingList');
             
     
@@ -111,6 +207,8 @@ export default function EditMarking()  {
             alert(err);
          })
         } 
+
+        
         
     };
 
@@ -210,9 +308,9 @@ export default function EditMarking()  {
 
                     </form>
 
-                    <button  className="btn btn-primary" style={{backgroundColor:"#84809F",width:"200px",fontWeight:"bold"}} onClick={handleCriteria} >+ Add criteria</button>
+                    <button  className="btn l-btn-pending" style={{width:"200px",fontWeight:"bold"}} onClick={handleCriteria} >+ Add criteria</button>
                     <br/>
-                    <button  className="btn btn-primary" style={{backgroundColor:"#0F0934",width:"200px",fontWeight:"bold",marginTop:'20px'}} onClick={handleSave} > Save</button>
+                    <button  className="btn l-btn-accepted" style={{width:"200px",fontWeight:"bold",marginTop:'20px'}} onClick={handleSave} > Save</button>
                     
                     <button  className="btn btn-danger" style={{width:"200px",fontWeight:"bold",marginLeft:'20px',marginTop:'20px'}} onClick={handleFullDelete} > Delete</button>
 
@@ -227,7 +325,7 @@ export default function EditMarking()  {
 
             <div style={{backgroundColor:'#D5D3E2'}}>
                 <div className="t-list-head-container">
-                        <label className="h-text"> <label style={{color:"#FF5631"}}> XX %</label> MARKS</label> <br className="br1" />
+                        <label className="h-text"> <label id="pCon" style={{color:"#FF5631"}}> {100 - criteria.map((data)=> Number(data.mark.toString().replace("$",""))).reduce((prev,curr)=>prev+curr,0)}%</label> MARKS</label> <br className="br1" />
                         <label className="h-text">TO ALLOCATE</label>       
                 </div>
 
@@ -274,6 +372,10 @@ export default function EditMarking()  {
                         
                         </tbody>
                     </table>
+
+                    <div>
+                        <button className="btn l-btn-accepted " onClick={()=>generatePDF(criteria,specialization,schemeType,marks)}> Download as PDF</button>
+                    </div>
 
                                 
 

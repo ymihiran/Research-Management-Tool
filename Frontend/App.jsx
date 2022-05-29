@@ -15,6 +15,10 @@ import TopicList from "./components/TopicList";
 import StdTopicList from "./components/StdTopicList";
 import AddMarking from "./components/AddMarking";
 import EditTopic from "./components/EditTopic";
+import { ReactNotifications } from "react-notifications-component";
+
+
+
 import SubmitDocs from "./components/SubmitDocs";
 import AllStudentGroup from "./components/AllStudentGroup";
 import AllTypes from "./components/AllTypes";
@@ -39,6 +43,7 @@ function App() {
 
  return (
     <div>
+      <ReactNotifications />
       <Router>
         <Route path="/" exact component={Home} />
         <Route path="/user/activate/:activation_token" exact component={ActivationEmail}/>
