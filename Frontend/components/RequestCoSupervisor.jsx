@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import axios from "axios";
 import SendIcon from "@mui/icons-material/Send";
+//import emailjs from "@emailjs/browser";
+import emailjs from "emailjs-com";
 
 export default function RequestCoSupervisor() {
   const theme = useTheme();
@@ -9,7 +11,8 @@ export default function RequestCoSupervisor() {
   const [groupID, setGroupID] = useState();
   const [topic, setTopic] = useState();
   const [researchField, setResearchField] = useState();
-  const [coSupervisor, setCoSupervisor] = useState();
+  const [coSupervisor, setCoSupervisor] = useState([]);
+  const [email, setEmail] = useState();
 
   useEffect(() => {
     setGroupID(localStorage.getItem("groupID"));
@@ -27,6 +30,28 @@ export default function RequestCoSupervisor() {
         setCoSupervisor(res.data);
       });
   }, []);
+
+  const handlerSend = (data) => {
+    console.log("data.email", data.email);
+    setEmail(data.email);
+    document.getElementById("subBut").click();
+  };
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+    console.log(" e.currentTarget", e.currentTarget);
+
+    emailjs
+      .sendForm("gmail", "sliit_rmt", e.currentTarget, "kAocVmHsaYNz5XOfJ")
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+  };
 
   return (
     <div className="body_container">
@@ -81,9 +106,21 @@ export default function RequestCoSupervisor() {
 
       {/*right side column */}
       <div className="right_container">
-        <form>
-          <ul className="list-group">
-            <div className="criteria_box mb-5">
+        <ul className="list-group">
+          <div
+            className=" mb-5"
+            style={{
+              borderRadius: "10px",
+              border: "1px solid #9b97b6",
+              backgroundColor: "#ece9ff",
+              padding: " 30px 30px",
+              width: "650px",
+              height: "450px",
+              overflow: "scroll",
+              overflowX: " hidden",
+            }}
+          >
+            <div className="form-group row mb-4 criteria_row">
               <table className="table-hover ms-4">
                 <thead>
                   <tr>
@@ -104,8 +141,8 @@ export default function RequestCoSupervisor() {
                   {coSupervisor?.map((data, index) => (
                     <tr key={index}>
                       <th scope="row">{index + 1}</th>
-                      <td className=" ps-5"> {data.name}</td>
-                      <td className="">{data.email}</td>
+                      <td className=" ps-5 pe-3"> {data.name}</td>
+                      <td className="ps-5">{data.email}</td>
                       <td>
                         <center>
                           <div className="col-3 ms-5 ">
@@ -114,9 +151,23 @@ export default function RequestCoSupervisor() {
                               min="0"
                               max="25"
                               className="form-control "
+                              style={{
+                                width: "70px",
+                                backgroundColor: "#ece9ff",
+                                border: "none",
+                              }}
+                              onClick={(e) => handlerSend(data)}
                             >
-                              <div className="ps-2">
-                                <SendIcon fontSize="large" />
+                              <div className="ps-2 ">
+                                <SendIcon
+                                  fontSize="large"
+                                  sx={{
+                                    "&:hover": {
+                                      color: "#00D8B6",
+                                    },
+                                    color: "green",
+                                  }}
+                                />
                               </div>
                             </a>
                           </div>
@@ -126,9 +177,24 @@ export default function RequestCoSupervisor() {
                   ))}
                 </tbody>
               </table>
+              <form onSubmit={sendEmail}>
+                <input type="hidden" name="mail" value={email} />
+                <input
+                  type="hidden"
+                  name="from_name"
+                  value="SLIIT Research Management "
+                />
+                <input type="hidden" name="groupID" value={groupID} />
+                <input type="hidden" name="rField" value={researchField} />
+                <input type="hidden" name="rTopic" value={topic} />
+                &nbsp; &nbsp;
+                <button hidden id="subBut">
+                  Send Email
+                </button>
+              </form>
             </div>
-          </ul>
-        </form>
+          </div>
+        </ul>
       </div>
     </div>
   );
