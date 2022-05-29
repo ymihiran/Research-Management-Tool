@@ -27,7 +27,8 @@ export default function EditMarking()  {
         
     },[])
 
-    console.log(criteria);
+    console.log("C print " , criteria);
+    
     
     
     const handleCriteriaInput = (e) => {
@@ -40,30 +41,44 @@ export default function EditMarking()  {
         document.getElementById('markBox').focus();
         alert("New Criteria Added");
         setCriteria((prev) => [...prev, extra]);
+        
 
     };
 
 
     const handleSave = async () => {
-        const data = new FormData();
-        
-        const updateMarking = {
-            sid,
-            specialization,
-            schemeType,
-            marks,
-            criteria,
-        };
 
-        axios.put(`http://localhost:8070/markingscheme/${id}`,updateMarking).then(()=>{
+        let suma = document.getElementById('pCon').textContent;
+        let sum = suma.substring(1,3);
 
-            alert("Marking Scheme Updated Successfully");
+        if(sum > 0){
+            alert("Error: You have not added all marks!");
+        }
+        else if (sum < 0){
+            alert("Error: You have added marks over the limit!");
+        }
+        else{
+            const data = new FormData();
             
-    
-         }).catch((err)=>{
-    
-            alert(err);
-         })
+            const updateMarking = {
+                sid,
+                specialization,
+                schemeType,
+                marks,
+                criteria,
+            };
+
+            axios.put(`http://localhost:8070/markingscheme/${id}`,updateMarking).then(()=>{
+
+                alert("Marking Scheme Updated Successfully");
+                
+        
+            }).catch((err)=>{
+        
+                alert(err);
+            })
+
+        } 
     };
 
     const handleDelete = async (e,desc) =>{
@@ -228,7 +243,7 @@ export default function EditMarking()  {
 
             <div style={{backgroundColor:'#D5D3E2'}}>
                 <div className="t-list-head-container">
-                        <label className="h-text"> <label style={{color:"#FF5631"}}> XX %</label> MARKS</label> <br className="br1" />
+                        <label className="h-text"> <label id="pCon" style={{color:"#FF5631"}}> {100 - criteria.map((data)=> Number(data.mark.toString().replace("$",""))).reduce((prev,curr)=>prev+curr,0)}%</label> MARKS</label> <br className="br1" />
                         <label className="h-text">TO ALLOCATE</label>       
                 </div>
 
