@@ -37,6 +37,7 @@ import Login from './components/Login.jsx';
 import Register from './components/Register.jsx';
 import ActivationEmail from './components/auth/activationEmail.js'
 import Home from './components/Home.jsx'
+import Profile from './components/Profile';
 
 
 function App() {
@@ -45,7 +46,9 @@ function App() {
     <div>
       <ReactNotifications />
       <Router>
+        
         <Route path="/" exact component={Home} />
+        <Route path="/profile" exact component={Profile} />
         <Route path="/user/activate/:activation_token" exact component={ActivationEmail}/>
         <Route path="/register" exact component={Register}/>
         <Route path="/login" exact component={Login} />

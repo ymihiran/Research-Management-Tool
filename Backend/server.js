@@ -46,7 +46,7 @@ app.use("/user", userRouter);
 import SubmitTypeRouter from "./routes/SubmitTypeRoute.js";
 app.use("/docType", SubmitTypeRouter);
 
-
+//Upload Image
 import uploadImgRouter from './routes/uploadRoute.js';
 app.use('/api',uploadImgRouter);
 
