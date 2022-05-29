@@ -192,6 +192,7 @@ export default function AddMarking()  {
 
                             <select className='form-control m-select' name="Field" id="Field" style={{ fontSize: '0.8rem', width: "450px", border: "2px solid #ced4da", height: "30px" }}
                                 onChange={(e) => setSpecialization(e.target.value)}
+                                required
                             >
                                 <option value="Default">Select one</option>
                                 <option value="Artificial Interligance">Artificial Interligance</option>
@@ -209,6 +210,7 @@ export default function AddMarking()  {
                                     <label className="m-form-label" style={{ color: "#322B5F" }}>Scheme Type</label>
                                     <select className='form-control m-select' name="Field" id="Field" style={{ fontSize: '0.8rem', width: "280px", border: "2px solid #ced4da", height: "30px" }}
                                         onChange={(e) => setschemeType(e.target.value)}
+                                        required
                                     >
                                         <option value="Default">Select one</option>
                                         <option value="Document">Document</option>
@@ -221,6 +223,7 @@ export default function AddMarking()  {
                                 <div className="mb-3">
                                     <label className="m-form-label" style={{ color: "#322B5F" }}>Total Marks</label>
                                     <input type="text" style={{ width: "150px", height: "30px" }} className="t-form-control" id="cUName"
+                                        required
                                         onChange={(e) => setMarks(e.target.value)} />
                                 </div>
 
