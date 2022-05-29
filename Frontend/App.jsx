@@ -28,15 +28,22 @@ import AllDocuments from "./components/AllDocuments";
 import RequestCoSupervisor from "./components/RequestCoSupervisor";
 import StudentGroup from "./components/StudentGroup";
 import UploadTemplate from "./components/UploadTemplate";
-import Login from './components/Login';
+
+import Login from './components/Login.jsx';
+import Register from './components/Register.jsx';
+import ActivationEmail from './components/auth/activationEmail.js'
+import Home from './components/Home.jsx'
+
 
 function App() {
 
  return (
     <div>
       <Router>
-
-        <Route path="/login" component={Login} />
+        <Route path="/" exact component={Home} />
+        <Route path="/user/activate/:activation_token" exact component={ActivationEmail}/>
+        <Route path="/register" exact component={Register}/>
+        <Route path="/login" exact component={Login} />
         <Route path="/SubmitTopic" component={SubmitTopic} />
         <Route path="/EvaluateTopic" component={EvaluateTopic} />
         <Route path="/AcceptTopic" component={AcceptTopic} />
