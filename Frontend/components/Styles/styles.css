@@ -34,7 +34,7 @@
   border: 1px solid #9b97b6;
   background-color: #ece9ff;
   padding: 30px 30px;
-  width: 600px;
+  width: 800px;
   height: 450px;
   overflow: scroll;
   overflow-x: hidden;
@@ -141,5 +141,5 @@ input[type="number"] {
 }
 
 tr {
-  height: 50px;
+  height: 75px;
 }

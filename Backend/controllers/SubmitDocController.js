@@ -12,6 +12,7 @@ export const getDocs = async (req, res) => {
 };
 
 export const SubmitDoc = async (req, res) => {
+  console.log(req.body);
   const Group_ID = req.body.Group_ID;
   const Research_Field = req.body.Research_Field;
   const Document = req.body.Document;

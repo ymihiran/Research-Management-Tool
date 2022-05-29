@@ -5,4 +5,6 @@ import '/node_modules/bootstrap/dist/css/bootstrap.css';
 import './components/CSS/animate.css'
 import "./components/CSS/notification-growl.css";
 
+
 createRoot(document.getElementById("app")).render(<App />);
+
