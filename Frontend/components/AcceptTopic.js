@@ -4,6 +4,7 @@ import React, {useState,useEffect} from "react";
 import axios from 'axios';
 import { useHistory } from 'react-router';
 import emailjs from "emailjs-com";
+import { Store } from 'react-notifications-component';
 
 
 
@@ -71,7 +72,24 @@ export default function AcceptTopic()  {
         if (ans) {
 
             await axios.put(`http://localhost:8070/topic/${id}`, updateTopic).then(() => {
-                alert("Status Update successfully");
+                Store.addNotification({
+                    title: "Status Updated Successfully.",
+                    animationIn: ["animate__animated", "animate__fadeIn"],
+                    animationOut: ["animate__animated", "animate__fadeOut"],
+                    type: "success",
+                    insert: "top",
+                    container: "top-right",
+                    
+                    dismiss: {
+                      duration: 1500,
+                      onScreen: true,
+                      showIcon: true
+                    },
+        
+                    width:400
+                });
+
+                history.push('/TopicList');
             }).catch((err) => {
                 alert(err);
             })

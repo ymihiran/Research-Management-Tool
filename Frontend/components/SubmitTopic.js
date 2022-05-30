@@ -3,6 +3,7 @@ import "./CSS/btrap.css";
 import React, {useState, useEffect}  from 'react';
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { Store } from 'react-notifications-component';
 
 export default function SubmitTopic()  {
 
@@ -34,7 +35,22 @@ export default function SubmitTopic()  {
 
         axios.post("http://localhost:8070/topic/",newTopic).then(()=>{
 
-            alert("Topic added");
+            Store.addNotification({
+                title: "Topic Saved Successfully.",
+                animationIn: ["animate__animated", "animate__fadeIn"],
+                animationOut: ["animate__animated", "animate__fadeOut"],
+                type: "success",
+                insert: "top",
+                container: "top-right",
+                
+                dismiss: {
+                  duration: 1500,
+                  onScreen: true,
+                  showIcon: true
+                },
+    
+                width:400
+            });
             e.target.reset();
             history.push('/StdTopicList');
             
@@ -80,6 +96,7 @@ export default function SubmitTopic()  {
                         <div className="mb-3">
                             <label className="t-form-label" style={{color:"#322B5F"}}>Group ID</label>
                             <input type="text"  style={{width:"450px"}} className="t-form-control" id="cUName"
+                                required
                                 onChange={e=>{
                                     setgroupID(e.target.value);
                                 }}
@@ -89,6 +106,7 @@ export default function SubmitTopic()  {
                         <div className="mb-3">
                             <label className="t-form-label">Group Name</label>
                             <input type="text"  style={{width:"450px"}}  id="cName"
+                                required
                                 onChange={e=>{
                                     setvgroupName(e.target.value);
                                 }}
@@ -99,6 +117,7 @@ export default function SubmitTopic()  {
                             <label className="t-form-label">Research Field</label>
                             
                             <select className='form-control' name="Field" id="Field" style={{width:"450px",border: "2px solid #ced4da"}}
+                                required
                                 onChange={e=>{
                                     setrField(e.target.value);
                                 }}
@@ -115,6 +134,7 @@ export default function SubmitTopic()  {
                         <div className="mb-3">
                             <label className="t-form-label">Research Topic</label>
                             <input type="text"  style={{width:"450px"}}  id="cName"   
+                                required
                                 onChange={e=>{
                                     setrTopic(e.target.value);
                                 }}
@@ -125,6 +145,7 @@ export default function SubmitTopic()  {
                         <div className="mb-3">
                             <label className="t-form-label">Group Leader's email</label>
                             <input type="text"  style={{width:"450px"}}  id="cName"
+                                required
                                 onChange={e=>{
                                     setleaderEmail(e.target.value);
                                 }}
