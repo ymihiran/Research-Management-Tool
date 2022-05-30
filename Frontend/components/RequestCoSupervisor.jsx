@@ -32,9 +32,10 @@ export default function RequestCoSupervisor() {
   }, []);
 
   const handlerSend = (data) => {
-    setEmail(data.email);
-    console.log("email", email);
-    document.getElementById("subBut").click();
+    // setEmail(data.email);
+    var { email } = data;
+    // console.log("email", email);
+    // document.getElementById("subBut").click();
 
     const newRequest = {
       groupID,
@@ -43,25 +44,35 @@ export default function RequestCoSupervisor() {
       email,
     };
 
-    // axios.post('http://localhost:8070').then()
-    console.log("newRequest", newRequest);
+    let ans = window.confirm("Do you want to send this request ?");
+
+    if (ans) {
+      axios
+        .post(`http://localhost:8070/`)
+        .then(() => {
+          alert("Request sent successfully");
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    }
   };
 
-  const sendEmail = (e) => {
-    e.preventDefault();
-    console.log(" e.currentTarget", e.currentTarget);
+  // const sendEmail = (e) => {
+  //   e.preventDefault();
+  //   console.log(" e.currentTarget", e.currentTarget);
 
-    emailjs
-      .sendForm("gmail", "sliit_rmt", e.currentTarget, "kAocVmHsaYNz5XOfJ")
-      .then(
-        (result) => {
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
-  };
+  //   emailjs
+  //     .sendForm("gmail", "sliit_rmt", e.currentTarget, "kAocVmHsaYNz5XOfJ")
+  //     .then(
+  //       (result) => {
+  //         console.log(result.text);
+  //       },
+  //       (error) => {
+  //         console.log(error.text);
+  //       }
+  //     );
+  // };
 
   return (
     <div className="body_container">
@@ -187,7 +198,7 @@ export default function RequestCoSupervisor() {
                   ))}
                 </tbody>
               </table>
-              <form onSubmit={sendEmail}>
+              {/* <form onSubmit={sendEmail}>
                 <input type="hidden" name="mail" value={email} />
                 <input
                   type="hidden"
@@ -201,7 +212,7 @@ export default function RequestCoSupervisor() {
                 <button hidden id="subBut">
                   Send Email
                 </button>
-              </form>
+              </form> */}
             </div>
           </div>
         </ul>

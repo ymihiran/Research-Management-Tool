@@ -33,8 +33,7 @@ app.use("/topic", topicRouter);
 
 // Marking Schema Route
 import markingRouter from "./routes/markingschemes.js";
-app.use("/markingScheme",markingRouter);
-
+app.use("/markingScheme", markingRouter);
 
 //User Routes
 import userRouter from "./routes/userRoute.js";
@@ -44,9 +43,8 @@ app.use("/user", userRouter);
 import SubmitTypeRouter from "./routes/SubmitTypeRoute.js";
 app.use("/docType", SubmitTypeRouter);
 
-
-import uploadImgRouter from './routes/uploadRoute.js';
-app.use('/api',uploadImgRouter);
+import uploadImgRouter from "./routes/uploadRoute.js";
+app.use("/api", uploadImgRouter);
 
 import router from "./routes/SubmitTypeRoute.js";
 app.use("/docType", router);
@@ -61,6 +59,9 @@ app.use("/document", docRouter);
 
 import uploadRouter from "./routes/UploadTemplateRoute.js";
 app.use("/template", uploadRouter);
+
+import request from "./routes/CoSupervisorReqRoute.js";
+app.use("/request", request);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
