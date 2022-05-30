@@ -20,6 +20,10 @@ const coSuperVisorReq = new Schema(
       type: String,
       required: true,
     },
+    requested: {
+      type: Boolean,
+      default: true,
+    },
   },
   { timestamps: true }
 );

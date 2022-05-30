@@ -12,7 +12,7 @@ export default function RequestCoSupervisor() {
   const [topic, setTopic] = useState();
   const [researchField, setResearchField] = useState();
   const [coSupervisor, setCoSupervisor] = useState([]);
-  const [email, setEmail] = useState();
+  const [status, setStatus] = useState("not-send");
 
   useEffect(() => {
     setGroupID(localStorage.getItem("groupID"));
@@ -51,6 +51,7 @@ export default function RequestCoSupervisor() {
         .post(`http://localhost:8070/request/`, newRequest)
         .then(() => {
           alert("Request sent successfully");
+          setStatus("send");
         })
         .catch((err) => {
           alert(err);
@@ -166,32 +167,62 @@ export default function RequestCoSupervisor() {
                       <td className="ps-5">{data.email}</td>
                       <td>
                         <center>
-                          <div className="col-3 ms-5 ">
-                            <a
-                              type="number"
-                              min="0"
-                              max="25"
-                              className="form-control "
-                              style={{
-                                width: "70px",
-                                backgroundColor: "#ece9ff",
-                                border: "none",
-                              }}
-                              onClick={(e) => handlerSend(data)}
-                            >
-                              <div className="ps-2 ">
-                                <SendIcon
-                                  fontSize="large"
-                                  sx={{
-                                    "&:hover": {
-                                      color: "#00D8B6",
-                                    },
-                                    color: "green",
-                                  }}
-                                />
-                              </div>
-                            </a>
-                          </div>
+                          {status == "not-send" ? (
+                            <div className="col-3 ms-5 ">
+                              <a
+                                type="number"
+                                min="0"
+                                max="25"
+                                className="form-control "
+                                style={{
+                                  width: "70px",
+                                  backgroundColor: "#ece9ff",
+                                  border: "none",
+                                }}
+                                onClick={(e) => handlerSend(data)}
+                              >
+                                <div className="ps-2 ">
+                                  <SendIcon
+                                    fontSize="large"
+                                    sx={{
+                                      "&:hover": {
+                                        color: "#00D8B6",
+                                      },
+                                      color: "green",
+                                      disabled: false,
+                                    }}
+                                  />
+                                </div>
+                              </a>
+                            </div>
+                          ) : (
+                            <div className="col-3 ms-5 ">
+                              <a
+                                type="number"
+                                min="0"
+                                max="25"
+                                className="form-control "
+                                style={{
+                                  width: "70px",
+                                  backgroundColor: "#ece9ff",
+                                  border: "none",
+                                }}
+                              >
+                                <div className="ps-2 ">
+                                  <SendIcon
+                                    fontSize="large"
+                                    sx={{
+                                      "&:hover": {
+                                        color: "#AAAAAA",
+                                      },
+                                      color: "#AAAAAA",
+                                      disabled: false,
+                                    }}
+                                  />
+                                </div>
+                              </a>
+                            </div>
+                          )}
                         </center>
                       </td>
                     </tr>

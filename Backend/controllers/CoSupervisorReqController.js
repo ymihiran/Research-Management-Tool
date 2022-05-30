@@ -24,7 +24,6 @@ transporter.use("compile", hbs(handleBar));
 
 //add request to the db
 export const sendReq = async (req, res) => {
-  console.log(req.body);
   try {
     const { groupID, researchField, topic, email } = req.body;
 
