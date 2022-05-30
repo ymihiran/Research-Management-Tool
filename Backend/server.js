@@ -19,6 +19,8 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+
+
 // Document/ presentation Evaluate Route
 import evaluationRouter from "./routes/EvaluationRoute.js";
 app.use("/evaluation", evaluationRouter);
@@ -43,8 +45,11 @@ app.use("/user", userRouter);
 import SubmitTypeRouter from "./routes/SubmitTypeRoute.js";
 app.use("/docType", SubmitTypeRouter);
 
-import uploadImgRouter from "./routes/uploadRoute.js";
-app.use("/api", uploadImgRouter);
+
+//Upload Image
+import uploadImgRouter from './routes/uploadRoute.js';
+app.use('/api',uploadImgRouter);
+
 
 import router from "./routes/SubmitTypeRoute.js";
 app.use("/docType", router);
