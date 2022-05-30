@@ -133,12 +133,14 @@ export default function AddMarking()  {
         
     };
 
-    const handleDelete = async (e,desc) =>{
+    const handleDelete = async (e,i) =>{
         e.preventDefault();
-        if(desc!=""){
-            const newList = criteria.filter((data) => data.des !== desc);
+        console.log(criteria);
+        console.log(i);
+        // if(i!=""){
+            const newList = criteria.filter((item, index) => index !== i);
             setCriteria(newList);
-        }
+        // }
 
         Store.addNotification({
             title: "Criteria Removed",
@@ -295,7 +297,7 @@ export default function AddMarking()  {
 
                                     <td>
                                         <button className="btn" style={{ color: "#0F0934" }}
-                                            onClick={(e) => handleDelete(e, data.des)}>
+                                            onClick={(e) => handleDelete(e,index)}>
                                             Remove
                                         </button>
                                     </td>
