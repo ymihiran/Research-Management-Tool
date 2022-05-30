@@ -1,7 +1,49 @@
 import "./CSS/topicsub.css";
 import "./CSS/btrap.css";
+import React, {useState,useEffect} from "react";
+import axios from 'axios';
+import { useHistory } from 'react-router';
+import emailjs from "emailjs-com";
+import { Store } from 'react-notifications-component';
 
 export default function EvaluateTopic()  {
+    const [tid, settid] = useState();
+    const [id, setid] = useState();
+    const [groupID, setgroupID] = useState("Y3_S1_1234");
+    const [groupName, setgroupName] = useState();
+    const [rField, setrField] = useState();
+    const [rTopic, setrTopic] = useState();
+    const [leaderEmail, setleaderEmail] = useState();
+    const [comment, setacomment] = useState();
+    const [Evaluation, setEvaluation] = useState();
+    const[request,setRequest] = useState([]);
+
+    let history = useHistory();
+
+    useEffect(()=>{
+
+        const path = "http://localhost:8070/topic/group/"+groupID;
+        console.log(path);
+
+        axios.get(path).then((res)=>{
+            setRequest(res.data.topicRouter);
+            }).catch((err)=>{
+                alert(err.message);
+        });
+
+        console.log(request.groupName);
+
+
+        settid(request.tid);
+        setid(request._id);
+        setgroupID(request.groupID);
+        setgroupName(request.groupName);
+        setrField(request.rField);
+        setrTopic(request.rTopic);
+        setleaderEmail(request.leaderEmail);
+        setacomment(request.comment);
+
+    },[])
 
     return(
         <div className="topic-container">
@@ -16,14 +58,14 @@ export default function EvaluateTopic()  {
                         <div className="mb-3">
                             <label className="s-form-label" >Group ID</label>
                             <input className="s-input" disabled type="text"  style={{width:"450px"}}  id="cUName"
-                                
+                                value={groupID}
                             />
                         </div>
 
                         <div className="mb-3">
                             <label className="s-form-label">Group Name</label>
                             <input  className="s-input" disabled  type="text"  style={{width:"450px"}}  id="cName"
-                                
+                                value={groupName}
                             />
                         </div>
 
@@ -31,7 +73,7 @@ export default function EvaluateTopic()  {
                             <label className="s-form-label">Research Field</label>
                             
                             <input  className="s-input" disabled  type="text"  style={{width:"450px"}}  id="cName"
-                                
+                                value={rField}
                                 />
 
                         </div>
@@ -39,6 +81,7 @@ export default function EvaluateTopic()  {
                         <div className="mb-3">
                             <label className="s-form-label">Research Topic</label>
                             <input className="s-input" disabled type="text"  style={{width:"450px"}}  id="cName"   
+                                value={rTopic}
                             />
                            
                         </div>
@@ -46,14 +89,14 @@ export default function EvaluateTopic()  {
                         <div className="mb-3">
                             <label className="s-form-label">Group Leader's email</label>
                             <input className="s-input" disabled type="text"  style={{width:"450px"}}  id="cName"
-                                
+                                value={leaderEmail}
                             />
                         </div>
 
                         <div className="mb-3">
                             <label className="s-form-label">Comments (Optional)</label>
                             <input className="s-input" disabled type="text"  style={{width:"450px", height:"100px"}}  id="cName"
-                                
+                                value={comment}
                             />
                         </div>
                     </form>       

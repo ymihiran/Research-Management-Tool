@@ -96,6 +96,7 @@ export default function SubmitTopic()  {
                         <div className="mb-3">
                             <label className="t-form-label" style={{color:"#322B5F"}}>Group ID</label>
                             <input type="text"  style={{width:"450px"}} className="t-form-control" id="cUName"
+                                required
                                 onChange={e=>{
                                     setgroupID(e.target.value);
                                 }}
@@ -105,6 +106,7 @@ export default function SubmitTopic()  {
                         <div className="mb-3">
                             <label className="t-form-label">Group Name</label>
                             <input type="text"  style={{width:"450px"}}  id="cName"
+                                required
                                 onChange={e=>{
                                     setvgroupName(e.target.value);
                                 }}
@@ -115,6 +117,7 @@ export default function SubmitTopic()  {
                             <label className="t-form-label">Research Field</label>
                             
                             <select className='form-control' name="Field" id="Field" style={{width:"450px",border: "2px solid #ced4da"}}
+                                required
                                 onChange={e=>{
                                     setrField(e.target.value);
                                 }}
@@ -131,6 +134,7 @@ export default function SubmitTopic()  {
                         <div className="mb-3">
                             <label className="t-form-label">Research Topic</label>
                             <input type="text"  style={{width:"450px"}}  id="cName"   
+                                required
                                 onChange={e=>{
                                     setrTopic(e.target.value);
                                 }}
@@ -141,6 +145,7 @@ export default function SubmitTopic()  {
                         <div className="mb-3">
                             <label className="t-form-label">Group Leader's email</label>
                             <input type="text"  style={{width:"450px"}}  id="cName"
+                                required
                                 onChange={e=>{
                                     setleaderEmail(e.target.value);
                                 }}

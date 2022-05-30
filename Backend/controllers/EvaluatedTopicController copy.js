@@ -1,6 +1,6 @@
-import TopicReg from "../models/TopicReg.js";
+import TopicReg from "../models/EvaluatedTopicReg.js";
 
-export const addTopic = async (req, res) => {
+export const addEvaluatedTopic = async (req, res) => {
   const tid = req.body.tid;
   const groupID = req.body.groupID;
   const groupName = req.body.groupName;
@@ -8,6 +8,7 @@ export const addTopic = async (req, res) => {
   const rTopic = req.body.rTopic;
   const leaderEmail = req.body.leaderEmail;
   const comment = req.body.comment;
+  const Evaluation = req.body.Evaluation;
 
   const newTopic = new TopicReg({
     tid,
@@ -17,6 +18,7 @@ export const addTopic = async (req, res) => {
     rTopic,
     leaderEmail,
     comment,
+    Evaluation,
   });
 
   await newTopic
@@ -29,7 +31,7 @@ export const addTopic = async (req, res) => {
     });
 };
 
-export const getAllTopic = async (req, res) => {
+export const getAllEvaluatedTopic = async (req, res) => {
   await TopicReg.find().exec((err, Topic) => {
     if (err) {
       return res.status(400).json({
@@ -43,7 +45,7 @@ export const getAllTopic = async (req, res) => {
   });
 };
 
-export const getSingleTopic = async (req, res) => {
+export const getSingleEvaluatedTopic = async (req, res) => {
   let topicid = req.params.id;
 
   await TopicReg.find({ _id: topicid }).exec((err, Topic) => {
@@ -59,23 +61,7 @@ export const getSingleTopic = async (req, res) => {
   });
 };
 
-export const getSingleTopicData = async (req, res) => {
-  let gid = req.params.id;
-
-  await TopicReg.findOne({ groupID: gid }).exec((err, Topic) => {
-    if (err) {
-      return res.status(400).json({
-        error: err,
-      });
-    }
-    return res.status(200).json({
-      success: true,
-      topicRouter: Topic,
-    });
-  });
-};
-
-export const updateSingleRecord = async (req, res) => {
+export const updateSingleEvaluatedRecord = async (req, res) => {
   let topicid = req.params.id;
   const {
     tid,
@@ -85,7 +71,7 @@ export const updateSingleRecord = async (req, res) => {
     rTopic,
     leaderEmail,
     comment,
-    status,
+    Evaluation,
   } = req.body;
 
   const updateTopic = {
@@ -96,7 +82,7 @@ export const updateSingleRecord = async (req, res) => {
     rTopic,
     leaderEmail,
     comment,
-    status,
+    Evaluation,
   };
 
   const update = await TopicReg.findByIdAndUpdate(topicid, updateTopic)
@@ -109,7 +95,7 @@ export const updateSingleRecord = async (req, res) => {
     });
 };
 
-export const deleteTopic = async (req, res) => {
+export const deleteEvaluatedTopic = async (req, res) => {
   let topicid = req.params.id;
   await TopicReg.findByIdAndDelete(topicid)
     .then(() => {
