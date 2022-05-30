@@ -44,7 +44,7 @@ const userCtrl={
             return res.status(500).json({msg:err.message})
         }
     } ,
-    
+
     login: async (req, res) => {
         try {
             const {email, password} = req.body
@@ -63,29 +63,14 @@ const userCtrl={
         }
     },
 
-    getAccessToken: (req, res) => {
-        try {
-            const rf_token = req.cookies.refreshtoken
-            if(!rf_token) return res.status(400).json({msg: "Please login now!"})
-
-            jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
-                if(err) return res.status(400).json({msg: "Please login now!"})
-
-                const access_token = createAccessToken({id: user._id})
-                res.json({access_token})
-            })
-        } catch (err) {
-            return res.status(500).json({msg: err.message})
-        }
-    },
-
     resetPassword: async (req, res) => {
+        let userId = req.params.id;
         try {
             const {password} = req.body
             
             const passwordHash = await bcrypt.hash(password, 12)
 
-            await Users.findOneAndUpdate({_id: req.user.id}, {
+            await Users.findOneAndUpdate(userId, {
                 password: passwordHash
             })
 
@@ -96,9 +81,9 @@ const userCtrl={
     },
 
     getUserInfor: async (req, res) => {
+        let userId = req.params.id;
         try {
-            const user = await Users.findById(req.user.id).select('-password')
-
+            const user = await Users.findById(userId).select('-password')
             res.json(user)
         } catch (err) {
             return res.status(500).json({msg: err.message})
@@ -106,11 +91,11 @@ const userCtrl={
     },
 
     updateUser: async (req, res) => {
+        let userId= req.params.id;
+        const {name, avatar,mobile,user_role,research_area,reg_number} = req.body
+        const update = {name, avatar,mobile,user_role,research_area,reg_number} 
         try {
-            const {name, avatar} = req.body
-            await Users.findOneAndUpdate({_id: req.user.id}, {
-                name, avatar
-            })
+            await Users.findByIdAndUpdate(userId,update)
 
             res.json({msg: "Update Success!"})
         } catch (err) {

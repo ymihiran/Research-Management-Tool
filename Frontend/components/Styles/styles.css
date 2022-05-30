@@ -39,6 +39,16 @@
   overflow: scroll;
   overflow-x: hidden;
 }
+.s_criteria_box {
+  border-radius: 10px;
+  border: 1px solid #9b97b6;
+  background-color: #ece9ff;
+  padding: 30px 30px;
+  width: 650px;
+  height: 450px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
 /* Scrollbar styles */
 ::-webkit-scrollbar {
   width: 10px;
