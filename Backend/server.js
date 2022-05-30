@@ -60,7 +60,7 @@ app.use("/document", docRouter);
 import uploadRouter from "./routes/UploadTemplateRoute.js";
 app.use("/template", uploadRouter);
 
-import request from "./routes/CoSupervisorReqRoute.js";
+import request from "./routes/ReqRoute.js";
 app.use("/request", request);
 
 app.listen(PORT, () => {

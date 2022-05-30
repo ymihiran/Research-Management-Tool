@@ -1,4 +1,4 @@
-import CoSuperVisorReq from "../models/CoSupervisorReq.js";
+import request from "../models/Request.js";
 import nodemailer from "nodemailer";
 import hbs from "nodemailer-express-handlebars";
 import path from "path";
@@ -27,7 +27,7 @@ export const sendReq = async (req, res) => {
   try {
     const { groupID, researchField, topic, email } = req.body;
 
-    const newRequest = new CoSuperVisorReq({
+    const newRequest = new request({
       groupID,
       researchField,
       topic,
@@ -62,4 +62,18 @@ export const sendReq = async (req, res) => {
       console.log("Email sent: " + info.response);
     }
   });
+};
+
+//get one groupe request details
+export const findGroup = async (req, res) => {
+  const groupID = req.params.groupID;
+
+  request
+    .findOne({ groupID: groupID })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };

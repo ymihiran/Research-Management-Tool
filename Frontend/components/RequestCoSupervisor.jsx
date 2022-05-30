@@ -12,13 +12,14 @@ export default function RequestCoSupervisor() {
   const [topic, setTopic] = useState();
   const [researchField, setResearchField] = useState();
   const [coSupervisor, setCoSupervisor] = useState([]);
-  const [status, setStatus] = useState("not-send");
+  const [status, setStatus] = useState(false);
 
   useEffect(() => {
     setGroupID(localStorage.getItem("groupID"));
     setTopic(localStorage.getItem("rTopic"));
     setResearchField(localStorage.getItem("rField"));
 
+    //get supervisor details
     axios
       .get(
         `http://localhost:8070/supervisor/co/${localStorage.getItem(
@@ -29,9 +30,17 @@ export default function RequestCoSupervisor() {
         console.log(res.data);
         setCoSupervisor(res.data);
       });
+
+    //get request details
+    axios
+      .get(`http://localhost:8070/request/${localStorage.getItem("groupID")}`)
+      .then((res) => {
+        console.log("requested ", res.data.requested);
+        setStatus(res.data.requested);
+      });
   }, []);
 
-  const handlerSend = (data) => {
+  const handlerSend = async (data) => {
     // setEmail(data.email);
     var { email } = data;
     // console.log("email", email);
@@ -47,7 +56,7 @@ export default function RequestCoSupervisor() {
     let ans = window.confirm("Do you want to send this request ?");
 
     if (ans) {
-      axios
+      await axios
         .post(`http://localhost:8070/request/`, newRequest)
         .then(() => {
           alert("Request sent successfully");
@@ -55,6 +64,14 @@ export default function RequestCoSupervisor() {
         })
         .catch((err) => {
           alert(err);
+        });
+
+      //get request details
+      await axios
+        .get(`http://localhost:8070/request/${localStorage.getItem("groupID")}`)
+        .then((res) => {
+          console.log("request details ", res.data);
+          setStatus(res.data.requested);
         });
     }
   };
@@ -167,7 +184,34 @@ export default function RequestCoSupervisor() {
                       <td className="ps-5">{data.email}</td>
                       <td>
                         <center>
-                          {status == "not-send" ? (
+                          {status ? (
+                            <div className="col-3 ms-5 ">
+                              <a
+                                type="number"
+                                min="0"
+                                max="25"
+                                className="form-control "
+                                style={{
+                                  width: "70px",
+                                  backgroundColor: "#ece9ff",
+                                  border: "none",
+                                }}
+                              >
+                                <div className="ps-2 ">
+                                  <SendIcon
+                                    fontSize="large"
+                                    sx={{
+                                      "&:hover": {
+                                        color: "#AAAAAA",
+                                      },
+                                      color: "#AAAAAA",
+                                      disabled: false,
+                                    }}
+                                  />
+                                </div>
+                              </a>
+                            </div>
+                          ) : (
                             <div className="col-3 ms-5 ">
                               <a
                                 type="number"
@@ -189,33 +233,6 @@ export default function RequestCoSupervisor() {
                                         color: "#00D8B6",
                                       },
                                       color: "green",
-                                      disabled: false,
-                                    }}
-                                  />
-                                </div>
-                              </a>
-                            </div>
-                          ) : (
-                            <div className="col-3 ms-5 ">
-                              <a
-                                type="number"
-                                min="0"
-                                max="25"
-                                className="form-control "
-                                style={{
-                                  width: "70px",
-                                  backgroundColor: "#ece9ff",
-                                  border: "none",
-                                }}
-                              >
-                                <div className="ps-2 ">
-                                  <SendIcon
-                                    fontSize="large"
-                                    sx={{
-                                      "&:hover": {
-                                        color: "#AAAAAA",
-                                      },
-                                      color: "#AAAAAA",
                                       disabled: false,
                                     }}
                                   />

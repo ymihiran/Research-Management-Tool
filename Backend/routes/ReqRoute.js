@@ -1,7 +1,8 @@
 import express from "express";
-import { sendReq } from "../controllers/CoSupervisorReqController.js";
+import { findGroup, sendReq } from "../controllers/ReqController.js";
 const router = express.Router();
 
 router.post("/", sendReq);
+router.get("/:groupID", findGroup);
 
 export default router;
