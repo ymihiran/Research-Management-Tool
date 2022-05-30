@@ -13,6 +13,8 @@ router.get('/infor/:id',userCtrl.getUserInfor)
 
 router.get('/allprof',userCtrl.allusers)
 
+router.get('/panel/:id',userCtrl.panelMembers)
+
 router.post('/reset/:id', userCtrl.resetPassword)
 
 router.get('/logout', userCtrl.logout)

@@ -61,7 +61,7 @@ export default function CheckMembers() {
                                 
                                 <a className="btn btn-warning" 
                                 onClick={() => setData(data)}
-                                href={`/`}
+                                href={`/selectpanel`}
                                 style={{textDecoration:'none'}}>
                                 <i></i>&nbsp;Check Panel Members
                                 </a>
