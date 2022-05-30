@@ -20,6 +20,13 @@ export default function EvaluateTopic()  {
 
     let history = useHistory();
 
+    const getData = async (path) => {await axios.get(path).then((res)=>{
+        setRequest(res.data.topicRouter);
+        }).catch((err)=>{
+            alert(err.message);
+    });
+    }
+    
     
 
     useEffect(()=>{
@@ -30,11 +37,8 @@ export default function EvaluateTopic()  {
         const path = "http://localhost:8070/topic/group/"+localStorage.getItem('groupID');
         console.log(path);
 
-        axios.get(path).then((res)=>{
-            setRequest(res.data.topicRouter);
-            }).catch((err)=>{
-                alert(err.message);
-        });
+        
+        getData(path);
 
         console.log(request.groupName);
 
@@ -116,7 +120,7 @@ export default function EvaluateTopic()  {
                         <div className="mb-3">
                             <label className="s-form-label">Group Name</label>
                             <input  className="s-input" disabled  type="text"  style={{width:"450px"}}  id="cName"
-                                value={groupName}
+                                value={request.groupName}
                             />
                         </div>
 
@@ -124,7 +128,7 @@ export default function EvaluateTopic()  {
                             <label className="s-form-label">Research Field</label>
                             
                             <input  className="s-input" disabled  type="text"  style={{width:"450px"}}  id="cName"
-                                value={rField}
+                                value={request.rField}
                                 />
 
                         </div>
@@ -132,7 +136,7 @@ export default function EvaluateTopic()  {
                         <div className="mb-3">
                             <label className="s-form-label">Research Topic</label>
                             <input className="s-input" disabled type="text"  style={{width:"450px"}}  id="cName"   
-                                value={rTopic}
+                                value={request.rTopic}
                             />
                            
                         </div>
@@ -140,14 +144,14 @@ export default function EvaluateTopic()  {
                         <div className="mb-3">
                             <label className="s-form-label">Group Leader's email</label>
                             <input className="s-input" disabled type="text"  style={{width:"450px"}}  id="cName"
-                                value={leaderEmail}
+                                value={request.leaderEmail}
                             />
                         </div>
 
                         <div className="mb-3">
                             <label className="s-form-label">Comments (Optional)</label>
                             <input className="s-input" disabled type="text"  style={{width:"450px", height:"100px"}}  id="cName"
-                                value={comment}
+                                value={request.comment}
                             />
                         </div>
                     </form>       

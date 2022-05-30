@@ -103,14 +103,14 @@ export default function EvaluateTopic()  {
                         <div className="mb-3">
                             <label className="s-form-label" >Group ID</label>
                             <input className="s-input" disabled type="text"  style={{width:"450px"}}  id="cUName"
-                                value={groupID}
+                                value={request.groupID}
                             />
                         </div>
 
                         <div className="mb-3">
                             <label className="s-form-label">Group Name</label>
                             <input  className="s-input" disabled  type="text"  style={{width:"450px"}}  id="cName"
-                                value={groupName}
+                                value={request.groupName}
                             />
                         </div>
 
@@ -118,7 +118,7 @@ export default function EvaluateTopic()  {
                             <label className="s-form-label">Research Field</label>
                             
                             <input  className="s-input" disabled  type="text"  style={{width:"450px"}}  id="cName"
-                                value={rField}
+                                value={request.rField}
                                 />
 
                         </div>
@@ -126,7 +126,7 @@ export default function EvaluateTopic()  {
                         <div className="mb-3">
                             <label className="s-form-label">Research Topic</label>
                             <input className="s-input" disabled type="text"  style={{width:"450px"}}  id="cName"   
-                                value={rTopic}
+                                value={request.rTopic}
                             />
                            
                         </div>
@@ -134,14 +134,14 @@ export default function EvaluateTopic()  {
                         <div className="mb-3">
                             <label className="s-form-label">Group Leader's email</label>
                             <input className="s-input" disabled type="text"  style={{width:"450px"}}  id="cName"
-                                value={leaderEmail}
+                                value={request.leaderEmail}
                             />
                         </div>
 
                         <div className="mb-3">
                             <label className="s-form-label">Comments (Optional)</label>
                             <input className="s-input" disabled type="text"  style={{width:"450px", height:"100px"}}  id="cName"
-                                value={comment}
+                                value={request.comment}
                             />
                         </div>
                     </form>       
