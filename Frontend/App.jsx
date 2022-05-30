@@ -24,6 +24,8 @@ import AllStudentGroup from "./components/AllStudentGroup";
 import AllTypes from "./components/AllTypes";
 import MarkingList from "./components/MarkingList";
 import EditMarking from "./components/EditMarking";
+import EvaluatedTopicList from "./components/EvaluatedTopicList"
+import EditEvaluatedTopic from "./components/EditEvaluatedTopic"
 import SubmitTypes from "./components/SubmitTypes.jsx";
 
 import DocumentEvaluation from "./components/DocumentEvaluation";
@@ -51,6 +53,8 @@ function App() {
         <Route path="/login" exact component={Login} />
         <Route path="/SubmitTopic" component={SubmitTopic} />
         <Route path="/EvaluateTopic" component={EvaluateTopic} />
+        <Route path="/EvaluatedTopicList" component={EvaluatedTopicList} />
+        <Route path="/EditEvaluatedTopic" component={EditEvaluatedTopic} />
         <Route path="/AcceptTopic" component={AcceptTopic} />
         <Route path="/TopicList" component={TopicList} />
         <Route path="/StdTopicList" component={StdTopicList} />
