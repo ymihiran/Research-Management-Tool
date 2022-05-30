@@ -48,7 +48,7 @@ export default function RequestCoSupervisor() {
 
     if (ans) {
       axios
-        .post(`http://localhost:8070/request/`)
+        .post(`http://localhost:8070/request/`, newRequest)
         .then(() => {
           alert("Request sent successfully");
         })
