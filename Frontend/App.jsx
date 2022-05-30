@@ -42,6 +42,7 @@ import Home from './components/Home'
 import Profile from './components/Profile';
 import AllUsers from './components/AllUsers';
 import PanelMembers from './components/CheckPanelMembers'
+import SelectPanelMembers from './components/SelectPanelMembers'
 
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
         <Route path="/" exact component={Main} />
         <Route path="/profile" exact component={Profile} />
         <Route path="/panelmembers" exact component={PanelMembers} />
+        <Route path="/selectpanel" exact component={SelectPanelMembers} />
         <Route path="/allprof" exact component={AllUsers} />
         <Route path="/register" exact component={Register}/>
         <Route path="/login" exact component={Login} />

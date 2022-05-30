@@ -114,6 +114,21 @@ const userCtrl={
           });
       },
 
+      panelMembers:async(req,res)=>{
+        let r_area=req.params.id;
+        Users.find({research_area:r_area}).exec((err,Users)=>{
+              if(err){
+                  return res.status(400).json({
+                     error:err
+                 });
+             }
+                return res.status(200).json({
+                  success:true,
+                  existingUser:Users
+              });
+          });
+      },
+
 
 
 
