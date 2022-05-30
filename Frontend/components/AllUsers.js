@@ -42,10 +42,9 @@ const filterData = (users,searchkey) =>{
   
            if(res.data.success){
                
-             filterData(res.data.existingUsers,searchkey)
+             filterData(res.data.existingUser,searchkey)
   
            }
-   
    
    });
   
