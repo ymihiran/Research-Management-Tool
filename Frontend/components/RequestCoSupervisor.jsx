@@ -32,9 +32,19 @@ export default function RequestCoSupervisor() {
   }, []);
 
   const handlerSend = (data) => {
-    console.log("data.email", data.email);
     setEmail(data.email);
+    console.log("email", email);
     document.getElementById("subBut").click();
+
+    const newRequest = {
+      groupID,
+      researchField,
+      topic,
+      email,
+    };
+
+    // axios.post('http://localhost:8070').then()
+    console.log("newRequest", newRequest);
   };
 
   const sendEmail = (e) => {
