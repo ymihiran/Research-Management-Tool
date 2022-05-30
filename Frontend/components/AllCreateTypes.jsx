@@ -18,6 +18,17 @@ export default function AllCreateTypes() {
       });
   }, []);
 
+  const setData = (data) => {
+    let { AdminName, SchemaType, Title, Template, Description } = data;
+    localStorage.setItem("AdminName", AdminName);
+    localStorage.setItem("SchemaType", SchemaType);
+    localStorage.setItem("Title", Title);
+    localStorage.setItem("Template", Template);
+    localStorage.setItem("Description", Description);
+
+    console.log(data);
+  };
+
   return (
     <div>
       <div className="t-list-container">
@@ -68,7 +79,7 @@ export default function AllCreateTypes() {
                       <td className="py-5 ">
                         <a
                           className="btn btn-warning "
-                          href="/details"
+                          href="/UpdateTemplate"
                           onClick={() => setData(data)}
                         >
                           <i className="fas fa-edit"></i>&nbsp;Edit

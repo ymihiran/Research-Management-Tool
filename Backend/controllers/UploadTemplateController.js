@@ -35,3 +35,14 @@ export const getAllTypes = async (req, res) => {
       console.catch.log(err);
     });
 };
+
+// const update = await Vehicle.findByIdAndUpdate(vehicleId, updateVehicleInfo)
+//   .then(() => {
+//     res.status(200).send({ status: "Create Types Updated successfully" });
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//     res
+//       .status(500)
+//       .send({ status: "Error with Updating Create Types", error: err.message });
+//   });

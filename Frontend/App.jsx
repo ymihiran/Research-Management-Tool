@@ -27,6 +27,7 @@ import PresentationEvaluation from "./components/PresentationEvaluation";
 import AllDocuments from "./components/AllDocuments";
 import SubmitTypes from "./components/SubmitTypes.jsx";
 import RequestCoSupervisor from "./components/RequestCoSupervisor";
+import UpdateUploadTemplate from "./components/UpdateUploadTemplate";
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
         <Route path="/presentation" component={PresentationEvaluation} />
         <Route path="/allDoc" component={AllDocuments} />
         <Route path="/reqCoSuper" component={RequestCoSupervisor} />
+        <Route path="/UpdateTemplate" component={UpdateUploadTemplate} />
       </Router>
     </div>
   );
