@@ -32,8 +32,9 @@ import UploadTemplate from "./components/UploadTemplate";
 import Login from './components/Login.jsx';
 import Register from './components/Register.jsx';
 import ActivationEmail from './components/auth/activationEmail.js'
-import Home from './components/Home.jsx'
+import Home from './components/Home'
 import Profile from './components/Profile';
+import AllUsers from './components/AllUsers';
 
 
 function App() {
@@ -44,7 +45,7 @@ function App() {
         
         <Route path="/" exact component={Home} />
         <Route path="/profile" exact component={Profile} />
-        <Route path="/user/activate/:activation_token" exact component={ActivationEmail}/>
+        <Route path="/allprof" exact component={AllUsers} />
         <Route path="/register" exact component={Register}/>
         <Route path="/login" exact component={Login} />
         <Route path="/SubmitTopic" component={SubmitTopic} />
