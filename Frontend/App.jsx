@@ -15,6 +15,7 @@ import TopicList from "./components/TopicList";
 import StdTopicList from "./components/StdTopicList";
 import AddMarking from "./components/AddMarking";
 import EditTopic from "./components/EditTopic";
+import Main from './components/Main';
 import { ReactNotifications } from "react-notifications-component";
 
 
@@ -47,7 +48,7 @@ function App() {
     <div>
       <ReactNotifications />
       <Router>
-        <Route path="/" exact component={Home} />
+        <Route path="/" exact component={Main} />
         <Route path="/user/activate/:activation_token" exact component={ActivationEmail}/>
         <Route path="/register" exact component={Register}/>
         <Route path="/login" exact component={Login} />
@@ -65,6 +66,7 @@ function App() {
         <Route path="/AllTypes" component={AllTypes} />
         <Route path="/MarkingList" component={MarkingList} />
         <Route path="/EditMarking" component={EditMarking} />
+        <Route path="/Main" component={Main} />
         <Route path="/SubmitTypes" component={SubmitTypes} />
         <Route exact path="/doc" component={DocumentEvaluation} />
         <Route path="/presentation" component={PresentationEvaluation} />
