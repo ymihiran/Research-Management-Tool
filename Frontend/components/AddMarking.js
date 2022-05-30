@@ -47,6 +47,11 @@ export default function AddMarking()  {
 
         setCriteria((prev) => [...prev, extra]);
         console.log(criteria);
+
+        document.getElementById('des').value="";
+        document.getElementById('mark').value="";
+
+
     };
 
 
@@ -133,12 +138,13 @@ export default function AddMarking()  {
         
     };
 
-    const handleDelete = async (e,desc) =>{
+    const handleDelete = async (e,i) =>{
         e.preventDefault();
-        if(desc!=""){
-            const newList = criteria.filter((data) => data.des !== desc);
-            setCriteria(newList);
-        }
+
+    
+        const newList = criteria.filter((item, index) => index !== i);
+        setCriteria(newList);
+
 
         Store.addNotification({
             title: "Criteria Removed",
@@ -234,14 +240,14 @@ export default function AddMarking()  {
 
                         <div className="mb-3">
                             <label className="m-form-label">Criteria Name</label>
-                            <input type="text" name="des" style={{ width: "450px", height: "30px" }} id="cName"
+                            <input type="text" name="des" style={{ width: "450px", height: "30px" }} id="des"
                                 onChange={handleCriteriaInput} />
                         </div>
 
 
                         <div className="mb-3">
                             <label className="m-form-label">Mark Percentage (%)</label>
-                            <input type="number" name="mark" style={{ width: "450px", height: "30px" }} id="cName"
+                            <input type="number" name="mark" style={{ width: "450px", height: "30px" }} id="mark"
                                 onChange={handleCriteriaInput} />
                         </div>
 
@@ -295,7 +301,7 @@ export default function AddMarking()  {
 
                                     <td>
                                         <button className="btn" style={{ color: "#0F0934" }}
-                                            onClick={(e) => handleDelete(e, data.des)}>
+                                            onClick={(e) => handleDelete(e,index)}>
                                             Remove
                                         </button>
                                     </td>

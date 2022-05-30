@@ -15,6 +15,7 @@ import TopicList from "./components/TopicList";
 import StdTopicList from "./components/StdTopicList";
 import AddMarking from "./components/AddMarking";
 import EditTopic from "./components/EditTopic";
+import Main from './components/Main';
 import { ReactNotifications } from "react-notifications-component";
 
 
@@ -24,6 +25,8 @@ import AllStudentGroup from "./components/AllStudentGroup";
 import AllTypes from "./components/AllTypes";
 import MarkingList from "./components/MarkingList";
 import EditMarking from "./components/EditMarking";
+import EvaluatedTopicList from "./components/EvaluatedTopicList"
+import EditEvaluatedTopic from "./components/EditEvaluatedTopic"
 import SubmitTypes from "./components/SubmitTypes.jsx";
 
 import DocumentEvaluation from "./components/DocumentEvaluation";
@@ -46,14 +49,16 @@ function App() {
     <div>
       <ReactNotifications />
       <Router>
-        
-        <Route path="/" exact component={Home} />
+
+        <Route path="/" exact component={Main} />
         <Route path="/profile" exact component={Profile} />
         <Route path="/user/activate/:activation_token" exact component={ActivationEmail}/>
         <Route path="/register" exact component={Register}/>
         <Route path="/login" exact component={Login} />
         <Route path="/SubmitTopic" component={SubmitTopic} />
         <Route path="/EvaluateTopic" component={EvaluateTopic} />
+        <Route path="/EvaluatedTopicList" component={EvaluatedTopicList} />
+        <Route path="/EditEvaluatedTopic" component={EditEvaluatedTopic} />
         <Route path="/AcceptTopic" component={AcceptTopic} />
         <Route path="/TopicList" component={TopicList} />
         <Route path="/StdTopicList" component={StdTopicList} />
@@ -64,6 +69,7 @@ function App() {
         <Route path="/AllTypes" component={AllTypes} />
         <Route path="/MarkingList" component={MarkingList} />
         <Route path="/EditMarking" component={EditMarking} />
+        <Route path="/Main" component={Main} />
         <Route path="/SubmitTypes" component={SubmitTypes} />
         <Route exact path="/doc" component={DocumentEvaluation} />
         <Route path="/presentation" component={PresentationEvaluation} />
