@@ -20,22 +20,30 @@ export default function EvaluateTopic()  {
 
     let history = useHistory();
 
+    const getData = async (path) => {await axios.get(path).then((res)=>{
+        setRequest(res.data.topicRouter);
+        }).catch((err)=>{
+            alert(err.message);
+    });
+    }
+    
+    
+
     useEffect(()=>{
 
-        const path = "http://localhost:8070/topic/group/"+groupID;
+        setEvaluation(localStorage.getItem('Evaluation'));
+        setid(localStorage.getItem('ID'));
+
+        const path = "http://localhost:8070/topic/group/"+localStorage.getItem('groupID');
         console.log(path);
 
-        axios.get(path).then((res)=>{
-            setRequest(res.data.topicRouter);
-            }).catch((err)=>{
-                alert(err.message);
-        });
+        
+        getData(path);
 
         console.log(request.groupName);
 
 
         settid(request.tid);
-        setid(request._id);
         setgroupID(request.groupID);
         setgroupName(request.groupName);
         setrField(request.rField);
@@ -60,7 +68,9 @@ export default function EvaluateTopic()  {
             Evaluation,
         }
 
-        axios.post("http://localhost:8070/evaluatedTopic/",newTopic).then(()=>{
+        let path = "http://localhost:8070/evaluatedTopic/"+id;
+
+        axios.put(path,newTopic).then(()=>{
 
             Store.addNotification({
                 title: "Evaluation Sent Successfully.",
@@ -79,14 +89,14 @@ export default function EvaluateTopic()  {
                 width:400
             });
             e.target.reset();
-            history.push('/StdTopicList');
+            history.push('/EvaluatedTopicList');
             
     
          }).catch((err)=>{
     
             alert(err);
          })
-    
+         
 
     }
 
@@ -103,7 +113,7 @@ export default function EvaluateTopic()  {
                         <div className="mb-3">
                             <label className="s-form-label" >Group ID</label>
                             <input className="s-input" disabled type="text"  style={{width:"450px"}}  id="cUName"
-                                value={request.groupID}
+                                value={groupID}
                             />
                         </div>
 
@@ -175,6 +185,7 @@ export default function EvaluateTopic()  {
                             <label className="t-form-label">Comments</label>
                             <input type="text"  style={{width:"450px", height:"100px"}}  id="cName"
                                 required
+                                value={Evaluation}
                                 onChange={(e)=>setEvaluation(e.target.value)}
                             />
                         </div>

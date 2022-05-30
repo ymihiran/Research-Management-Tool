@@ -35,7 +35,13 @@ app.use("/topic", topicRouter);
 
 // Marking Schema Route
 import markingRouter from "./routes/markingschemes.js";
-app.use("/markingScheme", markingRouter);
+
+app.use("/markingScheme",markingRouter);
+
+// Evaluated Topics Route
+import evaluatedTopicRouter from "./routes/evaluatedtopics.js";
+app.use("/evaluatedTopic",evaluatedTopicRouter);
+
 
 //User Routes
 import userRouter from "./routes/userRoute.js";

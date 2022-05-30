@@ -1,14 +1,14 @@
 
 import express from "express";
 const router = express.Router();
-import TopicReg from "../models/EvaluatedTopic.js";
+
 import {
   addEvaluatedTopic,
   getAllEvaluatedTopic,
   getSingleEvaluatedTopic,
   updateSingleEvaluatedRecord,
   deleteEvaluatedTopic,
-} from "../controllers/topicregController.js";
+} from "../controllers/EvaluatedTopicController.js";
 
 router.post("/", addEvaluatedTopic);
 
