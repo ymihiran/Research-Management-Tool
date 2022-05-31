@@ -39,23 +39,35 @@ const FileInput = ({ name, label, value, type, handleInputState, ...rest }) => {
   };
 
   return (
-    <div className={styles.container}>
-      <input
-        type="file"
-        ref={inputRef}
-        onChange={(e) => handleInputState(name, e.currentTarget.files[0])}
-        vlaue={value}
-        className={styles.input}
-        {...rest}
-      />
+    <div
+      style={{
+        width: "500px",
+        height: "200px",
+      }}
+      className={styles.container}
+    >
+      <i class="bi bi-cloud-arrow-up-fill fa-5x"></i>
+      <div>
+        <div style={{ marginLeft: "120px" }} class="file-upload-wrapper">
+          <input
+            type="file"
+            class="file-upload"
+            ref={inputRef}
+            onChange={(e) => handleInputState(name, e.currentTarget.files[0])}
+            vlaue={value}
+            //className={styles.input}
+            {...rest}
+          />
+        </div>
+      </div>
 
-      <button
+      {/* <button
         type="button"
         onClick={() => inputRef.current.click()}
         className={styles.button}
       >
         {label}
-      </button>
+      </button> */}
       {/* {type === "image" && value && (
 				<img
 					src={typeof value === "string" ? value : URL.createObjectURL(value)}
