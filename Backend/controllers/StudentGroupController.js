@@ -64,7 +64,7 @@ export const getGroupID = async (req, res) => {
   })
 
     .then((data) => {
-      res.json(data._id);
+      res.json(data);
     })
     .catch((err) => {
       console.log(err);

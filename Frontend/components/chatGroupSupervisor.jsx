@@ -49,47 +49,20 @@ export default function chatGroupSupervisor() {
         </div>
         <div className=" mb-5 ">
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-5">
-            <Card className="row_poster ms-4">
-              <CardImg top width="318px" height="180" alt="Card image cap" />
-              <CardBody>
-                <CardTitle tag="h5">hi</CardTitle>
-
-                <CardSubtitle tag="h6" className="mb-2 text-muted text-success">
-                  <p className="text-danger">
-                    <b>Not accepted yet</b>
-                  </p>
-                </CardSubtitle>
-
-                <CardText>details</CardText>
-                <div className="row justify-content-around">
-                  <div className="col-1">
-                    <button type="button" className="btn btn-danger ms-5">
-                      <i className="bi bi-trash me-2" />
-                      Delete
-                    </button>
-                  </div>
-                  <div className="col-3">
-                    <a type="button" className="btn btn-warning ms-5" href="/">
-                      <i className="bi bi-pencil-square me-2"></i>
-                      Update
-                    </a>
-                  </div>
-                </div>
-              </CardBody>
-            </Card>
-            <Card className="row_poster ms-4">
-              <CardBody className="p-5">
-                <CardTitle tag="h5">hi</CardTitle>
-
-                <CardSubtitle tag="h6" className="mb-2 text-muted text-success">
-                  <p className="text-danger">
-                    <b>Not accepted yet</b>
-                  </p>
-                </CardSubtitle>
-
-                <CardText>details</CardText>
-              </CardBody>
-            </Card>
+            <div className="p-3">
+              <Card
+                className="row_poster ms-4"
+                style={{ backgroundColor: "#ece9ff" }}
+              >
+                <CardBody className="p-5">
+                  <CardTitle tag="h5">
+                    <center>
+                      <b>Y3S1</b>
+                    </center>
+                  </CardTitle>
+                </CardBody>
+              </Card>
+            </div>
           </div>
           {/* <table className="table table-hover table-borderless">
             <thead>

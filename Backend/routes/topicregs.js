@@ -1,4 +1,3 @@
-
 import express from "express";
 const router = express.Router();
 import TopicReg from "../models/TopicReg.js";
@@ -8,7 +7,8 @@ import {
   getSingleTopic,
   updateSingleRecord,
   deleteTopic,
-  getSingleTopicData
+  getSingleTopicData,
+  getGroupID,
 } from "../controllers/topicregController.js";
 
 router.post("/", addTopic);
@@ -27,5 +27,6 @@ router.put("/:id", updateSingleRecord);
 
 router.delete("/:id", deleteTopic);
 
-export default router;
+router.get("/groupID/:leaderEmail", getGroupID);
 
+export default router;

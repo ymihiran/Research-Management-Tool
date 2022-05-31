@@ -3,18 +3,19 @@ import axios from "axios";
 import { Card, Button } from "react-bootstrap";
 
 export default function chatForum() {
-  const [groupID, setGroupID] = useState();
+  // const [groupID, setGroupID] = useState();
   const [stdName, setStdName] = useState();
   const [subject, setSubject] = useState();
   const [message, setMessage] = useState();
   const [stdEmail, setStdEmail] = useState();
   const [allMsg, setAllMsg] = useState();
   const [group_id, setGroup_id] = useState();
+  const [leaderEmail, setLeaderEmail] = useState();
 
   useEffect(() => {
     setStdEmail(JSON.parse(localStorage.getItem("user")).email);
 
-    //get group _id by student email
+    //get group _id and leader's email by student email
     axios
       .get(
         `http://localhost:8070/stdGroup/${
@@ -22,9 +23,10 @@ export default function chatForum() {
         }`
       )
       .then((res) => {
-        console.log(res.data);
-        setGroup_id(res.data);
-        localStorage.setItem("lsgroup_id", res.data);
+        console.log("res.data", res.data);
+        setGroup_id(res.data._id);
+        setLeaderEmail(res.data.Group_Leader_Email);
+        localStorage.setItem("lsgroup_id", res.data._id);
       });
 
     //get messages from db
@@ -32,12 +34,27 @@ export default function chatForum() {
       .get(`http://localhost:8070/chat/${localStorage.getItem("lsgroup_id")}`)
       .then((res) => {
         setAllMsg(res.data);
-        console.log(res.data);
+        console.log("all msg", res.data);
+      })
+      .catch((err) => {
+        console.log("err", err);
       });
   }, []);
 
   const handleNewMessage = async (e) => {
     e.preventDefault();
+    await axios
+      .get(`http://localhost:8070/topic/groupID/${leaderEmail}`)
+      .then((res) => {
+        localStorage.setItem("LGroupID", res.data);
+
+        console.log("GroupID", res.data);
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+
+    let groupID = localStorage.getItem("LGroupID");
 
     const newMessage = {
       group_id,
@@ -47,7 +64,7 @@ export default function chatForum() {
       subject,
       message,
     };
-    console.log("41", newMessage);
+    console.log("newMessage", newMessage);
     //send message to the db
     await axios.post(`http://localhost:8070/chat/`, newMessage).then(() => {
       alert("message send successfully");
@@ -76,19 +93,6 @@ export default function chatForum() {
           </label>
         </div>
         <form className=" pe-5" onSubmit={handleNewMessage}>
-          <div className="form-group mb-3 mt-5">
-            <label>Group ID</label>
-            <input
-              required
-              type="text"
-              className="form-control"
-              id="groupID"
-              onChange={(e) => {
-                setGroupID(e.target.value);
-              }}
-            />
-          </div>
-
           <div className="form-group mb-3">
             <label>Your Name</label>
             <input
