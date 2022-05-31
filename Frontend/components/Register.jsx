@@ -6,7 +6,6 @@ import axios from 'axios'
 import {showErrMsg, showSuccessMsg} from './utils/notification/Notification'
 import {isEmpty, isEmail, isLength, isMatch} from './utils/validation/Validation.js';
 
-
 const initialState = {
   name:'',
   email: '',
@@ -198,9 +197,9 @@ const handleSubmit = async e => {
                        />
                  </div>
 
-                 <button type="submit" className="l-btn-accept" style={{width:"200px",fontWeight:"bold"}} >Register</button>
+              
+                 <button type="submit" className="btn btn-success" style={{width:"200px",fontWeight:"bold"}} >Register</button>
                     </form>
-
                     <div className="bottom-t-container">
                         <label className="bottom-t" style={{color:"#FF5631"}}> SLIIT</label> <label className="bottom-t"> Research</label> <br />
                         <label className="bottom-t"> Management Tool</label>
