@@ -1,23 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ClassNames } from "@emotion/react";
 import "./CSS/st.css";
 import "./CSS/link.css";
 
 export default function DownloadTemplate() {
-  //   const [type, setTypes] = useState([]);
+  const [type, setTypes] = useState([]);
 
-  //   useEffect(() => {
-  //     axios
-  //       .get("http://localhost:8070/template")
-  //       .then((res) => {
-  //         setTypes(res.data);
-  //         console.log(res.data);
-  //       })
-  //       .catch((err) => {
-  //         alert(err.message);
-  //       });
-  //   }, []);
+  useEffect(() => {
+    axios
+      .get("http://localhost:8070/template")
+      .then((res) => {
+        setTypes(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  }, []);
 
   //   const setData = (data) => {
   //     let { AdminName, SchemaType, Title, Template, Description } = data;
@@ -58,58 +58,62 @@ export default function DownloadTemplate() {
               <h4 className="ms-2">Research Project</h4>
             </div>
 
-            <div className="t-list-tb-container mt-4">
-              <div className="mb-3 ">
-                <h5>
-                  <b>
-                    Dear students,<br></br>
-                    <label
-                      className="mt-2"
-                      style={{ backgroundColor: "yellow" }}
-                    >
-                      Please use this templates for your research project.
+            <div className="mb-3 t-list-tb-container mt-4">
+              <h5>
+                <b>
+                  Dear students,<br></br>
+                  <label className="mt-2" style={{ backgroundColor: "yellow" }}>
+                    Please use this templates for your research project.
+                  </label>
+                </b>
+              </h5>
+            </div>
+
+            {type.map((data, index) => (
+              <div>
+                {console.log(data)};
+                <div className="t-list-tb-container mt-4">
+                  <div className="mb-2" style={{ marginLeft: "15px" }}>
+                    <label htmlFor="formFile" className="t-form-label">
+                      <i class="bi bi-file-earmark-pdf-fill fa-5x"></i>
+                      &nbsp;{data.SchemaType}
                     </label>
-                  </b>
-                </h5>
-              </div>
-              <br></br>
-              <div className="mb-2" style={{ marginLeft: "15px" }}>
-                <label htmlFor="formFile" className="t-form-label">
-                  <i class="bi bi-file-earmark-pdf-fill fa-5x"></i>
-                  &nbsp;Final Thesis
-                </label>
-              </div>
+                  </div>
 
-              <div className="mb-1 " style={{ marginLeft: "15px" }}>
-                <label className="t-form-label">
-                  <h6>This is a final thesis document you have to submit</h6>
-                </label>
+                  <div className="mb-1 " style={{ marginLeft: "15px" }}>
+                    <label className="t-form-label">
+                      <h6>{data.Description}</h6>
+                    </label>
+                  </div>
+                </div>
+                <div style={{ marginLeft: "125px" }}>
+                  <a
+                    href={data.Template}
+                    type="submit"
+                    className="bi bi-file-earmark-arrow-down-fill fa-5x btn pb-4"
+                    style={{
+                      backgroundColor: "#0F0934",
+                      color: "white",
+                      width: "125px",
+                      height: "30px",
+                    }}
+                  >
+                    Download
+                  </a>
+                </div>
+                <div style={{ marginLeft: "125px" }}>
+                  <a href="/">
+                    <i>Click here to submit</i>
+                  </a>
+                </div>
+                <div className="ms-5 mt-3 me-5">
+                  <hr></hr>
+                </div>
               </div>
-            </div>
+            ))}
 
-            <div style={{ marginLeft: "125px" }}>
-              <button
-                type="submit"
-                className="bi bi-file-earmark-arrow-down-fill fa-5x btn pb-4"
-                style={{
-                  backgroundColor: "#0F0934",
-                  color: "white",
-                  width: "125px",
-                  height: "30px",
-                }}
-              >
-                Download
-              </button>
-            </div>
-
-            <div style={{ marginLeft: "125px" }}>
-              <a href="/">
-                <i>Click here to submit</i>
-              </a>
-            </div>
             <div className="bottom-t-container">
               <label className="bottom-t" style={{ color: "#FF5631" }}>
-                {" "}
                 SLIIT
               </label>{" "}
               <label className="bottom-t"> Research</label> <br />
