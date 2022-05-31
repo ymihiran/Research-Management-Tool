@@ -1,4 +1,4 @@
-import TopicReg from "../models/EvaluatedTopicReg.js";
+import TopicReg from "../models/EvaluatedTopic.js";
 
 export const addEvaluatedTopic = async (req, res) => {
   const tid = req.body.tid;

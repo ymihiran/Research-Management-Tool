@@ -58,7 +58,8 @@ export default function EditMarking()  {
         });
 
         setCriteria((prev) => [...prev, extra]);
-        
+        document.getElementById('desBox').value="";
+        document.getElementById('markBox').value="";
 
     };
 
@@ -146,12 +147,27 @@ export default function EditMarking()  {
         } 
     };
 
-    const handleDelete = async (e,desc) =>{
+    const handleDelete = async (e,i) =>{
         e.preventDefault();
-        if(desc!=""){
-            const newList = criteria.filter((data) => data.des !== desc);
-            setCriteria(newList);
-        }
+        const newList = criteria.filter((item, index) => index !== i);
+        setCriteria(newList);
+
+        Store.addNotification({
+            title: "Criteria Removed",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            type: "danger",
+            insert: "top",
+            container: "top-right",
+            
+            dismiss: {
+              duration: 1500,
+              onScreen: true,
+              showIcon: true
+            },
+
+            width:400
+        });
         
     };
 
@@ -363,7 +379,7 @@ export default function EditMarking()  {
 
                                 <td>
                                 <button className="btn" style={{color:"#0F0934"}} 
-                                onClick={(e) =>handleDelete(e,data.des)}> 
+                                onClick={(e) =>handleDelete(e,index)}> 
                                     X 
                                 </button>
                                 </td>
