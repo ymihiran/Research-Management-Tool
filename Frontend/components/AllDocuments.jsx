@@ -68,24 +68,6 @@ export default function AllDocuments() {
               ))}
             </tbody>
           </table>
-
-          {/* <div className="form-group row mb-4 criteria_row">
-                <div className="col ">
-                  <label>Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <button
-                    type="submit"
-                    className="btn btn-success "
-                    style={{ backgroundColor: "#0f0934" }}
-                  >
-                    Evaluate
-                  </button>
-                </div>
-              </div> */}
         </div>
       </div>
     </div>

@@ -33,6 +33,7 @@
     "react-dom": "^18.1.0",
     "react-html-table-to-excel": "^2.0.0",
     "react-notifications-component": "^4.0.1",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "reactstrap": "^9.0.3"
   }
 }

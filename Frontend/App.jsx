@@ -35,6 +35,7 @@ import ActivationEmail from "./components/auth/activationEmail.js";
 import Home from "./components/Home.jsx";
 import Profile from "./components/Profile";
 import chatForum from "./components/chatForum";
+import chatGroupSupervisor from "./components/chatGroupSupervisor";
 
 function App() {
   return (
@@ -70,6 +71,7 @@ function App() {
         <Route path="/StudentGroup" component={StudentGroup} />
         <Route path="/UploadTemplate" component={UploadTemplate} />
         <Route path="/chat" component={chatForum} />
+        <Route path="/chatGroup" component={chatGroupSupervisor} />
       </Router>
     </div>
   );
