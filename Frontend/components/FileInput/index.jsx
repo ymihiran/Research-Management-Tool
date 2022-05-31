@@ -42,13 +42,20 @@ const FileInput = ({ name, label, value, type, handleInputState, ...rest }) => {
     <div
       style={{
         width: "500px",
-        height: "200px",
+        height: "100px",
       }}
       className={styles.container}
     >
-      <i class="bi bi-cloud-arrow-up-fill fa-5x"></i>
+      <div
+        style={{
+          fontSize: "40px",
+        }}
+      >
+        <i class="bi bi-cloud-arrow-up-fill fa-10x"></i>
+      </div>
+
       <div>
-        <div style={{ marginLeft: "120px" }} class="file-upload-wrapper">
+        <div class="file-upload-wrapper ">
           <input
             type="file"
             class="file-upload"
