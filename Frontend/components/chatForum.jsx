@@ -11,51 +11,49 @@ export default function chatForum() {
   const [allMsg, setAllMsg] = useState();
   const [group_id, setGroup_id] = useState();
   const [leaderEmail, setLeaderEmail] = useState();
+  let groupID;
 
   useEffect(() => {
     setStdEmail(JSON.parse(localStorage.getItem("user")).email);
 
     //get group _id and leader's email by student email
-    axios
+    const emailID = axios
       .get(
         `http://localhost:8070/stdGroup/${
           JSON.parse(localStorage.getItem("user")).email
         }`
       )
       .then((res) => {
-        console.log("res.data", res.data);
         setGroup_id(res.data._id);
-        setLeaderEmail(res.data.Group_Leader_Email);
-        localStorage.setItem("lsgroup_id", res.data._id);
-      });
 
+        setLeaderEmail(res.data.Group_Leader_Email);
+      })
+      .catch((err) => {});
+  }, []);
+
+  const getAllMsg = async () => {
     //get messages from db
-    axios
-      .get(`http://localhost:8070/chat/${localStorage.getItem("lsgroup_id")}`)
+    const allChat = await axios
+      .get(`http://localhost:8070/chat/${group_id}`)
       .then((res) => {
         setAllMsg(res.data);
-        console.log("all msg", res.data);
       })
-      .catch((err) => {
-        console.log("err", err);
-      });
-  }, []);
+      .catch((err) => {});
+  };
+
+  getAllMsg();
 
   const handleNewMessage = async (e) => {
     e.preventDefault();
     await axios
       .get(`http://localhost:8070/topic/groupID/${leaderEmail}`)
       .then((res) => {
-        localStorage.setItem("LGroupID", res.data);
-
-        console.log("GroupID", res.data);
+        groupID = res.data;
       })
       .catch((err) => {
         console.log("err", err);
       });
-
-    let groupID = localStorage.getItem("LGroupID");
-
+    console.log("GroupID", groupID);
     const newMessage = {
       group_id,
       groupID,
@@ -72,12 +70,11 @@ export default function chatForum() {
     });
 
     //get messages from db
-    axios
-      .get(`http://localhost:8070/chat/${localStorage.getItem("lsgroup_id")}`)
-      .then((res) => {
-        setAllMsg(res.data);
-        console.log(res.data);
-      });
+    // axios.get(`http://localhost:8070/chat/${group_id}`).then((res) => {
+    //   setAllMsg(res.data);
+    //   console.log(res.data);
+    // });
+    getAllMsg();
   };
   return (
     <div className="body_container">
