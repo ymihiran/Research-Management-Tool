@@ -20,11 +20,11 @@ export default function Main(){
                   <label className="main-t-lbl"> <label style={{color:"#FF5631"}}>Quick</label>  Links</label>
                 </center>  
                 <center>
-                <button className="btn l-btn-accepted main-side-button">Register Group</button> <br/>
-                <button className="btn l-btn-accepted main-side-button">Register Topic</button> <br/>
-                <button className="btn l-btn-accepted main-side-button">Submit Document</button> <br/>
-                <button className="btn l-btn-accepted main-side-button">Ask Question</button>
-                <button className="btn l-btn-accepted main-side-button2">My Profile</button>
+                <a href='/StudentGroup'> <button className="btn l-btn-accepted main-side-button">Register Group</button></a> <br/>
+                <a href='/SubmitTopic'><button className="btn l-btn-accepted main-side-button">Register Topic</button></a> <br/>
+                <a href='/SubmitDocs'><button className="btn l-btn-accepted main-side-button">Submit Document</button></a> <br/>
+                <a href='/chat'><button className="btn l-btn-accepted main-side-button">Ask Question</button></a>
+                <a href='/profile'><button className="btn l-btn-accepted main-side-button2">My Profile</button></a>
                 <label>Have a question? write us to info@sliil.lk</label>
                 </center>
             </div>
@@ -78,29 +78,28 @@ export default function Main(){
           </div>
 
           <MDBAccordion flush initialActive={1}>
-      <MDBAccordionItem collapseId={1} headerTitle='Accordion Item #1'>
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
-        moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
-        Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda
-        shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
-        proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim
-        aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      <MDBAccordionItem collapseId={1} headerTitle='Register Your Group'>
+      Group registration is only available to groups of 4 delegates. If a group is smaller than this, then 
+      individual registration is available online for each delegate. All fields marked (*) are required for administration and must be completed so that we can process your 
+      group effectively, and to collect the appropriate information for registration. This will be used for the evaluation and certificate process after the research.
+      <br/>
+      <br/>
+      <a href='/StudentGroup'><button className="btn btn-primary">Register Group</button></a>
       </MDBAccordionItem>
-      <MDBAccordionItem collapseId={2} headerTitle='Accordion Item #2'>
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
-        moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
-        Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda
-        shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
-        proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim
-        aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      <MDBAccordionItem collapseId={2} headerTitle='Get Topic Approval'>
+        All groups are Advice to register with their topic details. The topic details will be used for the evaluation and certificate process after the research. 
+        A supervisor will check your research topic and will approve or reject your research topic. If your topic has been regected, you can re register with a different topic.
+        You will recive an email when the topic has been approved or rejected.
+        <br/>
+        <br/>
+        <a href='/SubmitTopic'><button className="btn btn-primary">Submit Topic</button></a>
       </MDBAccordionItem>
-      <MDBAccordionItem collapseId={3} headerTitle='Accordion Item #3'>
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
-        moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
-        Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda
-        shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
-        proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim
-        aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      <MDBAccordionItem collapseId={3} headerTitle='Check Topic Status'>
+        Students are advised to check their topic status. If your topic has been approved, you will recive an email when the topic has been approved. If your topic has been rejected, you can re register with a different topic.
+        A supervisor will check your research topic and will approve or reject your research topic. You can edit the topic details before review.
+        <br/>
+        <br/>
+        <a href='/TopicList'><button className="btn btn-primary">Topic List</button></a>
       </MDBAccordionItem>
     </MDBAccordion>
           
