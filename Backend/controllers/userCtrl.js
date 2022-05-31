@@ -2,9 +2,6 @@ import Users from '../models/userModel.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-
-const {CLIENT_URL} = process.env
-
 const userCtrl={
 
     register: async (req, res) => {
@@ -33,7 +30,7 @@ const userCtrl={
             const newUser = new Users({name, email,password:passwordHash,mobile,user_role,
                 research_area,reg_number})
 
-            const token = jwt.sign({reg: newUser.email, id: newUser._id}, process.env.REFRESH_TOKEN_SECRET, {expiresIn:"1h"} )
+            const token = jwt.sign({id:newUser._id}, process.env.REFRESH_TOKEN_SECRET, {expiresIn:"1h"} )
 
             await newUser.save();
 
@@ -54,7 +51,7 @@ const userCtrl={
             const isMatch = await bcrypt.compare(password, user.password)
             if(!isMatch) return res.status(400).json({msg: "Password is incorrect."})
 
-            const token = jwt.sign({reg: user.email, id: user._id}, process.env.REFRESH_TOKEN_SECRET, {expiresIn:"1h"} )
+            const token = jwt.sign({id:user._id}, process.env.REFRESH_TOKEN_SECRET,{expiresIn:"1h"} )
 
             res.status(200).json({result: user, token,msg: "Login success!"})
 
@@ -92,16 +89,49 @@ const userCtrl={
 
     updateUser: async (req, res) => {
         let userId= req.params.id;
-        const {name, avatar,mobile,user_role,research_area,reg_number} = req.body
-        const update = {name, avatar,mobile,user_role,research_area,reg_number} 
+        const {name,email,avatar,mobile,user_role,research_area,reg_number} = req.body
+        const update = {name,email,avatar,mobile,user_role,research_area,reg_number} 
         try {
             await Users.findByIdAndUpdate(userId,update)
-
             res.json({msg: "Update Success!"})
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
     },
+
+    allusers:async(req,res)=>{
+
+        Users.find().exec((err,Users)=>{
+              if(err){
+                  return res.status(400).json({
+                     error:err
+                 });
+             }
+                return res.status(200).json({
+                  success:true,
+                  existingUser:Users
+              });
+          });
+      },
+
+      panelMembers:async(req,res)=>{
+        let r_area=req.params.id;
+        Users.find({research_area:r_area}).exec((err,Users)=>{
+              if(err){
+                  return res.status(400).json({
+                     error:err
+                 });
+             }
+                return res.status(200).json({
+                  success:true,
+                  existingUser:Users
+              });
+          });
+      },
+
+
+
+
 
     logout: async (req, res) => {
         try {
@@ -118,18 +148,6 @@ const userCtrl={
 function validateEmail(email) {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
-}
-
-const createActivationToken = (payload) => {
-    return jwt.sign(payload, process.env.ACTIVATION_TOKEN_SECRET, {expiresIn: '5m'})
-}
-
-const createAccessToken = (payload) => {
-    return jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '15m'})
-}
-
-const createRefreshToken = (payload) => {
-    return jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, {expiresIn: '7d'})
 }
 
 export default userCtrl;

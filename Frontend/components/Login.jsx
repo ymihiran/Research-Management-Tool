@@ -18,12 +18,9 @@ function Login() {
                 "const-Type": "application/json"
             }
         };
-        try {
-            
-            //getting data from backend
+        try {        
             const {data} = await axios.post("http://localhost:8070/user/login", {email, password}, config);
-
-            localStorage.setItem("userAuthToken", `User ${data.token}`)
+            localStorage.setItem("userAuthToken", `${data.token}`)
             localStorage.setItem("user",JSON.stringify(data.result))
             localStorage.setItem('firstLogin', true)
         
