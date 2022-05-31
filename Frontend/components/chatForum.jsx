@@ -140,7 +140,7 @@ export default function chatForum() {
               <Card.Body>
                 <Card.Title>{allMsg.subject}</Card.Title>
                 <Card.Text>{allMsg.message}</Card.Text>
-                <Button variant="primary">Go somewhere</Button>
+                <Button variant="danger">Delete</Button>
               </Card.Body>
             </Card>
           </div>
