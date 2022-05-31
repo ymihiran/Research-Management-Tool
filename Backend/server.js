@@ -65,6 +65,7 @@ app.use("/template", uploadRouter);
 import request from "./routes/ReqRoute.js";
 app.use("/request", request);
 
+//send msg to db
 import msg from "./routes/chatForumRoute.js";
 app.use("/chat", msg);
 

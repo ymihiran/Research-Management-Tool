@@ -9,41 +9,58 @@ export default function chatForum() {
   const [message, setMessage] = useState();
   const [stdEmail, setStdEmail] = useState();
   const [allMsg, setAllMsg] = useState();
+  const [group_id, setGroup_id] = useState();
 
   useEffect(() => {
     setStdEmail(JSON.parse(localStorage.getItem("user")).email);
 
+    //get group _id by student email
+    axios
+      .get(
+        `http://localhost:8070/stdGroup/${
+          JSON.parse(localStorage.getItem("user")).email
+        }`
+      )
+      .then((res) => {
+        console.log(res.data);
+        setGroup_id(res.data);
+        localStorage.setItem("lsgroup_id", res.data);
+      });
+
     //get messages from db
-    axios.get(`http://localhost:8070/chat`).then((res) => {
-      setAllMsg(res.data);
-      console.log(res.data);
-    });
+    axios
+      .get(`http://localhost:8070/chat/${localStorage.getItem("lsgroup_id")}`)
+      .then((res) => {
+        setAllMsg(res.data);
+        console.log(res.data);
+      });
   }, []);
 
   const handleNewMessage = async (e) => {
     e.preventDefault();
 
-    console.log("user.email", stdEmail);
-
     const newMessage = {
+      group_id,
       groupID,
       stdName,
       stdEmail,
       subject,
       message,
     };
-
+    console.log("41", newMessage);
     //send message to the db
-    await axios.post(`http://localhost:8070/chat`, newMessage).then(() => {
+    await axios.post(`http://localhost:8070/chat/`, newMessage).then(() => {
       alert("message send successfully");
       e.target.reset();
     });
 
     //get messages from db
-    await axios.get(`http://localhost:8070/chat`).then((res) => {
-      setAllMsg(res.data);
-      console.log(res.data);
-    });
+    axios
+      .get(`http://localhost:8070/chat/${localStorage.getItem("lsgroup_id")}`)
+      .then((res) => {
+        setAllMsg(res.data);
+        console.log(res.data);
+      });
   };
   return (
     <div className="body_container">
@@ -62,6 +79,7 @@ export default function chatForum() {
           <div className="form-group mb-3 mt-5">
             <label>Group ID</label>
             <input
+              required
               type="text"
               className="form-control"
               id="groupID"
@@ -74,6 +92,7 @@ export default function chatForum() {
           <div className="form-group mb-3">
             <label>Your Name</label>
             <input
+              required
               type="text"
               className="form-control"
               id="researchTopic"
@@ -85,6 +104,7 @@ export default function chatForum() {
           <div className=" mb-5 ">
             <label>Subject</label>
             <input
+              required
               type="text"
               className="form-control"
               id="researchTopic"
@@ -96,6 +116,7 @@ export default function chatForum() {
           <div className="form-group mb-5">
             <label>Message</label>
             <textarea
+              required
               className="form-control"
               id="groupMembers"
               rows={5}

@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 
 const chatSchema = new Schema(
   {
+    group_id: {
+      type: String,
+      required: true,
+    },
     groupID: {
       type: String,
       required: true,

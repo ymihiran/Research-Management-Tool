@@ -3,6 +3,6 @@ import { getMsg, sendMsg } from "../controllers/chatController.js";
 const router = express.Router();
 
 router.post("/", sendMsg);
-router.get("/", getMsg);
+router.get("/:group_id", getMsg);
 
 export default router;
