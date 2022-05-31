@@ -19,8 +19,6 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-
-
 // Document/ presentation Evaluate Route
 import evaluationRouter from "./routes/EvaluationRoute.js";
 app.use("/evaluation", evaluationRouter);
@@ -45,11 +43,9 @@ app.use("/user", userRouter);
 import SubmitTypeRouter from "./routes/SubmitTypeRoute.js";
 app.use("/docType", SubmitTypeRouter);
 
-
 //Upload Image
-import uploadImgRouter from './routes/uploadRoute.js';
-app.use('/api',uploadImgRouter);
-
+import uploadImgRouter from "./routes/uploadRoute.js";
+app.use("/api", uploadImgRouter);
 
 import router from "./routes/SubmitTypeRoute.js";
 app.use("/docType", router);
@@ -65,8 +61,12 @@ app.use("/document", docRouter);
 import uploadRouter from "./routes/UploadTemplateRoute.js";
 app.use("/template", uploadRouter);
 
+//request co supervisor
 import request from "./routes/ReqRoute.js";
 app.use("/request", request);
+
+import msg from "./routes/chatForumRoute.js";
+app.use("/chat", msg);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

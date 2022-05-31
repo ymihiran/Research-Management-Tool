@@ -1,10 +1,8 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "/node_modules/bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import axios from 'axios';
-
-
+import axios from "axios";
 
 import UploadTemplate from "./components/UploadTemplate";
 import SubmitTypes from "./components/SubmitTypes";
@@ -16,8 +14,6 @@ import StdTopicList from "./components/StdTopicList";
 import AddMarking from "./components/AddMarking";
 import EditTopic from "./components/EditTopic";
 import { ReactNotifications } from "react-notifications-component";
-
-
 
 import SubmitDocs from "./components/SubmitDocs";
 import AllStudentGroup from "./components/AllStudentGroup";
@@ -33,24 +29,26 @@ import RequestCoSupervisor from "./components/RequestCoSupervisor";
 import StudentGroup from "./components/StudentGroup";
 import UploadTemplate from "./components/UploadTemplate";
 
-import Login from './components/Login.jsx';
-import Register from './components/Register.jsx';
-import ActivationEmail from './components/auth/activationEmail.js'
-import Home from './components/Home.jsx'
-import Profile from './components/Profile';
-
+import Login from "./components/Login.jsx";
+import Register from "./components/Register.jsx";
+import ActivationEmail from "./components/auth/activationEmail.js";
+import Home from "./components/Home.jsx";
+import Profile from "./components/Profile";
+import chatForum from "./components/chatForum";
 
 function App() {
-
- return (
+  return (
     <div>
       <ReactNotifications />
       <Router>
-        
         <Route path="/" exact component={Home} />
         <Route path="/profile" exact component={Profile} />
-        <Route path="/user/activate/:activation_token" exact component={ActivationEmail}/>
-        <Route path="/register" exact component={Register}/>
+        <Route
+          path="/user/activate/:activation_token"
+          exact
+          component={ActivationEmail}
+        />
+        <Route path="/register" exact component={Register} />
         <Route path="/login" exact component={Login} />
         <Route path="/SubmitTopic" component={SubmitTopic} />
         <Route path="/EvaluateTopic" component={EvaluateTopic} />
@@ -71,6 +69,7 @@ function App() {
         <Route path="/reqCoSuper" component={RequestCoSupervisor} />
         <Route path="/StudentGroup" component={StudentGroup} />
         <Route path="/UploadTemplate" component={UploadTemplate} />
+        <Route path="/chat" component={chatForum} />
       </Router>
     </div>
   );
