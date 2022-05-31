@@ -11,6 +11,11 @@ const chatSchema = new Schema(
       type: String,
       required: true,
     },
+    stdEmail: {
+      type: String,
+      trim: true,
+      required: true,
+    },
     subject: {
       type: String,
       required: true,

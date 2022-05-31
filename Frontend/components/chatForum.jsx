@@ -3,6 +3,48 @@ import axios from "axios";
 import { Card, Button } from "react-bootstrap";
 
 export default function chatForum() {
+  const [groupID, setGroupID] = useState();
+  const [stdName, setStdName] = useState();
+  const [subject, setSubject] = useState();
+  const [message, setMessage] = useState();
+  const [stdEmail, setStdEmail] = useState();
+  const [allMsg, setAllMsg] = useState();
+
+  useEffect(() => {
+    setStdEmail(JSON.parse(localStorage.getItem("user")).email);
+
+    //get messages from db
+    axios.get(`http://localhost:8070/chat`).then((res) => {
+      setAllMsg(res.data);
+      console.log(res.data);
+    });
+  }, []);
+
+  const handleNewMessage = async (e) => {
+    e.preventDefault();
+
+    console.log("user.email", stdEmail);
+
+    const newMessage = {
+      groupID,
+      stdName,
+      stdEmail,
+      subject,
+      message,
+    };
+
+    //send message to the db
+    await axios.post(`http://localhost:8070/chat`, newMessage).then(() => {
+      alert("message send successfully");
+      e.target.reset();
+    });
+
+    //get messages from db
+    await axios.get(`http://localhost:8070/chat`).then((res) => {
+      setAllMsg(res.data);
+      console.log(res.data);
+    });
+  };
   return (
     <div className="body_container">
       {/*left side column */}
@@ -16,23 +58,51 @@ export default function chatForum() {
             FORUM
           </label>
         </div>
-        <form className=" pe-5">
+        <form className=" pe-5" onSubmit={handleNewMessage}>
           <div className="form-group mb-3 mt-5">
             <label>Group ID</label>
-            <input type="text" className="form-control" id="groupID" />
+            <input
+              type="text"
+              className="form-control"
+              id="groupID"
+              onChange={(e) => {
+                setGroupID(e.target.value);
+              }}
+            />
           </div>
 
           <div className="form-group mb-3">
             <label>Your Name</label>
-            <input type="text" className="form-control" id="researchTopic" />
+            <input
+              type="text"
+              className="form-control"
+              id="researchTopic"
+              onChange={(e) => {
+                setStdName(e.target.value);
+              }}
+            />
           </div>
           <div className=" mb-5 ">
             <label>Subject</label>
-            <input type="text" className="form-control" id="researchTopic" />
+            <input
+              type="text"
+              className="form-control"
+              id="researchTopic"
+              onChange={(e) => {
+                setSubject(e.target.value);
+              }}
+            />
           </div>
           <div className="form-group mb-5">
             <label>Message</label>
-            <textarea className="form-control" id="groupMembers" rows={5} />
+            <textarea
+              className="form-control"
+              id="groupMembers"
+              rows={5}
+              onChange={(e) => {
+                setMessage(e.target.value);
+              }}
+            />
           </div>
           <button type="submit" className="btn btn-success ">
             Add a new Discussion
@@ -42,17 +112,18 @@ export default function chatForum() {
 
       {/*right side column */}
       <div className="right_container">
-        <Card>
-          <Card.Header>Featured</Card.Header>
-          <Card.Body>
-            <Card.Title>Special title treatment</Card.Title>
-            <Card.Text>
-              With supporting text below as a natural lead-in to additional
-              content.
-            </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
-          </Card.Body>
-        </Card>
+        {allMsg?.map((allMsg, index) => (
+          <div key={index}>
+            <Card className="mb-5">
+              <Card.Header>{allMsg.stdName}</Card.Header>
+              <Card.Body>
+                <Card.Title>{allMsg.subject}</Card.Title>
+                <Card.Text>{allMsg.message}</Card.Text>
+                <Button variant="primary">Go somewhere</Button>
+              </Card.Body>
+            </Card>
+          </div>
+        ))}
       </div>
     </div>
   );

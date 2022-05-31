@@ -50,7 +50,7 @@ export default function AllDocuments() {
               </tr>
             </thead>
             <tbody>
-              {docList.map((docList, index) => (
+              {docList?.map((docList, index) => (
                 <tr key={index} className="">
                   <td>{docList.Group_ID}</td>
                   <td>{docList.Research_Field}</td>
