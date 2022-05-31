@@ -107,15 +107,14 @@ export default function Main(){
             <MDBCol>
               <MDBCard>
                 <MDBCardImage
-                  src='https://mdbootstrap.com/img/new/standard/city/041.webp'
+                  src='https://res.cloudinary.com/sliit-yasantha/image/upload/v1654010222/img1_irqbi5.png'
                   alt='...'
                   position='top'
                 />
                 <MDBCardBody>
-                  <MDBCardTitle>Card title</MDBCardTitle>
+                  <MDBCardTitle>Register Groups</MDBCardTitle>
                   <MDBCardText>
-                    This is a longer card with supporting text below as a natural lead-in to additional content.
-                    This content is a little bit longer.
+                    You can now register your group easily through Research Management Tool. No need to fill physical papers of forms.
                   </MDBCardText>
                 </MDBCardBody>
               </MDBCard>
@@ -123,15 +122,14 @@ export default function Main(){
             <MDBCol>
               <MDBCard>
                 <MDBCardImage
-                  src='https://mdbootstrap.com/img/new/standard/city/042.webp'
+                  src='https://res.cloudinary.com/sliit-yasantha/image/upload/v1654010222/img2_c1v6ul.png'
                   alt='...'
                   position='top'
                 />
                 <MDBCardBody>
-                  <MDBCardTitle>Card title</MDBCardTitle>
+                  <MDBCardTitle>Submit Document</MDBCardTitle>
                   <MDBCardText>
-                    This is a longer card with supporting text below as a natural lead-in to additional content.
-                    This content is a little bit longer.
+                    No need to hand over your documents physically. You can submit your documents online using Research Management Tool.
                   </MDBCardText>
                 </MDBCardBody>
               </MDBCard>
@@ -139,35 +137,19 @@ export default function Main(){
             <MDBCol>
               <MDBCard>
                 <MDBCardImage
-                  src='https://mdbootstrap.com/img/new/standard/city/043.webp'
+                  src='https://res.cloudinary.com/sliit-yasantha/image/upload/v1654010221/img3_w41n4j.png'
                   alt='...'
                   position='top'
                 />
                 <MDBCardBody>
-                  <MDBCardTitle>Card title</MDBCardTitle>
+                  <MDBCardTitle>Get Evaluated</MDBCardTitle>
                   <MDBCardText>
-                    This is a longer card with supporting text below as a natural lead-in to additional content.
-                    This content is a little bit longer.
+                    Marking is no longer physical. All the assesments can be done through Research Management Tool.
                   </MDBCardText>
                 </MDBCardBody>
               </MDBCard>
             </MDBCol>
-            <MDBCol>
-              <MDBCard>
-                <MDBCardImage
-                  src='https://mdbootstrap.com/img/new/standard/city/044.webp'
-                  alt='...'
-                  position='top'
-                />
-                <MDBCardBody>
-                  <MDBCardTitle>Card title</MDBCardTitle>
-                  <MDBCardText>
-                    This is a longer card with supporting text below as a natural lead-in to additional content.
-                    This content is a little bit longer.
-                  </MDBCardText>
-                </MDBCardBody>
-              </MDBCard>
-            </MDBCol>
+            
           </MDBRow>
           </div>
 
@@ -176,31 +158,7 @@ export default function Main(){
 
           <MDBFooter className='text-center' color='white' bgColor='dark'>
       <MDBContainer className='p-4'>
-        <section className='mb-4'>
-          <a className='btn btn-outline-light btn-floating m-1' href='#!' role='button'>
-            <MDBIcon fab icon='facebook-f' />
-          </a>
-
-          <a className='btn btn-outline-light btn-floating m-1' href='#!' role='button'>
-            <MDBIcon fab icon='twitter' />
-          </a>
-
-          <a className='btn btn-outline-light btn-floating m-1' href='#!' role='button'>
-            <MDBIcon fab icon='google' />
-          </a>
-
-          <a className='btn btn-outline-light btn-floating m-1' href='#!' role='button'>
-            <MDBIcon fab icon='instagram' />
-          </a>
-
-          <a className='btn btn-outline-light btn-floating m-1' href='#!' role='button'>
-            <MDBIcon fab icon='linkedin-in' />
-          </a>
-
-          <a className='btn btn-outline-light btn-floating m-1' href='#!' role='button'>
-            <MDBIcon fab icon='github' />
-          </a>
-        </section>
+        
 
         <section className=''>
           <form action=''>
@@ -232,123 +190,13 @@ export default function Main(){
           </p>
         </section>
 
-        <section className=''>
-          <MDBRow>
-            <MDBCol lg='3' md='6' className='mb-4 mb-md-0'>
-              <h5 className='text-uppercase'>Links</h5>
-
-              <ul className='list-unstyled mb-0'>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 1
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 2
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 3
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 4
-                  </a>
-                </li>
-              </ul>
-            </MDBCol>
-
-            <MDBCol lg='3' md='6' className='mb-4 mb-md-0'>
-              <h5 className='text-uppercase'>Links</h5>
-
-              <ul className='list-unstyled mb-0'>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 1
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 2
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 3
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 4
-                  </a>
-                </li>
-              </ul>
-            </MDBCol>
-
-            <MDBCol lg='3' md='6' className='mb-4 mb-md-0'>
-              <h5 className='text-uppercase'>Links</h5>
-
-              <ul className='list-unstyled mb-0'>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 1
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 2
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 3
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 4
-                  </a>
-                </li>
-              </ul>
-            </MDBCol>
-
-            <MDBCol lg='3' md='6' className='mb-4 mb-md-0'>
-              <h5 className='text-uppercase'>Links</h5>
-
-              <ul className='list-unstyled mb-0'>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 1
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 2
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 3
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 4
-                  </a>
-                </li>
-              </ul>
-            </MDBCol>
-          </MDBRow>
-        </section>
+        
       </MDBContainer>
 
       <div className='text-center p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-        © 2020 Copyright:
+        © 2022 Copyright:
         <a className='text-white' href='https://mdbootstrap.com/'>
-          MDBootstrap.com
+          ResearchManagement.com
         </a>
       </div>
     </MDBFooter>
