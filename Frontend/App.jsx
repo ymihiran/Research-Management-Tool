@@ -36,9 +36,8 @@ import RequestCoSupervisor from "./components/RequestCoSupervisor";
 import StudentGroup from "./components/StudentGroup";
 import UploadTemplate from "./components/UploadTemplate";
 
-import Login from './components/Login.jsx';
-import Register from './components/Register.jsx';
-import Home from './components/Home'
+import Login from './components/Login';
+import Register from './components/Register';
 import Profile from './components/Profile';
 import AllUsers from './components/AllUsers';
 import PanelMembers from './components/CheckPanelMembers'
