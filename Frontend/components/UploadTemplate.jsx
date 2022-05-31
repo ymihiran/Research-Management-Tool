@@ -159,8 +159,10 @@ export default function UploadTemplate() {
                 <label className="t-form-label">
                   <b>Description about the Template/Document:</b>
                 </label>
-                <input
-                  type="text"
+                <br></br>
+                <textarea
+                  rows="4"
+                  type="textarea"
                   style={{ width: "450px", height: "100px" }}
                   id="cName"
                   name="Description"

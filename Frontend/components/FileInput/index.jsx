@@ -48,6 +48,7 @@ const FileInput = ({ name, label, value, type, handleInputState, ...rest }) => {
         className={styles.input}
         {...rest}
       />
+
       <button
         type="button"
         onClick={() => inputRef.current.click()}
