@@ -87,6 +87,16 @@ const userCtrl={
         }
     },
 
+    deleteUser: async (req, res) => {
+        let userId = req.params.id;
+        try {
+            await Users.findByIdAndDelete(userId)
+            res.json({msg: "Profile Deleted!"})
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
+
     updateUser: async (req, res) => {
         let userId= req.params.id;
         const {name,email,avatar,mobile,user_role,research_area,reg_number} = req.body
@@ -128,9 +138,6 @@ const userCtrl={
               });
           });
       },
-
-
-
 
 
     logout: async (req, res) => {

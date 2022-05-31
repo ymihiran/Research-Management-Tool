@@ -148,7 +148,7 @@ const filterData = (users,searchkey) =>{
     return (
         <div>
             
-            <h1><b> <center> Select Panel Members </center> </b> </h1>
+            <h1 style={{color:"#322B5F"}}><b> <center> Select Panel Members </center> </b> </h1>
             
             <div style={{marginLeft:"3%"}}>
            <h3> <b> Group ID: {GroupId} </b></h3>
@@ -183,10 +183,10 @@ const filterData = (users,searchkey) =>{
 
                 <thead>
                         <tr>
-                        <th scope="col">Number</th>
-                        <th scope="col">Registration Number</th>
-                        <th scope="col">Member Name</th>
-                        <th scope="col">Research Area</th>
+                        <th className="tColumn" style={{color:"#322B5F",fontWeight:"bold",fontSize:"24px"}} scope="col">Number</th>
+                        <th className="tColumn" style={{color:"#322B5F",fontWeight:"bold",fontSize:"24px"}} scope="col">Registration Number</th>
+                        <th className="tColumn" style={{color:"#322B5F",fontWeight:"bold",fontSize:"24px"}} scope="col">Member Name</th>
+                        <th className="tColumn" style={{color:"#322B5F",fontWeight:"bold",fontSize:"24px"}} scope="col">Research Area</th>
                        
                         </tr>
 
@@ -202,12 +202,12 @@ const filterData = (users,searchkey) =>{
                              <td> <b>{data.research_area} </b></td> 
                            
                             <td>
-                            <a className="btn btn-warning" 
+                            <a className="l-btn-accept" style={{width:"200px",fontWeight:"bold",textDecoration:'none'}} 
                             //type="submit"
                             //onClick={() => setData(data)}
                             href="/"
-                            
-                            style={{textDecoration:'none'}}>
+   
+                        >
                             <i></i>&nbsp;Allocate for the group
                             </a>
                             </td>
