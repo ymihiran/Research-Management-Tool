@@ -500,3 +500,28 @@ input{
         background-color: #84809F;
     }
   
+    .main-cd-container{
+        margin-top: 40%;
+        padding: 40px 40px 40px;
+    }
+
+    .main-color-cards{
+        display:inline;
+        float:left;
+        max-width: 250px;
+    }
+
+    .main-color-cards2{
+        display:inline;
+        float:left;
+        margin-left: 20px;
+        max-width: 250px;
+    }
+
+    .quote-con{
+        display:flex;
+        margin-left: 20px;
+        max-width: 90%;
+        margin-top: 200px;
+
+    }
