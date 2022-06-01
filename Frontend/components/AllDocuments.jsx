@@ -19,9 +19,11 @@ export default function AllDocuments() {
   }, []);
 
   const setData = (data) => {
-    let { Group_ID, Research_Field } = data;
+    console.log("data", data);
+    let { Group_ID, Research_Field, Document } = data;
     localStorage.setItem("Group_ID", Group_ID);
     localStorage.setItem("Research_Field", Research_Field);
+    localStorage.setItem("Link", Document);
     history.push("/Doc");
   };
 
@@ -50,7 +52,7 @@ export default function AllDocuments() {
               </tr>
             </thead>
             <tbody>
-              {docList.map((docList, index) => (
+              {docList?.map((docList, index) => (
                 <tr key={index} className="">
                   <td>{docList.Group_ID}</td>
                   <td>{docList.Research_Field}</td>
@@ -68,24 +70,6 @@ export default function AllDocuments() {
               ))}
             </tbody>
           </table>
-
-          {/* <div className="form-group row mb-4 criteria_row">
-                <div className="col ">
-                  <label>Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <button
-                    type="submit"
-                    className="btn btn-success "
-                    style={{ backgroundColor: "#0f0934" }}
-                  >
-                    Evaluate
-                  </button>
-                </div>
-              </div> */}
         </div>
       </div>
     </div>

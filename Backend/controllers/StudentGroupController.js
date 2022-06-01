@@ -50,3 +50,23 @@ export const getAllGroup = async (req, res) => {
       console.catch.log(err);
     });
 };
+
+//get group's mongoose _id by student email
+export const getGroupID = async (req, res) => {
+  const stdEmail = req.params.stdEmail;
+  await StudentGroupRoute.findOne({
+    $or: [
+      { Group_Leader_Email: stdEmail },
+      { Member2_Email: stdEmail },
+      { Member3_Email: stdEmail },
+      { Member4_Email: stdEmail },
+    ],
+  })
+
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
