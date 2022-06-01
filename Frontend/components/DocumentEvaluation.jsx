@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./Styles/styles.css";
-import Icon from "@mui/material/Icon";
 
 export default function DocumentEvaluation() {
   const [groupID, setGroupID] = useState();
