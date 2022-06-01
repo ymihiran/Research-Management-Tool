@@ -11,7 +11,7 @@ function UserAPI(token) {
         if(token){
             const getUser = async () =>{
                 try {
-                    //console.log(token)
+                    console.log(token)
                     const res = await axios.get(`http://localhost:8070/user/infor/${user._id}`, {
                         headers: {Authorization: token}
                     })

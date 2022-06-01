@@ -52,11 +52,11 @@ function App() {
       <ReactNotifications />
       <Router>
 
-        <Route path="/" exact component={Main} />
+        <Route path="/"  exact component={Main} />
         <Route path="/profile" exact component={Profile} />
         <Route path="/panelmembers" exact component={PanelMembers} />
         <Route path="/selectpanel" exact component={SelectPanelMembers} />
-        <Route path="/allprof" exact component={AllUsers} />
+        <Route path="/allprof"  exact component={AllUsers} /> 
         <Route path="/register" exact component={Register}/>
         <Route path="/login" exact component={Login} />
         <Route path="/SubmitTopic" component={SubmitTopic} />

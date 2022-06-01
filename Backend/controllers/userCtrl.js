@@ -126,7 +126,7 @@ const userCtrl={
 
       panelMembers:async(req,res)=>{
         let r_area=req.params.id;
-        Users.find({research_area:r_area}).exec((err,Users)=>{
+        Users.find({research_area:r_area,user_role:"Panel Member"}).exec((err,Users)=>{
               if(err){
                   return res.status(400).json({
                      error:err
