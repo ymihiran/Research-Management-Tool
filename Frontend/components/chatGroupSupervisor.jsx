@@ -34,17 +34,35 @@ export default function chatGroupSupervisor() {
     getAllMsg();
   }, []);
 
+  //delete message
   const deleteMsg = async (e, id) => {
     e.preventDefault();
     console.log("id", id);
 
-    let ans = window.confirm("Do you want to delete this request ?");
+    let ans = window.confirm("Do you want to delete this message ?");
 
     if (ans) {
       await axios.delete(`http://localhost:8070/chat/${id}`).then((res) => {
         console.log(res);
         window.location.reload(false);
       });
+    }
+  };
+
+  //delete reply
+  const deleteReply = async (e, id) => {
+    e.preventDefault();
+    console.log("id", id);
+
+    let ans = window.confirm("Do you want to delete this reply ?");
+
+    if (ans) {
+      await axios
+        .delete(`http://localhost:8070/chatReplies/${id}`)
+        .then((res) => {
+          console.log(res);
+          window.location.reload(false);
+        });
     }
   };
 
@@ -107,6 +125,12 @@ export default function chatGroupSupervisor() {
                             </p>
                             <p className="ms-4">{replyMsg.message}</p>
                           </Card.Text>
+                          <Button
+                            variant="danger"
+                            onClick={(e) => deleteReply(e, replyMsg._id)}
+                          >
+                            Delete
+                          </Button>
                         </Card.Body>
                       </Card>
                     ) : (

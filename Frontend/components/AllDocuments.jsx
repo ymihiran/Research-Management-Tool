@@ -19,9 +19,11 @@ export default function AllDocuments() {
   }, []);
 
   const setData = (data) => {
-    let { Group_ID, Research_Field } = data;
+    console.log("data", data);
+    let { Group_ID, Research_Field, Document } = data;
     localStorage.setItem("Group_ID", Group_ID);
     localStorage.setItem("Research_Field", Research_Field);
+    localStorage.setItem("Link", Document);
     history.push("/Doc");
   };
 
