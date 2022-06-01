@@ -10,7 +10,7 @@ export default function SubmitDocs() {
     name: "upload",
     GroupID: "",
     ResearchField: "",
-    Template: "",
+    Document: "",
     Comment: "",
   });
 

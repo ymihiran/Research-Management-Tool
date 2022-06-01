@@ -1,14 +1,15 @@
 import SubmitDocRoute from "../models/SubmitDoc.js";
 
 export const SubmitDoc = async (req, res) => {
-  const Group_ID = req.body.Group_ID;
-  const Research_Field = req.body.Research_Field;
+  console.log("req.body", req.body);
+  const GroupID = req.body.GroupID;
+  const ResearchField = req.body.ResearchField;
   const Document = req.body.Document;
   const Comment = req.body.Comment;
 
   const newType = new SubmitDocRoute({
-    Group_ID,
-    Research_Field,
+    GroupID,
+    ResearchField,
     Document,
     Comment,
   });
