@@ -48,3 +48,16 @@ export const getAllMsg = async (req, res) => {
       console.catch.log(err);
     });
 };
+
+//delete a message details
+export const deleteMsg = async (req, res) => {
+  const msgID = req.params.id;
+  chatForum
+    .findByIdAndDelete(msgID)
+    .then((data) => {
+      res.status(200).send({ status: "Request  deleted" });
+    })
+    .catch((err) => {
+      console.catch.log(err);
+    });
+};

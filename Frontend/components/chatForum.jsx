@@ -149,7 +149,7 @@ export default function chatForum() {
       <div className="right_container">
         {allMsg?.map((allMsg, index) => (
           <div key={index}>
-            <Card className="mb-3 mt-5">
+            <Card className="mb-3 mt-5" style={{ backgroundColor: "#ece9ff" }}>
               <Card.Header>{allMsg.stdName}</Card.Header>
               <Card.Body>
                 <Card.Title>{allMsg.subject}</Card.Title>
@@ -165,7 +165,10 @@ export default function chatForum() {
                 <div key={index}>
                   {console.log("reply", allMsg)}
                   {allMsg._id === replyMsg.messageID ? (
-                    <Card className="mb-3">
+                    <Card
+                      className="mb-3"
+                      style={{ backgroundColor: "#ece9ff" }}
+                    >
                       <Card.Body>
                         <Card.Text>
                           <p>{replyMsg.createdAt}</p>
