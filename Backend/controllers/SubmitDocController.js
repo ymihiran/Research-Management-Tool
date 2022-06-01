@@ -11,6 +11,18 @@ export const getDocs = async (req, res) => {
     });
 };
 
+//Get student's documents details
+export const getSubmitDocs = async (req, res) => {
+  const email = req.params.email;
+  SubmitDocRoute.find({ email: email })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.catch.log(err);
+    });
+};
+
 export const SubmitDoc = async (req, res) => {
   console.log("req.body", req.body);
   const GroupID = req.body.GroupID;
