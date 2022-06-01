@@ -16,13 +16,15 @@ const SubmitDocSchema = new Schema(
       default: "Pending",
     },
 
-
     ResearchField: {
-
       type: String,
     },
 
     Comment: {
+      type: String,
+    },
+
+    email: {
       type: String,
     },
   },

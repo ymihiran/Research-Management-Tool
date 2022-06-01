@@ -12,12 +12,11 @@ export const getDocs = async (req, res) => {
 };
 
 export const SubmitDoc = async (req, res) => {
-
   console.log("req.body", req.body);
   const GroupID = req.body.GroupID;
   const ResearchField = req.body.ResearchField;
   const Document = req.body.song;
-
+  const email = req.body.email;
   const Comment = req.body.Comment;
 
   const newType = new SubmitDocRoute({
@@ -25,6 +24,7 @@ export const SubmitDoc = async (req, res) => {
     ResearchField,
     Document,
     Comment,
+    email,
   });
 
   newType

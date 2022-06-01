@@ -6,13 +6,16 @@ import FileInput from "./FileInput";
 
 export default function SubmitDocs() {
   const [type, setType] = useState();
+  const [userEmail, setuserEmail] = useState();
   useEffect(() => {
     setType(localStorage.getItem("SchemaType"));
-    // console.log(localStorage.getItem("SchemaType"));
+    setuserEmail(JSON.parse(localStorage.getItem("user")).email);
+    //console.log(JSON.parse(localStorage.getItem("user")).email);
   }, []);
   //file upload
   const [data, setData] = useState({
     name: "upload",
+    email: JSON.parse(localStorage.getItem("user")).email,
     GroupID: "",
     ResearchField: "",
     Document: "",
