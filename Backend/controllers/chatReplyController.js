@@ -3,8 +3,9 @@ import ChatReply from "../models/chatReply.js";
 //insert reply message details to the db
 export const sendReplyMsg = async (req, res) => {
   console.log("req.body", req.body);
-  const { messageID, message } = req.body;
+  const { userSup, messageID, message } = req.body;
   const newReplyMsg = new ChatReply({
+    userSup,
     messageID,
     message,
   });

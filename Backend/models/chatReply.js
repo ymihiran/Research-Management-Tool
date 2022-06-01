@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 
 const chatReplySchema = new Schema(
   {
+    userSup: {
+      type: String,
+      required: true,
+    },
     messageID: {
       type: String,
       required: true,

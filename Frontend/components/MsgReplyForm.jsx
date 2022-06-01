@@ -6,11 +6,13 @@ import { useHistory } from "react-router";
 export default function MsgReplyForm() {
   const [message, setMessage] = useState();
   const [messageID, setMessageID] = useState();
+  const [userSup, setUserSup] = useState();
   const history = useHistory();
 
   useEffect(() => {
     setMessageID(localStorage.getItem("Message_ID"));
-  });
+    setUserSup(JSON.parse(localStorage.getItem("user")).name);
+  }, []);
 
   const handelSendReply = async (e) => {
     e.preventDefault();
@@ -18,6 +20,7 @@ export default function MsgReplyForm() {
 
     await axios
       .post(`http://localhost:8070/chatReplies`, {
+        userSup,
         messageID,
         message,
       })
