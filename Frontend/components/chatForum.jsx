@@ -48,11 +48,22 @@ export default function chatForum() {
       .get(`http://localhost:8070/chatReplies/group/replyMsgs`)
       .then((res) => {
         setReplyMsg(res.data);
-        console.log(res.data);
       })
       .catch((err) => {});
   };
 
+  const deleteMsg = async (e, id) => {
+    e.preventDefault();
+    console.log("id", id);
+
+    let ans = window.confirm("Do you want to delete this request ?");
+
+    if (ans) {
+      await axios.delete(`http://localhost:8070/chat/${id}`).then((res) => {
+        console.log(res);
+      });
+    }
+  };
   getAllMsg();
   getAllReply();
 
@@ -157,13 +168,17 @@ export default function chatForum() {
                   <p>{allMsg.createdAt}</p>
                   {allMsg.message}
                 </Card.Text>
-                <Button variant="danger">Delete</Button>
+                <Button
+                  variant="danger"
+                  onClick={(e) => deleteMsg(e, allMsg._id)}
+                >
+                  Delete
+                </Button>
               </Card.Body>
             </Card>
             <div className="ps-5">
               {replyMsg?.map((replyMsg, index) => (
                 <div key={index}>
-                  {console.log("reply", allMsg)}
                   {allMsg._id === replyMsg.messageID ? (
                     <Card
                       className="mb-3"

@@ -26,7 +26,6 @@ export const sendMsg = async (req, res) => {
 //Get a message details
 export const getMsg = async (req, res) => {
   const group_id = req.params.group_id;
-  console.log("id:", group_id);
   chatForum
     .find({ group_id: group_id })
     .then((data) => {
@@ -51,11 +50,12 @@ export const getAllMsg = async (req, res) => {
 
 //delete a message details
 export const deleteMsg = async (req, res) => {
+  console.log("id delete", req.params.id);
   const msgID = req.params.id;
   chatForum
     .findByIdAndDelete(msgID)
     .then((data) => {
-      res.status(200).send({ status: "Request  deleted" });
+      res.status(200).send({ status: "Message  deleted" });
     })
     .catch((err) => {
       console.catch.log(err);
