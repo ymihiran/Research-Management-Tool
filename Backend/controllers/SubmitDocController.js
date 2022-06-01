@@ -12,9 +12,12 @@ export const getDocs = async (req, res) => {
 };
 
 //Get student's documents details
+
 export const getSubmitDocs = async (req, res) => {
+  console.log("ëmail", req.params.email);
   const email = req.params.email;
   SubmitDocRoute.find({ email: email })
+
     .then((data) => {
       res.json(data);
     })
