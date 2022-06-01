@@ -3,6 +3,7 @@ import "./CSS/btrap.css";
 import React, {useState,useEffect} from "react";
 import axios from 'axios';
 import { useHistory } from 'react-router';
+import { Store } from "react-notifications-component";
 
 
 export default function TopicList()  {
@@ -15,7 +16,35 @@ export default function TopicList()  {
 
     let col = "l-accepted";
     let btnColor="l-btn-pending";
-    let btnText="Edit"
+    let btnText="Edit";
+
+    function authenticate() {
+
+        if((JSON.parse(localStorage.getItem('user')|| "[]")).user_role!="Panel Member"){
+            history.push("/login");
+            Store.addNotification({
+                title: "You are not allowed!",
+                message: "You are not allowed to access this page! Please login as Panel Member",
+                animationIn: ["animate__animated", "animate__fadeIn"],
+                animationOut: ["animate__animated", "animate__fadeOut"],
+                type: "danger",
+                insert: "top",
+                container: "top-right",
+                
+                dismiss: {
+                  duration: 2500,
+                  onScreen: true,
+                  showIcon: true
+                },
+    
+                width:400
+            });    
+        }
+    }
+    
+    setTimeout(() => {
+        authenticate();
+    }, 0);
 
     
 
