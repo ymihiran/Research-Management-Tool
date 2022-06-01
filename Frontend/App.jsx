@@ -36,6 +36,7 @@ import Home from "./components/Home.jsx";
 import Profile from "./components/Profile";
 import chatForum from "./components/chatForum";
 import chatGroupSupervisor from "./components/chatGroupSupervisor";
+import MsgReplyForm from "./components/MsgReplyForm";
 
 function App() {
   return (
@@ -72,6 +73,7 @@ function App() {
         <Route path="/UploadTemplate" component={UploadTemplate} />
         <Route path="/chat" component={chatForum} />
         <Route path="/chatGroup" component={chatGroupSupervisor} />
+        <Route path="/reply" component={MsgReplyForm} />
       </Router>
     </div>
   );
