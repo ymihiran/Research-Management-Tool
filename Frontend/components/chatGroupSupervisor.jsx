@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 
 export default function chatGroupSupervisor() {
   const [allMsg, setAllMsg] = useState();
+  const [replyMsg, setReplyMsg] = useState();
   const history = useHistory();
 
   useEffect(() => {
@@ -19,6 +20,17 @@ export default function chatGroupSupervisor() {
         })
         .catch((err) => {});
     };
+
+    const getAllReply = async () => {
+      //get messages from db
+      const allReplys = await axios
+        .get(`http://localhost:8070/chatReplies/group/replyMsgs`)
+        .then((res) => {
+          setReplyMsg(res.data);
+        })
+        .catch((err) => {});
+    };
+    getAllReply();
     getAllMsg();
   }, []);
 
@@ -56,7 +68,7 @@ export default function chatGroupSupervisor() {
             <div className="p-5">
               <h3>{allMsg.groupID}</h3>
 
-              <Card className="mb-5">
+              <Card className="mb-1 mt-5">
                 <Card.Header>{allMsg.stdName}</Card.Header>
                 <Card.Body>
                   <Card.Title>{allMsg.subject}</Card.Title>
@@ -77,6 +89,32 @@ export default function chatGroupSupervisor() {
                   </Button>
                 </Card.Body>
               </Card>
+            </div>
+            <div className="p-5">
+              <div className="ms-5">
+                {replyMsg?.map((replyMsg, index) => (
+                  <div key={index}>
+                    {allMsg._id === replyMsg.messageID ? (
+                      <Card
+                        className="mb-3"
+                        style={{ backgroundColor: "#ece9ff" }}
+                      >
+                        <Card.Body>
+                          <Card.Text>
+                            <p>{replyMsg.createdAt}</p>
+                            <p>
+                              <b>Reply by:</b> {replyMsg.userSup}
+                            </p>
+                            <p className="ms-4">{replyMsg.message}</p>
+                          </Card.Text>
+                        </Card.Body>
+                      </Card>
+                    ) : (
+                      <div></div>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         ))}

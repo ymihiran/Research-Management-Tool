@@ -115,18 +115,6 @@ export default function chatForum() {
           </label>
         </div>
         <form className=" pe-5" onSubmit={handleNewMessage}>
-          {/* <div className="form-group mb-3">
-            <label>Your Name</label>
-            <input
-              required
-              type="text"
-              className="form-control"
-              id="researchTopic"
-              onChange={(e) => {
-                setStdName(e.target.value);
-              }}
-            />
-          </div> */}
           <div className=" mb-5 ">
             <label>Subject</label>
             <input
@@ -198,14 +186,6 @@ export default function chatForum() {
                   ) : (
                     <div></div>
                   )}
-                  {/* {if(replyMsg.messageID == allMsg._id)
-                  {
-                    <Card className="mb-3">
-                      <Card.Body>
-                        <Card.Title>{replyMsg.message}</Card.Title>
-                      </Card.Body>
-                    </Card>
-                  }} */}
                 </div>
               ))}
             </div>
