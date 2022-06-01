@@ -49,6 +49,7 @@ function App() {
  return (
     <div>
       <ReactNotifications />
+
       <Router>
 
         <Route path="/" exact component={Main} />

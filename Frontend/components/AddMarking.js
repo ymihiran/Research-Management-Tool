@@ -20,7 +20,36 @@ export default function AddMarking()  {
     const [marks, setMarks] = useState(null);
     const [criteria, setCriteria] = useState([]);
     const [extra, setExtra] = useState(null);
+
+
+
+    function authenticate() {
+
+        if((JSON.parse(localStorage.getItem('user')|| "[]")).user_role!="Admin"){
+            history.push("/login");
+            Store.addNotification({
+                title: "You are not allowed!",
+                message: "You are not allowed to access this page! Please login as Admin",
+                animationIn: ["animate__animated", "animate__fadeIn"],
+                animationOut: ["animate__animated", "animate__fadeOut"],
+                type: "danger",
+                insert: "top",
+                container: "top-right",
+                
+                dismiss: {
+                  duration: 2500,
+                  onScreen: true,
+                  showIcon: true
+                },
     
+                width:400
+            });    
+        }
+    }
+    
+    setTimeout(() => {
+        authenticate();
+    }, 0);
     
     const handleCriteriaInput = (e) => {
         setExtra({ ...extra, [e.target.name]: e.target.value });
@@ -181,6 +210,7 @@ export default function AddMarking()  {
 
             </div>
 
+  
 
 
             <div style={{ backgroundColor: "white" }}>
@@ -321,7 +351,8 @@ export default function AddMarking()  {
 
         </div>
     );
-        
+    
+    
 
 
 }
