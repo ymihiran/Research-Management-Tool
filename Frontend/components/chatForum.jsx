@@ -153,18 +153,27 @@ export default function chatForum() {
               <Card.Header>{allMsg.stdName}</Card.Header>
               <Card.Body>
                 <Card.Title>{allMsg.subject}</Card.Title>
-                <Card.Text>{allMsg.message}</Card.Text>
+                <Card.Text>
+                  <p>{allMsg.createdAt}</p>
+                  {allMsg.message}
+                </Card.Text>
                 <Button variant="danger">Delete</Button>
               </Card.Body>
             </Card>
             <div className="ps-5">
               {replyMsg?.map((replyMsg, index) => (
                 <div key={index}>
-                  {console.log("reply", allMsg._id)}
+                  {console.log("reply", allMsg)}
                   {allMsg._id === replyMsg.messageID ? (
                     <Card className="mb-3">
                       <Card.Body>
-                        <Card.Title>reply {replyMsg.message}</Card.Title>
+                        <Card.Text>
+                          <p>{replyMsg.createdAt}</p>
+                          <p>
+                            <b>Reply by:</b> {replyMsg.userSup}
+                          </p>
+                          <p className="ms-4">{replyMsg.message}</p>
+                        </Card.Text>
                       </Card.Body>
                     </Card>
                   ) : (
