@@ -5,12 +5,10 @@ const SubmitDocSchema = new Schema(
   {
     GroupID: {
       type: String,
-      required: true,
     },
 
     Document: {
       type: String,
-      required: true,
     },
 
     Status: {
@@ -20,7 +18,6 @@ const SubmitDocSchema = new Schema(
 
     ResearchField: {
       type: String,
-      required: true,
     },
 
     Comment: {

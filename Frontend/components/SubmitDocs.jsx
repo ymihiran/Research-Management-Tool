@@ -5,31 +5,6 @@ import "./CSS/st.css";
 import FileInput from "./FileInput";
 
 export default function SubmitDocs() {
-  // const [Group_ID, setGroupID] = useState("");
-  // const [Research_Field, setResearch_Field] = useState("");
-  // const [Document, setDocument] = useState("");
-  // const [Comment, setComment] = useState("");
-
-  // function sendData(e) {
-  //   e.preventDefault();
-
-  //   const newDoc = {
-  //     Group_ID,
-  //     Research_Field,
-  //     Document,
-  //     Comment,
-  //   };
-  //   axios
-  //     .post("http://localhost:8070/document/", newDoc)
-  //     .then(() => {
-  //       alert("Added New Submit Type");
-  //       e.target.reset(); // to clear input fiels after submission
-  //     })
-  //     .catch((err) => {
-  //       alert("err");
-  //     });
-  // }
-
   //file upload
   const [data, setData] = useState({
     name: "upload",
@@ -51,7 +26,7 @@ export default function SubmitDocs() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = process.env.REACT_APP_API_URL + "template";
+      const url = process.env.REACT_APP_API_URL + "document";
       const { data: res } = await axios.post(url, data);
       console.log(res);
       console.log(data);
@@ -151,7 +126,7 @@ export default function SubmitDocs() {
                   type="text"
                   style={{ width: "450px", height: "100px" }}
                   id="cName"
-                  name="Comments"
+                  name="Comment"
                   onChange={handleChange}
                   value={data.Comment}
                 />
