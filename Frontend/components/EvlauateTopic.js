@@ -9,10 +9,10 @@ import { Store } from 'react-notifications-component';
 export default function EvaluateTopic()  {
     const [tid, settid] = useState();
     const [id, setid] = useState();
-    const [groupID, setgroupID] = useState("Y3_S1_1234");
+    const [groupID, setgroupID] = useState(localStorage.getItem('groupID'));
     const [groupName, setgroupName] = useState();
-    const [rField, setrField] = useState();
-    const [rTopic, setrTopic] = useState();
+    const [rField, setrField] = useState(localStorage.getItem('rField'));
+    const [rTopic, setrTopic] = useState(localStorage.getItem('rTopic'));
     const [leaderEmail, setleaderEmail] = useState();
     const [comment, setacomment] = useState();
     const [Evaluation, setEvaluation] = useState();
@@ -56,26 +56,36 @@ export default function EvaluateTopic()  {
         axios.get(path).then((res)=>{
             setRequest(res.data.topicRouter);
             }).catch((err)=>{
-                alert(err.message);
+                alert("Get Error: ",err.message);
         });
 
         console.log(request.groupName);
 
 
-        settid(request.tid);
-        setid(request._id);
-        setgroupID(request.groupID);
-        setgroupName(request.groupName);
-        setrField(request.rField);
-        setrTopic(request.rTopic);
-        setleaderEmail(request.leaderEmail);
-        setacomment(request.comment);
+        // settid(request.tid);
+        // setid(request._id);
+        // //setgroupID(request.groupID);
+        // setgroupName(request.groupName);
+        // setrField(request.rField);
+        // setrTopic(request.rTopic);
+        // setleaderEmail(request.leaderEmail);
+        // setacomment(request.comment);
 
     },[])
 
     function submitData(e) {
         e.preventDefault();
         settid("1111");
+
+        // setgroupID(document.getElementById('gid').value);
+        // settid((JSON.parse(localStorage.getItem('user')|| "[]")).reg_number);
+        // //setid(document.getElementById('gid').value);
+        // setgroupName(document.getElementById('gname').value);
+
+        // setrTopic(document.getElementById('rtopic').value);
+        // setleaderEmail(document.getElementById('mail').value);
+        // setacomment(document.getElementById('comment').value);
+
         const newTopic = {
               
             tid,
@@ -107,15 +117,51 @@ export default function EvaluateTopic()  {
                 width:400
             });
             e.target.reset();
-            history.push('/StdTopicList');
+                   
+            history.push('/EvaluatedTopicList');
             
     
          }).catch((err)=>{
     
-            alert(err);
+            alert("Post ERROR: ",err);
          })
-    
+         document.getElementById("subBut").click();
+        //  emailjs
+        //         .sendForm(
+        //             'service_tc03vnm',
+        //             'template_ajm9ro9',
+        //             e.currentTarget,
+        //             '-utNmr2eLLLW4jLyR'
+        //         )
+        //         .then(
+        //             (result) => {
+        //             console.log("Mail Sent");
+        //             },
+        //             (error) => {
+        //             console.log(error.text);
+        //             }
+        //         );
 
+    }
+
+    function sendEmail(e) {
+        e.preventDefault();
+
+        emailjs
+                .sendForm(
+                    'service_tc03vnm',
+                    'template_ajm9ro9',
+                    e.currentTarget,
+                    '-utNmr2eLLLW4jLyR'
+                )
+                .then(
+                    (result) => {
+                    console.log("Mail Sent");
+                    },
+                    (error) => {
+                    console.log(error.text);
+                    }
+                );
     }
 
     return(
@@ -137,7 +183,7 @@ export default function EvaluateTopic()  {
 
                         <div className="mb-3">
                             <label className="s-form-label">Group Name</label>
-                            <input  className="s-input" disabled  type="text"  style={{width:"450px"}}  id="cName"
+                            <input  className="s-input" disabled  type="text"  style={{width:"450px"}}  id="gname"
                                 value={request.groupName}
                             />
                         </div>
@@ -145,7 +191,7 @@ export default function EvaluateTopic()  {
                         <div className="mb-3">
                             <label className="s-form-label">Research Field</label>
                             
-                            <input  className="s-input" disabled  type="text"  style={{width:"450px"}}  id="cName"
+                            <input  className="s-input" disabled  type="text"  style={{width:"450px"}}  id="rfield"
                                 value={request.rField}
                                 />
 
@@ -153,7 +199,7 @@ export default function EvaluateTopic()  {
 
                         <div className="mb-3">
                             <label className="s-form-label">Research Topic</label>
-                            <input className="s-input" disabled type="text"  style={{width:"450px"}}  id="cName"   
+                            <input className="s-input" disabled type="text"  style={{width:"450px"}}  id="rtopic"   
                                 value={request.rTopic}
                             />
                            
@@ -161,14 +207,14 @@ export default function EvaluateTopic()  {
 
                         <div className="mb-3">
                             <label className="s-form-label">Group Leader's email</label>
-                            <input className="s-input" disabled type="text"  style={{width:"450px"}}  id="cName"
+                            <input className="s-input" disabled type="text"  style={{width:"450px"}}  id="mail"
                                 value={request.leaderEmail}
                             />
                         </div>
 
                         <div className="mb-3">
                             <label className="s-form-label">Comments (Optional)</label>
-                            <input className="s-input" disabled type="text"  style={{width:"450px", height:"100px"}}  id="cName"
+                            <input className="s-input" disabled type="text"  style={{width:"450px", height:"100px"}}  id="comment"
                                 value={request.comment}
                             />
                         </div>
@@ -201,15 +247,31 @@ export default function EvaluateTopic()  {
                         
                         <div className="mb-3">
                             <label className="t-form-label">Comments</label>
-                            <input type="text"  style={{width:"450px", height:"100px"}}  id="cName"
+                            <input type="text" name="amessage" style={{width:"450px", height:"100px"}}  id="cName"
                                 required
                                 onChange={(e)=>setEvaluation(e.target.value)}
                             />
+
+                        <input type="hidden" name="amail" style={{width:"450px", height:"100px"}}  id="gid"
+                                value={request.leaderEmail}
+                                
+                            />
+
+                               
                         </div>
+
+                        
+                        
 
 
 
                         <button type="submit" className="btn btn-primary" style={{backgroundColor:"#0F0934",width:"200px",fontWeight:"bold",marginLeft:"45%"}} >Submit</button>
+                    </form>
+
+                    <form onSubmit={sendEmail}>
+                            <input type="hidden" name="mail" value={request.leaderEmail} />
+                            <input type="hidden" name="message" value={Evaluation} />
+                            <button hidden id="subBut">Send Email</button>
                     </form>
 
                     <div className="bottom-t-container">
