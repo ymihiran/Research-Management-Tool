@@ -4,8 +4,12 @@ import { ClassNames } from "@emotion/react";
 import "./CSS/st.css";
 import "./CSS/link.css";
 
+import { useHistory } from "react-router-dom";
+
 export default function DownloadTemplate() {
   const [type, setTypes] = useState([]);
+  const history = useHistory();
+  //const[SchemaType, setSchemaType] = useState([]);
 
   useEffect(() => {
     axios
@@ -19,16 +23,20 @@ export default function DownloadTemplate() {
       });
   }, []);
 
-  //   const setData = (data) => {
-  //     let { AdminName, SchemaType, Title, Template, Description } = data;
-  //     localStorage.setItem("AdminName", AdminName);
-  //     localStorage.setItem("SchemaType", SchemaType);
-  //     localStorage.setItem("Title", Title);
-  //     localStorage.setItem("Template", Template);
-  //     localStorage.setItem("Description", Description);
+  const setData = (data) => {
+    console.log("data", data);
 
-  //     console.log(data);
-  //   };
+    let { SchemaType } = data;
+    //     localStorage.setItem("AdminName", AdminName);
+
+    localStorage.setItem("SchemaType", SchemaType);
+    //     localStorage.setItem("Title", Title);
+    //     localStorage.setItem("Template", Template);
+    //     localStorage.setItem("Description", Description);
+
+    //     console.log(data);
+    history.push("/SubmitDocs");
+  };
   return (
     <div>
       <form>
@@ -107,7 +115,7 @@ export default function DownloadTemplate() {
             </div>
 
             {type.map((data, index) => (
-              <div>
+              <div key={index}>
                 {console.log(data)};
                 <div
                   className="ms-5 mt-3 me-5"
@@ -145,9 +153,18 @@ export default function DownloadTemplate() {
                   </a>
                 </div>
                 <div style={{ marginLeft: "125px" }}>
-                  <a onClick={setData}>
+                  <button
+                    type="button"
+                    className="btn btn-link "
+                    style={{
+                      outline: "none ",
+                      border: "none ",
+                      boxShadow: "none ",
+                    }}
+                    onClick={() => setData(data)}
+                  >
                     <i>Click here to submit</i>
-                  </a>
+                  </button>
                 </div>
               </div>
             ))}

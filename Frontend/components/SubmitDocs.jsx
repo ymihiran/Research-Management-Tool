@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ClassNames } from "@emotion/react";
 import "./CSS/st.css";
 import FileInput from "./FileInput";
 
 export default function SubmitDocs() {
+  const [type, setType] = useState();
+  useEffect(() => {
+    setType(localStorage.getItem("SchemaType"));
+    // console.log(localStorage.getItem("SchemaType"));
+  }, []);
   //file upload
   const [data, setData] = useState({
     name: "upload",
@@ -57,7 +62,7 @@ export default function SubmitDocs() {
                 Template
               </label>{" "}
               <br className="br1" />
-              <label className="h-text">SUBMISSION</label>
+              <label className="h-text">{type}</label>
             </div>
 
             <div className="t-list-tb-container mt-3">
