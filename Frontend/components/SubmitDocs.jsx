@@ -18,6 +18,7 @@ export default function SubmitDocs() {
     email: JSON.parse(localStorage.getItem("user")).email,
     GroupID: "",
     ResearchField: "",
+    ResearchTopic: "",
     Document: "",
     Comment: "",
   });
@@ -106,6 +107,21 @@ export default function SubmitDocs() {
                   <option value="Games">Games</option>
                   <option value="Robotics">Robotics</option>
                 </select>
+              </div>
+
+              <div className="mb-3">
+                <label className="t-form-label">
+                  <b>Group ID :</b>
+                </label>
+                <input
+                  type="text"
+                  style={{ width: "450px" }}
+                  id="cName"
+                  required
+                  name="ResearchTopic"
+                  onChange={handleChange}
+                  value={data.ResearchTopic}
+                />
               </div>
 
               <div className="mb-3">

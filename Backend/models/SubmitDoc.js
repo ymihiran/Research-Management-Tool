@@ -5,10 +5,12 @@ const SubmitDocSchema = new Schema(
   {
     GroupID: {
       type: String,
+      required: true,
     },
 
     Document: {
       type: String,
+      required: true,
     },
 
     Status: {
@@ -18,6 +20,11 @@ const SubmitDocSchema = new Schema(
 
     ResearchField: {
       type: String,
+      required: true,
+    },
+    ResearchTopic: {
+      type: String,
+      required: true,
     },
 
     Comment: {
@@ -26,6 +33,7 @@ const SubmitDocSchema = new Schema(
 
     email: {
       type: String,
+      required: true,
     },
   },
   { timestamps: true }

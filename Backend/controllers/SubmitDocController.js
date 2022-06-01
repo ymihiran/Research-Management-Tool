@@ -18,6 +18,7 @@ export const SubmitDoc = async (req, res) => {
   const Document = req.body.song;
   const email = req.body.email;
   const Comment = req.body.Comment;
+  const ResearchTopic = req.body.ResearchTopic;
 
   const newType = new SubmitDocRoute({
     GroupID,
@@ -25,6 +26,7 @@ export const SubmitDoc = async (req, res) => {
     Document,
     Comment,
     email,
+    ResearchTopic,
   });
 
   newType
