@@ -69,8 +69,8 @@ app.use("/request", request);
 import msg from "./routes/chatForumRoute.js";
 app.use("/chat", msg);
 
-import group from "./routes/chatGroupRoute.js";
-app.use("/chatGroup", group);
+import reply from "./routes/chatReplyRoute.js";
+app.use("/chatReplies", reply);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

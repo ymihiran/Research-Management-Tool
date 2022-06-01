@@ -11,6 +11,7 @@ export default function chatForum() {
   const [allMsg, setAllMsg] = useState();
   const [group_id, setGroup_id] = useState();
   const [leaderEmail, setLeaderEmail] = useState();
+  const [replyMsg, setReplyMsg] = useState();
   let groupID;
 
   useEffect(() => {
@@ -41,7 +42,19 @@ export default function chatForum() {
       .catch((err) => {});
   };
 
+  const getAllReply = async () => {
+    //get messages from db
+    const allReplys = await axios
+      .get(`http://localhost:8070/chatReplies/group/replyMsgs`)
+      .then((res) => {
+        setReplyMsg(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {});
+  };
+
   getAllMsg();
+  getAllReply();
 
   const handleNewMessage = async (e) => {
     e.preventDefault();
@@ -136,7 +149,7 @@ export default function chatForum() {
       <div className="right_container">
         {allMsg?.map((allMsg, index) => (
           <div key={index}>
-            <Card className="mb-5">
+            <Card className="mb-3 mt-5">
               <Card.Header>{allMsg.stdName}</Card.Header>
               <Card.Body>
                 <Card.Title>{allMsg.subject}</Card.Title>
@@ -144,6 +157,30 @@ export default function chatForum() {
                 <Button variant="danger">Delete</Button>
               </Card.Body>
             </Card>
+            <div className="ps-5">
+              {replyMsg?.map((replyMsg, index) => (
+                <div key={index}>
+                  {console.log("reply", allMsg._id)}
+                  {allMsg._id === replyMsg.messageID ? (
+                    <Card className="mb-3">
+                      <Card.Body>
+                        <Card.Title>reply {replyMsg.message}</Card.Title>
+                      </Card.Body>
+                    </Card>
+                  ) : (
+                    <div></div>
+                  )}
+                  {/* {if(replyMsg.messageID == allMsg._id)
+                  {
+                    <Card className="mb-3">
+                      <Card.Body>
+                        <Card.Title>{replyMsg.message}</Card.Title>
+                      </Card.Body>
+                    </Card>
+                  }} */}
+                </div>
+              ))}
+            </div>
           </div>
         ))}
       </div>
