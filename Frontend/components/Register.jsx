@@ -5,6 +5,7 @@ import { Link,useHistory} from 'react-router-dom'
 import axios from 'axios'
 import {showErrMsg, showSuccessMsg} from './utils/notification/Notification'
 import {isEmpty, isEmail, isLength, isMatch} from './utils/validation/Validation.js';
+import { Checkbox } from "@mui/material";
 
 const initialState = {
   name:'',
@@ -22,12 +23,19 @@ const initialState = {
 function Register() {
 
   const [user, setUser] = useState(initialState)
-
+  const [ischeck, setisCheck]=React.useState(true);
   const {name,email,password,cf_password,mobile,user_role,research_area,reg_number,err, success} = user
 
   const handleChangeInput = e => {
     const {name, value} = e.target
     setUser({...user, [name]:value, err: '', success: ''})
+}
+
+    const handleNotStudent = e => {
+        if(e.target.checked)
+        setisCheck(false);
+        else   
+        setisCheck(true);
 }
 
 const history  = useHistory();
@@ -93,6 +101,17 @@ const handleSubmit = async e => {
             
 
           <form onSubmit={handleSubmit}>
+        <div> <h3>  <label style={{float:"right"}}>Not a Student?</label></h3>
+              <Checkbox
+               id="notStudent"
+               name="notStudent"
+               onChange={handleNotStudent}
+               style={{color:"#322B5F",float:"right"}}
+               > 
+               </Checkbox>
+               </div>
+
+<br></br><br></br>
              <div className="mb-3">
                             <label className="t-form-label" style={{color:"#322B5F"}}>Full Name</label>
                             <input type="text"  style={{width:"450px"}} className="t-form-control" id="name"
@@ -155,25 +174,26 @@ const handleSubmit = async e => {
                                style={{width:"450px",border: "2px solid #ced4da"}}
                                value={user_role}
                                required
+                               disabled={ischeck}
                                onChange={handleChangeInput}
                             >
                                 <option value="Default">Select one</option>
-                                <option value="Student">Student</option>
                                 <option value="Supervisor">Supervisor</option>
                                 <option value="Co-Supervisor">Co-Supervisor</option>
                                 <option value="Panel Member">Panel Member</option>
                             </select>
-
+                    
                 </div>
 
 
               <div className="mb-3">
+                  
                             <label className="t-form-label">Most Interested Research Area</label>
                             
                             <select className='form-control' name="research_area" id="research_area" 
                                style={{width:"450px",border: "2px solid #ced4da"}}
                                value={research_area}
-                               
+                               disabled={ischeck}
                                onChange={handleChangeInput}
                             >
                                 <option value="Default">Select one</option>

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import "/node_modules/bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import axios from 'axios';
-
+import {AuthProvider} from './components/UserState.js'
 
 
 import UploadTemplate from "./components/UploadTemplate";
@@ -48,6 +48,7 @@ function App() {
 
  return (
     <div>
+  <AuthProvider>
       <ReactNotifications />
       <Router>
 
@@ -81,7 +82,8 @@ function App() {
         <Route path="/StudentGroup" component={StudentGroup} />
         <Route path="/UploadTemplate" component={UploadTemplate} />
       </Router>
-    </div>
+      </AuthProvider>
+    </div> 
   );
 }
 export default App;

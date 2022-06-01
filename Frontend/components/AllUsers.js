@@ -1,13 +1,21 @@
 import "./CSS/topicsub.css";
 import "./CSS/btrap.css";
-import React, {useState,useEffect} from "react";
+import React, {useState,useEffect,useContext} from "react";
 import axios from 'axios';
+import {UserState} from './UserState.js'
+
 
 
 export default function AllUsers() {
     
     
     const[request,setRequest] = useState([]);
+    const state=useContext(UserState);
+  
+    const[isLogged,setIsLogged]= state.UserAPI.isLogged;
+    const[isAdmin,setIsAdmin]= state.UserAPI.isAdmin;
+    const[CurrentUser,setCurrentUser]= state.UserAPI.CurrentUser;
+
    
     useEffect(()=>{
               
@@ -26,7 +34,7 @@ export default function AllUsers() {
       if(ans){  
       axios.delete(`http://localhost:8070/user/delete/${id}`).then((res)=>{
           alert("Profile Successfully Deleted");
-          this.props.history.push('/allprof');
+          window.location.reload(false);
           }).catch((err)=>{
           alert(err.message);
          })
@@ -131,7 +139,7 @@ const filterData = (users,searchkey) =>{
 
                             <td>
                             <a className="btn btn-danger" 
-                            href="/"
+                            onClick={()=> onDelete(data._id)}
                             style={{textDecoration:'none'}}>
                             <i></i>&nbsp;Delete Profile
                             </a>       
