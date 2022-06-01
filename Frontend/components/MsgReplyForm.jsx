@@ -33,8 +33,12 @@ export default function MsgReplyForm() {
       });
   };
 
+  const handelCancel = () => {
+    history.push("/chatGroup");
+  };
+
   return (
-    <div className="body_container">
+    <div className="reply_body_container">
       {/*left side column */}
       <div className="left_container">
         <div>
@@ -50,9 +54,9 @@ export default function MsgReplyForm() {
 
       {/*right side column */}
       <div className="right_container">
-        <div className="criteria_box mb-4 ">
+        <div className="reply_criteria_box mb-4 ">
           <form>
-            <div className="form-group mb-5">
+            <div className="form-group mb-3">
               <label>Reply</label>
               <textarea
                 className="form-control"
@@ -63,13 +67,22 @@ export default function MsgReplyForm() {
                 }}
               />
             </div>
-            <button
-              type="submit"
-              className="btn btn-success"
-              onClick={(e) => handelSendReply(e)}
-            >
-              Send
-            </button>
+            <div className="modal-footer">
+              <button
+                type="submit"
+                className="btn btn-secondary "
+                onClick={handelCancel}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="btn btn-success "
+                onClick={(e) => handelSendReply(e)}
+              >
+                Send
+              </button>
+            </div>
           </form>
         </div>
       </div>
