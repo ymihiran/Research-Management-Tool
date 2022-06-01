@@ -22,6 +22,20 @@ export default function chatGroupSupervisor() {
     getAllMsg();
   }, []);
 
+  const deleteMsg = async (e, id) => {
+    e.preventDefault();
+    console.log("id", id);
+
+    let ans = window.confirm("Do you want to delete this request ?");
+
+    if (ans) {
+      await axios.delete(`http://localhost:8070/chat/${id}`).then((res) => {
+        console.log(res);
+        window.location.reload(false);
+      });
+    }
+  };
+
   const handleReply = (e, id) => {
     e.preventDefault();
     console.log(id);
@@ -54,7 +68,11 @@ export default function chatGroupSupervisor() {
                   >
                     Reply
                   </Button>
-                  <Button variant="danger" className="ms-5">
+                  <Button
+                    variant="danger"
+                    className="ms-5"
+                    onClick={(e) => deleteMsg(e, allMsg._id)}
+                  >
                     Delete
                   </Button>
                 </Card.Body>

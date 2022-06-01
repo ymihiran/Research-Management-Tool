@@ -16,6 +16,7 @@ export default function chatForum() {
 
   useEffect(() => {
     setStdEmail(JSON.parse(localStorage.getItem("user")).email);
+    setStdName(JSON.parse(localStorage.getItem("user")).name);
 
     //get group _id and leader's email by student email
     const emailID = axios
@@ -114,7 +115,7 @@ export default function chatForum() {
           </label>
         </div>
         <form className=" pe-5" onSubmit={handleNewMessage}>
-          <div className="form-group mb-3">
+          {/* <div className="form-group mb-3">
             <label>Your Name</label>
             <input
               required
@@ -125,7 +126,7 @@ export default function chatForum() {
                 setStdName(e.target.value);
               }}
             />
-          </div>
+          </div> */}
           <div className=" mb-5 ">
             <label>Subject</label>
             <input
