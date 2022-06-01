@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  deleteReply,
   getAllReplyMsg,
   getReplyMsg,
   sendReplyMsg,
@@ -10,5 +11,6 @@ const router = express.Router();
 router.get("/:messageID", getReplyMsg);
 router.post("/", sendReplyMsg);
 router.get("/group/replyMsgs", getAllReplyMsg);
+router.delete("/:id", deleteReply);
 
 export default router;
