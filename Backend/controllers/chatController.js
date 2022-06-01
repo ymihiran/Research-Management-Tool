@@ -27,7 +27,7 @@ export const sendMsg = async (req, res) => {
 //Get a message details
 export const getMsg = async (req, res) => {
   const group_id = req.params.group_id;
-  console.log("id", group_id);
+  console.log("id:", group_id);
   chatForum
     .find({ group_id: group_id })
     .then((data) => {
@@ -40,7 +40,6 @@ export const getMsg = async (req, res) => {
 
 //Get all message details
 export const getAllMsg = async (req, res) => {
-  const group_id = req.params.group_id;
   chatForum
     .find()
     .then((data) => {
@@ -72,6 +71,7 @@ export const sendReplyMsg = async (req, res) => {
 
 //Get reply message details
 export const getReplyMsg = async (req, res) => {
+  console.log("25");
   const messageID = req.params.messageID;
   ChatReply.find({ messageID: messageID })
     .then((data) => {

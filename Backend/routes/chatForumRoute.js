@@ -2,9 +2,9 @@ import express from "express";
 import {
   getMsg,
   sendMsg,
+  getAllMsg,
   getReplyMsg,
   sendReplyMsg,
-  getAllMsg,
 } from "../controllers/chatController.js";
 const router = express.Router();
 
@@ -16,4 +16,5 @@ router.get("/", getAllMsg);
 //chat reply routes
 router.get("/replyMsg/:messageID", getReplyMsg);
 router.post("/replyMsg/", sendReplyMsg);
+
 export default router;

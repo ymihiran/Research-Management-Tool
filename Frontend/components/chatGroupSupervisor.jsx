@@ -2,44 +2,29 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import "./Styles/styles.css";
 import { useHistory } from "react-router";
-import {
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-} from "reactstrap";
+import { Card, Button } from "react-bootstrap";
 
 export default function chatGroupSupervisor() {
-  const [docList, setDocList] = useState([]);
-  const history = useHistory();
+  const [allMsg, setAllMsg] = useState();
   useEffect(() => {
-    axios
-      .get(`http://localhost:8070/document/`)
-      .then((res) => {
-        setDocList(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        alert("Can't get Document details: " + err.message);
-      });
+    const getAllMsg = async () => {
+      //get messages from db
+      const allChat = await axios
+        .get(`http://localhost:8070/chat/`)
+        .then((res) => {
+          setAllMsg(res.data);
+        })
+        .catch((err) => {});
+    };
+    getAllMsg();
   }, []);
-
-  const setData = (data) => {
-    let { Group_ID, Research_Field } = data;
-    localStorage.setItem("Group_ID", Group_ID);
-    localStorage.setItem("Research_Field", Research_Field);
-    history.push("/Doc");
-  };
-
   return (
     <div className="allDoc_body_container">
       {/*left side column */}
       <div className="left_container"></div>
 
       {/*right side column */}
-      <div className="allDoc_right_container">
+      {/* <div className="allDoc_right_container">
         <div>
           <label className="h-text text_space" style={{ color: "#FF5631" }}>
             STUDENTS
@@ -64,35 +49,32 @@ export default function chatGroupSupervisor() {
               </Card>
             </div>
           </div>
-          {/* <table className="table table-hover table-borderless">
-            <thead>
-              <tr>
-                <th scope="col">Group ID</th>
-                <th scope="col">Research Field</th>
-                <th scope="col">Comment</th>
-                <th scope="col"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {docList?.map((docList, index) => (
-                <tr key={index} className="">
-                  <td>{docList.Group_ID}</td>
-                  <td>{docList.Research_Field}</td>
-                  <td>{docList.Comment}</td>
-                  <td>
-                    <button
-                      type="submit"
-                      className="btn allDoc_button "
-                      onClick={() => setData(docList)}
-                    >
-                      Evaluate
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table> */}
         </div>
+      </div> */}
+
+      <div className="right_container">
+        {allMsg?.map((allMsg, index) => (
+          <div key={index}>
+            {console.log("allMsg", allMsg)}
+            <div className="p-5">
+              <h3>{allMsg.groupID}</h3>
+
+              <Card className="mb-5">
+                <Card.Header>{allMsg.stdName}</Card.Header>
+                <Card.Body>
+                  <Card.Title>{allMsg.subject}</Card.Title>
+                  <Card.Text>{allMsg.message}</Card.Text>
+                  <Button variant="danger" className="me-5">
+                    Reply
+                  </Button>
+                  <Button variant="danger" className="ms-5">
+                    Delete
+                  </Button>
+                </Card.Body>
+              </Card>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
