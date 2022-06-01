@@ -47,6 +47,7 @@ const FileInput = ({ name, label, value, type, handleInputState, ...rest }) => {
       className={styles.container}
     >
       <div
+        class="file-upload-wrapper"
         style={{
           fontSize: "40px",
         }}
@@ -57,6 +58,7 @@ const FileInput = ({ name, label, value, type, handleInputState, ...rest }) => {
       <div>
         <div class="file-upload-wrapper ">
           <input
+            id="input-file-now"
             type="file"
             class="file-upload"
             ref={inputRef}

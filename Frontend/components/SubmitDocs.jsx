@@ -35,7 +35,7 @@ export default function SubmitDocs() {
     name: "upload",
     GroupID: "",
     ResearchField: "",
-    Document: "",
+    Template: "",
     Comment: "",
   });
 
@@ -51,7 +51,7 @@ export default function SubmitDocs() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = process.env.REACT_APP_API_URL + "document";
+      const url = process.env.REACT_APP_API_URL + "template";
       const { data: res } = await axios.post(url, data);
       console.log(res);
       console.log(data);
@@ -79,7 +79,7 @@ export default function SubmitDocs() {
             <div className="t-list-head-container">
               <label className="h-text" style={{ color: "#FF5631" }}>
                 {" "}
-                DOCUMENT
+                Template
               </label>{" "}
               <br className="br1" />
               <label className="h-text">SUBMISSION</label>
@@ -108,7 +108,7 @@ export default function SubmitDocs() {
 
                 <select
                   className="form-control"
-                  name="Field"
+                  name="ResearchField"
                   id="Field"
                   style={{ width: "450px", border: "2px solid #ced4da" }}
                   required
@@ -127,7 +127,7 @@ export default function SubmitDocs() {
 
               <div className="mb-3">
                 <label htmlFor="formFile" className="t-form-label">
-                  <b>Upload Template/Document</b>
+                  <b>Upload TeTemplate</b>
                 </label>
                 <div style={{ width: "470px" }}>
                   <FileInput
