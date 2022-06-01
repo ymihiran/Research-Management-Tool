@@ -42,3 +42,16 @@ export const getAllReplyMsg = async (req, res) => {
       console.catch.log(err);
     });
 };
+
+//delete a reply
+export const deleteReply = async (req, res) => {
+  console.log("id delete", req.params.id);
+  const msgID = req.params.id;
+  ChatReply.findByIdAndDelete(msgID)
+    .then((data) => {
+      res.status(200).send({ status: "Message  deleted" });
+    })
+    .catch((err) => {
+      console.catch.log(err);
+    });
+};
