@@ -2,7 +2,10 @@ import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "/node_modules/bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+
+
 import axios from "axios";
+
 
 import UploadTemplate from "./components/UploadTemplate";
 import SubmitTypes from "./components/SubmitTypes";
@@ -12,13 +15,19 @@ import AcceptTopic from "./components/AcceptTopic";
 import TopicList from "./components/TopicList";
 import StdTopicList from "./components/StdTopicList";
 import AddMarking from "./components/AddMarking";
+
 import EditTopic from "./components/EditTopic";
 import Main from './components/Main';
 import { ReactNotifications } from "react-notifications-component";
 
+
 import SubmitDocs from "./components/SubmitDocs";
 import AllStudentGroup from "./components/AllStudentGroup";
 import AllTypes from "./components/AllTypes";
+
+import AllCreateTypes from "./components/AllCreateTypes";
+
+
 import MarkingList from "./components/MarkingList";
 import EditMarking from "./components/EditMarking";
 import EvaluatedTopicList from "./components/EvaluatedTopicList"
@@ -29,6 +38,10 @@ import DocumentEvaluation from "./components/DocumentEvaluation";
 import PresentationEvaluation from "./components/PresentationEvaluation";
 import AllDocuments from "./components/AllDocuments";
 import RequestCoSupervisor from "./components/RequestCoSupervisor";
+
+import UpdateUploadTemplate from "./components/UpdateUploadTemplate";
+import DownloadTemplate from "./components/DownloadTemplate";
+
 import StudentGroup from "./components/StudentGroup";
 import UploadTemplate from "./components/UploadTemplate";
 
@@ -43,6 +56,7 @@ import Profile from './components/Profile';
 import AllUsers from './components/AllUsers';
 import PanelMembers from './components/CheckPanelMembers'
 import SelectPanelMembers from './components/SelectPanelMembers'
+
 
 
 
@@ -74,6 +88,11 @@ function App() {
         <Route path="/SubmitDocs" component={SubmitDocs} />
         <Route path="/AllStudentGroup" component={AllStudentGroup} />
         <Route path="/AllTypes" component={AllTypes} />
+
+
+        <Route path="/AllCreateTypes" component={AllCreateTypes} />
+
+
         <Route path="/MarkingList" component={MarkingList} />
         <Route path="/EditMarking" component={EditMarking} />
         <Route path="/Main" component={Main} />
@@ -82,11 +101,16 @@ function App() {
         <Route path="/presentation" component={PresentationEvaluation} />
         <Route path="/allDoc" component={AllDocuments} />
         <Route path="/reqCoSuper" component={RequestCoSupervisor} />
+
+        <Route path="/UpdateTemplate" component={UpdateUploadTemplate} />
+        <Route path="/DownloadTemplate" component={DownloadTemplate} />
+
         <Route path="/StudentGroup" component={StudentGroup} />
         <Route path="/UploadTemplate" component={UploadTemplate} />
         <Route path="/chat" component={chatForum} />
         <Route path="/chatGroup" component={chatGroupSupervisor} />
         <Route path="/reply" component={MsgReplyForm} />
+
       </Router>
     </div>
   );

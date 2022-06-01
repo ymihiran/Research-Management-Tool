@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ClassNames } from "@emotion/react";
 import "./CSS/st.css";
 import FileInput from "./FileInput";
 
-export default function UploadTemplate() {
+export default function UpdateUploadTemplate() {
   //file upload
   const [data, setData] = useState({
     name: "upload",
@@ -13,6 +13,7 @@ export default function UploadTemplate() {
     SchemaType: "",
     Title: "",
     Description: "",
+    _id: "",
   });
 
   const handleChange = ({ currentTarget: input }) => {
@@ -32,12 +33,40 @@ export default function UploadTemplate() {
       console.log(res);
       console.log(data);
 
-      alert("Create New Type Successfully");
+      alert("Update New Template Successfully");
       e.target.reset(); // to clear input fiels after submission
     } catch (error) {
       console.log(error);
     }
   };
+
+  // const [AdminName, setAdminName] = useState();
+  // const [SchemaType, setSchemaType] = useState();
+  // const [Title, setTitle] = useState();
+  // const [Template, setTemplate] = useState();
+  // const [Description, setDescription] = useState();
+
+  // const [_id, setID] = useState(null);
+
+  useEffect(() => {
+    // setID(localStorage.getItem("ID"));
+    // setAdminName(localStorage.getItem("AdminName"));
+    // setSchemaType(localStorage.getItem("SchemaType"));
+    // setTitle(localStorage.getItem("Title"));
+    // setTemplate(localStorage.getItem("Template"));
+    // setDescription(localStorage.getItem("Description"));
+
+    setData({ ...data, [data.AdminName]: localStorage.getItem("AdminName") });
+    // setData({ SchemaType: localStorage.getItem("SchemaType") });
+    // setData({ Title: localStorage.getItem("Title") });
+    // setData({ Template: localStorage.getItem("Template") });
+    setData({
+      ...data,
+      [data.Description]: localStorage.getItem("Description"),
+    });
+    // setData({ _id: localStorage.getItem("_id") });
+    console.log("admin name: ", data.AdminName);
+  }, []);
 
   return (
     <div>
@@ -66,14 +95,15 @@ export default function UploadTemplate() {
                 <label className="t-form-label">
                   <b>Admin Name:</b>
                 </label>
+                {console.log(data.AdminName)}
                 <input
                   type="text"
                   style={{ width: "450px" }}
                   id="cName"
                   required
                   name="AdminName"
-                  onChange={handleChange}
                   value={data.AdminName}
+                  onChange={handleChange}
                 />
               </div>
 
@@ -92,8 +122,8 @@ export default function UploadTemplate() {
                     height: "40px",
                   }}
                   name="SchemaType"
-                  onChange={handleChange}
                   value={data.SchemaType}
+                  onChange={handleChange}
                 >
                   <option value="Default">Select one</option>
                   <option value="Proposal Presentation">
@@ -131,8 +161,8 @@ export default function UploadTemplate() {
                   id="cName"
                   required
                   name="Title"
-                  onChange={handleChange}
                   value={data.Title}
+                  onChange={handleChange}
                 />
               </div>
               <div className="mb-3"></div>
@@ -159,15 +189,13 @@ export default function UploadTemplate() {
                 <label className="t-form-label">
                   <b>Description about the Template/Document:</b>
                 </label>
-                <br></br>
-                <textarea
-                  rows="4"
-                  type="textarea"
+                <input
+                  type="text"
                   style={{ width: "450px", height: "100px" }}
                   id="cName"
                   name="Description"
-                  onChange={handleChange}
                   value={data.Description}
+                  onChange={handleChange}
                 />
               </div>
               <br></br>

@@ -76,7 +76,10 @@ export default function StudentGroup() {
 
             {/*right side column */}
             <div className="right_container">
-              <div className="criteria_box mb-5 fw-bold">
+              <div
+                className="criteria_box   fw-bold"
+                style={{ marginTop: "-60px" }}
+              >
                 <div className="mb-3">
                   <label className="t-form-label">Group Leader Name:</label>
                   <input

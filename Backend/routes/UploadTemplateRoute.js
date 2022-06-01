@@ -1,8 +1,13 @@
 import express from "express";
 
-import { UploadTemplate } from "../controllers/UploadTemplateController.js";
+import {
+  getAllTypes,
+  UploadTemplate,
+} from "../controllers/UploadTemplateController.js";
 const router = express.Router();
 
 router.post("/", UploadTemplate);
+
+router.get("/", getAllTypes);
 
 export default router;

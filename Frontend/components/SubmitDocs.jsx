@@ -1,37 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ClassNames } from "@emotion/react";
 import "./CSS/st.css";
+import FileInput from "./FileInput";
 
 export default function SubmitDocs() {
-  const [Group_ID, setGroupID] = useState("");
-  const [Research_Field, setResearch_Field] = useState("");
-  const [Document, setDocument] = useState("");
-  const [Comment, setComment] = useState("");
+  const [type, setType] = useState();
+  useEffect(() => {
+    setType(localStorage.getItem("SchemaType"));
+    // console.log(localStorage.getItem("SchemaType"));
+  }, []);
+  //file upload
+  const [data, setData] = useState({
+    name: "upload",
+    GroupID: "",
+    ResearchField: "",
+    Document: "",
+    Comment: "",
+  });
 
-  function sendData(e) {
+  const handleChange = ({ currentTarget: input }) => {
+    setData({ ...data, [input.name]: input.value });
+  };
+
+  const handleInputState = (name, value) => {
+    setData((prev) => ({ ...prev, [name]: value }));
+    console.log("21 ", data);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const url = process.env.REACT_APP_API_URL + "document";
+      const { data: res } = await axios.post(url, data);
+      console.log(res);
+      console.log(data);
 
-    const newDoc = {
-      Group_ID,
-      Research_Field,
-      Document,
-      Comment,
-    };
-    axios
-      .post("http://localhost:8070/document/", newDoc)
-      .then(() => {
-        alert("Added New Submit Type");
-        e.target.reset(); // to clear input fiels after submission
-      })
-      .catch((err) => {
-        alert("err");
-      });
-  }
+      alert("Successfully");
+      e.target.reset(); // to clear input fiels after submission
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
-      <form onSubmit={sendData}>
+      <form onSubmit={handleSubmit}>
         <div className="t-list-container">
           <div style={{ backgroundColor: "#0F0934" }}>
             <div>
@@ -45,10 +59,10 @@ export default function SubmitDocs() {
             <div className="t-list-head-container">
               <label className="h-text" style={{ color: "#FF5631" }}>
                 {" "}
-                DOCUMENT
+                Template
               </label>{" "}
               <br className="br1" />
-              <label className="h-text">SUBMISSION</label>
+              <label className="h-text">{type}</label>
             </div>
 
             <div className="t-list-tb-container mt-3">
@@ -60,9 +74,10 @@ export default function SubmitDocs() {
                   type="text"
                   style={{ width: "450px" }}
                   id="cName"
-                  onChange={(e) => {
-                    setGroupID(e.target.value);
-                  }}
+                  required
+                  name="GroupID"
+                  onChange={handleChange}
+                  value={data.GroupID}
                 />
               </div>
 
@@ -73,12 +88,12 @@ export default function SubmitDocs() {
 
                 <select
                   className="form-control"
-                  name="Field"
+                  name="ResearchField"
                   id="Field"
                   style={{ width: "450px", border: "2px solid #ced4da" }}
-                  onChange={(e) => {
-                    setResearch_Field(e.target.value);
-                  }}
+                  required
+                  onChange={handleChange}
+                  value={data.ResearchField}
                 >
                   <option value="Default">Select one</option>
                   <option value="Artificial Interligance">
@@ -92,16 +107,19 @@ export default function SubmitDocs() {
 
               <div className="mb-3">
                 <label htmlFor="formFile" className="t-form-label">
-                  <b>Upload Template/Document</b>
+                  <b>Upload TeTemplate</b>
                 </label>
-                <div className="col-sm-4">
-                  <input
-                    className="form-control"
-                    style={{ width: "450px" }}
+                <div style={{ width: "470px" }}>
+                  <FileInput
+                    name="song"
+                    label="Choose File"
+                    handleInputState={handleInputState}
                     type="file"
-                    accept="image/png, image/jpeg"
-                    id="image"
+                    value={data.song}
                   />
+                </div>
+                <div className="col-sm-4">
+                  <br></br>
                 </div>
               </div>
 
@@ -113,9 +131,9 @@ export default function SubmitDocs() {
                   type="text"
                   style={{ width: "450px", height: "100px" }}
                   id="cName"
-                  onChange={(e) => {
-                    setComment(e.target.value);
-                  }}
+                  name="Comment"
+                  onChange={handleChange}
+                  value={data.Comment}
                 />
               </div>
 
@@ -129,7 +147,7 @@ export default function SubmitDocs() {
                   marginLeft: "50%",
                 }}
               >
-                CREATE
+                SUBMIT
               </button>
             </div>
 
