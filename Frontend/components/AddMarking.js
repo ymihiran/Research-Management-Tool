@@ -20,7 +20,36 @@ export default function AddMarking()  {
     const [marks, setMarks] = useState(null);
     const [criteria, setCriteria] = useState([]);
     const [extra, setExtra] = useState(null);
+
+
+
+    function authenticate() {
+
+        if((JSON.parse(localStorage.getItem('user')|| "[]")).user_role!="Admin"){
+            history.push("/login");
+            Store.addNotification({
+                title: "You are not allowed!",
+                message: "You are not allowed to access this page! Please login as Admin",
+                animationIn: ["animate__animated", "animate__fadeIn"],
+                animationOut: ["animate__animated", "animate__fadeOut"],
+                type: "danger",
+                insert: "top",
+                container: "top-right",
+                
+                dismiss: {
+                  duration: 2500,
+                  onScreen: true,
+                  showIcon: true
+                },
     
+                width:400
+            });    
+        }
+    }
+    
+    setTimeout(() => {
+        authenticate();
+    }, 0);
     
     const handleCriteriaInput = (e) => {
         setExtra({ ...extra, [e.target.name]: e.target.value });
@@ -47,6 +76,11 @@ export default function AddMarking()  {
 
         setCriteria((prev) => [...prev, extra]);
         console.log(criteria);
+
+        document.getElementById('des').value="";
+        document.getElementById('mark').value="";
+
+
     };
 
 
@@ -133,12 +167,13 @@ export default function AddMarking()  {
         
     };
 
-    const handleDelete = async (e,desc) =>{
+    const handleDelete = async (e,i) =>{
         e.preventDefault();
-        if(desc!=""){
-            const newList = criteria.filter((data) => data.des !== desc);
-            setCriteria(newList);
-        }
+
+    
+        const newList = criteria.filter((item, index) => index !== i);
+        setCriteria(newList);
+
 
         Store.addNotification({
             title: "Criteria Removed",
@@ -175,6 +210,7 @@ export default function AddMarking()  {
 
             </div>
 
+  
 
 
             <div style={{ backgroundColor: "white" }}>
@@ -234,14 +270,14 @@ export default function AddMarking()  {
 
                         <div className="mb-3">
                             <label className="m-form-label">Criteria Name</label>
-                            <input type="text" name="des" style={{ width: "450px", height: "30px" }} id="cName"
+                            <input type="text" name="des" style={{ width: "450px", height: "30px" }} id="des"
                                 onChange={handleCriteriaInput} />
                         </div>
 
 
                         <div className="mb-3">
                             <label className="m-form-label">Mark Percentage (%)</label>
-                            <input type="number" name="mark" style={{ width: "450px", height: "30px" }} id="cName"
+                            <input type="number" name="mark" style={{ width: "450px", height: "30px" }} id="mark"
                                 onChange={handleCriteriaInput} />
                         </div>
 
@@ -295,7 +331,7 @@ export default function AddMarking()  {
 
                                     <td>
                                         <button className="btn" style={{ color: "#0F0934" }}
-                                            onClick={(e) => handleDelete(e, data.des)}>
+                                            onClick={(e) => handleDelete(e,index)}>
                                             Remove
                                         </button>
                                     </td>
@@ -315,7 +351,8 @@ export default function AddMarking()  {
 
         </div>
     );
-        
+    
+    
 
 
 }

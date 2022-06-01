@@ -7,6 +7,7 @@ import {showSuccessMsg, showErrMsg} from './utils/notification/Notification'
 
 const initialState = {
     name: '',
+    email:'',
     password: '',
     cf_password: '',
     mobile:'',
@@ -21,7 +22,7 @@ export default function Profile() {
 
     const [user,setUser] = useState(JSON.parse(localStorage.getItem('user')));
     const [data, setData] = useState(initialState)
-    const {name,mobile,user_role,research_area,reg_number,password,cf_password,err,success} = data
+    const {name,email,mobile,user_role,research_area,reg_number,password,cf_password,err,success} = data
     const [avatar, setAvatar] = useState(false)
     const [loading, setLoading] = useState(false)
     const location =useLocation();
@@ -78,13 +79,14 @@ export default function Profile() {
 
     async function updateInfor() {
         try {
-            axios.patch(`http://localhost:8070/user/update/${user._id}`, {
+            axios.put(`http://localhost:8070/user/update/${user._id}`, {
                 name: name ? name : user.name,
+                email: email ? email : user.email,
                 avatar: avatar ? avatar : user.avatar,
-                mobile:mobile? mobile:user.mobile,
-                user_role:user_role? user_role:user.user_role,
-                research_area:research_area? research_area:user.research_area,
-                reg_number:reg_number? reg_number:user.reg_number
+                mobile:mobile ? mobile:user.mobile,
+                user_role:user_role ? user_role:user.user_role,
+                research_area:research_area ? research_area:user.research_area,
+                reg_number:reg_number ? reg_number:user.reg_number
             })
 
             setData({...data, err: '' , success: "Updated Success!"})
@@ -154,15 +156,15 @@ export default function Profile() {
         <input type="email"
          className="form-control"
         name="email" id="email" defaultValue={user.email}
-        placeholder="Your email address" disabled />
+        placeholder="Your email address"  onChange={handleChange} />
     </div>
 
         <div className="col-md-13 mb-3 font">
           <label htmlFor="about">Mobile</label>
             <input type="text"
             className="form-control"
-            name="about" id="about"
-            placeholder="Details"defaultValue={user.mobile} onChange={handleChange} 
+            name="about" id="about" defaultValue={user.mobile}
+            placeholder="Details" onChange={handleChange} 
                     />
       </div>
 

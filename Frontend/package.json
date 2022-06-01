@@ -28,6 +28,7 @@
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.5.24",
     "jspdf-invoice-template": "^1.4.2",
+    "mdb-react-ui-kit": "^3.0.0",
     "react": "^18.1.0",
     "react-bootstrap": "^2.4.0",
     "react-dom": "^18.1.0",
@@ -35,5 +36,6 @@
     "react-notifications-component": "^4.0.1",
     "react-router-dom": "^5.2.0",
     "reactstrap": "^9.0.3"
+    "react-slidez": "0.0.31"
   }
 }

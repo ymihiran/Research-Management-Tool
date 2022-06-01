@@ -32,6 +32,30 @@ input{
     margin-top: 40px;
 }
 
+.reg-from-container{
+    align-content : center;
+    margin-left: 22%;
+    margin-top: 30px;
+    margin-right: 12%;
+    margin-bottom: 4%;
+}
+
+.Hfont{
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 40px;
+    margin-left: 18px;
+    margin-top: 13px;
+    font-weight: bold;
+    color: #0F0934;
+}
+
+.tColum{
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #0F0934;
+}
+
 .t-form-label {
     margin-bottom: 0.6rem;
     font-size: 1rem;
@@ -416,5 +440,88 @@ input{
     .l-filter-container{
         height: 40px;
     }
+
+    .main-Featured-Container{
+        width:100px;
+        margin-top: 100px;
+
+    }
+
+    .main-slide-container{
+        background-color: #d80000;
+    }
+
+    .main-side-container{
+        background-color: white;
+        width: 20%;
+        height: 60%;
+        margin-left: 60%;
+        position: absolute;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+
+    }
+
+    .main-side-sub-container{
+        padding: 10px 10px 10px;
+        /* border-style: solid;
+        border-width: medium;
+        border-color: #2a027f;  */
+    }
+
+    .main-t-lbl{
+        margin-top: 10px;
+        color: #0F0934;
+        font-size: 2rem;
+        font-weight:bolder;
+    }
+
+    .main-side-button{
+        margin-top: 10px;
+        font-size: 1rem;
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .main-side-button2{
+        margin-top: 10px;
+        font-size: 1rem;
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #00D8B6;
+    }
   
+    .main-m-container{
+        display: grid;
+        height:100vh;
+        grid-template-columns: 10% auto 10%;
+    }
+
+    .main-item-con{
+        background-color: #84809F;
+    }
   
+    .main-cd-container{
+        margin-top: 40%;
+        padding: 40px 40px 40px;
+    }
+
+    .main-color-cards{
+        display:inline;
+        float:left;
+        max-width: 250px;
+    }
+
+    .main-color-cards2{
+        display:inline;
+        float:left;
+        margin-left: 20px;
+        max-width: 250px;
+    }
+
+    .quote-con{
+        display:flex;
+        margin-left: 20px;
+        max-width: 90%;
+        margin-top: 200px;
+
+    }

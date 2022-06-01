@@ -14,17 +14,17 @@ export default function TopicList()  {
     const[spec,setSpec] = useState("");
     const[field,setField] = useState("");
 
-    let col = "";
-    let btnColor="";
-    let btnText="";
+    let col = "l-accepted";
+    let btnColor="l-btn-pending";
+    let btnText="Edit";
 
     function authenticate() {
 
-        if((JSON.parse(localStorage.getItem('user')|| "[]")).user_role!="Supervisor" && (JSON.parse(localStorage.getItem('user')|| "[]")).user_role!="Co-Supervisor"){
+        if((JSON.parse(localStorage.getItem('user')|| "[]")).user_role!="Panel Member"){
             history.push("/login");
             Store.addNotification({
                 title: "You are not allowed!",
-                message: "You are not allowed to access this page! Please login as Supervisor or Co-Supervisor",
+                message: "You are not allowed to access this page! Please login as Panel Member",
                 animationIn: ["animate__animated", "animate__fadeIn"],
                 animationOut: ["animate__animated", "animate__fadeOut"],
                 type: "danger",
@@ -51,7 +51,7 @@ export default function TopicList()  {
     useEffect(()=>{
 
         
-        axios.get("http://localhost:8070/topic").then((res)=>{
+        axios.get("http://localhost:8070/evaluatedTopic").then((res)=>{
             setRequest(res.data.topicRouter);
             }).catch((err)=>{
                 alert(err.message);
@@ -61,47 +61,18 @@ export default function TopicList()  {
 
     console.log(request);
 
-    function colorProduce(data){
-        let val= "l-accepted";
-        if(data == "pending"){
-           val= "l-pending";
-           btnColor= "l-btn-accepted";
-           btnText="Review"  
-        }
-        else if(data == "Rejected"){
-            val= "l-rejected";
-            btnColor= "l-btn-pending";
-            btnText="Edit"   
-        }
-        else{
-            val= "l-accepted";
-            btnColor= "l-btn-pending";
-            btnText="Edit"   
-        }
-        col = val;
-
-    };
-
+   
 
     const setData = (data) => {
-        let { _id,tid, groupID, groupName, rField, rTopic,leaderEmail, comment,status} = data;
+        let { _id,tid, groupID, groupName, rField, rTopic,leaderEmail, comment,Evaluation} = data;
 
         localStorage.setItem('ID',_id);
-        localStorage.setItem('tid', tid);
         localStorage.setItem('groupID', groupID);
-        localStorage.setItem('groupName', groupName);
-        localStorage.setItem('rField', rField);
-        localStorage.setItem('rTopic', rTopic);
-        localStorage.setItem('leaderEmail', leaderEmail);
-        localStorage.setItem('comment', comment);
-        localStorage.setItem('status', status);
+        localStorage.setItem('Evaluation', Evaluation);
 
-        history.push('/AcceptTopic')
+
+        history.push('/EditEvaluatedTopic')
         
-    }
-
-    function search(rows){
-        return rows.filter(row => row.groupID.toLowerCase().indexOf(q))
     }
 
 
@@ -118,7 +89,7 @@ export default function TopicList()  {
             <div style={{backgroundColor:"white"}}>
 
                 <div className="t-list-head-container">
-                    <label className="h-text" style={{color:"#FF5631"}}> SUBMITTED</label> <br className="br1" />
+                    <label className="h-text" style={{color:"#FF5631"}}> EVALUATED</label> <br className="br1" />
                     <label className="h-text">RESEARCH TOPICS</label>
                 </div>
             
@@ -144,17 +115,7 @@ export default function TopicList()  {
                                     
                             </select>
 
-                            <label style={{marginLeft:"20px"}} > Research Topic: </label>
-
-                            <select className='l-s-spec' style={{marginLeft:"20px", backgroundColor:"white"}} name="Field" id="Field"
-                                    onChange={(e) => setSpec(e.target.value)}
-                                >
-                                    <option value="">All</option>
-                                    <option value="Accepted">Accepted</option>
-                                    <option value="pending">Pending</option>
-                                    <option value="Rejected">Rejected</option>
-                                    
-                            </select>
+                            
                         </div>
   
                     </div>
@@ -168,7 +129,6 @@ export default function TopicList()  {
                             <th scope="col">Group_ID</th>
                             <th scope="col">Research Field</th>
                             <th scope="col">Research Topic</th>             
-                            <th scope="col">Status</th>
                             <th scope="col" style={{width:'100px'}}>Action</th>
                             </tr>
                         </thead>
@@ -178,7 +138,7 @@ export default function TopicList()  {
                                 if(searchTerm ==="" && spec==="" && field===""){
                                     return val;
                                 }
-                                else if(val.groupID.toLowerCase().includes(searchTerm.toLocaleLowerCase()) && val.status.toLowerCase().includes(spec.toLocaleLowerCase()) && val.rField.toLowerCase().includes(field.toLocaleLowerCase())){
+                                else if(val.groupID.toLowerCase().includes(searchTerm.toLocaleLowerCase())&& val.rField.toLowerCase().includes(field.toLocaleLowerCase())){
                                     return val}
                             }).map((data,index)=>(
 
@@ -193,12 +153,7 @@ export default function TopicList()  {
                                     <td>
                                         {data.rTopic}
                                     </td>
-                                   
-                                    <td>
-                                        {colorProduce(data.status)}
-                                        <span className={col} >{data.status}</span>
-                                    </td>
-                                    
+                                                                       
                                     <td>
                                     <button className={btnColor} onClick={() => setData(data)}> {btnText} </button>
                                     </td>
