@@ -145,7 +145,7 @@ export default function DownloadTemplate() {
                   </a>
                 </div>
                 <div style={{ marginLeft: "125px" }}>
-                  <a href="/">
+                  <a onClick={setData}>
                     <i>Click here to submit</i>
                   </a>
                 </div>
