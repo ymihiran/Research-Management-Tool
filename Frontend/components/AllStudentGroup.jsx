@@ -3,7 +3,7 @@ import axios from "axios";
 import "./CSS/st.css";
 import "./CSS/stgrup.css";
 
-import ReactHTMLTableToExcel from "react-html-table-to-excel";
+//import ReactHTMLTableToExcel from "react-html-table-to-excel";
 
 export default function AllStudentGroup() {
   const [group, setGroups] = useState([]);

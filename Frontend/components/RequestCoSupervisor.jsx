@@ -1,56 +1,74 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+import axios from "axios";
+import SendIcon from "@mui/icons-material/Send";
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
-
-const names = [
-  "Oliver Hansen",
-  "Van Henry",
-  "April Tucker",
-  "Ralph Hubbard",
-  "Omar Alexander",
-  "Carlos Abbott",
-  "Miriam Wagner",
-  "Bradley Wilkerson",
-  "Virginia Andrews",
-  "Kelly Snyder",
-];
-
-function getStyles(name, personName, theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
 export default function RequestCoSupervisor() {
-  const theme = useTheme();
-  const [personName, setPersonName] = React.useState([]);
+  const [groupID, setGroupID] = useState();
+  const [topic, setTopic] = useState();
+  const [researchField, setResearchField] = useState();
+  const [coSupervisor, setCoSupervisor] = useState([]);
+  const [status, setStatus] = useState(false);
 
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
+  useEffect(() => {
+    setGroupID(localStorage.getItem("groupID"));
+    setTopic(localStorage.getItem("rTopic"));
+    setResearchField(localStorage.getItem("rField"));
+
+    //get supervisor details
+    axios
+      .get(
+        `http://localhost:8070/supervisor/co/${localStorage.getItem(
+          "rField"
+        )}/${"Co-Supervisor"}`
+      )
+      .then((res) => {
+        console.log(res.data);
+        setCoSupervisor(res.data);
+      });
+
+    //get request details
+    axios
+      .get(`http://localhost:8070/request/${localStorage.getItem("groupID")}`)
+      .then((res) => {
+        console.log("requested ", res.data.requested);
+        setStatus(res.data.requested);
+      });
+  }, []);
+
+  const handlerSend = async (data) => {
+    var { email } = data;
+
+    const newRequest = {
+      groupID,
+      researchField,
+      topic,
+      email,
+    };
+
+    let ans = window.confirm("Do you want to send this request ?");
+
+    if (ans) {
+      await axios
+        .post(`http://localhost:8070/request/`, newRequest)
+        .then(() => {
+          alert("Request sent successfully");
+          setStatus("send");
+        })
+        .catch((err) => {
+          alert(err);
+        });
+
+      //get request details
+      await axios
+        .get(`http://localhost:8070/request/${localStorage.getItem("groupID")}`)
+        .then((res) => {
+          console.log("request details ", res.data);
+          setStatus(res.data.requested);
+        });
+    }
   };
+
   return (
     <div className="body_container">
       {/*left side column */}
@@ -60,20 +78,27 @@ export default function RequestCoSupervisor() {
             REQUEST
           </label>
           <br />
-          <label className="h-text" style={{ color: "#ffffff" }}>
+          <label className="h-text mb-5" style={{ color: "#ffffff" }}>
             CO-SUPERVISOR
           </label>
         </div>
-        <form>
+        <form className=" pe-5">
           <div className="form-group mb-3 mt-5">
             <label>Group ID</label>
-            <input type="text" disabled className="form-control" id="groupID" />
+            <input
+              type="text"
+              value={groupID}
+              disabled
+              className="form-control"
+              id="groupID"
+            />
           </div>
 
           <div className="form-group mb-3">
             <label>Research Topic</label>
             <input
               type="text"
+              value={topic}
               disabled
               className="form-control"
               id="researchTopic"
@@ -81,39 +106,13 @@ export default function RequestCoSupervisor() {
           </div>
           <div className=" mb-5 ">
             <label>Research Field</label>
-            <FormControl
-              sx={{ width: 300, height: 45 }}
-              className="form-control me-5 "
-            >
-              <Select
-                displayEmpty
-                value={personName}
-                onChange={handleChange}
-                input={<OutlinedInput />}
-                renderValue={(selected) => {
-                  if (selected.length === 0) {
-                    return <em>Your Research Field</em>;
-                  }
-
-                  return selected.join(", ");
-                }}
-                MenuProps={MenuProps}
-                inputProps={{ "aria-label": "Without label" }}
-              >
-                <MenuItem disabled value="">
-                  <em>Your Research Field</em>
-                </MenuItem>
-                {names.map((name) => (
-                  <MenuItem
-                    key={name}
-                    value={name}
-                    style={getStyles(name, personName, theme)}
-                  >
-                    {name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+            <input
+              type="text"
+              value={researchField}
+              disabled
+              className="form-control"
+              id="researchTopic"
+            />
           </div>
           <button type="submit" className="btn btn-success ">
             Find Co-Supervisor
@@ -123,120 +122,110 @@ export default function RequestCoSupervisor() {
 
       {/*right side column */}
       <div className="right_container">
-        <form>
-          <ul className="list-group">
-            <div className="criteria_box mb-5 fw-bold">
-              <div className="form-group row mb-4 criteria_row">
-                <div className="col ">
-                  <label>Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input
-                    type="number"
-                    min="0"
-                    max="25"
-                    className="form-control"
-                  />
-                </div>
-              </div>
+        <ul className="list-group">
+          <div
+            className=" mb-5"
+            style={{
+              borderRadius: "10px",
+              border: "1px solid #9b97b6",
+              backgroundColor: "#ece9ff",
+              padding: " 30px 30px",
+              width: "650px",
+              height: "450px",
+              overflow: "scroll",
+              overflowX: " hidden",
+            }}
+          >
+            <div className="form-group row mb-4 criteria_row">
+              <table className="table-hover ms-4">
+                <thead>
+                  <tr>
+                    <th scope="col" className="col">
+                      No
+                    </th>
+                    <th scope="col" className="col-2 ps-5">
+                      Name
+                    </th>
+                    <th scope="col" className="col ms-5">
+                      <center>Email</center>
+                    </th>
+                    <th scope="col-1" className="col-5"></th>
+                  </tr>
+                </thead>
 
-              <div className="form-group row mb-4 criteria_row">
-                <div className="col">
-                  <label>Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input
-                    type="number"
-                    min="0"
-                    max="25"
-                    className="form-control"
-                  />
-                </div>
-              </div>
-
-              <div className="form-group row mb-4 criteria_row">
-                <div className="col">
-                  <label>Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input type="number" className="form-control" />
-                </div>
-              </div>
-
-              <div className="form-group row mb-4 criteria_row">
-                <div className="col">
-                  <label>Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input type="number" className="form-control" />
-                </div>
-              </div>
-
-              <div className="form-group row mb-4 criteria_row">
-                <div className="col">
-                  <label>Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input type="number" className="form-control" />
-                </div>
-              </div>
-
-              <div className="form-group row mb-4 criteria_row">
-                <div className="col">
-                  <label>Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input type="number" className="form-control" />
-                </div>
-              </div>
-
-              <div className="form-group row mb-4 criteria_row">
-                <div className="col">
-                  <label>Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input type="number" className="form-control" />
-                </div>
-              </div>
-
-              <div className="form-group row mb-4 criteria_row ">
-                <div className="col">
-                  <label>Criteria Name Criteria Name </label>
-                </div>
-                <div className="col">
-                  <label>25</label>
-                </div>
-                <div className="col-2">
-                  <input type="number" className="form-control" />
-                </div>
-              </div>
+                <tbody>
+                  {coSupervisor?.map((data, index) => (
+                    <tr key={index}>
+                      <th scope="row">{index + 1}</th>
+                      <td className=" ps-5 pe-3"> {data.name}</td>
+                      <td className="ps-5">{data.email}</td>
+                      <td>
+                        <center>
+                          {status ? (
+                            <div className="col-3 ms-5 ">
+                              <a
+                                type="number"
+                                min="0"
+                                max="25"
+                                className="form-control "
+                                style={{
+                                  width: "70px",
+                                  backgroundColor: "#ece9ff",
+                                  border: "none",
+                                }}
+                              >
+                                <div className="ps-2 ">
+                                  <SendIcon
+                                    fontSize="large"
+                                    sx={{
+                                      "&:hover": {
+                                        color: "#AAAAAA",
+                                      },
+                                      color: "#AAAAAA",
+                                      disabled: false,
+                                    }}
+                                  />
+                                </div>
+                              </a>
+                            </div>
+                          ) : (
+                            <div className="col-3 ms-5 ">
+                              <a
+                                type="number"
+                                min="0"
+                                max="25"
+                                className="form-control "
+                                style={{
+                                  width: "70px",
+                                  backgroundColor: "#ece9ff",
+                                  border: "none",
+                                }}
+                                onClick={(e) => handlerSend(data)}
+                              >
+                                <div className="ps-2 ">
+                                  <SendIcon
+                                    fontSize="large"
+                                    sx={{
+                                      "&:hover": {
+                                        color: "#00D8B6",
+                                      },
+                                      color: "green",
+                                      disabled: false,
+                                    }}
+                                  />
+                                </div>
+                              </a>
+                            </div>
+                          )}
+                        </center>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
-          </ul>
-          <button type="submit" className="btn btn-success btn_submit mt-3">
-            Submit
-          </button>
-        </form>
+          </div>
+        </ul>
       </div>
     </div>
   );

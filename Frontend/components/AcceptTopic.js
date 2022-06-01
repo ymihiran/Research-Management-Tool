@@ -3,6 +3,10 @@ import "./CSS/btrap.css";
 import React, {useState,useEffect} from "react";
 import axios from 'axios';
 import { useHistory } from 'react-router';
+import emailjs from "emailjs-com";
+import { Store } from 'react-notifications-component';
+
+
 
 export default function AcceptTopic()  {
 
@@ -15,6 +19,36 @@ export default function AcceptTopic()  {
     const [leaderEmail, setleaderEmail] = useState();
     const [comment, setacomment] = useState();
     const [status, setstatus] = useState();
+
+    let history = useHistory();
+
+    function authenticate() {
+
+        if((JSON.parse(localStorage.getItem('user')|| "[]")).user_role!="Supervisor" || (JSON.parse(localStorage.getItem('user')|| "[]")).user_role!="Co-Supervisor"){
+            history.push("/login");
+            Store.addNotification({
+                title: "You are not allowed!",
+                message: "You are not allowed to access this page! Please login as Supervisor or Co-Supervisor",
+                animationIn: ["animate__animated", "animate__fadeIn"],
+                animationOut: ["animate__animated", "animate__fadeOut"],
+                type: "danger",
+                insert: "top",
+                container: "top-right",
+                
+                dismiss: {
+                  duration: 2500,
+                  onScreen: true,
+                  showIcon: true
+                },
+    
+                width:400
+            });    
+        }
+    }
+    
+    setTimeout(() => {
+        authenticate();
+    }, 0);
 
 
     useEffect(()=>{
@@ -66,13 +100,54 @@ export default function AcceptTopic()  {
         if (ans) {
 
             await axios.put(`http://localhost:8070/topic/${id}`, updateTopic).then(() => {
-                alert("Status Update successfully");
+                Store.addNotification({
+                    title: "Status Updated Successfully.",
+                    animationIn: ["animate__animated", "animate__fadeIn"],
+                    animationOut: ["animate__animated", "animate__fadeOut"],
+                    type: "success",
+                    insert: "top",
+                    container: "top-right",
+                    
+                    dismiss: {
+                      duration: 1500,
+                      onScreen: true,
+                      showIcon: true
+                    },
+        
+                    width:400
+                });
+
+                history.push('/TopicList');
             }).catch((err) => {
                 alert(err);
             })
 
         }
+
+        document.getElementById("subBut").click();
+
+        
     }
+
+    function sendEmail(e) {
+        e.preventDefault();
+
+        emailjs
+        .sendForm(
+            'service_tc03vnm',
+            'template_viacnc5',
+            e.currentTarget,
+            '-utNmr2eLLLW4jLyR'
+        )
+        .then(
+            (result) => {
+            history.push("/topiclist");
+            },
+            (error) => {
+            console.log(error.text);
+            }
+        );
+      }
 
     return(
         <div className="topic-container">
@@ -139,14 +214,24 @@ export default function AcceptTopic()  {
                             />
                         </div>
                         <br />
-                        <button name="Accept" type="submit" className="btn btn-primary" style={{backgroundColor:"#0F0934",width:"200px",fontSize:"2rem"}} value="Accepted">
+
+                        <input type="hidden" name="mail" value={leaderEmail} />
+
+                        <button name="Accept" type="submit" className="l-btn-accept" style={{width:"200px",fontSize:"2rem"}} value="Accepted">
                             Accept
                         </button>
 
-                        <button name="Reject" type="submit" className="btn btn-primary" style={{backgroundColor:"#84809F",width:"200px", marginLeft:"40px",fontSize:"2rem"}} value="Rejected">
+                        <button name="Reject" type="submit" className="l-btn-reject" style={{width:"200px", marginLeft:"40px",fontSize:"2rem"}} value="Rejected">
                             Reject
                         </button>
                     </form>  
+
+                    <form onSubmit={sendEmail}>
+                            <input type="hidden" name="mail" value={leaderEmail} />
+                            <input type="hidden" name="to_name" value={groupName} />
+                            <input type="hidden" name="status" value={status} />
+                            <button hidden id="subBut">Send Email</button>
+                    </form>
 
                     <br/>            
                 </div>

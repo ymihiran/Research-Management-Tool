@@ -3,16 +3,48 @@ import "./CSS/btrap.css";
 import React, {useState,useEffect} from "react";
 import axios from 'axios';
 import { useHistory } from 'react-router';
+import { Store } from "react-notifications-component";
 
 
 export default function TopicList()  {
 
     const[request,setRequest] = useState([]);
     let history = useHistory();
+    const[searchTerm,setSearchTerm] = useState("");
+    const[spec,setSpec] = useState("");
+    const[field,setField] = useState("");
 
     let col = "";
     let btnColor="";
-    let btnText=""
+    let btnText="";
+
+    function authenticate() {
+
+        if((JSON.parse(localStorage.getItem('user')|| "[]")).user_role!="Supervisor" && (JSON.parse(localStorage.getItem('user')|| "[]")).user_role!="Co-Supervisor"){
+            history.push("/login");
+            Store.addNotification({
+                title: "You are not allowed!",
+                message: "You are not allowed to access this page! Please login as Supervisor or Co-Supervisor",
+                animationIn: ["animate__animated", "animate__fadeIn"],
+                animationOut: ["animate__animated", "animate__fadeOut"],
+                type: "danger",
+                insert: "top",
+                container: "top-right",
+                
+                dismiss: {
+                  duration: 2500,
+                  onScreen: true,
+                  showIcon: true
+                },
+    
+                width:400
+            });    
+        }
+    }
+    
+    setTimeout(() => {
+        authenticate();
+    }, 0);
 
     
 
@@ -68,6 +100,10 @@ export default function TopicList()  {
         
     }
 
+    function search(rows){
+        return rows.filter(row => row.groupID.toLowerCase().indexOf(q))
+    }
+
 
     return(
         <div className="t-list-container">
@@ -88,19 +124,63 @@ export default function TopicList()  {
             
                 <div className="t-list-tb-container">
 
+                    <div className="l-filter-container" style={{backgroundColor:"#D3D3D3", paddingTop: "5px",paddingLeft: "10px", paddingRight: "10px",paddingBottom: "5px"}}>
+
+                        <div className="m-sub-container">
+                            <input placeholder="Group ID" className="l-sbox" type="text" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} />
+                        </div>
+
+                        <div className="m-sub-container2">
+                            
+                        <label> Research Field:  </label>
+                        <select style={{marginLeft:"20px", backgroundColor:"white"}}  className='l-s-spec'  name="Field" id="rField"
+                                    onChange={(e) => setField(e.target.value)}
+                                >
+                                    <option value="">All</option>
+                                    <option value="Artificial Interligance">Artificial Interligance</option>
+                                    <option value="Machine Learning">Machine Learning</option>
+                                    <option value="Games">Games</option>
+                                    <option value="Robotics">Robotics</option>
+                                    
+                            </select>
+
+                            <label style={{marginLeft:"20px"}} > Research Topic: </label>
+
+                            <select className='l-s-spec' style={{marginLeft:"20px", backgroundColor:"white"}} name="Field" id="Field"
+                                    onChange={(e) => setSpec(e.target.value)}
+                                >
+                                    <option value="">All</option>
+                                    <option value="Accepted">Accepted</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="Rejected">Rejected</option>
+                                    
+                            </select>
+                        </div>
+  
+                    </div>
+
+                    
+
                     <table className="t-table table-striped table-hover">
                         <thead>
                             <tr>
                             <th scope="col">#</th>
                             <th scope="col">Group_ID</th>
-                            <th scope="col">Research Topic</th>
+                            <th scope="col">Research Field</th>
+                            <th scope="col">Research Topic</th>             
                             <th scope="col">Status</th>
                             <th scope="col" style={{width:'100px'}}>Action</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                            {request.map((data,index)=>(
+                            {request.filter(val=>{
+                                if(searchTerm ==="" && spec==="" && field===""){
+                                    return val;
+                                }
+                                else if(val.groupID.toLowerCase().includes(searchTerm.toLocaleLowerCase()) && val.status.toLowerCase().includes(spec.toLocaleLowerCase()) && val.rField.toLowerCase().includes(field.toLocaleLowerCase())){
+                                    return val}
+                            }).map((data,index)=>(
 
                                 <tr key={index}>
                                     <th scope="row">{index+1}</th>
@@ -108,8 +188,12 @@ export default function TopicList()  {
                                         {data.groupID}
                                     </td>
                                     <td>
+                                        {data.rField}
+                                    </td>
+                                    <td>
                                         {data.rTopic}
                                     </td>
+                                   
                                     <td>
                                         {colorProduce(data.status)}
                                         <span className={col} >{data.status}</span>

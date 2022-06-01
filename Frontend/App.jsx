@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import "/node_modules/bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
+
+import axios from "axios";
+
+
 import UploadTemplate from "./components/UploadTemplate";
 import SubmitTypes from "./components/SubmitTypes";
-import StudentGroup from "./components/StudentGroup";
-
-import { BrowserRouter as Router, Route } from "react-router-dom";
 import SubmitTopic from "./components/SubmitTopic";
 import EvaluateTopic from "./components/EvlauateTopic";
 import AcceptTopic from "./components/AcceptTopic";
@@ -14,51 +16,101 @@ import TopicList from "./components/TopicList";
 import StdTopicList from "./components/StdTopicList";
 import AddMarking from "./components/AddMarking";
 
+import EditTopic from "./components/EditTopic";
+import Main from './components/Main';
+import { ReactNotifications } from "react-notifications-component";
+
+
 import SubmitDocs from "./components/SubmitDocs";
 import AllStudentGroup from "./components/AllStudentGroup";
 import AllTypes from "./components/AllTypes";
+
 import AllCreateTypes from "./components/AllCreateTypes";
+
 
 import MarkingList from "./components/MarkingList";
 import EditMarking from "./components/EditMarking";
+import EvaluatedTopicList from "./components/EvaluatedTopicList"
+import EditEvaluatedTopic from "./components/EditEvaluatedTopic"
+import SubmitTypes from "./components/SubmitTypes.jsx";
 
 import DocumentEvaluation from "./components/DocumentEvaluation";
 import PresentationEvaluation from "./components/PresentationEvaluation";
 import AllDocuments from "./components/AllDocuments";
-import SubmitTypes from "./components/SubmitTypes.jsx";
 import RequestCoSupervisor from "./components/RequestCoSupervisor";
+
 import UpdateUploadTemplate from "./components/UpdateUploadTemplate";
 import DownloadTemplate from "./components/DownloadTemplate";
+
+import StudentGroup from "./components/StudentGroup";
+import UploadTemplate from "./components/UploadTemplate";
+
+
+import chatForum from "./components/chatForum";
+import chatGroupSupervisor from "./components/chatGroupSupervisor";
+import MsgReplyForm from "./components/MsgReplyForm";
+
+import Login from './components/Login';
+import Register from './components/Register';
+import Profile from './components/Profile';
+import AllUsers from './components/AllUsers';
+import PanelMembers from './components/CheckPanelMembers'
+import SelectPanelMembers from './components/SelectPanelMembers'
+
+
+
 
 function App() {
   return (
     <div>
+      <ReactNotifications />
+
       <Router>
+
+
+        <Route path="/" exact component={Main} />
+        <Route path="/profile" exact component={Profile} />
+        <Route path="/panelmembers" exact component={PanelMembers} />
+        <Route path="/selectpanel" exact component={SelectPanelMembers} />
+        <Route path="/allprof" exact component={AllUsers} />
+        <Route path="/register" exact component={Register}/>
+
+        <Route path="/login" exact component={Login} />
         <Route path="/SubmitTopic" component={SubmitTopic} />
         <Route path="/EvaluateTopic" component={EvaluateTopic} />
+        <Route path="/EvaluatedTopicList" component={EvaluatedTopicList} />
+        <Route path="/EditEvaluatedTopic" component={EditEvaluatedTopic} />
         <Route path="/AcceptTopic" component={AcceptTopic} />
         <Route path="/TopicList" component={TopicList} />
         <Route path="/StdTopicList" component={StdTopicList} />
         <Route path="/AddMarking" component={AddMarking} />
-
-        <Route path="/SubmitTypes" component={SubmitTypes} />
-        <Route path="/StudentGroup" component={StudentGroup} />
+        <Route path="/EditTopic" component={EditTopic} />
         <Route path="/SubmitDocs" component={SubmitDocs} />
-        <Route path="/UploadTemplate" component={UploadTemplate} />
         <Route path="/AllStudentGroup" component={AllStudentGroup} />
         <Route path="/AllTypes" component={AllTypes} />
 
+
         <Route path="/AllCreateTypes" component={AllCreateTypes} />
+
 
         <Route path="/MarkingList" component={MarkingList} />
         <Route path="/EditMarking" component={EditMarking} />
+        <Route path="/Main" component={Main} />
         <Route path="/SubmitTypes" component={SubmitTypes} />
         <Route exact path="/doc" component={DocumentEvaluation} />
         <Route path="/presentation" component={PresentationEvaluation} />
         <Route path="/allDoc" component={AllDocuments} />
         <Route path="/reqCoSuper" component={RequestCoSupervisor} />
+
         <Route path="/UpdateTemplate" component={UpdateUploadTemplate} />
         <Route path="/DownloadTemplate" component={DownloadTemplate} />
+
+        <Route path="/StudentGroup" component={StudentGroup} />
+        <Route path="/UploadTemplate" component={UploadTemplate} />
+        <Route path="/chat" component={chatForum} />
+        <Route path="/chatGroup" component={chatGroupSupervisor} />
+        <Route path="/reply" component={MsgReplyForm} />
+
       </Router>
     </div>
   );

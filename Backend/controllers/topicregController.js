@@ -59,6 +59,22 @@ export const getSingleTopic = async (req, res) => {
   });
 };
 
+export const getSingleTopicData = async (req, res) => {
+  let gid = req.params.id;
+
+  await TopicReg.findOne({ groupID: gid }).exec((err, Topic) => {
+    if (err) {
+      return res.status(400).json({
+        error: err,
+      });
+    }
+    return res.status(200).json({
+      success: true,
+      topicRouter: Topic,
+    });
+  });
+};
+
 export const updateSingleRecord = async (req, res) => {
   let topicid = req.params.id;
   const {
@@ -102,5 +118,20 @@ export const deleteTopic = async (req, res) => {
     .catch((err) => {
       console.log(err.message);
       res.status(500).send({ status: "Error delete" });
+    });
+};
+
+//get group id using leader's email
+export const getGroupID = async (req, res) => {
+  console.log("req.params", req.params);
+  const leaderEmail = req.params.leaderEmail;
+
+  await TopicReg.findOne({ leaderEmail: leaderEmail })
+
+    .then((data) => {
+      res.json(data.groupID);
+    })
+    .catch((err) => {
+      console.log(err);
     });
 };

@@ -1,7 +1,122 @@
 import "./CSS/topicsub.css";
 import "./CSS/btrap.css";
+import React, {useState,useEffect} from "react";
+import axios from 'axios';
+import { useHistory } from 'react-router';
+import emailjs from "emailjs-com";
+import { Store } from 'react-notifications-component';
 
 export default function EvaluateTopic()  {
+    const [tid, settid] = useState();
+    const [id, setid] = useState();
+    const [groupID, setgroupID] = useState("Y3_S1_1234");
+    const [groupName, setgroupName] = useState();
+    const [rField, setrField] = useState();
+    const [rTopic, setrTopic] = useState();
+    const [leaderEmail, setleaderEmail] = useState();
+    const [comment, setacomment] = useState();
+    const [Evaluation, setEvaluation] = useState();
+    const[request,setRequest] = useState([]);
+
+    let history = useHistory();
+
+    function authenticate() {
+
+        if((JSON.parse(localStorage.getItem('user')|| "[]")).user_role!="Panel Member"){
+            history.push("/login");
+            Store.addNotification({
+                title: "You are not allowed!",
+                message: "You are not allowed to access this page! Please login as Panel Member",
+                animationIn: ["animate__animated", "animate__fadeIn"],
+                animationOut: ["animate__animated", "animate__fadeOut"],
+                type: "danger",
+                insert: "top",
+                container: "top-right",
+                
+                dismiss: {
+                  duration: 2500,
+                  onScreen: true,
+                  showIcon: true
+                },
+    
+                width:400
+            });    
+        }
+    }
+    
+    setTimeout(() => {
+        authenticate();
+    }, 0);
+
+    useEffect(()=>{
+
+        const path = "http://localhost:8070/topic/group/"+groupID;
+        console.log(path);
+
+        axios.get(path).then((res)=>{
+            setRequest(res.data.topicRouter);
+            }).catch((err)=>{
+                alert(err.message);
+        });
+
+        console.log(request.groupName);
+
+
+        settid(request.tid);
+        setid(request._id);
+        setgroupID(request.groupID);
+        setgroupName(request.groupName);
+        setrField(request.rField);
+        setrTopic(request.rTopic);
+        setleaderEmail(request.leaderEmail);
+        setacomment(request.comment);
+
+    },[])
+
+    function submitData(e) {
+        e.preventDefault();
+        settid("1111");
+        const newTopic = {
+              
+            tid,
+            groupID,
+            groupName,
+            rField,
+            rTopic,
+            leaderEmail,
+            comment,
+            Evaluation,
+        }
+
+        axios.post("http://localhost:8070/evaluatedTopic/",newTopic).then(()=>{
+
+            Store.addNotification({
+                title: "Evaluation Sent Successfully.",
+                animationIn: ["animate__animated", "animate__fadeIn"],
+                animationOut: ["animate__animated", "animate__fadeOut"],
+                type: "success",
+                insert: "top",
+                container: "top-right",
+                
+                dismiss: {
+                  duration: 1500,
+                  onScreen: true,
+                  showIcon: true
+                },
+    
+                width:400
+            });
+            e.target.reset();
+            history.push('/StdTopicList');
+            
+    
+         }).catch((err)=>{
+    
+            alert(err);
+         })
+    
+
+    }
 
     return(
         <div className="topic-container">
@@ -16,14 +131,14 @@ export default function EvaluateTopic()  {
                         <div className="mb-3">
                             <label className="s-form-label" >Group ID</label>
                             <input className="s-input" disabled type="text"  style={{width:"450px"}}  id="cUName"
-                                
+                                value={request.groupID}
                             />
                         </div>
 
                         <div className="mb-3">
                             <label className="s-form-label">Group Name</label>
                             <input  className="s-input" disabled  type="text"  style={{width:"450px"}}  id="cName"
-                                
+                                value={request.groupName}
                             />
                         </div>
 
@@ -31,7 +146,7 @@ export default function EvaluateTopic()  {
                             <label className="s-form-label">Research Field</label>
                             
                             <input  className="s-input" disabled  type="text"  style={{width:"450px"}}  id="cName"
-                                
+                                value={request.rField}
                                 />
 
                         </div>
@@ -39,6 +154,7 @@ export default function EvaluateTopic()  {
                         <div className="mb-3">
                             <label className="s-form-label">Research Topic</label>
                             <input className="s-input" disabled type="text"  style={{width:"450px"}}  id="cName"   
+                                value={request.rTopic}
                             />
                            
                         </div>
@@ -46,14 +162,14 @@ export default function EvaluateTopic()  {
                         <div className="mb-3">
                             <label className="s-form-label">Group Leader's email</label>
                             <input className="s-input" disabled type="text"  style={{width:"450px"}}  id="cName"
-                                
+                                value={request.leaderEmail}
                             />
                         </div>
 
                         <div className="mb-3">
                             <label className="s-form-label">Comments (Optional)</label>
                             <input className="s-input" disabled type="text"  style={{width:"450px", height:"100px"}}  id="cName"
-                                
+                                value={request.comment}
                             />
                         </div>
                     </form>       
@@ -81,12 +197,13 @@ export default function EvaluateTopic()  {
                 </button> <br/> <br/>
 
 
-                <form >
+                <form onSubmit={submitData} >
                         
                         <div className="mb-3">
-                            <label className="t-form-label">Comments (Optional)</label>
+                            <label className="t-form-label">Comments</label>
                             <input type="text"  style={{width:"450px", height:"100px"}}  id="cName"
-                                
+                                required
+                                onChange={(e)=>setEvaluation(e.target.value)}
                             />
                         </div>
 
