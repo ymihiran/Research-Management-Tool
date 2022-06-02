@@ -57,6 +57,7 @@ import MsgReplyForm from "./components/MsgReplyForm";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Profile from "./components/Profile";
+import ProfileUpdate from "./components/ProfileUpdate";
 import AllUsers from "./components/AllUsers";
 import PanelMembers from "./components/CheckPanelMembers";
 import SelectPanelMembers from "./components/SelectPanelMembers";
@@ -108,6 +109,7 @@ function App() {
       <Router>
         <Route path="/"  exact component={Main} />
         <Route path="/profile" exact component={isLogged?Profile:NotFound} />
+        <Route path="/updateadmin/:id" exact component={isAdmin? ProfileUpdate: NotFound} />
         <Route path="/panelmembers" exact component={isAdmin? PanelMembers: NotFound} />
         <Route path="/selectpanel" exact component={isAdmin? SelectPanelMembers : NotFound} />
         <Route path="/allprof"  exact component={isAdmin? AllUsers: NotFound} /> 
