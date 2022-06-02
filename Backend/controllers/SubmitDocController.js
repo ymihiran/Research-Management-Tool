@@ -60,8 +60,12 @@ export const SubmitDoc = async (req, res) => {
 //update document status
 export const updateDocStatus = async (req, res) => {
   const id = req.params.id;
+  const status = req.body.Status;
 
+  console.log("id", id);
   await SubmitDocRoute.findByIdAndUpdate(id, {
-    Status: "Graded",
+    Status: status,
+  }).then(() => {
+    res.json("Document Status Updated");
   });
 };

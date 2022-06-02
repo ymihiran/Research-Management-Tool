@@ -13,6 +13,7 @@ export default function DocumentEvaluation() {
   const [evaluatedBy, setEvaluatedBy] = useState([]);
   const [Doctype, setDoctype] = useState();
   const [docID, setDocID] = useState();
+  const [Status, setStatus] = useState();
   const history = useHistory();
 
   useEffect(() => {
@@ -50,10 +51,16 @@ export default function DocumentEvaluation() {
       Object.values(inputValue).reduce((total, value) => total + value, 0)
     );
     console.log("total", total);
+
+    setStatus(
+      "Graded: " +
+        Object.values(inputValue).reduce((total, value) => total + value, 0)
+    );
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Status", Status);
 
     const newEvaluation = {
       groupID,
@@ -63,7 +70,6 @@ export default function DocumentEvaluation() {
       evaluatedBy,
     };
 
-    //insert evaluation data
     await axios
       .post("http://localhost:8070/evaluation/document", newEvaluation)
       .then(() => {
@@ -73,9 +79,18 @@ export default function DocumentEvaluation() {
       .catch((err) => {
         alert(err);
       });
-  };
 
-  //Update the evaluation status
+    const Update = {
+      Status,
+    };
+
+    //Update document status
+    await axios
+      .put(`http://localhost:8070/document/status/${docID}`, Update)
+      .then(() => {
+        alert("Document status updated");
+      });
+  };
 
   return (
     <div className="body_container">
