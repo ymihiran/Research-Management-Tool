@@ -123,8 +123,6 @@ function App() {
           component={isAdmin ? AllUsers : NotFound}
         />
         <Route path="/register" exact component={Register} />
-
-
         <Route path="/login" exact component={Login} />
         <Route path="/SubmitTopic" component={SubmitTopic} />
         <Route path="/EvaluateTopic" component={EvaluateTopic} />
