@@ -106,8 +106,6 @@ function App() {
  
       <ReactNotifications />
       <Router>
-
-
         <Route path="/"  exact component={Main} />
         <Route path="/profile" exact component={isLogged?Profile:NotFound} />
         <Route path="/panelmembers" exact component={isAdmin? PanelMembers: NotFound} />
