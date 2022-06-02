@@ -31,7 +31,6 @@ import EditEvaluatedTopic from "./components/EditEvaluatedTopic";
 import SubmitTypes from "./components/SubmitTypes.jsx";
 
 import DocumentEvaluation from "./components/DocumentEvaluation";
-import PresentationEvaluation from "./components/PresentationEvaluation";
 import AllDocuments from "./components/AllDocuments";
 import RequestCoSupervisor from "./components/RequestCoSupervisor";
 
@@ -42,7 +41,6 @@ import StudentGroup from "./components/StudentGroup";
 import UploadTemplate from "./components/UploadTemplate";
 
 import AllSubmitDoc from "./components/AllSubmitDoc";
-
 
 import chatForum from "./components/chatForum";
 import chatGroupSupervisor from "./components/chatGroupSupervisor";
@@ -89,7 +87,6 @@ function App() {
         <Route path="/Main" component={Main} />
         <Route path="/SubmitTypes" component={SubmitTypes} />
         <Route exact path="/doc" component={DocumentEvaluation} />
-        <Route path="/presentation" component={PresentationEvaluation} />
         <Route path="/allDoc" component={AllDocuments} />
         <Route path="/reqCoSuper" component={RequestCoSupervisor} />
 
