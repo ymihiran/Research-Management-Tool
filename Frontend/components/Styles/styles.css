@@ -204,7 +204,6 @@ tr {
   height: 100vh;
   grid-template-columns: 40% auto;
 }
-
 .evaluate_btn:disabled {
   cursor: not-allowed !important;
   pointer-events: all !important;

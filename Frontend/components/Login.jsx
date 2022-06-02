@@ -24,7 +24,7 @@ function Login() {
             localStorage.setItem("userAuthToken", `${data.token}`)
             localStorage.setItem("user",JSON.stringify(data.result))
             localStorage.setItem('firstLogin', true)
-        
+           
             history.push('/profile')
         } catch (error) {
             if(error.response.status === 404){
@@ -96,7 +96,7 @@ function Login() {
                  </div>
 
 <br></br>
-                 <button type="submit" className="l-btn-accept" style={{width:"200px",fontWeight:"bold"}} >Login</button>
+                 <button type="submit"  className="l-btn-accept" style={{width:"200px",fontWeight:"bold"}} >Login</button>
                     </form>
                     <div className="bottom-t-container">
                         <label className="bottom-t" style={{color:"#FF5631"}}> SLIIT</label> <label className="bottom-t"> Research</label> <br />
