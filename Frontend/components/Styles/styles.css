@@ -21,20 +21,12 @@
   justify-content: center;
 }
 
-.btn_submit {
-  background-color: #0f0934 !important;
-  color: #ffffff;
-  width: 150px;
-
-  margin-left: 75%;
-}
-
 .criteria_box {
   border-radius: 10px;
   border: 1px solid #9b97b6;
   background-color: #ece9ff;
   padding: 30px 30px;
-  width: 800px;
+  width: 700px;
   height: 450px;
   overflow: scroll;
   overflow-x: hidden;
@@ -180,4 +172,35 @@ tr {
   height: 300px;
   overflow: scroll;
   overflow-x: hidden;
+}
+
+.btn_total {
+  background-color: #00d8be !important;
+  color: #000;
+  width: 100px;
+}
+
+.btn_total:hover {
+  color: #000 !important;
+  background-color: #00a592 !important;
+  transition: all 0.7s;
+}
+.btn_submit {
+  background-color: #0f0934 !important;
+  color: #ffffff;
+  width: 150px;
+
+  margin-left: 100%;
+}
+
+.Docleft_container {
+  background-color: #0f0934;
+  color: #ffffff;
+  padding: 70px 150px;
+}
+
+.Docbody_container {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: 40% auto;
 }

@@ -11,7 +11,9 @@ export default function DocumentEvaluation() {
   const [inputValue, setInputValue] = useState(0);
   const [total, setTotal] = useState(0);
   const [evaluatedBy, setEvaluatedBy] = useState([]);
-  const [Doctype, setDoctype] = useState("null");
+  const [Doctype, setDoctype] = useState();
+  const [docID, setDocID] = useState();
+  const [Status, setStatus] = useState();
   const history = useHistory();
 
   useEffect(() => {
@@ -19,24 +21,46 @@ export default function DocumentEvaluation() {
     setResearchTopic(localStorage.getItem("rTopic"));
     setLink(localStorage.getItem("Link"));
     setEvaluatedBy(JSON.parse(localStorage.getItem("user")).name);
+    setDoctype(localStorage.getItem("DocType"));
+    setDocID(localStorage.getItem("DocID"));
 
-    console.log("localStorage.getItem()", localStorage.getItem("Link"));
-
-    axios
-      .get(
-        `http://localhost:8070/markingScheme/one/${localStorage.getItem(
-          "Research_Field"
-        )}/${"Document"}`
-      )
-      .then((res) => {
-        console.log("res.data", res.data);
-        let { _id, sid, specialization, schemeType, marks, criteria } =
-          res.data;
-        setMarkingCriteria(criteria);
-      })
-      .catch((err) => {
-        alert(err);
-      });
+    if (
+      localStorage.getItem("DocType") == "Proposal Presentation" ||
+      localStorage.getItem("DocType") == "Progress Presentation" ||
+      localStorage.getItem("DocType") == "Final Presentation"
+    ) {
+      axios
+        .get(
+          `http://localhost:8070/markingScheme/one/${localStorage.getItem(
+            "Research_Field"
+          )}/${"Presentation"}`
+        )
+        .then((res) => {
+          console.log("res.data", res.data);
+          let { _id, sid, specialization, schemeType, marks, criteria } =
+            res.data;
+          setMarkingCriteria(criteria);
+        })
+        .catch((err) => {
+          alert("Not provide the marking scheme");
+        });
+    } else {
+      axios
+        .get(
+          `http://localhost:8070/markingScheme/one/${localStorage.getItem(
+            "Research_Field"
+          )}/${"Document"}`
+        )
+        .then((res) => {
+          console.log("res.data", res.data);
+          let { _id, sid, specialization, schemeType, marks, criteria } =
+            res.data;
+          setMarkingCriteria(criteria);
+        })
+        .catch((err) => {
+          alert("Not provide the marking scheme");
+        });
+    }
   }, []);
 
   const handleChangeInput = (e, index) => {
@@ -49,10 +73,17 @@ export default function DocumentEvaluation() {
       Object.values(inputValue).reduce((total, value) => total + value, 0)
     );
     console.log("total", total);
+
+    setStatus(
+      "Graded: " +
+        Object.values(inputValue).reduce((total, value) => total + value, 0) +
+        "%"
+    );
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Status", Status);
 
     const newEvaluation = {
       groupID,
@@ -61,28 +92,46 @@ export default function DocumentEvaluation() {
       total,
       evaluatedBy,
     };
-    axios
+
+    await axios
       .post("http://localhost:8070/evaluation/document", newEvaluation)
       .then(() => {
         alert("Evaluation Successful");
-        history.push("/allDoc");
       })
       .catch((err) => {
         alert(err);
       });
+
+    const Update = {
+      Status,
+    };
+
+    //Update document status
+    await axios
+      .put(`http://localhost:8070/document/status/${docID}`, Update)
+      .then(() => {
+        history.push("/allDoc");
+      });
   };
 
   return (
-    <div className="body_container">
+    <div className="Docbody_container">
       {/*left side column */}
-      <div className="left_container">
+      <div className="Docleft_container">
         <div>
-          <label className="h-text text_space" style={{ color: "#FF5631" }}>
-            DOCUMENT
+          <label
+            className="h-text text_space"
+            style={{
+              color: "#FF5631",
+              textTransform: "uppercase",
+              lineHeight: "0.9",
+            }}
+          >
+            {localStorage.getItem("DocType")}
           </label>
           <br />
-          <label className="h-text" style={{ color: "#ffffff" }}>
-            EVALUATION
+          <label className="h-text mt-4" style={{ color: "#ffffff" }}>
+            EVALUATE
           </label>
         </div>
         <form>
@@ -126,7 +175,7 @@ export default function DocumentEvaluation() {
       <div className="right_container">
         <form>
           <ul className="list-group">
-            <div className="criteria_box mb-4 fw-bold">
+            <div className="criteria_box mb-4">
               <div className="form-group row mb-4 criteria_row">
                 <table className="table-hover">
                   <thead>
@@ -140,10 +189,9 @@ export default function DocumentEvaluation() {
                       <th scope="col" className="col">
                         Total Marks
                       </th>
-                      <th scope="col" className="col-2">
-                        Given Marks
+                      <th scope="col" className="col-1">
+                        Marks
                       </th>
-                      <th scope="col" className="col-2"></th>
                     </tr>
                   </thead>
 
@@ -156,17 +204,12 @@ export default function DocumentEvaluation() {
                         <td>
                           <input
                             type="number"
+                            min={0}
+                            max={data.mark}
                             className="form-control"
                             onChange={(e) => handleChangeInput(e, index)}
                           />
                         </td>
-                        {/* <td>
-                          <div className="ps-5 ">
-                            <button type="submit" className="form-control">
-                              Add
-                            </button>
-                          </div>
-                        </td> */}
                       </tr>
                     ))}
                   </tbody>
@@ -175,9 +218,48 @@ export default function DocumentEvaluation() {
             </div>
           </ul>
           {/* Total marks */}
-          <div className="form-group row mb-4 criteria_row ps-5 fw-bold fs-4">
+          <div style={{ paddingLeft: "90px" }}>
+            <table className="m-5">
+              <tbody>
+                <tr>
+                  <td>
+                    <label>
+                      <b>Total Marks </b>
+                    </label>{" "}
+                  </td>
+                  <td className="ps-3">
+                    <label>
+                      <b>{total}%</b>
+                    </label>
+                  </td>
+                  <td className="ps-5">
+                    <button
+                      type="submit"
+                      className="col btn btn-success btn_total mt-3"
+                      onClick={handleGetTotal}
+                    >
+                      <b> Get Total</b>
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      type="submit"
+                      className="col btn btn-success btn_submit mt-3"
+                      onClick={handleSubmit}
+                    >
+                      <b> Submit</b>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          {/* <div className="form-group row mb-4 criteria_row ps-5 fw-bold fs-4">
             <div className="col">
               <label>Total Marks </label>
+            </div>
+            <div className="col-3 ps-4">
+              <label>{total}</label>
             </div>
             <div className="col">
               <button
@@ -188,17 +270,14 @@ export default function DocumentEvaluation() {
                 Get Total
               </button>
             </div>
-            <div className="col-3 ps-4">
-              <label>{total}</label>
-            </div>
-          </div>
-          <button
-            type="submit"
-            className="btn btn-success btn_submit mt-3"
-            onClick={handleSubmit}
-          >
-            Submit
-          </button>
+            <button
+              type="submit"
+              className="col btn btn-success btn_submit mt-3"
+              onClick={handleSubmit}
+            >
+              Submit
+            </button>
+          </div> */}
         </form>
       </div>
     </div>
