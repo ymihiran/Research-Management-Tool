@@ -1,12 +1,8 @@
 import React, {useEffect,useState,useContext} from 'react';
 import { BrowserRouter as Router, Route} from "react-router-dom";
-//import { useNavigate } from "react-router-dom";
 import "/node_modules/bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import axios from 'axios';
-//import {AuthProvider} from './components/UserState.js'
-//import {UserState} from './components/UserState.js'
-//import {UserAPI} from './components/utils/UserAPI.js'
 import {NotFound} from './components/utils/NotFound/NotFound.js'
 
 
@@ -56,7 +52,6 @@ function App() {
   const [ispanelmember, setIsPanelMember] = useState(false)
   const [iscosupervisor, setIsCoSupervisor] = useState(false)
   
-  //const [user,setUser] = useState(JSON.parse(localStorage.getItem('user')));
 
   const refreshToken = async () =>{
       const res = localStorage.getItem("userAuthToken")
@@ -97,7 +92,7 @@ function App() {
       <Router>
 
         <Route path="/"  exact component={Main} />
-        <Route path="/profile" exact component={isLogged?Profile:NotFound} />
+        <Route path="/profile/:id" exact component={isLogged? Profile:NotFound} />
         <Route path="/panelmembers" exact component={isAdmin? PanelMembers: NotFound} />
         <Route path="/selectpanel" exact component={isAdmin? SelectPanelMembers : NotFound} />
         <Route path="/allprof"  exact component={isAdmin? AllUsers: NotFound} /> 

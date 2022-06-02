@@ -19,6 +19,8 @@ router.post('/reset/:id', userCtrl.resetPassword)
 
 router.delete('/delete/:id', userCtrl.deleteUser)
 
+router.patch('/update/:id', userCtrl.updateUser)
+
 router.get('/logout', userCtrl.logout)
 
 export default router;

@@ -99,15 +99,6 @@ const handleSubmit = async e => {
             
 
           <form onSubmit={handleSubmit}>
-        {/* <div> <h3>  <label style={{float:"right"}}>Not a Student?</label></h3>
-              <Checkbox
-               id="notStudent"
-               name="notStudent"
-               onChange={handleNotStudent}
-               style={{color:"#322B5F",float:"right"}}
-               > 
-               </Checkbox>
-               </div> */}
 
              <div className="mb-3">
                             <label className="t-form-label" style={{color:"#322B5F"}}>Full Name</label>
