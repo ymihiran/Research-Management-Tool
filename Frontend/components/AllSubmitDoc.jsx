@@ -4,6 +4,30 @@ import "./CSS/st.css";
 import "./CSS/stgrup.css";
 
 export default function AllSubmitDoc() {
+  const [type, setTypes] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:8070/template")
+      .then((res) => {
+        setTypes(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  }, []);
+
+  const setData = (data) => {
+    let { AdminName, SchemaType, Title, Template, Description } = data;
+    localStorage.setItem("AdminName", AdminName);
+    localStorage.setItem("SchemaType", SchemaType);
+    localStorage.setItem("Title", Title);
+    localStorage.setItem("Template", Template);
+    localStorage.setItem("Description", Description);
+
+    console.log(data);
+  };
+
   return (
     <div>
       <form>
@@ -29,50 +53,45 @@ export default function AllSubmitDoc() {
               </h5>
             </div>
 
-            <table class="table">
-              <tbody>
-                <tr>
-                  <td scope="col" style={{ backgroundColor: "red" }}>
-                    #
-                  </td>
-                  <td scope="col" style={{ backgroundColor: "blue" }}>
-                    First
-                  </td>
-                </tr>
-                <tr>
-                  <td scope="col" style={{ backgroundColor: "red" }}>
-                    #
-                  </td>
-                  <td scope="col" style={{ backgroundColor: "blue" }}>
-                    First
-                  </td>
-                </tr>
-                <tr>
-                  <td scope="col" style={{ backgroundColor: "red" }}>
-                    #
-                  </td>
-                  <td scope="col" style={{ backgroundColor: "blue" }}>
-                    First
-                  </td>
-                </tr>
-                <tr>
-                  <td scope="col" style={{ backgroundColor: "red" }}>
-                    #
-                  </td>
-                  <td scope="col" style={{ backgroundColor: "blue" }}>
-                    First
-                  </td>
-                </tr>
-                <tr>
-                  <td scope="col" style={{ backgroundColor: "red" }}>
-                    #
-                  </td>
-                  <td scope="col" style={{ backgroundColor: "blue" }}>
-                    First
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div
+              className="container mt-5 "
+              //   style={{ marginLeft: "30px", marginRight: "50px" }}
+            >
+              <table class="table table-striped">
+                <tbody>
+                  <tr>
+                    <td scope="col">
+                      <b>Group ID</b>
+                    </td>
+                    <td scope="col">First</td>
+                  </tr>
+                  <tr>
+                    <td scope="col">
+                      <b>Status</b>
+                    </td>
+                    <td scope="col">First</td>
+                  </tr>
+                  <tr>
+                    <td scope="col">
+                      <b>Last modified</b>
+                    </td>
+                    <td scope="col">First</td>
+                  </tr>
+                  <tr>
+                    <td scope="col">
+                      <b>Submission Comments</b>
+                    </td>
+                    <td scope="col">First</td>
+                  </tr>
+                  <tr>
+                    <td scope="col">
+                      <b>Feedback</b>
+                    </td>
+                    <td scope="col">First</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </form>
