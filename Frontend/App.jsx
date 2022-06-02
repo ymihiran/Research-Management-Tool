@@ -45,6 +45,7 @@ import MsgReplyForm from "./components/MsgReplyForm";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Profile from "./components/Profile";
+import ProfileUpdate from "./components/ProfileUpdate";
 import AllUsers from "./components/AllUsers";
 import PanelMembers from "./components/CheckPanelMembers";
 import SelectPanelMembers from "./components/SelectPanelMembers";
@@ -95,6 +96,12 @@ function App() {
     <div>
       <ReactNotifications />
       <Router>
+
+        <Route path="/"  exact component={Main} />
+  
+        <Route path="/updateadmin/:id" exact component={isAdmin? ProfileUpdate: NotFound} />
+ 
+
         <Route
           path="/profile"
           exact
@@ -116,7 +123,6 @@ function App() {
           component={isAdmin ? AllUsers : NotFound}
         />
         <Route path="/register" exact component={Register} />
-
         <Route path="/login" exact component={Login} />
         <Route path="/SubmitTopic" component={SubmitTopic} />
         <Route path="/EvaluateTopic" component={EvaluateTopic} />
