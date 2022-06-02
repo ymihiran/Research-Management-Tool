@@ -26,6 +26,7 @@ export const UploadTemplate = async (req, res) => {
     });
 };
 
+//GET ALL TEMPLATE
 export const getAllTypes = async (req, res) => {
   await UplaodTemplateRoute.find()
     .then((createtypes) => {
@@ -36,13 +37,16 @@ export const getAllTypes = async (req, res) => {
     });
 };
 
-// const update = await Vehicle.findByIdAndUpdate(vehicleId, updateVehicleInfo)
-//   .then(() => {
-//     res.status(200).send({ status: "Create Types Updated successfully" });
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//     res
-//       .status(500)
-//       .send({ status: "Error with Updating Create Types", error: err.message });
-//   });
+//DELETE A CREATE TYPE
+export const deleteTemplate = async (req, res) => {
+  let tempid = req.params.id;
+  console.log(tempid);
+  await UplaodTemplateRoute.findByIdAndDelete(tempid)
+    .then(() => {
+      res.status(200).send({ status: "Deleted!" });
+    })
+    .catch((err) => {
+      console.log(err.message);
+      res.status(500).send({ status: "Error delete" });
+    });
+};

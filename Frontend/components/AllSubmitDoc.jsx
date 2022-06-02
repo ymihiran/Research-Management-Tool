@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./CSS/st.css";
 import "./CSS/stgrup.css";
+import { style } from "@mui/system";
 
 export default function AllSubmitDoc() {
   const [type, setType] = useState([]);

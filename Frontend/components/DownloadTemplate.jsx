@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ClassNames } from "@emotion/react";
 import "./CSS/st.css";
-import "./CSS/link.css";
 
 import { useHistory } from "react-router-dom";
 
