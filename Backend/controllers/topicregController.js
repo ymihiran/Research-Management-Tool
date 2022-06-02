@@ -120,3 +120,18 @@ export const deleteTopic = async (req, res) => {
       res.status(500).send({ status: "Error delete" });
     });
 };
+
+//get group id using leader's email
+export const getGroupID = async (req, res) => {
+  console.log("req.params", req.params);
+  const leaderEmail = req.params.leaderEmail;
+
+  await TopicReg.findOne({ leaderEmail: leaderEmail })
+
+    .then((data) => {
+      res.json(data.groupID);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};

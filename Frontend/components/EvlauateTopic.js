@@ -20,6 +20,34 @@ export default function EvaluateTopic()  {
 
     let history = useHistory();
 
+    function authenticate() {
+
+        if((JSON.parse(localStorage.getItem('user')|| "[]")).user_role!="Panel Member"){
+            history.push("/login");
+            Store.addNotification({
+                title: "You are not allowed!",
+                message: "You are not allowed to access this page! Please login as Panel Member",
+                animationIn: ["animate__animated", "animate__fadeIn"],
+                animationOut: ["animate__animated", "animate__fadeOut"],
+                type: "danger",
+                insert: "top",
+                container: "top-right",
+                
+                dismiss: {
+                  duration: 2500,
+                  onScreen: true,
+                  showIcon: true
+                },
+    
+                width:400
+            });    
+        }
+    }
+    
+    setTimeout(() => {
+        authenticate();
+    }, 0);
+
     useEffect(()=>{
 
         const path = "http://localhost:8070/topic/group/"+groupID;

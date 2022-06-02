@@ -153,3 +153,31 @@ input[type="number"] {
 tr {
   height: 75px;
 }
+
+.chatGroup_box {
+  border-radius: 10px;
+  border: 1px solid #9b97b6;
+  background-color: #ece9ff;
+  margin-top: 20px;
+  padding: 30px 30px;
+  width: 900px;
+  height: 600px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.reply_body_container {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: 30% auto;
+}
+.reply_criteria_box {
+  border-radius: 10px;
+  border: 1px solid #9b97b6;
+  background-color: #ece9ff;
+  padding: 30px 30px;
+  width: 600px;
+  height: 300px;
+  overflow: scroll;
+  overflow-x: hidden;
+}

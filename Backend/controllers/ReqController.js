@@ -26,6 +26,7 @@ transporter.use("compile", hbs(handleBar));
 export const sendReq = async (req, res) => {
   try {
     const { groupID, researchField, topic, email } = req.body;
+    console.log("req.body", req.body);
 
     const newRequest = new request({
       groupID,
@@ -43,7 +44,7 @@ export const sendReq = async (req, res) => {
 
   var mailOptions = {
     from: "SLIIT Research Management",
-    to: "sdulshan10@gmail.com",
+    to: req.body.email,
     subject: "SLIIT Research Management",
     text: "hi",
     template: "email",

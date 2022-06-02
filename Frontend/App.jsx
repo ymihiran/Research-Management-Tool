@@ -1,14 +1,17 @@
 import React, {useEffect,useState,useContext} from 'react';
 import { BrowserRouter as Router, Route} from "react-router-dom";
-//import { useNavigate } from "react-router-dom";
 import "/node_modules/bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import axios from 'axios';
-//import {AuthProvider} from './components/UserState.js'
-//import {UserState} from './components/UserState.js'
-//import {UserAPI} from './components/utils/UserAPI.js'
 import {NotFound} from './components/utils/NotFound/NotFound.js'
 
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import "/node_modules/bootstrap/dist/css/bootstrap.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
+
+
+import axios from "axios";
 
 import UploadTemplate from "./components/UploadTemplate";
 import SubmitTypes from "./components/SubmitTypes";
@@ -18,35 +21,35 @@ import AcceptTopic from "./components/AcceptTopic";
 import TopicList from "./components/TopicList";
 import StdTopicList from "./components/StdTopicList";
 import AddMarking from "./components/AddMarking";
+
 import EditTopic from "./components/EditTopic";
-import Main from './components/Main';
+import Main from "./components/Main";
 import { ReactNotifications } from "react-notifications-component";
-
-
 
 import SubmitDocs from "./components/SubmitDocs";
 import AllStudentGroup from "./components/AllStudentGroup";
 import AllTypes from "./components/AllTypes";
+
+import AllCreateTypes from "./components/AllCreateTypes";
+
 import MarkingList from "./components/MarkingList";
 import EditMarking from "./components/EditMarking";
-import EvaluatedTopicList from "./components/EvaluatedTopicList"
-import EditEvaluatedTopic from "./components/EditEvaluatedTopic"
+import EvaluatedTopicList from "./components/EvaluatedTopicList";
+import EditEvaluatedTopic from "./components/EditEvaluatedTopic";
 import SubmitTypes from "./components/SubmitTypes.jsx";
 
 import DocumentEvaluation from "./components/DocumentEvaluation";
 import PresentationEvaluation from "./components/PresentationEvaluation";
 import AllDocuments from "./components/AllDocuments";
 import RequestCoSupervisor from "./components/RequestCoSupervisor";
+
+import UpdateUploadTemplate from "./components/UpdateUploadTemplate";
+import DownloadTemplate from "./components/DownloadTemplate";
+
 import StudentGroup from "./components/StudentGroup";
 import UploadTemplate from "./components/UploadTemplate";
 
-import Login from './components/Login';
-import Register from './components/Register';
-import Profile from './components/Profile';
-import AllUsers from './components/AllUsers';
-import PanelMembers from './components/CheckPanelMembers'
-import SelectPanelMembers from './components/SelectPanelMembers'
-
+import AllSubmitDoc from "./components/AllSubmitDoc";
 
 function App() {
   const [token, setToken] = useState(false)
@@ -56,7 +59,6 @@ function App() {
   const [ispanelmember, setIsPanelMember] = useState(false)
   const [iscosupervisor, setIsCoSupervisor] = useState(false)
   
-  //const [user,setUser] = useState(JSON.parse(localStorage.getItem('user')));
 
   const refreshToken = async () =>{
       const res = localStorage.getItem("userAuthToken")
@@ -89,15 +91,24 @@ function App() {
   }
 },[token])
 
+import chatForum from "./components/chatForum";
+import chatGroupSupervisor from "./components/chatGroupSupervisor";
+import MsgReplyForm from "./components/MsgReplyForm";
 
- return (
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Profile from "./components/Profile";
+import AllUsers from "./components/AllUsers";
+import PanelMembers from "./components/CheckPanelMembers";
+import SelectPanelMembers from "./components/SelectPanelMembers";
+
+function App() {
+  return (
     <div>
  
       <ReactNotifications />
       <Router>
-
-        <Route path="/"  exact component={Main} />
-        <Route path="/profile" exact component={isLogged?Profile:NotFound} />
+         <Route path="/profile" exact component={isLogged?Profile:NotFound} />
         <Route path="/panelmembers" exact component={isAdmin? PanelMembers: NotFound} />
         <Route path="/selectpanel" exact component={isAdmin? SelectPanelMembers : NotFound} />
         <Route path="/allprof"  exact component={isAdmin? AllUsers: NotFound} /> 
@@ -115,6 +126,7 @@ function App() {
         <Route path="/SubmitDocs" component={SubmitDocs} />
         <Route path="/AllStudentGroup" component={AllStudentGroup} />
         <Route path="/AllTypes" component={AllTypes} />
+        <Route path="/AllCreateTypes" component={AllCreateTypes} />
         <Route path="/MarkingList" component={MarkingList} />
         <Route path="/EditMarking" component={EditMarking} />
         <Route path="/Main" component={Main} />
@@ -123,10 +135,15 @@ function App() {
         <Route path="/presentation" component={PresentationEvaluation} />
         <Route path="/allDoc" component={AllDocuments} />
         <Route path="/reqCoSuper" component={RequestCoSupervisor} />
+        <Route path="/UpdateTemplate" component={UpdateUploadTemplate} />
+        <Route path="/DownloadTemplate" component={DownloadTemplate} />
         <Route path="/StudentGroup" component={StudentGroup} />
         <Route path="/UploadTemplate" component={UploadTemplate} />
-      </Router>
-     
+        <Route path="/chat" component={chatForum} />
+        <Route path="/chatGroup" component={chatGroupSupervisor} />
+        <Route path="/reply" component={MsgReplyForm} />
+        <Route path="/AllSubmitDoc" component={AllSubmitDoc} />
+      </Router> 
     </div> 
   );
 }
