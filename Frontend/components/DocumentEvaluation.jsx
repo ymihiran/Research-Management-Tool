@@ -11,7 +11,8 @@ export default function DocumentEvaluation() {
   const [inputValue, setInputValue] = useState(0);
   const [total, setTotal] = useState(0);
   const [evaluatedBy, setEvaluatedBy] = useState([]);
-  const [Doctype, setDoctype] = useState("null");
+  const [Doctype, setDoctype] = useState();
+  const [docID, setDocID] = useState();
   const history = useHistory();
 
   useEffect(() => {
@@ -19,8 +20,8 @@ export default function DocumentEvaluation() {
     setResearchTopic(localStorage.getItem("rTopic"));
     setLink(localStorage.getItem("Link"));
     setEvaluatedBy(JSON.parse(localStorage.getItem("user")).name);
-
-    console.log("localStorage.getItem()", localStorage.getItem("Link"));
+    setDoctype(localStorage.getItem("DocType"));
+    setDocID(localStorage.getItem("DocID"));
 
     axios
       .get(
@@ -35,7 +36,7 @@ export default function DocumentEvaluation() {
         setMarkingCriteria(criteria);
       })
       .catch((err) => {
-        alert(err);
+        alert("Not provide the marking scheme");
       });
   }, []);
 
@@ -51,7 +52,7 @@ export default function DocumentEvaluation() {
     console.log("total", total);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const newEvaluation = {
@@ -61,7 +62,9 @@ export default function DocumentEvaluation() {
       total,
       evaluatedBy,
     };
-    axios
+
+    //insert evaluation data
+    await axios
       .post("http://localhost:8070/evaluation/document", newEvaluation)
       .then(() => {
         alert("Evaluation Successful");
@@ -71,6 +74,8 @@ export default function DocumentEvaluation() {
         alert(err);
       });
   };
+
+  //Update the evaluation status
 
   return (
     <div className="body_container">
@@ -140,10 +145,9 @@ export default function DocumentEvaluation() {
                       <th scope="col" className="col">
                         Total Marks
                       </th>
-                      <th scope="col" className="col-2">
+                      <th scope="col" className="col-1">
                         Given Marks
                       </th>
-                      <th scope="col" className="col-2"></th>
                     </tr>
                   </thead>
 

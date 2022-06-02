@@ -14,17 +14,20 @@ export default function AllDocuments() {
         console.log(res.data);
       })
       .catch((err) => {
-        alert("Can't get Document details: " + err.message);
+        alert("Can't get Document details ");
       });
   }, []);
 
   const setData = (data) => {
     console.log("data", data);
-    let { GroupID, ResearchField, Document, ResearchTopic } = data;
+    let { GroupID, ResearchField, Document, ResearchTopic, DocType, _id } =
+      data;
     localStorage.setItem("Group_ID", GroupID);
     localStorage.setItem("Research_Field", ResearchField);
     localStorage.setItem("rTopic", ResearchTopic);
     localStorage.setItem("Link", Document);
+    localStorage.setItem("DocType", DocType);
+    localStorage.setItem("DocID", _id);
     history.push("/Doc");
   };
 
@@ -45,18 +48,27 @@ export default function AllDocuments() {
         <div className="allDoc_box mb-5 ">
           <table className="table table-hover table-borderless">
             <thead>
-              <tr>
+              {/* <tr style={{ height: "50px" }}>
                 <th scope="col">Group ID</th>
                 <th scope="col">Research Field</th>
+                <th scope="col">Submission Type </th>
+                <th scope="col">Comment</th>
+                <th scope="col"></th>
+              </tr> */}
+            </thead>
+            <tbody>
+              <tr style={{ height: "80px" }}>
+                <th scope="col">Group ID</th>
+                <th scope="col">Research Field</th>
+                <th scope="col">Submission Type </th>
                 <th scope="col">Comment</th>
                 <th scope="col"></th>
               </tr>
-            </thead>
-            <tbody>
               {docList?.map((docList, index) => (
-                <tr key={index} className="">
+                <tr key={index} className="" style={{ height: "80px" }}>
                   <td>{docList.GroupID}</td>
                   <td>{docList.ResearchField}</td>
+                  <td>{docList.DocType}</td>
                   <td>{docList.Comment}</td>
                   <td>
                     <button
