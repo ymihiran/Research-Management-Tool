@@ -111,7 +111,7 @@ export default function SubmitDocs() {
 
               <div className="mb-3">
                 <label className="t-form-label">
-                  <b>Group ID :</b>
+                  <b>Research Topic :</b>
                 </label>
                 <input
                   type="text"
