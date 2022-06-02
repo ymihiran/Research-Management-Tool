@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./Styles/styles.css";
 import { useHistory } from "react-router-dom";
+import { Store } from "react-notifications-component";
 
 export default function DocumentEvaluation() {
   const [groupID, setGroupID] = useState();
@@ -42,7 +43,25 @@ export default function DocumentEvaluation() {
           setMarkingCriteria(criteria);
         })
         .catch((err) => {
-          alert("Not provide the marking scheme");
+          Store.addNotification({
+            title: "Not found the Marking Schema !",
+            message:
+              "Please contact the system administrator to add the Marking Schema",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            type: "danger",
+            insert: "top",
+            container: "top-center",
+
+            dismiss: {
+              duration: 19500,
+
+              showIcon: true,
+              click: false,
+            },
+
+            width: 500,
+          });
         });
     } else {
       axios
@@ -58,7 +77,25 @@ export default function DocumentEvaluation() {
           setMarkingCriteria(criteria);
         })
         .catch((err) => {
-          alert("Not provide the marking scheme");
+          Store.addNotification({
+            title: "Not found the Marking Schema !",
+            message:
+              "Please contact the system administrator to add the Marking Schema",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            type: "danger",
+            insert: "top",
+            container: "top-center",
+
+            dismiss: {
+              duration: 19500,
+
+              showIcon: true,
+              click: false,
+            },
+
+            width: 500,
+          });
         });
     }
   }, []);
@@ -96,7 +133,22 @@ export default function DocumentEvaluation() {
     await axios
       .post("http://localhost:8070/evaluation/document", newEvaluation)
       .then(() => {
-        alert("Evaluation Successful");
+        Store.addNotification({
+          title: "Evaluation Successful",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          type: "default",
+          insert: "top",
+          container: "top-right",
+
+          dismiss: {
+            duration: 1500,
+            onScreen: true,
+            showIcon: true,
+          },
+
+          width: 400,
+        });
       })
       .catch((err) => {
         alert(err);

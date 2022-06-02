@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./Styles/styles.css";
 import { useHistory } from "react-router";
+import { Store } from "react-notifications-component";
 
 export default function MsgReplyForm() {
   const [message, setMessage] = useState();
@@ -25,11 +26,42 @@ export default function MsgReplyForm() {
         message,
       })
       .then((res) => {
-        console.log(res);
+        Store.addNotification({
+          title: "Reply Send!",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          type: "success",
+          insert: "top",
+          container: "top-right",
+
+          dismiss: {
+            duration: 1500,
+            onScreen: true,
+            showIcon: true,
+          },
+
+          width: 400,
+        });
         history.push("/chatGroup");
       })
       .catch((err) => {
-        alert(err);
+        Store.addNotification({
+          title: "Please type the reply !",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          type: "danger",
+          insert: "top",
+          container: "top-center",
+
+          dismiss: {
+            duration: 19500,
+
+            showIcon: true,
+            click: false,
+          },
+
+          width: 400,
+        });
       });
   };
 
@@ -59,6 +91,7 @@ export default function MsgReplyForm() {
             <div className="form-group mb-3">
               <label>Reply</label>
               <textarea
+                required
                 className="form-control"
                 id="groupMembers"
                 rows={4}

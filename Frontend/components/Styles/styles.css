@@ -204,3 +204,14 @@ tr {
   height: 100vh;
   grid-template-columns: 40% auto;
 }
+
+.evaluate_btn:disabled {
+  cursor: not-allowed !important;
+  pointer-events: all !important;
+  font-weight: bold;
+  cursor: pointer;
+  color: white !important;
+  outline: none;
+  border: none;
+  background-color: #0f0934;
+}
