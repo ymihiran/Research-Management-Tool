@@ -149,7 +149,7 @@ export default function chatForum() {
       <div className="right_container">
         {allMsg?.map((allMsg, index) => (
           <div key={index}>
-            <Card className="mb-3 mt-5" style={{ backgroundColor: "#ece9ff" }}>
+            <Card className="mb-3 mt-5">
               <Card.Header>{allMsg.stdName}</Card.Header>
               <Card.Body>
                 <Card.Title>{allMsg.subject}</Card.Title>
@@ -157,12 +157,14 @@ export default function chatForum() {
                   <p>{allMsg.createdAt}</p>
                   {allMsg.message}
                 </Card.Text>
-                <Button
-                  variant="danger"
-                  onClick={(e) => deleteMsg(e, allMsg._id)}
-                >
-                  Delete
-                </Button>
+                <div className="modal-footer">
+                  <Button
+                    variant="danger"
+                    onClick={(e) => deleteMsg(e, allMsg._id)}
+                  >
+                    Delete
+                  </Button>
+                </div>
               </Card.Body>
             </Card>
             <div className="ps-5">

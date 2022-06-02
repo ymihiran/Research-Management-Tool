@@ -3,11 +3,11 @@ const Schema = mongoose.Schema;
 
 const DocumentSchema = new Schema(
   {
-    docID: {
+    groupID: {
       type: String,
       required: true,
     },
-    groupID: {
+    Doctype: {
       type: String,
       required: true,
     },
@@ -15,17 +15,13 @@ const DocumentSchema = new Schema(
       type: String,
       required: true,
     },
-    groupMembers: {
-      type: [String],
+    total: {
+      type: Number,
       required: true,
     },
-    markingScheme: {
-      criteriaAndMarks: [
-        {
-          criteria: { type: String, required: true },
-          marks: { type: Number, required: true },
-        },
-      ],
+    evaluatedBy: {
+      type: String,
+      required: true,
     },
   },
   { timestamps: true }

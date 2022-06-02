@@ -20,9 +20,10 @@ export default function AllDocuments() {
 
   const setData = (data) => {
     console.log("data", data);
-    let { Group_ID, Research_Field, Document } = data;
-    localStorage.setItem("Group_ID", Group_ID);
-    localStorage.setItem("Research_Field", Research_Field);
+    let { GroupID, ResearchField, Document, ResearchTopic } = data;
+    localStorage.setItem("Group_ID", GroupID);
+    localStorage.setItem("Research_Field", ResearchField);
+    localStorage.setItem("rTopic", ResearchTopic);
     localStorage.setItem("Link", Document);
     history.push("/Doc");
   };
@@ -54,8 +55,8 @@ export default function AllDocuments() {
             <tbody>
               {docList?.map((docList, index) => (
                 <tr key={index} className="">
-                  <td>{docList.Group_ID}</td>
-                  <td>{docList.Research_Field}</td>
+                  <td>{docList.GroupID}</td>
+                  <td>{docList.ResearchField}</td>
                   <td>{docList.Comment}</td>
                   <td>
                     <button
