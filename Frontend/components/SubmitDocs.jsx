@@ -6,16 +6,21 @@ import FileInput from "./FileInput";
 
 export default function SubmitDocs() {
   const [type, setType] = useState();
+  const [userEmail, setuserEmail] = useState();
   useEffect(() => {
     setType(localStorage.getItem("SchemaType"));
-    // console.log(localStorage.getItem("SchemaType"));
+    setuserEmail(JSON.parse(localStorage.getItem("user")).email);
+    //console.log(JSON.parse(localStorage.getItem("user")).email);
   }, []);
   //file upload
   const [data, setData] = useState({
     name: "upload",
+    email: JSON.parse(localStorage.getItem("user")).email,
     GroupID: "",
     ResearchField: "",
+    ResearchTopic: "",
     Document: "",
+    DocType: localStorage.getItem("SchemaType"),
     Comment: "",
   });
 
@@ -103,6 +108,21 @@ export default function SubmitDocs() {
                   <option value="Games">Games</option>
                   <option value="Robotics">Robotics</option>
                 </select>
+              </div>
+
+              <div className="mb-3">
+                <label className="t-form-label">
+                  <b>Research Topic :</b>
+                </label>
+                <input
+                  type="text"
+                  style={{ width: "450px" }}
+                  id="cName"
+                  required
+                  name="ResearchTopic"
+                  onChange={handleChange}
+                  value={data.ResearchTopic}
+                />
               </div>
 
               <div className="mb-3">

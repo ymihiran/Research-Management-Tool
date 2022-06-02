@@ -11,20 +11,39 @@ export const getDocs = async (req, res) => {
     });
 };
 
-export const SubmitDoc = async (req, res) => {
+//Get student's documents details
 
+export const getSubmitDocs = async (req, res) => {
+  console.log("ëmail", req.params.email);
+  const email = req.params.email;
+  SubmitDocRoute.find({ email: email })
+
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.catch.log(err);
+    });
+};
+
+export const SubmitDoc = async (req, res) => {
   console.log("req.body", req.body);
   const GroupID = req.body.GroupID;
   const ResearchField = req.body.ResearchField;
   const Document = req.body.song;
-
+  const DocType = req.body.DocType;
+  const email = req.body.email;
   const Comment = req.body.Comment;
+  const ResearchTopic = req.body.ResearchTopic;
 
   const newType = new SubmitDocRoute({
     GroupID,
     ResearchField,
     Document,
+    DocType,
     Comment,
+    email,
+    ResearchTopic,
   });
 
   newType
