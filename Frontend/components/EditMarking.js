@@ -282,7 +282,7 @@ export default function EditMarking()  {
                                 >
                                 <option value="Default">Select one</option>
                                 <option value="Document">Document</option>
-                                <option value="Persentation">Persentation</option>
+                                <option value="Presentation">Persentation</option>
                             </select>
                             </div>
 

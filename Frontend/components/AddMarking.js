@@ -250,7 +250,7 @@ export default function AddMarking()  {
                                     >
                                         <option value="Default">Select one</option>
                                         <option value="Document">Document</option>
-                                        <option value="Persentation">Persentation</option>
+                                        <option value="Presentation">Presentation</option>
                                     </select>
                                 </div>
 
