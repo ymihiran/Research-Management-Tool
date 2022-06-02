@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./CSS/st.css";
 import "./CSS/stgrup.css";
+import { Button } from "react-bootstrap";
 
 export default function AllCreateTypes() {
   const [type, setTypes] = useState([]);
@@ -32,6 +33,7 @@ export default function AllCreateTypes() {
 
   const onDelete = (_id) => {
     axios.delete(`http://localhost:8070/template/${_id}`);
+    window.location.reload(false);
   };
 
   return (
@@ -86,7 +88,7 @@ export default function AllCreateTypes() {
                         <a
                           className="btn btn-danger"
                           //href="/delete"
-                          onClick={onDelete(data._id)}
+                          onClick={() => onDelete(data._id)}
                         >
                           <i className="far fa-trash-alt"></i>&nbsp;Delete
                         </a>

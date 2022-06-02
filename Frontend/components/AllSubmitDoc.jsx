@@ -65,9 +65,22 @@ export default function AllSubmitDoc() {
                         <td scope="col">
                           <b>Status</b>
                         </td>
-                        <td scope="col" style={{ backgroundColor: "#fefe33" }}>
-                          {data.Status}
-                        </td>
+                        {console.log(
+                          "68",
+                          data.Status,
+                          "chk ",
+                          data.Status == "Pending"
+                        )}
+                        {data.Status == "pending" ? (
+                          <td scope="col">{data.Status}</td>
+                        ) : (
+                          <td
+                            scope="col"
+                            style={{ backgroundColor: "#fefe33" }}
+                          >
+                            {data.Status}
+                          </td>
+                        )}
                       </tr>
                       <tr>
                         <td scope="col">
