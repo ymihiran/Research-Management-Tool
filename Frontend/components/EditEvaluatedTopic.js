@@ -9,7 +9,7 @@ import { Store } from 'react-notifications-component';
 export default function EvaluateTopic()  {
     const [tid, settid] = useState();
     const [id, setid] = useState();
-    const [groupID, setgroupID] = useState("Y3_S1_1234");
+    const [groupID, setgroupID] = useState(localStorage.getItem('groupID'));
     const [groupName, setgroupName] = useState();
     const [rField, setrField] = useState();
     const [rTopic, setrTopic] = useState();
@@ -212,12 +212,17 @@ export default function EvaluateTopic()  {
                         
                         <div className="mb-3">
                             <label className="t-form-label">Comments</label>
-                            <input type="text"  style={{width:"450px", height:"100px"}}  id="cName"
+                            <input type="text" name="message"  style={{width:"450px", height:"100px"}}  id="cName"
                                 required
                                 value={Evaluation}
                                 onChange={(e)=>setEvaluation(e.target.value)}
                             />
                         </div>
+
+                        <input type="hidden" name="mail" style={{width:"450px", height:"100px"}}  id="gid"
+                                value={request.leaderEmail}
+                                
+                            />
 
 
 

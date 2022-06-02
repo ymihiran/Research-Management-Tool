@@ -1,18 +1,9 @@
-import React, {useEffect,useState,useContext} from 'react';
-import { BrowserRouter as Router, Route} from "react-router-dom";
-import "/node_modules/bootstrap/dist/css/bootstrap.css";
-import "bootstrap-icons/font/bootstrap-icons.css";
-import axios from 'axios';
-import {NotFound} from './components/utils/NotFound/NotFound.js'
-
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "/node_modules/bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-
-
 import axios from "axios";
-
+import { NotFound } from "./components/utils/NotFound/NotFound.js";
 import UploadTemplate from "./components/UploadTemplate";
 import SubmitTypes from "./components/SubmitTypes";
 import SubmitTopic from "./components/SubmitTopic";
@@ -37,12 +28,9 @@ import EditMarking from "./components/EditMarking";
 import EvaluatedTopicList from "./components/EvaluatedTopicList";
 import EditEvaluatedTopic from "./components/EditEvaluatedTopic";
 import SubmitTypes from "./components/SubmitTypes.jsx";
-
 import DocumentEvaluation from "./components/DocumentEvaluation";
-import PresentationEvaluation from "./components/PresentationEvaluation";
 import AllDocuments from "./components/AllDocuments";
 import RequestCoSupervisor from "./components/RequestCoSupervisor";
-
 import UpdateUploadTemplate from "./components/UpdateUploadTemplate";
 import DownloadTemplate from "./components/DownloadTemplate";
 
@@ -62,6 +50,7 @@ import PanelMembers from "./components/CheckPanelMembers";
 import SelectPanelMembers from "./components/SelectPanelMembers";
 
 function App() {
+
   const [token, setToken] = useState(false)
   const [isLogged, setIsLogged] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
@@ -100,18 +89,34 @@ function App() {
       
   }
 },[token])
-
+  
+ 
   return (
     <div>
- 
       <ReactNotifications />
       <Router>
-        <Route path="/"  exact component={Main} />
-        <Route path="/profile" exact component={isLogged?Profile:NotFound} />
-        <Route path="/panelmembers" exact component={isAdmin? PanelMembers: NotFound} />
-        <Route path="/selectpanel" exact component={isAdmin? SelectPanelMembers : NotFound} />
-        <Route path="/allprof"  exact component={isAdmin? AllUsers: NotFound} /> 
-        <Route path="/register" exact component={Register}/>
+        <Route
+          path="/profile"
+          exact
+          component={isLogged ? Profile : NotFound}
+        />
+        <Route
+          path="/panelmembers"
+          exact
+          component={isAdmin ? PanelMembers : NotFound}
+        />
+        <Route
+          path="/selectpanel"
+          exact
+          component={isAdmin ? SelectPanelMembers : NotFound}
+        />
+        <Route
+          path="/allprof"
+          exact
+          component={isAdmin ? AllUsers : NotFound}
+        />
+        <Route path="/register" exact component={Register} />
+
         <Route path="/login" exact component={Login} />
         <Route path="/SubmitTopic" component={SubmitTopic} />
         <Route path="/EvaluateTopic" component={EvaluateTopic} />
@@ -131,7 +136,6 @@ function App() {
         <Route path="/Main" component={Main} />
         <Route path="/SubmitTypes" component={SubmitTypes} />
         <Route exact path="/doc" component={DocumentEvaluation} />
-        <Route path="/presentation" component={PresentationEvaluation} />
         <Route path="/allDoc" component={AllDocuments} />
         <Route path="/reqCoSuper" component={RequestCoSupervisor} />
         <Route path="/UpdateTemplate" component={UpdateUploadTemplate} />
@@ -142,8 +146,8 @@ function App() {
         <Route path="/chatGroup" component={chatGroupSupervisor} />
         <Route path="/reply" component={MsgReplyForm} />
         <Route path="/AllSubmitDoc" component={AllSubmitDoc} />
-      </Router> 
-    </div> 
+      </Router>
+    </div>
   );
 }
 export default App;
