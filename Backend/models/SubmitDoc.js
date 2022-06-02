@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const SubmitDocSchema = new Schema(
   {
-    Group_ID: {
+    GroupID: {
       type: String,
       required: true,
     },
@@ -12,22 +12,36 @@ const SubmitDocSchema = new Schema(
       type: String,
       required: true,
     },
+    DocType: {
+      type: String,
+    },
 
     Status: {
       type: String,
       default: "Pending",
     },
 
-    Research_Field: {
+    ResearchField: {
       type: String,
+      required: true,
+    },
+    ResearchTopic: {
+      type: String,
+      required: true,
     },
 
     Comment: {
       type: String,
+    },
+
+    email: {
+      type: String,
+      required: true,
     },
   },
   { timestamps: true }
 );
 
 const SubmitDoc = mongoose.model("SubmitDoc", SubmitDocSchema);
+
 export default SubmitDoc;
