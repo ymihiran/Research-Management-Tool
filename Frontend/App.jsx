@@ -3,9 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import "/node_modules/bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
-
 import axios from "axios";
-
 
 import UploadTemplate from "./components/UploadTemplate";
 import SubmitTypes from "./components/SubmitTypes";
@@ -17,9 +15,8 @@ import StdTopicList from "./components/StdTopicList";
 import AddMarking from "./components/AddMarking";
 
 import EditTopic from "./components/EditTopic";
-import Main from './components/Main';
+import Main from "./components/Main";
 import { ReactNotifications } from "react-notifications-component";
-
 
 import SubmitDocs from "./components/SubmitDocs";
 import AllStudentGroup from "./components/AllStudentGroup";
@@ -27,11 +24,10 @@ import AllTypes from "./components/AllTypes";
 
 import AllCreateTypes from "./components/AllCreateTypes";
 
-
 import MarkingList from "./components/MarkingList";
 import EditMarking from "./components/EditMarking";
-import EvaluatedTopicList from "./components/EvaluatedTopicList"
-import EditEvaluatedTopic from "./components/EditEvaluatedTopic"
+import EvaluatedTopicList from "./components/EvaluatedTopicList";
+import EditEvaluatedTopic from "./components/EditEvaluatedTopic";
 import SubmitTypes from "./components/SubmitTypes.jsx";
 
 import DocumentEvaluation from "./components/DocumentEvaluation";
@@ -44,21 +40,18 @@ import DownloadTemplate from "./components/DownloadTemplate";
 
 import StudentGroup from "./components/StudentGroup";
 import UploadTemplate from "./components/UploadTemplate";
-
+import AllSubmitDoc from "./components/AllSubmitDoc";
 
 import chatForum from "./components/chatForum";
 import chatGroupSupervisor from "./components/chatGroupSupervisor";
 import MsgReplyForm from "./components/MsgReplyForm";
 
-import Login from './components/Login';
-import Register from './components/Register';
-import Profile from './components/Profile';
-import AllUsers from './components/AllUsers';
-import PanelMembers from './components/CheckPanelMembers'
-import SelectPanelMembers from './components/SelectPanelMembers'
-
-
-
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Profile from "./components/Profile";
+import AllUsers from "./components/AllUsers";
+import PanelMembers from "./components/CheckPanelMembers";
+import SelectPanelMembers from "./components/SelectPanelMembers";
 
 function App() {
   return (
@@ -66,14 +59,12 @@ function App() {
       <ReactNotifications />
 
       <Router>
-
-
         <Route path="/" exact component={Main} />
         <Route path="/profile" exact component={Profile} />
         <Route path="/panelmembers" exact component={PanelMembers} />
         <Route path="/selectpanel" exact component={SelectPanelMembers} />
         <Route path="/allprof" exact component={AllUsers} />
-        <Route path="/register" exact component={Register}/>
+        <Route path="/register" exact component={Register} />
 
         <Route path="/login" exact component={Login} />
         <Route path="/SubmitTopic" component={SubmitTopic} />
@@ -89,9 +80,7 @@ function App() {
         <Route path="/AllStudentGroup" component={AllStudentGroup} />
         <Route path="/AllTypes" component={AllTypes} />
 
-
         <Route path="/AllCreateTypes" component={AllCreateTypes} />
-
 
         <Route path="/MarkingList" component={MarkingList} />
         <Route path="/EditMarking" component={EditMarking} />
@@ -110,7 +99,7 @@ function App() {
         <Route path="/chat" component={chatForum} />
         <Route path="/chatGroup" component={chatGroupSupervisor} />
         <Route path="/reply" component={MsgReplyForm} />
-
+        <Route path="/AllSubmitDoc" component={AllSubmitDoc} />
       </Router>
     </div>
   );
