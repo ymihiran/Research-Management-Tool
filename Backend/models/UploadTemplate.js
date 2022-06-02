@@ -7,6 +7,10 @@ const UploadTemplateSchema = new Schema(
       type: String,
     },
 
+    SchemaType: {
+      type: String,
+    },
+
     Title: {
       type: String,
     },

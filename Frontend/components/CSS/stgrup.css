@@ -27,3 +27,17 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #0f0934;
 }
+
+/* Changing row height */
+/* tr {
+  height: 2px;
+} */
+
+/* Changing cell width. Don't forget th! */
+/* td,
+th {
+  width: 40px;
+} */
+table tr {
+  height: 5px;
+}
