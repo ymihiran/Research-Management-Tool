@@ -20,6 +20,7 @@ export default function SubmitDocs() {
     ResearchField: "",
     ResearchTopic: "",
     Document: "",
+    DocType: localStorage.getItem("SchemaType"),
     Comment: "",
   });
 

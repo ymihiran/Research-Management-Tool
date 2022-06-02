@@ -12,6 +12,9 @@ const SubmitDocSchema = new Schema(
       type: String,
       required: true,
     },
+    DocType: {
+      type: String,
+    },
 
     Status: {
       type: String,

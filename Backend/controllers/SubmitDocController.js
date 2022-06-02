@@ -31,6 +31,7 @@ export const SubmitDoc = async (req, res) => {
   const GroupID = req.body.GroupID;
   const ResearchField = req.body.ResearchField;
   const Document = req.body.song;
+  const DocType = req.body.DocType;
   const email = req.body.email;
   const Comment = req.body.Comment;
   const ResearchTopic = req.body.ResearchTopic;
@@ -39,6 +40,7 @@ export const SubmitDoc = async (req, res) => {
     GroupID,
     ResearchField,
     Document,
+    DocType,
     Comment,
     email,
     ResearchTopic,

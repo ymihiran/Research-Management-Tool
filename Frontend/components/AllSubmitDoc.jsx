@@ -40,7 +40,7 @@ export default function AllSubmitDoc() {
                     color: "white",
                   }}
                 >
-                  <h4 className="ms-2">{data.SchemaType}</h4>
+                  <h4 className="ms-2">{data.DocType}</h4>
                 </div>
                 <div className="mt-4 ms-5 me-5">
                   <h5>
