@@ -5,7 +5,7 @@ import { Link,useHistory} from 'react-router-dom'
 import axios from 'axios'
 import {showErrMsg, showSuccessMsg} from './utils/notification/Notification'
 import {isEmpty, isEmail, isLength, isMatch} from './utils/validation/Validation.js';
-import { Checkbox } from "@mui/material";
+
 
 const initialState = {
   name:'',
@@ -23,19 +23,17 @@ const initialState = {
 function Register() {
 
   const [user, setUser] = useState(initialState)
-  const [ischeck, setisCheck]=React.useState(true);
   const {name,email,password,cf_password,mobile,user_role,research_area,reg_number,err, success} = user
 
   const handleChangeInput = e => {
     const {name, value} = e.target
     setUser({...user, [name]:value, err: '', success: ''})
-}
 
-    const handleNotStudent = e => {
-        if(e.target.checked)
-        setisCheck(false);
-        else   
-        setisCheck(true);
+    if( document.getElementById('user_role').value=='Student'){
+      document.getElementById('research_area').disabled=true;
+    }else{
+      document.getElementById('research_area').disabled=false;
+    }
 }
 
 const history  = useHistory();
@@ -43,7 +41,7 @@ const history  = useHistory();
 const handleSubmit = async e => {
   e.preventDefault()
   
-  if(isEmpty(name) || isEmpty(password) || isEmpty(mobile) || isEmpty(user_role) || isEmpty(reg_number) )
+  if(isEmpty(name) || isEmpty(password) || isEmpty(mobile) || isEmpty(reg_number)||isEmpty(reg_number) )
   return setUser({...user, err: "Please fill in all fields.", success: ''})
 
   if(!isEmail(email))
@@ -101,7 +99,7 @@ const handleSubmit = async e => {
             
 
           <form onSubmit={handleSubmit}>
-        <div> <h3>  <label style={{float:"right"}}>Not a Student?</label></h3>
+        {/* <div> <h3>  <label style={{float:"right"}}>Not a Student?</label></h3>
               <Checkbox
                id="notStudent"
                name="notStudent"
@@ -109,9 +107,8 @@ const handleSubmit = async e => {
                style={{color:"#322B5F",float:"right"}}
                > 
                </Checkbox>
-               </div>
+               </div> */}
 
-<br></br><br></br>
              <div className="mb-3">
                             <label className="t-form-label" style={{color:"#322B5F"}}>Full Name</label>
                             <input type="text"  style={{width:"450px"}} className="t-form-control" id="name"
@@ -173,11 +170,10 @@ const handleSubmit = async e => {
                             <select className='form-control' name="user_role" id="user_role" 
                                style={{width:"450px",border: "2px solid #ced4da"}}
                                value={user_role}
-                               required
-                               disabled={ischeck}
                                onChange={handleChangeInput}
                             >
                                 <option value="Default">Select one</option>
+                                <option value="Student">Student</option>
                                 <option value="Supervisor">Supervisor</option>
                                 <option value="Co-Supervisor">Co-Supervisor</option>
                                 <option value="Panel Member">Panel Member</option>
@@ -193,7 +189,6 @@ const handleSubmit = async e => {
                             <select className='form-control' name="research_area" id="research_area" 
                                style={{width:"450px",border: "2px solid #ced4da"}}
                                value={research_area}
-                               disabled={ischeck}
                                onChange={handleChangeInput}
                             >
                                 <option value="Default">Select one</option>

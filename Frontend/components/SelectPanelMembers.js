@@ -8,10 +8,10 @@ export default function SelectMember() {
     
     
     const[request,setRequest] = useState([]);
-    const [GroupId, setGroupId] = useState();
+    const [GroupId, setGroupId] = useState("");
     const [ResearchArea, setResearchArea] = useState("");
     const [ResearchTopic, setResearchTopic] = useState("");
-   // const [email, setemail] = useState("");
+
    
 
     useEffect(()=>{
@@ -20,6 +20,7 @@ export default function SelectMember() {
         setGroupId(localStorage.getItem('GroupId'));
         setResearchArea(localStorage.getItem('ResearchArea'));
         setResearchTopic(localStorage.getItem('ResearchTopic'));
+
     
             
   
@@ -54,41 +55,38 @@ export default function SelectMember() {
 
 
         const setData = (data) => {
- 
-          let {GroupId, ResearchArea,ResearchTopic} = data;
+          setGroupId(localStorage.getItem('GroupId'));
         //   const Dstatus="Assigned";
         //   const status="Assigned";
           const dId=data._id;
-          //const email=data.email;
+          const email=data.email;
+          const name=data.name;
+          
 
           localStorage.setItem('dId',dId);
-          localStorage.setItem('GroupId', GroupId);
-          localStorage.setItem('ResearchArea', ResearchArea);
-          localStorage.setItem('ResearchTopic', ResearchTopic);
-         // localStorage.setItem('email', email);
-          
+          localStorage.setItem('GroupId',GroupId);
+          localStorage.setItem('ResearchTopic',ResearchTopic);
         
-        //   const OngoingDelivery = {
+          const panelMembers = {
              
-        //     dId,
-        //     tripId,
-        //     destination,
-        //     Dstatus
-          
-        // };
+            name,
+            email,
+            GroupId,
+  
+        };
     
-        // axios
-        //   .post(
-        //     "http://localhost:8070/trip/addTrip",
-        //      OngoingDelivery
-        //   )
-        //   .then(() => {
-            
+        axios
+          .post(
+            "http://localhost:8070/panel/add",
+             panelMembers
+          )
+          .then(() => {
+            alert("Added New Panel Member");
                                  
-        //   })
-        //   .catch((err) => {
-        //     alert(err);
-        //   });
+          })
+          .catch((err) => {
+            alert(err);
+          });
           
 
           
@@ -203,9 +201,9 @@ const filterData = (users,searchkey) =>{
                            
                             <td>
                             <a className="l-btn-accept" style={{width:"200px",fontWeight:"bold",textDecoration:'none'}} 
-                            //type="submit"
-                            //onClick={() => setData(data)}
-                            href="/"
+                            type="submit"
+                            onClick={() => setData(data)}
+                            //href="/"
    
                         >
                             <i></i>&nbsp;Allocate for the group

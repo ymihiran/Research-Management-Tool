@@ -12,7 +12,7 @@ const userCtrl={
         try {
             
             
-            if(!name || !email || !password || !mobile || !user_role || !reg_number)
+            if(!name || !email || !password || !mobile || !user_role||!reg_number)
             return res.status(400).json({msg: "Please fill in all fields."})
 
             if(!validateEmail(email))
@@ -138,7 +138,6 @@ const userCtrl={
               });
           });
       },
-
 
     logout: async (req, res) => {
         try {

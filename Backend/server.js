@@ -47,6 +47,9 @@ app.use("/evaluatedTopic",evaluatedTopicRouter);
 import userRouter from "./routes/userRoute.js";
 app.use("/user", userRouter);
 
+import panelRouter from "./routes/PanelMemberRoute.js";
+app.use("/panel", panelRouter);
+
 //Submit Type Route
 import SubmitTypeRouter from "./routes/SubmitTypeRoute.js";
 app.use("/docType", SubmitTypeRouter);

@@ -5,7 +5,7 @@ import App from "./App";
 import '/node_modules/bootstrap/dist/css/bootstrap.css';
 import './components/CSS/animate.css'
 import "./components/CSS/notification-growl.css";
-import AuthProvider from './components/UserState.js'
+//import AuthProvider from './components/UserState.js'
 
 // ReactDOM.render(<AuthProvider><App /></AuthProvider>,document.getElementById('app')
 // );

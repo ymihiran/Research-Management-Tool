@@ -2,21 +2,13 @@ import "./CSS/topicsub.css";
 import "./CSS/btrap.css";
 import React, {useState,useEffect,useContext} from "react";
 import axios from 'axios';
-import {UserState} from './UserState.js'
+
 
 
 
 export default function AllUsers() {
     
-    
-    const[request,setRequest] = useState([]);
-    const state=useContext(UserState);
-  
-    const[isLogged,setIsLogged]= state.UserAPI.isLogged;
-    const[isAdmin,setIsAdmin]= state.UserAPI.isAdmin;
-    const[CurrentUser,setCurrentUser]= state.UserAPI.CurrentUser;
-
-   
+    const[request,setRequest] = useState([]); 
     useEffect(()=>{
               
         axios.get("http://localhost:8070/user/allprof").then((res)=>{

@@ -1,9 +1,13 @@
-import React, {useEffect} from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import React, {useEffect,useState,useContext} from 'react';
+import { BrowserRouter as Router, Route} from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import "/node_modules/bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import axios from 'axios';
-import {AuthProvider} from './components/UserState.js'
+//import {AuthProvider} from './components/UserState.js'
+//import {UserState} from './components/UserState.js'
+//import {UserAPI} from './components/utils/UserAPI.js'
+import {NotFound} from './components/utils/NotFound/NotFound.js'
 
 
 import UploadTemplate from "./components/UploadTemplate";
@@ -45,18 +49,58 @@ import SelectPanelMembers from './components/SelectPanelMembers'
 
 
 function App() {
+  const [token, setToken] = useState(false)
+  const [isLogged, setIsLogged] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false)
+  const [issupervisor, setIsSupervisor] = useState(false)
+  const [ispanelmember, setIsPanelMember] = useState(false)
+  const [iscosupervisor, setIsCoSupervisor] = useState(false)
+  
+  //const [user,setUser] = useState(JSON.parse(localStorage.getItem('user')));
+
+  const refreshToken = async () =>{
+      const res = localStorage.getItem("userAuthToken")
+      setToken(res)
+  }
+  useEffect(() =>{
+    const firstLogin = localStorage.getItem('firstLogin')
+    if(firstLogin) refreshToken()
+
+    if(token){
+      const getUser = async () =>{
+          try {
+
+              const res =(JSON.parse(localStorage.getItem("user")).user_role);
+              
+             
+              setIsLogged(true)
+              res == "Admin" ? setIsAdmin(true): setIsAdmin(false)
+              res== "Panel Member" ? setIsPanelMember(true): setIsPanelMember(false)
+              res == "Supervisor" ? setIsSupervisor(true): setIsSupervisor(false)
+              res == "Co-Supervisor" ? setIsCoSupervisor(true): setIsCoSupervisor(false)
+
+          } catch (err) {
+              alert(err.response.data.msg)
+          }
+      }
+
+      getUser()
+      
+  }
+},[token])
+
 
  return (
     <div>
-  <AuthProvider>
+ 
       <ReactNotifications />
       <Router>
 
         <Route path="/"  exact component={Main} />
-        <Route path="/profile" exact component={Profile} />
-        <Route path="/panelmembers" exact component={PanelMembers} />
-        <Route path="/selectpanel" exact component={SelectPanelMembers} />
-        <Route path="/allprof"  exact component={AllUsers} /> 
+        <Route path="/profile" exact component={isLogged?Profile:NotFound} />
+        <Route path="/panelmembers" exact component={isAdmin? PanelMembers: NotFound} />
+        <Route path="/selectpanel" exact component={isAdmin? SelectPanelMembers : NotFound} />
+        <Route path="/allprof"  exact component={isAdmin? AllUsers: NotFound} /> 
         <Route path="/register" exact component={Register}/>
         <Route path="/login" exact component={Login} />
         <Route path="/SubmitTopic" component={SubmitTopic} />
@@ -82,7 +126,7 @@ function App() {
         <Route path="/StudentGroup" component={StudentGroup} />
         <Route path="/UploadTemplate" component={UploadTemplate} />
       </Router>
-      </AuthProvider>
+     
     </div> 
   );
 }
