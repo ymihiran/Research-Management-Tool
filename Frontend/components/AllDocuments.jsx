@@ -62,6 +62,7 @@ export default function AllDocuments() {
                 <th scope="col">Research Field</th>
                 <th scope="col">Submission Type </th>
                 <th scope="col">Comment</th>
+                <th scope="col">Status</th>
                 <th scope="col"></th>
               </tr>
               {docList?.map((docList, index) => (
@@ -70,15 +71,34 @@ export default function AllDocuments() {
                   <td>{docList.ResearchField}</td>
                   <td>{docList.DocType}</td>
                   <td>{docList.Comment}</td>
-                  <td>
-                    <button
-                      type="submit"
-                      className="btn allDoc_button "
-                      onClick={() => setData(docList)}
-                    >
-                      Evaluate
-                    </button>
-                  </td>
+                  {docList.Status == "pending" ? (
+                    <td className="text-danger fw-bold">{docList.Status}</td>
+                  ) : (
+                    <td className="text-success fw-bold">{docList.Status}</td>
+                  )}
+                  {docList.Status == "pending" ? (
+                    <td>
+                      <button
+                        type="submit"
+                        className="btn allDoc_button "
+                        style={{ cursor: "pointer" }}
+                        onClick={() => setData(docList)}
+                      >
+                        Evaluate
+                      </button>
+                    </td>
+                  ) : (
+                    <td>
+                      <button
+                        disabled
+                        type="submit"
+                        className="btn evaluate_btn"
+                        onClick={() => setData(docList)}
+                      >
+                        Evaluate
+                      </button>
+                    </td>
+                  )}
                 </tr>
               ))}
             </tbody>
