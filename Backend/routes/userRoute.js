@@ -17,6 +17,8 @@ router.get('/panel/:id',userCtrl.panelMembers)
 
 router.post('/reset/:id', userCtrl.resetPassword)
 
+router.delete('/delete/:id', userCtrl.deleteUser)
+
 router.get('/logout', userCtrl.logout)
 
 export default router;

@@ -1,5 +1,10 @@
 import "./CSS/topicsub.css";
 import "./CSS/btrap.css";
+
+import {MDBAccordion, MDBAccordionItem ,MDBIcon ,MDBInput ,MDBBtn, MDBContainer ,MDBFooter ,MDBCardOverlay,  MDBCardHeader, MDBCard, MDBCardImage, MDBCardBody, MDBCardTitle, MDBCardText, MDBRow, MDBCol } from 'mdb-react-ui-kit'
+import React, { useState,useEffect } from "react";
+import { useHistory } from 'react-router';
+
 import {
   MDBAccordion,
   MDBAccordionItem,
@@ -20,6 +25,7 @@ import {
 } from "mdb-react-ui-kit";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
+
 import Featured from "./Featured";
 
 export default function Main() {
