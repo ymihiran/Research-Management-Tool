@@ -4,39 +4,19 @@ import "./Styles/styles.css";
 
 export default function DocumentEvaluation() {
   const [groupID, setGroupID] = useState();
+  const [researchTopic, setResearchTopic] = useState();
+  const [link, setLink] = useState();
   const [markingCriteria, setMarkingCriteria] = useState([]);
-  // const [inputValue, setInputValue] = useState({
-  //   1: 0,
-  //   2: 0,
-  //   3: 0,
-  //   4: 0,
-  //   5: 0,
-  //   6: 0,
-  //   7: 0,
-  //   8: 0,
-  //   9: 0,
-  //   10: 0,
-  // });
-
-  const [inputValue, setInputValue] = useState([
-    { id: 1, mark: 0 },
-    { id: 2, mark: 0 },
-    { id: 3, mark: 0 },
-    { id: 4, mark: "" },
-    { id: 5, mark: "" },
-    { id: 6, mark: "" },
-    { id: 7, mark: "" },
-    { id: 8, mark: "" },
-    { id: 9, mark: "" },
-    { id: 10, mark: "" },
-    { id: 11, mark: "" },
-    { id: 12, mark: "" },
-  ]);
-
+  const [inputValue, setInputValue] = useState([]);
   const [total, setTotal] = useState(0);
+  const [rounds, setRounds] = useState();
 
   useEffect(() => {
     setGroupID(localStorage.getItem("Group_ID"));
+    setResearchTopic(localStorage.getItem("rTopic"));
+    setLink(localStorage.getItem("Link"));
+
+    console.log("localStorage.getItem()", localStorage.getItem("Link"));
 
     axios
       .get(
@@ -48,36 +28,32 @@ export default function DocumentEvaluation() {
         console.log("res.data", res.data);
         let { _id, sid, specialization, schemeType, marks, criteria } =
           res.data;
-        console.log(criteria);
         setMarkingCriteria(criteria);
-        console.log(inputValue);
       })
       .catch((err) => {
         alert(err);
       });
   }, []);
 
-  const handleInputState = (name, value) => {
-    setData((prev) => ({ ...prev, [name]: value }));
-    console.log("21 ", data);
+  const handleChangeInput = (e, index) => {
+    setInputValue({ ...inputValue, [index]: e.target.value });
   };
 
-  const handleAdd = (e) => {
+  const handleGetTotal = (e) => {
     e.preventDefault();
-    console.log("click");
+    console.log("inputValue", inputValue, "count ", criteria.length);
   };
 
-  const handleMarks = (e, index) => {
-    console.log(
-      "inputValue[index].id " + inputValue[index].id,
-      "index + 1 " + index + 1,
-      "value " + e.target.value
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const N = inputValue.map((value, index) =>
+      console.log("value", value.index)
     );
 
-    if (inputValue[index].id == index + 1) {
-      setInputValue(e.target.value);
-      console.log("inputValue " + inputValue);
-    }
+    console.log("N", N);
+    //const total = inputValue.map((inputValue) => Number(inputValue.{index}) )
+    //   console.log("total", total);
   };
 
   return (
@@ -112,9 +88,10 @@ export default function DocumentEvaluation() {
               disabled
               className="form-control"
               id="researchTopic"
+              value={researchTopic}
             />
           </div>
-          <div className="form-group mb-5">
+          {/* <div className="form-group mb-5">
             <label>Group Members</label>
             <textarea
               className="form-control"
@@ -122,10 +99,10 @@ export default function DocumentEvaluation() {
               id="groupMembers"
               rows={4}
             />
-          </div>
-          <button type="submit" className="btn btn-success ">
+          </div> */}
+          <a href={link} className="btn btn-success ">
             Download Document
-          </button>
+          </a>
         </form>
       </div>
 
@@ -164,16 +141,16 @@ export default function DocumentEvaluation() {
                           <input
                             type="number"
                             className="form-control"
-                            onChange={(e) => handleMarks(e, index)}
+                            onChange={(e) => handleChangeInput(e, index)}
                           />
                         </td>
-                        <td>
+                        {/* <td>
                           <div className="ps-5 ">
                             <button type="submit" className="form-control">
                               Add
                             </button>
                           </div>
-                        </td>
+                        </td> */}
                       </tr>
                     ))}
                   </tbody>
@@ -187,19 +164,25 @@ export default function DocumentEvaluation() {
               <label>Total Marks </label>
             </div>
             <div className="col">
-              <label></label>
+              <button
+                type="submit"
+                className="form-control"
+                onClick={handleGetTotal}
+              >
+                Get Total
+              </button>
             </div>
             <div className="col-3 ps-4">
               <label>100</label>
             </div>
           </div>
-          <a
+          <button
             type="submit"
             className="btn btn-success btn_submit mt-3"
-            onClick={(e) => handleAdd}
+            onClick={handleSubmit}
           >
             Submit
-          </a>
+          </button>
         </form>
       </div>
     </div>
