@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Card, Button } from "react-bootstrap";
+import { Store } from "react-notifications-component";
 
 export default function chatForum() {
   // const [groupID, setGroupID] = useState();
@@ -90,7 +91,23 @@ export default function chatForum() {
     console.log("newMessage", newMessage);
     //send message to the db
     await axios.post(`http://localhost:8070/chat/`, newMessage).then(() => {
-      alert("message send successfully");
+      Store.addNotification({
+        title: "message send successfully",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        type: "default",
+        insert: "top",
+        container: "top-right",
+
+        dismiss: {
+          duration: 1500,
+          onScreen: true,
+          showIcon: true,
+        },
+
+        width: 400,
+      });
+
       e.target.reset();
     });
 

@@ -114,9 +114,6 @@ export default function RequestCoSupervisor() {
               id="researchTopic"
             />
           </div>
-          <button type="submit" className="btn btn-success ">
-            Find Co-Supervisor
-          </button>
         </form>
       </div>
 
