@@ -36,11 +36,9 @@ import EditMarking from "./components/EditMarking";
 import EvaluatedTopicList from "./components/EvaluatedTopicList";
 import EditEvaluatedTopic from "./components/EditEvaluatedTopic";
 import SubmitTypes from "./components/SubmitTypes.jsx";
-
 import DocumentEvaluation from "./components/DocumentEvaluation";
 import AllDocuments from "./components/AllDocuments";
 import RequestCoSupervisor from "./components/RequestCoSupervisor";
-
 import UpdateUploadTemplate from "./components/UpdateUploadTemplate";
 import DownloadTemplate from "./components/DownloadTemplate";
 
