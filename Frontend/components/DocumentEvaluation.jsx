@@ -1,20 +1,24 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./Styles/styles.css";
+import { useHistory } from "react-router-dom";
 
 export default function DocumentEvaluation() {
   const [groupID, setGroupID] = useState();
   const [researchTopic, setResearchTopic] = useState();
   const [link, setLink] = useState();
   const [markingCriteria, setMarkingCriteria] = useState([]);
-  const [inputValue, setInputValue] = useState([]);
+  const [inputValue, setInputValue] = useState(0);
   const [total, setTotal] = useState(0);
-  const [rounds, setRounds] = useState();
+  const [evaluatedBy, setEvaluatedBy] = useState([]);
+  const [Doctype, setDoctype] = useState("null");
+  const history = useHistory();
 
   useEffect(() => {
     setGroupID(localStorage.getItem("Group_ID"));
     setResearchTopic(localStorage.getItem("rTopic"));
     setLink(localStorage.getItem("Link"));
+    setEvaluatedBy(JSON.parse(localStorage.getItem("user")).name);
 
     console.log("localStorage.getItem()", localStorage.getItem("Link"));
 
@@ -36,24 +40,36 @@ export default function DocumentEvaluation() {
   }, []);
 
   const handleChangeInput = (e, index) => {
-    setInputValue({ ...inputValue, [index]: e.target.value });
+    setInputValue({ ...inputValue, [index]: e.target.valueAsNumber });
   };
 
   const handleGetTotal = (e) => {
     e.preventDefault();
-    console.log("inputValue", inputValue, "count ", criteria.length);
+    setTotal(
+      Object.values(inputValue).reduce((total, value) => total + value, 0)
+    );
+    console.log("total", total);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const N = inputValue.map((value, index) =>
-      console.log("value", value.index)
-    );
-
-    console.log("N", N);
-    //const total = inputValue.map((inputValue) => Number(inputValue.{index}) )
-    //   console.log("total", total);
+    const newEvaluation = {
+      groupID,
+      Doctype,
+      researchTopic,
+      total,
+      evaluatedBy,
+    };
+    axios
+      .post("http://localhost:8070/evaluation/document", newEvaluation)
+      .then(() => {
+        alert("Evaluation Successful");
+        history.push("/allDoc");
+      })
+      .catch((err) => {
+        alert(err);
+      });
   };
 
   return (
@@ -173,7 +189,7 @@ export default function DocumentEvaluation() {
               </button>
             </div>
             <div className="col-3 ps-4">
-              <label>100</label>
+              <label>{total}</label>
             </div>
           </div>
           <button
