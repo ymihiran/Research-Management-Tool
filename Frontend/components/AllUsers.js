@@ -123,7 +123,8 @@ const filterData = (users,searchkey) =>{
                            
                             <td>
                             <a className="btn btn-warning" 
-                            href="/profile"
+                            href={`http://localhost:1234/updateadmin/${data._id}`}
+                           
                             style={{textDecoration:'none'}}>
                             <i></i>&nbsp;Update Profile
                             </a>

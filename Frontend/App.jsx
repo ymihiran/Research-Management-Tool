@@ -5,7 +5,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import axios from "axios";
 import { NotFound } from "./components/utils/NotFound/NotFound.js";
 import UploadTemplate from "./components/UploadTemplate";
-import SubmitTypes from "./components/SubmitTypes";
+
 import SubmitTopic from "./components/SubmitTopic";
 import EvaluateTopic from "./components/EvlauateTopic";
 import AcceptTopic from "./components/AcceptTopic";
@@ -19,7 +19,6 @@ import { ReactNotifications } from "react-notifications-component";
 
 import SubmitDocs from "./components/SubmitDocs";
 import AllStudentGroup from "./components/AllStudentGroup";
-import AllTypes from "./components/AllTypes";
 
 import AllCreateTypes from "./components/AllCreateTypes";
 
@@ -27,11 +26,11 @@ import MarkingList from "./components/MarkingList";
 import EditMarking from "./components/EditMarking";
 import EvaluatedTopicList from "./components/EvaluatedTopicList";
 import EditEvaluatedTopic from "./components/EditEvaluatedTopic";
-import SubmitTypes from "./components/SubmitTypes.jsx";
+
 import DocumentEvaluation from "./components/DocumentEvaluation";
 import AllDocuments from "./components/AllDocuments";
 import RequestCoSupervisor from "./components/RequestCoSupervisor";
-import UpdateUploadTemplate from "./components/UpdateUploadTemplate";
+
 import DownloadTemplate from "./components/DownloadTemplate";
 
 import StudentGroup from "./components/StudentGroup";
@@ -45,6 +44,7 @@ import MsgReplyForm from "./components/MsgReplyForm";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Profile from "./components/Profile";
+import ProfileUpdate from "./components/ProfileUpdate";
 import AllUsers from "./components/AllUsers";
 import PanelMembers from "./components/CheckPanelMembers";
 import SelectPanelMembers from "./components/SelectPanelMembers";
@@ -92,6 +92,12 @@ function App() {
     <div>
       <ReactNotifications />
       <Router>
+
+        <Route path="/"  exact component={Main} />
+  
+        <Route path="/updateadmin/:id" exact component={isAdmin? ProfileUpdate: NotFound} />
+ 
+
         <Route
           path="/profile"
           exact
@@ -113,7 +119,6 @@ function App() {
           component={isAdmin ? AllUsers : NotFound}
         />
         <Route path="/register" exact component={Register} />
-
         <Route path="/login" exact component={Login} />
         <Route path="/SubmitTopic" component={SubmitTopic} />
         <Route path="/EvaluateTopic" component={EvaluateTopic} />
@@ -126,10 +131,11 @@ function App() {
         <Route path="/EditTopic" component={EditTopic} />
         <Route path="/SubmitDocs" component={SubmitDocs} />
         <Route path="/AllStudentGroup" component={AllStudentGroup} />
-        <Route path="/AllTypes" component={AllTypes} />
+
         <Route path="/AllCreateTypes" component={AllCreateTypes} />
         <Route path="/MarkingList" component={MarkingList} />
         <Route path="/EditMarking" component={EditMarking} />
+
         <Route path="/" exact component={Main} />
         <Route path="/SubmitTypes" component={SubmitTypes} />
         <Route path="/doc" exact component={DocumentEvaluation} />
@@ -140,6 +146,7 @@ function App() {
           component={isLogged ? RequestCoSupervisor : Login}
         />
         <Route path="/UpdateTemplate" component={UpdateUploadTemplate} />
+
         <Route path="/DownloadTemplate" component={DownloadTemplate} />
         <Route path="/StudentGroup" component={StudentGroup} />
         <Route path="/UploadTemplate" component={UploadTemplate} />
