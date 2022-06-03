@@ -102,10 +102,10 @@ export default function AllCreateTypes() {
   //SEARCH BAR FUNCTION
   const filterData = (stype, searchkey) => {
     const result = stype.filter(
-      (SchemaType) =>
-        SchemaType.toLowerCase().includes(searchkey) ||
-        SchemaType.toUpperCase().includes(searchkey) ||
-        SchemaType.includes(searchkey)
+      (UploadTemplate) =>
+        UploadTemplate.SchemaType.toLowerCase().includes(searchkey) ||
+        UploadTemplate.SchemaType.toUpperCase().includes(searchkey) ||
+        UploadTemplate.SchemaType.includes(searchkey)
     );
 
     setTypes(result);
@@ -116,7 +116,7 @@ export default function AllCreateTypes() {
 
     axios.get("http://localhost:8070/template").then((res) => {
       if (res.data.success) {
-        filterData(res.data.SchemaType, searchkey);
+        filterData(res.data.schema, searchkey);
       }
     });
   }
@@ -145,7 +145,6 @@ export default function AllCreateTypes() {
           <section className="py-4 container mt-2">
             {/* search bar */}
             <div className="row" style={{ marginLeft: "10px" }}>
-              <h6> Search Here </h6>
               <div className="col-lg-3 mt-2 mb-2">
                 <input
                   className="form-control"
