@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./CSS/st.css";
 import "./CSS/stgrup.css";
+import { Button } from "react-bootstrap";
+import { Store } from "react-notifications-component";
 
 export default function AllCreateTypes() {
   const [type, setTypes] = useState([]);
@@ -19,7 +21,8 @@ export default function AllCreateTypes() {
   }, []);
 
   const setData = (data) => {
-    let { AdminName, SchemaType, Title, Template, Description } = data;
+    let { _id, AdminName, SchemaType, Title, Template, Description } = data;
+    localStorage.setItem("ID", _id);
     localStorage.setItem("AdminName", AdminName);
     localStorage.setItem("SchemaType", SchemaType);
     localStorage.setItem("Title", Title);
@@ -27,6 +30,38 @@ export default function AllCreateTypes() {
     localStorage.setItem("Description", Description);
 
     console.log(data);
+  };
+
+  const onDelete = (_id) => {
+    let ans = window.confirm("Do you want to delete this type ?");
+
+    if (ans) {
+      axios
+        .delete(`http://localhost:8070/template/${_id}`)
+        .then((res) => {
+          Store.addNotification({
+            title: "Delete Succesfully.",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            type: "success",
+            insert: "top",
+            container: "top-right",
+
+            dismiss: {
+              duration: 1500,
+              onScreen: true,
+              showIcon: true,
+            },
+
+            width: 400,
+          });
+          console.log(res);
+          window.location.reload(false);
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    }
   };
 
   return (
@@ -77,18 +112,11 @@ export default function AllCreateTypes() {
                       </td>
                       <td className="py-5 ">{data.Description}</td>
                       <td className="py-5 ">
-                        <a
-                          className="btn btn-warning "
-                          href="/UpdateTemplate"
-                          onClick={() => setData(data)}
-                        >
-                          <i className="fas fa-edit"></i>&nbsp;Edit
-                        </a>
                         &nbsp; &nbsp;
                         <a
                           className="btn btn-danger"
-                          href="/delete"
-                          onClick={() => setData(data)}
+                          //href="/delete"
+                          onClick={() => onDelete(data._id)}
                         >
                           <i className="far fa-trash-alt"></i>&nbsp;Delete
                         </a>
@@ -98,14 +126,14 @@ export default function AllCreateTypes() {
                 </tbody>
               </table>
 
-              <div className="bottom-t-container">
+              {/* <div className="bottom-t-container">
                 <label className="bottom-t" style={{ color: "#FF5631" }}>
                   {" "}
                   SLIIT
                 </label>{" "}
                 <label className="bottom-t"> Research</label> <br />
                 <label className="bottom-t"> Management Tool</label>
-              </div>
+              </div> */}
             </div>
           </section>
         </div>

@@ -5,7 +5,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import axios from "axios";
 import { NotFound } from "./components/utils/NotFound/NotFound.js";
 import UploadTemplate from "./components/UploadTemplate";
-import SubmitTypes from "./components/SubmitTypes";
+
 import SubmitTopic from "./components/SubmitTopic";
 import EvaluateTopic from "./components/EvlauateTopic";
 import AcceptTopic from "./components/AcceptTopic";
@@ -19,7 +19,6 @@ import { ReactNotifications } from "react-notifications-component";
 
 import SubmitDocs from "./components/SubmitDocs";
 import AllStudentGroup from "./components/AllStudentGroup";
-import AllTypes from "./components/AllTypes";
 
 import AllCreateTypes from "./components/AllCreateTypes";
 
@@ -27,11 +26,11 @@ import MarkingList from "./components/MarkingList";
 import EditMarking from "./components/EditMarking";
 import EvaluatedTopicList from "./components/EvaluatedTopicList";
 import EditEvaluatedTopic from "./components/EditEvaluatedTopic";
-import SubmitTypes from "./components/SubmitTypes.jsx";
+
 import DocumentEvaluation from "./components/DocumentEvaluation";
 import AllDocuments from "./components/AllDocuments";
 import RequestCoSupervisor from "./components/RequestCoSupervisor";
-import UpdateUploadTemplate from "./components/UpdateUploadTemplate";
+
 import DownloadTemplate from "./components/DownloadTemplate";
 
 import StudentGroup from "./components/StudentGroup";
@@ -135,16 +134,16 @@ function App() {
         <Route path="/EditTopic" component={EditTopic} />
         <Route path="/SubmitDocs" component={SubmitDocs} />
         <Route path="/AllStudentGroup" component={AllStudentGroup} />
-        <Route path="/AllTypes" component={AllTypes} />
+
         <Route path="/AllCreateTypes" component={AllCreateTypes} />
         <Route path="/MarkingList" component={MarkingList} />
         <Route path="/EditMarking" component={EditMarking} />
         <Route path="/Main" component={Main} />
-        <Route path="/SubmitTypes" component={SubmitTypes} />
+
         <Route exact path="/doc" component={DocumentEvaluation} />
         <Route path="/allDoc" component={AllDocuments} />
         <Route path="/reqCoSuper" component={RequestCoSupervisor} />
-        <Route path="/UpdateTemplate" component={UpdateUploadTemplate} />
+
         <Route path="/DownloadTemplate" component={DownloadTemplate} />
         <Route path="/StudentGroup" component={StudentGroup} />
         <Route path="/UploadTemplate" component={UploadTemplate} />

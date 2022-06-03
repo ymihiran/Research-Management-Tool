@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./CSS/st.css";
 import "./CSS/stgrup.css";
+import { style } from "@mui/system";
 
 export default function AllSubmitDoc() {
   const [type, setType] = useState([]);
@@ -64,7 +65,22 @@ export default function AllSubmitDoc() {
                         <td scope="col">
                           <b>Status</b>
                         </td>
-                        <td scope="col">{data.Status}</td>
+                        {console.log(
+                          "68",
+                          data.Status,
+                          "chk ",
+                          data.Status == "Pending"
+                        )}
+                        {data.Status == "pending" ? (
+                          <td scope="col">{data.Status}</td>
+                        ) : (
+                          <td
+                            scope="col"
+                            style={{ backgroundColor: "#fefe33" }}
+                          >
+                            {data.Status}
+                          </td>
+                        )}
                       </tr>
                       <tr>
                         <td scope="col">
