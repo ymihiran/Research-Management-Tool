@@ -62,14 +62,6 @@ export default function EvaluateTopic()  {
         console.log(request.groupName);
 
 
-        // settid(request.tid);
-        // setid(request._id);
-        // //setgroupID(request.groupID);
-        // setgroupName(request.groupName);
-        // setrField(request.rField);
-        // setrTopic(request.rTopic);
-        // setleaderEmail(request.leaderEmail);
-        // setacomment(request.comment);
 
     },[])
 
