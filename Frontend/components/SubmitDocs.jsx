@@ -186,19 +186,6 @@ export default function SubmitDocs() {
               </div>
               <br></br>
               <p>
-                <button
-                  type="submit"
-                  className="btn btn-primary mb-5"
-                  style={{
-                    backgroundColor: "#0F0934",
-                    width: "150px",
-                    fontWeight: "bold",
-                    marginLeft: "0%",
-                  }}
-                >
-                  SUBMIT
-                </button>
-
                 <a
                   href="/DownloadTemplate"
                   type="submit"
@@ -207,11 +194,23 @@ export default function SubmitDocs() {
                     backgroundColor: "#FF5631",
                     width: "150px",
                     fontWeight: "bold",
-                    marginLeft: "10%",
+                    marginLeft: "0%",
                   }}
                 >
                   CANCEL
                 </a>
+                <button
+                  type="submit"
+                  className="btn btn-primary mb-5"
+                  style={{
+                    backgroundColor: "#0F0934",
+                    width: "150px",
+                    fontWeight: "bold",
+                    marginLeft: "10%",
+                  }}
+                >
+                  SUBMIT
+                </button>
               </p>
             </div>
 

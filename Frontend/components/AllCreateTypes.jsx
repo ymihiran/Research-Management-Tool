@@ -83,7 +83,7 @@ export default function AllCreateTypes() {
             container: "top-right",
 
             dismiss: {
-              duration: 1500,
+              duration: 2500,
               onScreen: true,
               showIcon: true,
             },
