@@ -5,11 +5,17 @@ import { useHistory } from "react-router";
 import { Card, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { Store } from "react-notifications-component";
+import { Modal, ModalHeader, ModalBody } from "reactstrap";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 export default function chatGroupSupervisor() {
   const [allMsg, setAllMsg] = useState();
   const [replyMsg, setReplyMsg] = useState();
   const history = useHistory();
+  const [modal, setModal] = useState(false);
+  const [messageID, setMessageID] = useState();
+  const [message, setMessage] = useState();
+  const [userSup, setUserSup] = useState();
 
   //User authentication
   function authenticate() {
@@ -45,7 +51,7 @@ export default function chatGroupSupervisor() {
     setTimeout(() => {
       authenticate();
     }, 0);
-
+    setUserSup(JSON.parse(localStorage.getItem("user")).name);
     //get messages from db
     const getAllMsg = async () => {
       const allChat = await axios
@@ -104,16 +110,63 @@ export default function chatGroupSupervisor() {
   const handleReply = (e, id) => {
     e.preventDefault();
     console.log(id);
-    localStorage.setItem("Message_ID", id);
-    history.push("/reply");
+    setMessageID(id);
+    setModal(true);
+
+    console.log(messageID);
   };
+
+  const handelSendReplyModal = async (e) => {
+    e.preventDefault();
+    console.log("message", message);
+    console.log("mID", messageID);
+    console.log("userSup", userSup);
+
+    await axios
+      .post(`http://localhost:8070/chatReplies`, {
+        userSup,
+        messageID,
+        message,
+      })
+      .then((res) => {
+        window.location.reload(false);
+      });
+  };
+
   return (
     <div className="allDoc_body_container">
       {/*left side column */}
       <div className="left_container"></div>
 
-      {/*right side column */}
+      {/* Popup modal */}
+      <Modal size="lg" isOpen={modal} toggle={() => setModal(!modal)}>
+        <ModalHeader toggle={() => setModal(!modal)}>
+          <h3>Reply to message</h3>
+        </ModalHeader>
+        <ModalBody>
+          <form onSubmit={handelSendReplyModal}>
+            <div className="form-group mb-3">
+              <label>Reply</label>
+              <textarea
+                required
+                className="form-control"
+                id="groupMembers"
+                rows={4}
+                onChange={(e) => {
+                  setMessage(e.target.value);
+                }}
+              />
+            </div>
+            <div className="modal-footer">
+              <button type="submit" className="btn btn-success ">
+                Send
+              </button>
+            </div>
+          </form>
+        </ModalBody>
+      </Modal>
 
+      {/*right side column */}
       <div className="right_container">
         {allMsg?.map((allMsg, index) => (
           <div key={index}>
@@ -150,28 +203,55 @@ export default function chatGroupSupervisor() {
                 {replyMsg?.map((replyMsg, index) => (
                   <div key={index}>
                     {allMsg._id === replyMsg.messageID ? (
-                      <Card
-                        className="mb-3"
-                        style={{ backgroundColor: "#ece9ff" }}
-                      >
-                        <Card.Body>
-                          <Card.Text>
-                            <p>{replyMsg.createdAt}</p>
-                            <p>
-                              <b>Reply by:</b> {replyMsg.userSup}
-                            </p>
-                            <p className="ms-4">{replyMsg.message}</p>
-                          </Card.Text>
-                          <div className="modal-footer">
-                            <Button
-                              variant="danger"
-                              onClick={(e) => deleteReply(e, replyMsg._id)}
-                            >
-                              Delete
-                            </Button>
+                      <div style={{ width: "550px", marginLeft: "350px" }}>
+                        <Card
+                          className="mb-3"
+                          style={{ backgroundColor: "#ece9ff" }}
+                        >
+                          <div style={{ height: "180px" }}>
+                            <Card.Body>
+                              <Card.Text>
+                                <p>{replyMsg.createdAt}</p>
+                                <p>
+                                  <b>Reply by:</b> {replyMsg.userSup}
+                                </p>
+                                <p className="ms-4">{replyMsg.message}</p>
+                              </Card.Text>
+                              <div style={{ marginLeft: "450px" }}>
+                                <a
+                                  type="number"
+                                  min="0"
+                                  max="25"
+                                  className="form-control "
+                                  style={{
+                                    width: "70px",
+                                    backgroundColor: "#ece9ff",
+                                    border: "none",
+                                  }}
+                                  onClick={(e) => deleteReply(e, replyMsg._id)}
+                                >
+                                  <DeleteForeverIcon
+                                    fontSize="large"
+                                    sx={{
+                                      "&:hover": {
+                                        color: "#00D8B6",
+                                      },
+                                      color: "red",
+                                      disabled: false,
+                                    }}
+                                  />
+                                </a>
+                                {/* <Button
+                                  variant="danger"
+                                  onClick={(e) => deleteReply(e, replyMsg._id)}
+                                >
+                                  Delete
+                                </Button> */}
+                              </div>
+                            </Card.Body>
                           </div>
-                        </Card.Body>
-                      </Card>
+                        </Card>
+                      </div>
                     ) : (
                       <div></div>
                     )}

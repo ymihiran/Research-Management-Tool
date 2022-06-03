@@ -27,7 +27,7 @@ function Login() {
       localStorage.setItem("user", JSON.stringify(data.result));
       localStorage.setItem("firstLogin", true);
 
-      history.push("/profile");
+      history.push("/");
     } catch (error) {
       if (error.response.status === 404) {
         alert("Invalid Registration Number");

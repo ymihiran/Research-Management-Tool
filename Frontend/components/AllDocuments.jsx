@@ -23,8 +23,8 @@ export default function AllDocuments() {
         title: "You are not allowed!",
         message:
           "You are not allowed to access this page! Please login as Supervisor, Co-Supervisor or Panel Member",
-        animationIn: ["animate__animated", "animate__fadeIn"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
+        animationIn: ["animate_animated", "animate_fadeIn"],
+        animationOut: ["animate_animated", "animate_fadeOut"],
         type: "danger",
         insert: "top",
         container: "top-right",
@@ -66,7 +66,12 @@ export default function AllDocuments() {
     localStorage.setItem("Link", Document);
     localStorage.setItem("DocType", DocType);
     localStorage.setItem("DocID", _id);
-    history.push("/Doc");
+    if (data.DocType == "Topic Details Document") {
+      history.push("/EvaluateTopic");
+    } else {
+      history.push("/Doc");
+    }
+    h;
   };
 
   return (
@@ -81,7 +86,7 @@ export default function AllDocuments() {
             SUBMITTED
           </label>
           <br />
-          <label className="h-text">RESEARCH DOCUMENTS</label>
+          <label className="h-text">RESEARCH DOCUMENTS / PRESENTATIONS</label>
         </div>
         <div className="allDoc_box mb-5 ">
           <table className="table table-hover table-borderless">

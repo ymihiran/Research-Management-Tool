@@ -36,8 +36,10 @@ export default function UploadTemplate() {
         title: "You are not allowed!",
         message:
           "You are not allowed to access this page! Please login as an Admin",
+
         animationIn: ["animate__animated", "animate__fadeIn"],
         animationOut: ["animate__animated", "animate__fadeOut"],
+
         type: "danger",
         insert: "top",
         container: "top-right",
@@ -69,14 +71,14 @@ export default function UploadTemplate() {
 
       Store.addNotification({
         title: "Create New Submission Type Successfully.",
-        animationIn: ["animate__animated", "animate__fadeIn"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
+        animationIn: ["animate_animated", "animate_fadeIn"],
+        animationOut: ["animate_animated", "animate_fadeOut"],
         type: "success",
         insert: "top",
         container: "top-right",
 
         dismiss: {
-          duration: 2000,
+          duration: 2500,
           onScreen: true,
           showIcon: true,
         },
@@ -148,6 +150,11 @@ export default function UploadTemplate() {
                 >
                   <option value="Default">Select one</option>
                   <option value="RP Group">RP Group List</option>
+
+                  <option value="Topic Details Document">
+                    Topic Details Document
+                  </option>
+
                   <option value="Proposal Presentation">
                     Proposal Presentation
                   </option>

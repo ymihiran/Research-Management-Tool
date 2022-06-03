@@ -319,7 +319,6 @@ export default function DocumentEvaluation() {
                         <td className="ps-3">{data.mark}</td>
                         <td>
                           <input
-                            disabled
                             type="number"
                             min={0}
                             max={data.mark}
