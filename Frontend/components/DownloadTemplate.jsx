@@ -26,14 +26,9 @@ export default function DownloadTemplate() {
     console.log("data", data);
 
     let { SchemaType } = data;
-    //     localStorage.setItem("AdminName", AdminName);
 
     localStorage.setItem("SchemaType", SchemaType);
-    //     localStorage.setItem("Title", Title);
-    //     localStorage.setItem("Template", Template);
-    //     localStorage.setItem("Description", Description);
 
-    //     console.log(data);
     history.push("/SubmitDocs");
   };
   return (
@@ -49,15 +44,6 @@ export default function DownloadTemplate() {
             </div>
           </div>
           <div className="mt-3" style={{ backgroundColor: "white" }}>
-            {/* <div className="t-list-head-container">
-              <label className="h-text" style={{ color: "#FF5631" }}>
-                {" "}
-                RESEARCH PROJECT
-              </label>{" "}
-              <br className="br1" />
-              <label className="h-text"></label>
-            </div> */}
-
             <div
               className="ms-5 mt-3 me-5"
               style={{ backgroundColor: "#C4C4C4", height: "30px" }}
