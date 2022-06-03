@@ -125,8 +125,29 @@ export default function EvaluateTopic()  {
     
             alert(err);
          })
+         document.getElementById("subBut").click();
          
 
+    }
+
+    function sendEmail(e) {
+        e.preventDefault();
+
+        emailjs
+                .sendForm(
+                    'service_tc03vnm',
+                    'template_ajm9ro9',
+                    e.currentTarget,
+                    '-utNmr2eLLLW4jLyR'
+                )
+                .then(
+                    (result) => {
+                    console.log("Mail Sent");
+                    },
+                    (error) => {
+                    console.log(error.text);
+                    }
+                );
     }
 
     return(
@@ -227,6 +248,12 @@ export default function EvaluateTopic()  {
 
 
                         <button type="submit" className="btn btn-primary" style={{backgroundColor:"#0F0934",width:"200px",fontWeight:"bold",marginLeft:"45%"}} >Submit</button>
+                    </form>
+
+                    <form onSubmit={sendEmail}>
+                            <input type="hidden" name="mail" value={request.leaderEmail} />
+                            <input type="hidden" name="message" value={Evaluation} />
+                            <button hidden id="subBut">Send Email</button>
                     </form>
 
                     <div className="bottom-t-container">

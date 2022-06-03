@@ -17,6 +17,64 @@ export default function DocumentEvaluation() {
   const [Status, setStatus] = useState();
   const history = useHistory();
 
+  //Supervisor, co-supervisor authentication
+  function DocumentAuthenticate() {
+    if (
+      JSON.parse(localStorage.getItem("user") || "[]").user_role !=
+        "Supervisor" &&
+      JSON.parse(localStorage.getItem("user") || "[]").user_role !=
+        "Co-Supervisor"
+    ) {
+      history.push("/allDoc");
+      Store.addNotification({
+        title: "You are not allowed Documentation Evaluation!",
+        message:
+          "You are not allowed to access this page! Please login as Supervisor, Co-Supervisor",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        type: "danger",
+        insert: "top",
+        container: "top-right",
+
+        dismiss: {
+          duration: 3500,
+          onScreen: true,
+          showIcon: true,
+        },
+
+        width: 400,
+      });
+    }
+  }
+
+  //Panel Member authentication
+  function presentationAuthenticate() {
+    if (
+      JSON.parse(localStorage.getItem("user") || "[]").user_role !=
+      "Panel Member"
+    ) {
+      history.push("/allDoc");
+      Store.addNotification({
+        title: "You are not allowed to Presentation Evaluation!",
+        message:
+          "You are not allowed to access this page! Please login as Panel Member",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        type: "danger",
+        insert: "top",
+        container: "top-right",
+
+        dismiss: {
+          duration: 3500,
+          onScreen: true,
+          showIcon: true,
+        },
+
+        width: 400,
+      });
+    }
+  }
+
   useEffect(() => {
     setGroupID(localStorage.getItem("Group_ID"));
     setResearchTopic(localStorage.getItem("rTopic"));
@@ -30,6 +88,9 @@ export default function DocumentEvaluation() {
       localStorage.getItem("DocType") == "Progress Presentation" ||
       localStorage.getItem("DocType") == "Final Presentation"
     ) {
+      setTimeout(() => {
+        presentationAuthenticate();
+      }, 0);
       axios
         .get(
           `http://localhost:8070/markingScheme/one/${localStorage.getItem(
@@ -64,6 +125,9 @@ export default function DocumentEvaluation() {
           });
         });
     } else {
+      setTimeout(() => {
+        DocumentAuthenticate();
+      }, 0);
       axios
         .get(
           `http://localhost:8070/markingScheme/one/${localStorage.getItem(
