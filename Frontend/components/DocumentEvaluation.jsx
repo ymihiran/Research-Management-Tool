@@ -18,14 +18,12 @@ export default function DocumentEvaluation() {
   const history = useHistory();
 
   //User authentication
-  function authenticate() {
+  function DocumentAuthenticate() {
     if (
       JSON.parse(localStorage.getItem("user") || "[]").user_role !=
         "Supervisor" &&
       JSON.parse(localStorage.getItem("user") || "[]").user_role !=
-        "Co-Supervisor" &&
-      JSON.parse(localStorage.getItem("user") || "[]").user_role !=
-        "Panel Member"
+        "Co-Supervisor"
     ) {
       history.push("/login");
       Store.addNotification({
@@ -51,7 +49,7 @@ export default function DocumentEvaluation() {
 
   useEffect(() => {
     setTimeout(() => {
-      authenticate();
+      DocumentAuthenticate();
     }, 0);
 
     setGroupID(localStorage.getItem("Group_ID"));
