@@ -91,20 +91,22 @@ export default function chatGroupSupervisor() {
                 <Card.Body>
                   <Card.Title>{allMsg.subject}</Card.Title>
                   <Card.Text>{allMsg.message}</Card.Text>
-                  <Button
-                    variant="danger"
-                    className="me-5"
-                    onClick={(e) => handleReply(e, allMsg._id)}
-                  >
-                    Reply
-                  </Button>
-                  <Button
-                    variant="danger"
-                    className="ms-5"
-                    onClick={(e) => deleteMsg(e, allMsg._id)}
-                  >
-                    Delete
-                  </Button>
+                  <div className="modal-footer">
+                    <Button
+                      className="me-5"
+                      style={{ backgroundColor: "#0f0934" }}
+                      onClick={(e) => handleReply(e, allMsg._id)}
+                    >
+                      Reply
+                    </Button>
+                    <Button
+                      variant="danger"
+                      className="ms-5"
+                      onClick={(e) => deleteMsg(e, allMsg._id)}
+                    >
+                      Delete
+                    </Button>
+                  </div>
                 </Card.Body>
               </Card>
             </div>
@@ -125,12 +127,14 @@ export default function chatGroupSupervisor() {
                             </p>
                             <p className="ms-4">{replyMsg.message}</p>
                           </Card.Text>
-                          <Button
-                            variant="danger"
-                            onClick={(e) => deleteReply(e, replyMsg._id)}
-                          >
-                            Delete
-                          </Button>
+                          <div className="modal-footer">
+                            <Button
+                              variant="danger"
+                              onClick={(e) => deleteReply(e, replyMsg._id)}
+                            >
+                              Delete
+                            </Button>
+                          </div>
                         </Card.Body>
                       </Card>
                     ) : (

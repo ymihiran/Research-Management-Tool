@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./Styles/styles.css";
 import { useHistory } from "react-router";
+import { Store } from "react-notifications-component";
 
 export default function MsgReplyForm() {
   const [message, setMessage] = useState();
@@ -25,16 +26,51 @@ export default function MsgReplyForm() {
         message,
       })
       .then((res) => {
-        console.log(res);
+        Store.addNotification({
+          title: "Reply Send!",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          type: "success",
+          insert: "top",
+          container: "top-right",
+
+          dismiss: {
+            duration: 1500,
+            onScreen: true,
+            showIcon: true,
+          },
+
+          width: 400,
+        });
         history.push("/chatGroup");
       })
       .catch((err) => {
-        alert(err);
+        Store.addNotification({
+          title: "Please type the reply !",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          type: "danger",
+          insert: "top",
+          container: "top-center",
+
+          dismiss: {
+            duration: 19500,
+
+            showIcon: true,
+            click: false,
+          },
+
+          width: 400,
+        });
       });
   };
 
+  const handelCancel = () => {
+    history.push("/chatGroup");
+  };
+
   return (
-    <div className="body_container">
+    <div className="reply_body_container">
       {/*left side column */}
       <div className="left_container">
         <div>
@@ -50,11 +86,12 @@ export default function MsgReplyForm() {
 
       {/*right side column */}
       <div className="right_container">
-        <div className="criteria_box mb-4 ">
+        <div className="reply_criteria_box mb-4 ">
           <form>
-            <div className="form-group mb-5">
+            <div className="form-group mb-3">
               <label>Reply</label>
               <textarea
+                required
                 className="form-control"
                 id="groupMembers"
                 rows={4}
@@ -63,13 +100,22 @@ export default function MsgReplyForm() {
                 }}
               />
             </div>
-            <button
-              type="submit"
-              className="btn btn-success"
-              onClick={(e) => handelSendReply(e)}
-            >
-              Send
-            </button>
+            <div className="modal-footer">
+              <button
+                type="submit"
+                className="btn btn-secondary "
+                onClick={handelCancel}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="btn btn-success "
+                onClick={(e) => handelSendReply(e)}
+              >
+                Send
+              </button>
+            </div>
           </form>
         </div>
       </div>

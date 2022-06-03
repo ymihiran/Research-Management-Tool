@@ -1,14 +1,14 @@
 import "./CSS/topicsub.css";
 import "./CSS/btrap.css";
-import React, {useState,useEffect} from "react";
+import React, {useState,useEffect,useContext} from "react";
 import axios from 'axios';
+
+
 
 
 export default function AllUsers() {
     
-    
-    const[request,setRequest] = useState([]);
-   
+    const[request,setRequest] = useState([]); 
     useEffect(()=>{
               
         axios.get("http://localhost:8070/user/allprof").then((res)=>{
@@ -26,7 +26,7 @@ export default function AllUsers() {
       if(ans){  
       axios.delete(`http://localhost:8070/user/delete/${id}`).then((res)=>{
           alert("Profile Successfully Deleted");
-          this.props.history.push('/allprof');
+          window.location.reload(false);
           }).catch((err)=>{
           alert(err.message);
          })
@@ -123,7 +123,8 @@ const filterData = (users,searchkey) =>{
                            
                             <td>
                             <a className="btn btn-warning" 
-                            href="/profile"
+                            href={`http://localhost:1234/updateadmin/${data._id}`}
+                           
                             style={{textDecoration:'none'}}>
                             <i></i>&nbsp;Update Profile
                             </a>
@@ -131,7 +132,7 @@ const filterData = (users,searchkey) =>{
 
                             <td>
                             <a className="btn btn-danger" 
-                            href="/"
+                            onClick={()=> onDelete(data._id)}
                             style={{textDecoration:'none'}}>
                             <i></i>&nbsp;Delete Profile
                             </a>       
