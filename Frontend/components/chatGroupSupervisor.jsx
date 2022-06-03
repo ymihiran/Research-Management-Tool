@@ -5,11 +5,16 @@ import { useHistory } from "react-router";
 import { Card, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { Store } from "react-notifications-component";
+import { Modal, ModalHeader, ModalBody } from "reactstrap";
 
 export default function chatGroupSupervisor() {
   const [allMsg, setAllMsg] = useState();
   const [replyMsg, setReplyMsg] = useState();
   const history = useHistory();
+  const [modal, setModal] = useState(false);
+  const [messageID, setMessageID] = useState();
+  const [message, setMessage] = useState();
+  const [userSup, setUserSup] = useState();
 
   //User authentication
   function authenticate() {
@@ -45,7 +50,7 @@ export default function chatGroupSupervisor() {
     setTimeout(() => {
       authenticate();
     }, 0);
-
+    setUserSup(JSON.parse(localStorage.getItem("user")).name);
     //get messages from db
     const getAllMsg = async () => {
       const allChat = await axios
@@ -104,16 +109,63 @@ export default function chatGroupSupervisor() {
   const handleReply = (e, id) => {
     e.preventDefault();
     console.log(id);
-    localStorage.setItem("Message_ID", id);
-    history.push("/reply");
+    setMessageID(id);
+    setModal(true);
+
+    console.log(messageID);
   };
+
+  const handelSendReplyModal = async (e) => {
+    e.preventDefault();
+    console.log("message", message);
+    console.log("mID", messageID);
+    console.log("userSup", userSup);
+
+    await axios
+      .post(`http://localhost:8070/chatReplies`, {
+        userSup,
+        messageID,
+        message,
+      })
+      .then((res) => {
+        window.location.reload(false);
+      });
+  };
+
   return (
     <div className="allDoc_body_container">
       {/*left side column */}
       <div className="left_container"></div>
 
-      {/*right side column */}
+      {/* Popup modal */}
+      <Modal size="lg" isOpen={modal} toggle={() => setModal(!modal)}>
+        <ModalHeader toggle={() => setModal(!modal)}>
+          <h3>Reply to message</h3>
+        </ModalHeader>
+        <ModalBody>
+          <form onSubmit={handelSendReplyModal}>
+            <div className="form-group mb-3">
+              <label>Reply</label>
+              <textarea
+                required
+                className="form-control"
+                id="groupMembers"
+                rows={4}
+                onChange={(e) => {
+                  setMessage(e.target.value);
+                }}
+              />
+            </div>
+            <div className="modal-footer">
+              <button type="submit" className="btn btn-success ">
+                Send
+              </button>
+            </div>
+          </form>
+        </ModalBody>
+      </Modal>
 
+      {/*right side column */}
       <div className="right_container">
         {allMsg?.map((allMsg, index) => (
           <div key={index}>
@@ -127,6 +179,13 @@ export default function chatGroupSupervisor() {
                   <Card.Title>{allMsg.subject}</Card.Title>
                   <Card.Text>{allMsg.message}</Card.Text>
                   <div className="modal-footer">
+                    {/* <Button
+                      className="me-5"
+                      style={{ backgroundColor: "#0f0934" }}
+                      onClick={(e) => handleReply(e, allMsg._id)}
+                    >
+                      Reply
+                    </Button> */}
                     <Button
                       className="me-5"
                       style={{ backgroundColor: "#0f0934" }}
