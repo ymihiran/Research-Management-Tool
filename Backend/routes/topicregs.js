@@ -6,6 +6,7 @@ import {
   getAllTopic,
   getSingleTopic,
   updateSingleRecord,
+  updatepanel,
   deleteTopic,
   getSingleTopicData,
   getGroupID,
