@@ -99,6 +99,28 @@ export default function AllCreateTypes() {
     }
   };
 
+  //SEARCH BAR FUNCTION
+  const filterData = (stype, searchkey) => {
+    const result = stype.filter(
+      (SchemaType) =>
+        SchemaType.toLowerCase().includes(searchkey) ||
+        SchemaType.toUpperCase().includes(searchkey) ||
+        SchemaType.includes(searchkey)
+    );
+
+    setTypes(result);
+  };
+
+  function handleSearch(e) {
+    const searchkey = e.currentTarget.value;
+
+    axios.get("http://localhost:8070/template").then((res) => {
+      if (res.data.success) {
+        filterData(res.data.SchemaType, searchkey);
+      }
+    });
+  }
+
   return (
     <div>
       <div className="t-list-container">
@@ -120,7 +142,20 @@ export default function AllCreateTypes() {
             <label className="h-text">TYPES</label>
           </div>
 
-          <section className="py-4 container">
+          <section className="py-4 container mt-2">
+            {/* search bar */}
+            <div className="row" style={{ marginLeft: "10px" }}>
+              <h6> Search Here </h6>
+              <div className="col-lg-3 mt-2 mb-2">
+                <input
+                  className="form-control"
+                  type="search"
+                  placeholder="Search Schema Type "
+                  name="searchQuery"
+                  onChange={handleSearch}
+                ></input>
+              </div>
+            </div>
             <div className="py-2 container">
               <table class="table border shadow" id="emp-table">
                 <thead class="thread-dark">

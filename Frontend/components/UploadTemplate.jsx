@@ -15,6 +15,8 @@ export default function UploadTemplate() {
     SchemaType: "",
     Title: "",
     Description: "",
+    DeadlineDate: "",
+    DeadlineTime: "",
   });
   let history = useHistory();
 
@@ -127,7 +129,6 @@ export default function UploadTemplate() {
                   value={data.AdminName}
                 />
               </div>
-
               <div className="mb-3 ">
                 <label className="t-form-label">
                   <b>Schema Type:</b>
@@ -172,7 +173,6 @@ export default function UploadTemplate() {
                   </option>
                 </select>
               </div>
-
               <div className="mb-3">
                 <label className="t-form-label">
                   <b>Document/Presentation Title:</b>
@@ -187,8 +187,37 @@ export default function UploadTemplate() {
                   value={data.Title}
                 />
               </div>
-              <div className="mb-3"></div>
 
+              <p>
+                {/*  date */}
+                <div lassName="mb-5" style={{ width: "200px" }}>
+                  <label className="t-form-label">
+                    <b>Submit Date:</b>
+                  </label>
+                  <input
+                    type="date"
+                    id="cName"
+                    required
+                    name="DeadlineDate"
+                    onChange={handleChange}
+                    value={data.DeadlineDate}
+                  ></input>
+                </div>
+                {/* time */}
+                <div lassName="mb-5" style={{ width: "200px" }}>
+                  <label className="t-form-label">
+                    <b>Submit Time:</b>
+                  </label>
+                  <input
+                    type="time"
+                    id="cName"
+                    name="DeadlineTime"
+                    onChange={handleChange}
+                    value={data.DeadlineTime}
+                  ></input>
+                </div>
+              </p>
+              <div className="mb-3"></div>
               <div className="mb-3">
                 <label htmlFor="formFile" className="t-form-label">
                   <b>Upload Template/Document</b>
@@ -223,7 +252,6 @@ export default function UploadTemplate() {
                 />
               </div>
               <br></br>
-
               <p>
                 <a
                   href="/"
@@ -256,14 +284,14 @@ export default function UploadTemplate() {
           </div>
         </div>
       </form>
-      <div className="bottom-t-container " style={{ marginBottom: "-6em" }}>
+      {/* <div className="bottom-t-container " style={{ marginBottom: "-6em" }}>
         <label className="bottom-t" style={{ color: "#FF5631" }}>
           {" "}
           SLIIT
         </label>{" "}
         <label className="bottom-t"> Research</label> <br />
         <label className="bottom-t"> Management Tool</label>
-      </div>
+      </div> */}
     </div>
   );
 }

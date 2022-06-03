@@ -7,6 +7,8 @@ export const UploadTemplate = async (req, res) => {
   const SchemaType = req.body.SchemaType;
   const Template = req.body.song;
   const Description = req.body.Description;
+  const DeadlineDate = req.body.DeadlineDate;
+  const DeadlineTime = req.body.DeadlineTime;
 
   const newType = new UplaodTemplateRoute({
     AdminName,
@@ -14,6 +16,8 @@ export const UploadTemplate = async (req, res) => {
     Template,
     SchemaType,
     Description,
+    DeadlineDate,
+    DeadlineTime,
   });
 
   newType
