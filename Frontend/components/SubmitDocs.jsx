@@ -13,6 +13,7 @@ export default function SubmitDocs() {
     setuserEmail(JSON.parse(localStorage.getItem("user")).email);
     //console.log(JSON.parse(localStorage.getItem("user")).email);
   }, []);
+
   //file upload
   const [data, setData] = useState({
     name: "upload",
@@ -144,7 +145,7 @@ export default function SubmitDocs() {
 
               <div className="mb-3">
                 <label htmlFor="formFile" className="t-form-label">
-                  <b>Upload TeTemplate</b>
+                  <b>Upload Template</b>
                 </label>
                 <div style={{ width: "470px" }}>
                   <FileInput
@@ -173,19 +174,35 @@ export default function SubmitDocs() {
                   value={data.Comment}
                 />
               </div>
+              <br></br>
+              <p>
+                <button
+                  type="submit"
+                  className="btn btn-primary mb-5"
+                  style={{
+                    backgroundColor: "#0F0934",
+                    width: "150px",
+                    fontWeight: "bold",
+                    marginLeft: "0%",
+                  }}
+                >
+                  SUBMIT
+                </button>
 
-              <button
-                type="submit"
-                className="btn btn-primary"
-                style={{
-                  backgroundColor: "#0F0934",
-                  width: "200px",
-                  fontWeight: "bold",
-                  marginLeft: "50%",
-                }}
-              >
-                SUBMIT
-              </button>
+                <a
+                  href="/DownloadTemplate"
+                  type="submit"
+                  className="btn btn-primary mb-5"
+                  style={{
+                    backgroundColor: "#FF5631",
+                    width: "150px",
+                    fontWeight: "bold",
+                    marginLeft: "10%",
+                  }}
+                >
+                  CANCEL
+                </a>
+              </p>
             </div>
 
             <div className="bottom-t-container">
