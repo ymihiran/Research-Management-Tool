@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router";
 import emailjs from "emailjs-com";
+
 import { Store } from "react-notifications-component";
 
 export default function AcceptTopic() {
@@ -76,6 +77,7 @@ export default function AcceptTopic() {
       sts = "Rejected";
     } else {
       //no button pressed
+
     }
 
     const updateTopic = {

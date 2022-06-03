@@ -37,6 +37,7 @@ export default function TopicList() {
       btnColor = "l-btn-accepted";
       btnText = "Req Co-Supervisor";
     }
+
     col = val;
   }
 
@@ -92,6 +93,7 @@ export default function TopicList() {
           </label>{" "}
           <br className="br1" />
           <label className="h-text">RESEARCH TOPICS</label>
+
         </div>
 
         <div className="t-list-tb-container">
