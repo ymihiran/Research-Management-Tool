@@ -6,6 +6,7 @@ import { useHistory } from 'react-router';
 import emailjs from "emailjs-com";
 import { Store } from 'react-notifications-component';
 
+//function
 
 
 export default function AcceptTopic()  {
