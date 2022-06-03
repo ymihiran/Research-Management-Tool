@@ -189,18 +189,34 @@ export default function UploadTemplate() {
               </div>
               <br></br>
 
-              <button
-                type="submit"
-                className="btn btn-primary mb-5"
-                style={{
-                  backgroundColor: "#0F0934",
-                  width: "200px",
-                  fontWeight: "bold",
-                  marginLeft: "50%",
-                }}
-              >
-                UPLOAD
-              </button>
+              <p>
+                <button
+                  type="submit"
+                  className="btn btn-primary mb-5"
+                  style={{
+                    backgroundColor: "#0F0934",
+                    width: "150px",
+                    fontWeight: "bold",
+                    marginLeft: "0%",
+                  }}
+                >
+                  UPLOAD
+                </button>
+
+                <a
+                  href="/"
+                  type="submit"
+                  className="btn btn-primary mb-5"
+                  style={{
+                    backgroundColor: "#FF5631",
+                    width: "150px",
+                    fontWeight: "bold",
+                    marginLeft: "10%",
+                  }}
+                >
+                  CANCEL
+                </a>
+              </p>
             </div>
           </div>
         </div>
