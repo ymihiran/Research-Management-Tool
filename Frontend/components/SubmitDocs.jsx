@@ -79,14 +79,6 @@ export default function SubmitDocs() {
             </div>
           </div>
           <div style={{ backgroundColor: "white" }}>
-            {/* <div className="t-list-head-container">
-              <label className="h-text" style={{ color: "#FF5631" }}>
-                {" "}
-              </label>{" "}
-              <br className="br1" />
-              <label className="h-text">{type}</label>
-            </div> */}
-
             <div
               className="ms-5 mt-5 me-5"
               style={{
@@ -96,6 +88,23 @@ export default function SubmitDocs() {
               }}
             >
               <h4 className="ms-2">{type} Submission</h4>
+            </div>
+
+            <div
+              className="ms-5 mt-3 me-5"
+              style={{
+                backgroundColor: "#fefe33",
+                height: "20px",
+                color: "red",
+              }}
+            >
+              <h6 className="ms-2">
+                Upload the document here.{" "}
+                <b>
+                  Note that for the late submissions there will be a deduction
+                  from the allocated marks
+                </b>
+              </h6>
             </div>
 
             <div className="t-list-tb-container mt-3">
