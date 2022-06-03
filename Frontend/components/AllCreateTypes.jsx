@@ -18,7 +18,7 @@ export default function AllCreateTypes() {
       Store.addNotification({
         title: "You are not allowed!",
         message:
-          "You are not allowed to access this page! Please login as Panel Member",
+          "You are not allowed to access this page! Please login as an Admin",
         animationIn: ["animate__animated", "animate__fadeIn"],
         animationOut: ["animate__animated", "animate__fadeOut"],
         type: "danger",

@@ -35,7 +35,7 @@ export default function UploadTemplate() {
       Store.addNotification({
         title: "You are not allowed!",
         message:
-          "You are not allowed to access this page! Please login as Admin",
+          "You are not allowed to access this page! Please login as an Admin",
         animationIn: ["animate__animated", "animate__fadeIn"],
         animationOut: ["animate__animated", "animate__fadeOut"],
         type: "danger",
@@ -147,6 +147,7 @@ export default function UploadTemplate() {
                   value={data.SchemaType}
                 >
                   <option value="Default">Select one</option>
+                  <option value="RP Group">RP Group List</option>
                   <option value="Proposal Presentation">
                     Proposal Presentation
                   </option>

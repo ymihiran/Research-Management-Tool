@@ -8,7 +8,11 @@ export default function AllSubmitDoc() {
   const [type, setType] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:8070/document")
+      .get(
+        `http://localhost:8070/document/student/${
+          JSON.parse(localStorage.getItem("user")).email
+        }`
+      )
       .then((res) => {
         setType(res.data);
         console.log(res.data);
