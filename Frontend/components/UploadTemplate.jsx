@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ClassNames } from "@emotion/react";
 import "./CSS/st.css";
 import FileInput from "./FileInput";
+import { Store } from "react-notifications-component";
+import { useHistory } from "react-router-dom";
 
 export default function UploadTemplate() {
   //file upload
@@ -10,9 +12,11 @@ export default function UploadTemplate() {
     name: "upload",
     Template: "",
     AdminName: "",
+    SchemaType: "",
     Title: "",
     Description: "",
   });
+  let history = useHistory();
 
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
@@ -23,6 +27,40 @@ export default function UploadTemplate() {
     console.log("21 ", data);
   };
 
+  //USER AUTHENTICATE
+
+  function authenticate() {
+    if (JSON.parse(localStorage.getItem("user") || "[]").user_role != "Admin") {
+      history.push("/login");
+      Store.addNotification({
+        title: "You are not allowed!",
+        message:
+          "You are not allowed to access this page! Please login as an Admin",
+
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+
+        type: "danger",
+        insert: "top",
+        container: "top-right",
+
+        dismiss: {
+          duration: 3000,
+          onScreen: true,
+          showIcon: true,
+        },
+
+        width: 400,
+      });
+    }
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      authenticate();
+    }, 0);
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -30,6 +68,25 @@ export default function UploadTemplate() {
       const { data: res } = await axios.post(url, data);
       console.log(res);
       console.log(data);
+
+      Store.addNotification({
+        title: "Create New Submission Type Successfully.",
+        animationIn: ["animate_animated", "animate_fadeIn"],
+        animationOut: ["animate_animated", "animate_fadeOut"],
+        type: "success",
+        insert: "top",
+        container: "top-right",
+
+        dismiss: {
+          duration: 2500,
+          onScreen: true,
+          showIcon: true,
+        },
+
+        width: 400,
+      });
+
+      window.location.reload(false);
     } catch (error) {
       console.log(error);
     }
@@ -73,6 +130,56 @@ export default function UploadTemplate() {
                 />
               </div>
 
+              <div className="mb-3 ">
+                <label className="t-form-label">
+                  <b>Schema Type:</b>
+                </label>
+
+                <select
+                  className="form-control m-select"
+                  id="Field"
+                  style={{
+                    fontSize: "1rem",
+                    width: "450px",
+                    border: "2px solid #ced4da",
+                    height: "40px",
+                  }}
+                  name="SchemaType"
+                  onChange={handleChange}
+                  value={data.SchemaType}
+                >
+                  <option value="Default">Select one</option>
+                  <option value="RP Group">RP Group List</option>
+
+                  <option value="Topic Details Document">
+                    Topic Details Document
+                  </option>
+
+                  <option value="Proposal Presentation">
+                    Proposal Presentation
+                  </option>
+                  <option value="Progress Presentation">
+                    Progress Presentation
+                  </option>
+                  <option value="Final Presentation">Final Presentation</option>
+                  <option value="Chater Documentation">
+                    Chater Documentation
+                  </option>
+                  <option value="Scrum Documentation">
+                    Scrum Documentation
+                  </option>
+                  <option value="Proposal Documentation">
+                    Proposal Documentation
+                  </option>
+                  <option value="Progress Documentation">
+                    Progress Documentation
+                  </option>
+                  <option value="Final Documentation">
+                    Final Documentation
+                  </option>
+                </select>
+              </div>
+
               <div className="mb-3">
                 <label className="t-form-label">
                   <b>Document/Presentation Title:</b>
@@ -111,8 +218,10 @@ export default function UploadTemplate() {
                 <label className="t-form-label">
                   <b>Description about the Template/Document:</b>
                 </label>
-                <input
-                  type="text"
+                <br></br>
+                <textarea
+                  rows="4"
+                  type="textarea"
                   style={{ width: "450px", height: "100px" }}
                   id="cName"
                   name="Description"
@@ -122,18 +231,34 @@ export default function UploadTemplate() {
               </div>
               <br></br>
 
-              <button
-                type="submit"
-                className="btn btn-primary mb-5"
-                style={{
-                  backgroundColor: "#0F0934",
-                  width: "200px",
-                  fontWeight: "bold",
-                  marginLeft: "50%",
-                }}
-              >
-                UPLOAD
-              </button>
+              <p>
+                <a
+                  href="/"
+                  type="submit"
+                  className="btn btn-primary mb-5"
+                  style={{
+                    backgroundColor: "#FF5631",
+                    width: "150px",
+                    fontWeight: "bold",
+                    marginLeft: "0%",
+                  }}
+                >
+                  CANCEL
+                </a>
+
+                <button
+                  type="submit"
+                  className="btn btn-primary mb-5"
+                  style={{
+                    backgroundColor: "#0F0934",
+                    width: "150px",
+                    fontWeight: "bold",
+                    marginLeft: "10%",
+                  }}
+                >
+                  UPLOAD
+                </button>
+              </p>
             </div>
           </div>
         </div>

@@ -1,37 +1,74 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ClassNames } from "@emotion/react";
 import "./CSS/st.css";
+import FileInput from "./FileInput";
+import { Store } from "react-notifications-component";
 
 export default function SubmitDocs() {
-  const [Group_ID, setGroupID] = useState("");
-  const [Research_Field, setResearch_Field] = useState("");
-  const [Document, setDocument] = useState("");
-  const [Comment, setComment] = useState("");
+  const [type, setType] = useState();
+  const [userEmail, setuserEmail] = useState();
+  useEffect(() => {
+    setType(localStorage.getItem("SchemaType"));
+    setuserEmail(JSON.parse(localStorage.getItem("user")).email);
+    //console.log(JSON.parse(localStorage.getItem("user")).email);
+  }, []);
 
-  function sendData(e) {
+  //file upload
+  const [data, setData] = useState({
+    name: "upload",
+    email: JSON.parse(localStorage.getItem("user")).email,
+    GroupID: "",
+    ResearchField: "",
+    ResearchTopic: "",
+    Document: "",
+    DocType: localStorage.getItem("SchemaType"),
+    Comment: "",
+  });
+
+  const handleChange = ({ currentTarget: input }) => {
+    setData({ ...data, [input.name]: input.value });
+  };
+
+  const handleInputState = (name, value) => {
+    setData((prev) => ({ ...prev, [name]: value }));
+    console.log("21 ", data);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const url = process.env.REACT_APP_API_URL + "document";
+      const { data: res } = await axios.post(url, data);
+      console.log(res);
+      console.log(data);
 
-    const newDoc = {
-      Group_ID,
-      Research_Field,
-      Document,
-      Comment,
-    };
-    axios
-      .post("http://localhost:8070/document/", newDoc)
-      .then(() => {
-        alert("Added New Submit Type");
-        e.target.reset(); // to clear input fiels after submission
-      })
-      .catch((err) => {
-        alert("err");
+      Store.addNotification({
+        title: "Submit Doc Successfully.",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        type: "success",
+        insert: "top",
+        container: "top-right",
+
+        dismiss: {
+          duration: 1500,
+          onScreen: true,
+          showIcon: true,
+        },
+
+        width: 400,
       });
-  }
+
+      window.location.reload(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
-      <form onSubmit={sendData}>
+      <form onSubmit={handleSubmit}>
         <div className="t-list-container">
           <div style={{ backgroundColor: "#0F0934" }}>
             <div>
@@ -42,13 +79,23 @@ export default function SubmitDocs() {
             </div>
           </div>
           <div style={{ backgroundColor: "white" }}>
-            <div className="t-list-head-container">
+            {/* <div className="t-list-head-container">
               <label className="h-text" style={{ color: "#FF5631" }}>
                 {" "}
-                DOCUMENT
               </label>{" "}
               <br className="br1" />
-              <label className="h-text">SUBMISSION</label>
+              <label className="h-text">{type}</label>
+            </div> */}
+
+            <div
+              className="ms-5 mt-5 me-5"
+              style={{
+                backgroundColor: "#0F0934",
+                height: "30px",
+                color: "white",
+              }}
+            >
+              <h4 className="ms-2">{type} Submission</h4>
             </div>
 
             <div className="t-list-tb-container mt-3">
@@ -60,9 +107,10 @@ export default function SubmitDocs() {
                   type="text"
                   style={{ width: "450px" }}
                   id="cName"
-                  onChange={(e) => {
-                    setGroupID(e.target.value);
-                  }}
+                  required
+                  name="GroupID"
+                  onChange={handleChange}
+                  value={data.GroupID}
                 />
               </div>
 
@@ -73,12 +121,12 @@ export default function SubmitDocs() {
 
                 <select
                   className="form-control"
-                  name="Field"
+                  name="ResearchField"
                   id="Field"
                   style={{ width: "450px", border: "2px solid #ced4da" }}
-                  onChange={(e) => {
-                    setResearch_Field(e.target.value);
-                  }}
+                  required
+                  onChange={handleChange}
+                  value={data.ResearchField}
                 >
                   <option value="Default">Select one</option>
                   <option value="Artificial Interligance">
@@ -91,17 +139,35 @@ export default function SubmitDocs() {
               </div>
 
               <div className="mb-3">
-                <label htmlFor="formFile" className="t-form-label">
-                  <b>Upload Template/Document</b>
+                <label className="t-form-label">
+                  <b>Research Topic :</b>
                 </label>
-                <div className="col-sm-4">
-                  <input
-                    className="form-control"
-                    style={{ width: "450px" }}
+                <input
+                  type="text"
+                  style={{ width: "450px" }}
+                  id="cName"
+                  required
+                  name="ResearchTopic"
+                  onChange={handleChange}
+                  value={data.ResearchTopic}
+                />
+              </div>
+
+              <div className="mb-3">
+                <label htmlFor="formFile" className="t-form-label">
+                  <b>Upload Template</b>
+                </label>
+                <div style={{ width: "470px" }}>
+                  <FileInput
+                    name="song"
+                    label="Choose File"
+                    handleInputState={handleInputState}
                     type="file"
-                    accept="image/png, image/jpeg"
-                    id="image"
+                    value={data.song}
                   />
+                </div>
+                <div className="col-sm-4">
+                  <br></br>
                 </div>
               </div>
 
@@ -113,24 +179,39 @@ export default function SubmitDocs() {
                   type="text"
                   style={{ width: "450px", height: "100px" }}
                   id="cName"
-                  onChange={(e) => {
-                    setComment(e.target.value);
-                  }}
+                  name="Comment"
+                  onChange={handleChange}
+                  value={data.Comment}
                 />
               </div>
-
-              <button
-                type="submit"
-                className="btn btn-primary"
-                style={{
-                  backgroundColor: "#0F0934",
-                  width: "200px",
-                  fontWeight: "bold",
-                  marginLeft: "50%",
-                }}
-              >
-                CREATE
-              </button>
+              <br></br>
+              <p>
+                <a
+                  href="/DownloadTemplate"
+                  type="submit"
+                  className="btn btn-primary mb-5"
+                  style={{
+                    backgroundColor: "#FF5631",
+                    width: "150px",
+                    fontWeight: "bold",
+                    marginLeft: "0%",
+                  }}
+                >
+                  CANCEL
+                </a>
+                <button
+                  type="submit"
+                  className="btn btn-primary mb-5"
+                  style={{
+                    backgroundColor: "#0F0934",
+                    width: "150px",
+                    fontWeight: "bold",
+                    marginLeft: "10%",
+                  }}
+                >
+                  SUBMIT
+                </button>
+              </p>
             </div>
 
             <div className="bottom-t-container">

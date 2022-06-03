@@ -1,3 +1,5 @@
+import "./CSS/topicsub.css";
+import "./CSS/btrap.css";
 import React, {useState,useEffect} from "react";
 import axios from 'axios';
 
@@ -32,18 +34,18 @@ export default function CheckMembers() {
     return (
         <div>
             
-            <h1><b> <center> Check Panel Members</center> </b> </h1>
-
+            <h1 style={{color:"#322B5F"}}><b> <center> Check Panel Members</center> </b> </h1>
+            <br></br>
             <div className = "container">
             <div style={{display:"flex"}}>  
             <table className="table" style={{backgroundColor:"white"}}>
 
                 <thead>
                         <tr>
-                        <th scope="col">Number</th>
-                        <th scope="col">Group Id</th>
-                        <th scope="col">Research Area</th>
-                        <th scope="col">Research Topic</th>
+                        <th className="tColumn" style={{color:"#322B5F",fontWeight:"bold",fontSize:"24px"}} scope="col">Number</th>
+                        <th className="tColumn" style={{color:"#322B5F",fontWeight:"bold",fontSize:"24px"}} scope="col">Group Id</th>
+                        <th className="tColumn" style={{color:"#322B5F",fontWeight:"bold",fontSize:"24px"}} scope="col">Research Area</th>
+                        <th className="tColumn" style={{color:"#322B5F",fontWeight:"bold",fontSize:"24px"}} scope="col">Research Topic</th>
                         </tr>
 
                 </thead>
@@ -59,10 +61,10 @@ export default function CheckMembers() {
                            
                             <td>
                                 
-                                <a className="btn btn-warning" 
+                                <a className="l-btn-accept" style={{width:"200px",fontWeight:"bold",textDecoration:'none'}}
                                 onClick={() => setData(data)}
                                 href={`/selectpanel`}
-                                style={{textDecoration:'none'}}>
+                                >
                                 <i></i>&nbsp;Check Panel Members
                                 </a>
                                 </td>

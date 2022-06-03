@@ -2,15 +2,46 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./CSS/st.css";
 import "./CSS/stgrup.css";
-
-//import ReactHTMLTableToExcel from "react-html-table-to-excel";
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
+import { useHistory } from "react-router-dom";
+import { Store } from "react-notifications-component";
 
 export default function AllStudentGroup() {
   const [group, setGroups] = useState([]);
+  const history = useHistory();
+
+  //user authenticate
+
+  function authenticate() {
+    if (JSON.parse(localStorage.getItem("user") || "[]").user_role != "Admin") {
+      history.push("/login");
+      Store.addNotification({
+        title: "You are not allowed!",
+        message:
+          "You are not allowed to access this page! Please login as an Admin",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        type: "danger",
+        insert: "top",
+        container: "top-right",
+
+        dismiss: {
+          duration: 3000,
+          onScreen: true,
+          showIcon: true,
+        },
+
+        width: 400,
+      });
+    }
+  }
 
   useEffect(() => {
+    setTimeout(() => {
+      authenticate();
+    }, 0);
     axios
-      .get("http://localhost:8070/create/group")
+      .get("http://localhost:8070/stdGroup")
       .then((res) => {
         setGroups(res.data);
       })
@@ -18,39 +49,6 @@ export default function AllStudentGroup() {
         alert(err.message);
       });
   }, []);
-
-  //   const setData = (data) => {
-  //     let {
-  //       Group_Leader_Name,
-  //       Student_ID,
-  //       Group_Leader_Email,
-  //       Member2_Name,
-  //       Member2_ID,
-  //       Member2_Email,
-  //       Member3_Name,
-  //       Member3_ID,
-  //       Member3_Email,
-  //       Member4_Name,
-  //       Member4_ID,
-  //       Member4_Email,
-  //       Feedback,
-  //     } = data;
-  //     localStorage.setItem("Group_Leader_Name", Group_Leader_Name);
-  //     localStorage.setItem("Student_ID", Student_ID);
-  //     localStorage.setItem("Group_Leader_Email", Group_Leader_Email);
-  //     localStorage.setItem("Member2_Name", Member2_Name);
-  //     localStorage.setItem("Member2_ID", Member2_ID);
-  //     localStorage.setItem("Member2_Email", Member2_Email);
-  //     localStorage.setItem("Member3_Name", Member3_Name);
-  //     localStorage.setItem("Member3_ID", Member3_ID);
-  //     localStorage.setItem("Member3_Email", Member3_Email);
-  //     localStorage.setItem("Member4_Name", Member4_Name);
-  //     localStorage.setItem("Member4_ID", Member4_ID);
-  //     localStorage.setItem("Member4_Email", Member4_Email);
-  //     localStorage.setItem("Feedback", Feedback);
-
-  //     console.log(data);
-  //   };
 
   return (
     <div>

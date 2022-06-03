@@ -2,12 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import axios from "axios";
 import SendIcon from "@mui/icons-material/Send";
-//import emailjs from "@emailjs/browser";
-import emailjs from "emailjs-com";
 
 export default function RequestCoSupervisor() {
-  const theme = useTheme();
-
   const [groupID, setGroupID] = useState();
   const [topic, setTopic] = useState();
   const [researchField, setResearchField] = useState();
@@ -41,10 +37,7 @@ export default function RequestCoSupervisor() {
   }, []);
 
   const handlerSend = async (data) => {
-    // setEmail(data.email);
     var { email } = data;
-    // console.log("email", email);
-    // document.getElementById("subBut").click();
 
     const newRequest = {
       groupID,
@@ -75,22 +68,6 @@ export default function RequestCoSupervisor() {
         });
     }
   };
-
-  // const sendEmail = (e) => {
-  //   e.preventDefault();
-  //   console.log(" e.currentTarget", e.currentTarget);
-
-  //   emailjs
-  //     .sendForm("gmail", "sliit_rmt", e.currentTarget, "kAocVmHsaYNz5XOfJ")
-  //     .then(
-  //       (result) => {
-  //         console.log(result.text);
-  //       },
-  //       (error) => {
-  //         console.log(error.text);
-  //       }
-  //     );
-  // };
 
   return (
     <div className="body_container">
@@ -137,9 +114,6 @@ export default function RequestCoSupervisor() {
               id="researchTopic"
             />
           </div>
-          <button type="submit" className="btn btn-success ">
-            Find Co-Supervisor
-          </button>
         </form>
       </div>
 
@@ -246,21 +220,6 @@ export default function RequestCoSupervisor() {
                   ))}
                 </tbody>
               </table>
-              {/* <form onSubmit={sendEmail}>
-                <input type="hidden" name="mail" value={email} />
-                <input
-                  type="hidden"
-                  name="from_name"
-                  value="SLIIT Research Management "
-                />
-                <input type="hidden" name="groupID" value={groupID} />
-                <input type="hidden" name="rField" value={researchField} />
-                <input type="hidden" name="rTopic" value={topic} />
-                &nbsp; &nbsp;
-                <button hidden id="subBut">
-                  Send Email
-                </button>
-              </form> */}
             </div>
           </div>
         </ul>

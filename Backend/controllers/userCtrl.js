@@ -12,7 +12,7 @@ const userCtrl={
         try {
             
             
-            if(!name || !email || !password || !mobile || !user_role || !reg_number)
+            if(!name || !email || !password || !mobile || !user_role||!reg_number)
             return res.status(400).json({msg: "Please fill in all fields."})
 
             if(!validateEmail(email))
@@ -87,6 +87,16 @@ const userCtrl={
         }
     },
 
+    deleteUser: async (req, res) => {
+        let userId = req.params.id;
+        try {
+            await Users.findByIdAndDelete(userId)
+            res.json({msg: "Profile Deleted!"})
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
+
     updateUser: async (req, res) => {
         let userId= req.params.id;
         const {name,email,avatar,mobile,user_role,research_area,reg_number} = req.body
@@ -116,7 +126,7 @@ const userCtrl={
 
       panelMembers:async(req,res)=>{
         let r_area=req.params.id;
-        Users.find({research_area:r_area}).exec((err,Users)=>{
+        Users.find({research_area:r_area,user_role:"Panel Member"}).exec((err,Users)=>{
               if(err){
                   return res.status(400).json({
                      error:err
@@ -128,10 +138,6 @@ const userCtrl={
               });
           });
       },
-
-
-
-
 
     logout: async (req, res) => {
         try {
