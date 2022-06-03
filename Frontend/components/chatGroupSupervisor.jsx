@@ -179,13 +179,6 @@ export default function chatGroupSupervisor() {
                   <Card.Title>{allMsg.subject}</Card.Title>
                   <Card.Text>{allMsg.message}</Card.Text>
                   <div className="modal-footer">
-                    {/* <Button
-                      className="me-5"
-                      style={{ backgroundColor: "#0f0934" }}
-                      onClick={(e) => handleReply(e, allMsg._id)}
-                    >
-                      Reply
-                    </Button> */}
                     <Button
                       className="me-5"
                       style={{ backgroundColor: "#0f0934" }}
