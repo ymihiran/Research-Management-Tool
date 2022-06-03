@@ -69,15 +69,7 @@ export default function EvaluateTopic()  {
         e.preventDefault();
         settid("1111");
 
-        // setgroupID(document.getElementById('gid').value);
-        // settid((JSON.parse(localStorage.getItem('user')|| "[]")).reg_number);
-        // //setid(document.getElementById('gid').value);
-        // setgroupName(document.getElementById('gname').value);
-
-        // setrTopic(document.getElementById('rtopic').value);
-        // setleaderEmail(document.getElementById('mail').value);
-        // setacomment(document.getElementById('comment').value);
-
+   
         const newTopic = {
               
             tid,
