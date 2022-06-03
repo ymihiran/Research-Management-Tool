@@ -39,7 +39,6 @@ import UploadTemplate from "./components/UploadTemplate";
 import AllSubmitDoc from "./components/AllSubmitDoc";
 import chatForum from "./components/chatForum";
 import chatGroupSupervisor from "./components/chatGroupSupervisor";
-import MsgReplyForm from "./components/MsgReplyForm";
 
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -48,58 +47,59 @@ import ProfileUpdate from "./components/ProfileUpdate";
 import AllUsers from "./components/AllUsers";
 import PanelMembers from "./components/CheckPanelMembers";
 import SelectPanelMembers from "./components/SelectPanelMembers";
+import Header from "./components/Header";
 
 function App() {
+  const [token, setToken] = useState(false);
+  const [isLogged, setIsLogged] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [issupervisor, setIsSupervisor] = useState(false);
+  const [ispanelmember, setIsPanelMember] = useState(false);
+  const [iscosupervisor, setIsCoSupervisor] = useState(false);
 
-  const [token, setToken] = useState(false)
-  const [isLogged, setIsLogged] = useState(false)
-  const [isAdmin, setIsAdmin] = useState(false)
-  const [issupervisor, setIsSupervisor] = useState(false)
-  const [ispanelmember, setIsPanelMember] = useState(false)
-  const [iscosupervisor, setIsCoSupervisor] = useState(false)
-  
+  const refreshToken = async () => {
+    const res = localStorage.getItem("userAuthToken");
+    setToken(res);
+  };
+  useEffect(() => {
+    const firstLogin = localStorage.getItem("firstLogin");
+    if (firstLogin) refreshToken();
 
-  const refreshToken = async () =>{
-      const res = localStorage.getItem("userAuthToken")
-      setToken(res)
-  }
-  useEffect(() =>{
-    const firstLogin = localStorage.getItem('firstLogin')
-    if(firstLogin) refreshToken()
+    if (token) {
+      const getUser = async () => {
+        try {
+          const res = JSON.parse(localStorage.getItem("user")).user_role;
 
-    if(token){
-      const getUser = async () =>{
-          try {
+          setIsLogged(true);
+          res == "Admin" ? setIsAdmin(true) : setIsAdmin(false);
+          res == "Panel Member"
+            ? setIsPanelMember(true)
+            : setIsPanelMember(false);
+          res == "Supervisor" ? setIsSupervisor(true) : setIsSupervisor(false);
+          res == "Co-Supervisor"
+            ? setIsCoSupervisor(true)
+            : setIsCoSupervisor(false);
+        } catch (err) {
+          alert(err.response.data.msg);
+        }
+      };
 
-              const res =(JSON.parse(localStorage.getItem("user")).user_role);
-              
-             
-              setIsLogged(true)
-              res == "Admin" ? setIsAdmin(true): setIsAdmin(false)
-              res== "Panel Member" ? setIsPanelMember(true): setIsPanelMember(false)
-              res == "Supervisor" ? setIsSupervisor(true): setIsSupervisor(false)
-              res == "Co-Supervisor" ? setIsCoSupervisor(true): setIsCoSupervisor(false)
+      getUser();
+    }
+  }, [token]);
 
-          } catch (err) {
-              alert(err.response.data.msg)
-          }
-      }
-
-      getUser()
-      
-  }
-},[token])
-  
- 
   return (
     <div>
+      <Header />
       <ReactNotifications />
       <Router>
+        <Route path="/" exact component={Main} />
 
-        <Route path="/"  exact component={Main} />
-  
-        <Route path="/updateadmin/:id" exact component={isAdmin? ProfileUpdate: NotFound} />
- 
+        <Route
+          path="/updateadmin/:id"
+          exact
+          component={isAdmin ? ProfileUpdate : NotFound}
+        />
 
         <Route
           path="/profile"
@@ -138,18 +138,20 @@ function App() {
         <Route path="/AllCreateTypes" component={AllCreateTypes} />
         <Route path="/MarkingList" component={MarkingList} />
         <Route path="/EditMarking" component={EditMarking} />
-        <Route path="/Main" component={Main} />
-
-        <Route exact path="/doc" component={DocumentEvaluation} />
+        <Route path="/doc" exact component={DocumentEvaluation} />
         <Route path="/allDoc" component={AllDocuments} />
-        <Route path="/reqCoSuper" component={RequestCoSupervisor} />
+        <Route
+          path="/reqCoSuper"
+          exact
+          component={isLogged ? RequestCoSupervisor : Login}
+        />
 
         <Route path="/DownloadTemplate" component={DownloadTemplate} />
         <Route path="/StudentGroup" component={StudentGroup} />
         <Route path="/UploadTemplate" component={UploadTemplate} />
-        <Route path="/chat" component={chatForum} />
-        <Route path="/chatGroup" component={chatGroupSupervisor} />
-        <Route path="/reply" component={MsgReplyForm} />
+        <Route path="/chat" exact component={isLogged ? chatForum : Login} />
+        <Route path="/chatGroup" exact component={chatGroupSupervisor} />
+
         <Route path="/AllSubmitDoc" component={AllSubmitDoc} />
       </Router>
     </div>

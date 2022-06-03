@@ -37,6 +37,9 @@
     "react-notifications-component": "^4.0.1",
     "react-router-dom": "^5.2.0",
     "react-slidez": "0.0.31",
+
+    "reactjs-popup": "^2.0.5",
+
     "reactstrap": "^9.0.3"
   }
 }
