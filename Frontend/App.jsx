@@ -91,6 +91,15 @@ function App() {
   }
 },[token])
   
+const logout=async ()=>{
+  localStorage.clear()
+  setToken(false)
+  setIsLogged(false)
+  setIsAdmin(false)
+  setIsSupervisor(false)
+  setIsPanelMember(false)
+  setIsCoSupervisor(false)
+}
  
   return (
     <div>

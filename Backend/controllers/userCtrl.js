@@ -139,9 +139,9 @@ const userCtrl={
           });
       },
 
-    logout: async (req, res) => {
+    logout: async () => {
         try {
-            res.clearCookie('refreshtoken', {path: '/user/refresh_token'})
+            localStorage.clear();
             return res.json({msg: "Logged out."})
         } catch (err) {
             return res.status(500).json({msg: err.message})
