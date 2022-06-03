@@ -39,7 +39,6 @@ import UploadTemplate from "./components/UploadTemplate";
 import AllSubmitDoc from "./components/AllSubmitDoc";
 import chatForum from "./components/chatForum";
 import chatGroupSupervisor from "./components/chatGroupSupervisor";
-import MsgReplyForm from "./components/MsgReplyForm";
 
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -110,12 +109,12 @@ function App() {
         <Route
           path="/panelmembers"
           exact
-          component={isAdmin ? PanelMembers: NotFound }
+          component={isAdmin ? PanelMembers : NotFound}
         />
         <Route
           path="/selectpanel"
           exact
-          component={isAdmin ? SelectPanelMembers: NotFound }
+          component={isAdmin ? SelectPanelMembers : NotFound}
         />
         <Route
           path="/allprof"
@@ -152,7 +151,7 @@ function App() {
         <Route path="/UploadTemplate" component={UploadTemplate} />
         <Route path="/chat" exact component={isLogged ? chatForum : Login} />
         <Route path="/chatGroup" exact component={chatGroupSupervisor} />
-        <Route path="/reply" component={MsgReplyForm} />
+
         <Route path="/AllSubmitDoc" component={AllSubmitDoc} />
       </Router>
     </div>
