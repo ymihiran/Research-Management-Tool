@@ -1,12 +1,11 @@
 import express from "express";
 const router = express.Router();
-import TopicReg from "../models/TopicReg.js";
+
 import {
   addTopic,
   getAllTopic,
   getSingleTopic,
   updateSingleRecord,
-  updatepanel,
   deleteTopic,
   getSingleTopicData,
   getGroupID,
