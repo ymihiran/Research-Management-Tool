@@ -30,7 +30,7 @@ export default function AllDocuments() {
         container: "top-right",
 
         dismiss: {
-          duration: 2500,
+          duration: 3500,
           onScreen: true,
           showIcon: true,
         },

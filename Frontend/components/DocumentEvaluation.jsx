@@ -17,7 +17,7 @@ export default function DocumentEvaluation() {
   const [Status, setStatus] = useState();
   const history = useHistory();
 
-  //User authentication
+  //Supervisor, co-supervisor authentication
   function DocumentAuthenticate() {
     if (
       JSON.parse(localStorage.getItem("user") || "[]").user_role !=
@@ -29,7 +29,7 @@ export default function DocumentEvaluation() {
       Store.addNotification({
         title: "You are not allowed!",
         message:
-          "You are not allowed to access this page! Please login as Supervisor, Co-Supervisor or Panel Member",
+          "You are not allowed to access this page! Please login as Supervisor, Co-Supervisor",
         animationIn: ["animate__animated", "animate__fadeIn"],
         animationOut: ["animate__animated", "animate__fadeOut"],
         type: "danger",
@@ -37,7 +37,37 @@ export default function DocumentEvaluation() {
         container: "top-right",
 
         dismiss: {
-          duration: 2500,
+          duration: 3500,
+          onScreen: true,
+          showIcon: true,
+        },
+
+        width: 400,
+      });
+    }
+  }
+
+  //Supervisor, co-supervisor authentication
+  function presentationAuthenticate() {
+    if (
+      JSON.parse(localStorage.getItem("user") || "[]").user_role !=
+        "Supervisor" &&
+      JSON.parse(localStorage.getItem("user") || "[]").user_role !=
+        "Co-Supervisor"
+    ) {
+      history.push("/login");
+      Store.addNotification({
+        title: "You are not allowed!",
+        message:
+          "You are not allowed to access this page! Please login as Supervisor, Co-Supervisor",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        type: "danger",
+        insert: "top",
+        container: "top-right",
+
+        dismiss: {
+          duration: 3500,
           onScreen: true,
           showIcon: true,
         },
@@ -48,10 +78,6 @@ export default function DocumentEvaluation() {
   }
 
   useEffect(() => {
-    setTimeout(() => {
-      DocumentAuthenticate();
-    }, 0);
-
     setGroupID(localStorage.getItem("Group_ID"));
     setResearchTopic(localStorage.getItem("rTopic"));
     setLink(localStorage.getItem("Link"));
