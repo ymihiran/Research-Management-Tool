@@ -110,12 +110,12 @@ function App() {
         <Route
           path="/panelmembers"
           exact
-          component={isAdmin ? PanelMembers : NotFound}
+          component={isAdmin ? PanelMembers: NotFound }
         />
         <Route
           path="/selectpanel"
           exact
-          component={isAdmin ? SelectPanelMembers : NotFound}
+          component={isAdmin ? SelectPanelMembers: NotFound }
         />
         <Route
           path="/allprof"
