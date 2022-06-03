@@ -27,12 +27,7 @@ export default function Header() {
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="#">
-                    UploadTemplates
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="#">
-                    Submit Document
+                    Profile
                   </a>
                 </li>
                 <li className="nav-item">
@@ -40,6 +35,11 @@ export default function Header() {
                     About
                   </a>
                 </li>
+                {/* <li className="nav-item">
+                  <a className="nav-link" href="#">
+                    About
+                  </a>
+                </li> */}
               </ul>
             </div>
           </div>
