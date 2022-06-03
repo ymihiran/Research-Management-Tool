@@ -4,11 +4,46 @@ import "./CSS/st.css";
 import "./CSS/stgrup.css";
 import { Button } from "react-bootstrap";
 import { Store } from "react-notifications-component";
+import { useHistory } from "react-router-dom";
 
 export default function AllCreateTypes() {
   const [type, setTypes] = useState([]);
+  const history = useHistory();
+
+  //user authenticate
+
+  function authenticate() {
+    if (JSON.parse(localStorage.getItem("user") || "[]").user_role != "Admin") {
+      history.push("/login");
+      Store.addNotification({
+        title: "You are not allowed!",
+        message:
+          "You are not allowed to access this page! Please login as an Admin",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        type: "danger",
+        insert: "top",
+        container: "top-right",
+
+        dismiss: {
+          duration: 3000,
+          onScreen: true,
+          showIcon: true,
+        },
+
+        width: 400,
+      });
+    }
+  }
+
+  setTimeout(() => {
+    authenticate();
+  }, 0);
 
   useEffect(() => {
+    console.log(
+      JSON.parse(localStorage.getItem("user") || "[]").user_role != "Admin"
+    );
     axios
       .get("http://localhost:8070/template")
       .then((res) => {
@@ -48,7 +83,7 @@ export default function AllCreateTypes() {
             container: "top-right",
 
             dismiss: {
-              duration: 1500,
+              duration: 2500,
               onScreen: true,
               showIcon: true,
             },

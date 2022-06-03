@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ClassNames } from "@emotion/react";
 import "./CSS/st.css";
 import FileInput from "./FileInput";
 import { Store } from "react-notifications-component";
+import { useHistory } from "react-router-dom";
 
 export default function UploadTemplate() {
   //file upload
@@ -15,6 +16,7 @@ export default function UploadTemplate() {
     Title: "",
     Description: "",
   });
+  let history = useHistory();
 
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
@@ -24,6 +26,38 @@ export default function UploadTemplate() {
     setData((prev) => ({ ...prev, [name]: value }));
     console.log("21 ", data);
   };
+
+  //USER AUTHENTICATE
+
+  function authenticate() {
+    if (JSON.parse(localStorage.getItem("user") || "[]").user_role != "Admin") {
+      history.push("/login");
+      Store.addNotification({
+        title: "You are not allowed!",
+        message:
+          "You are not allowed to access this page! Please login as an Admin",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        type: "danger",
+        insert: "top",
+        container: "top-right",
+
+        dismiss: {
+          duration: 3000,
+          onScreen: true,
+          showIcon: true,
+        },
+
+        width: 400,
+      });
+    }
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      authenticate();
+    }, 0);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -113,6 +147,7 @@ export default function UploadTemplate() {
                   value={data.SchemaType}
                 >
                   <option value="Default">Select one</option>
+                  <option value="RP Group">RP Group List</option>
                   <option value="Proposal Presentation">
                     Proposal Presentation
                   </option>
