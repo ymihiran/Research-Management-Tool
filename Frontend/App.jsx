@@ -48,6 +48,7 @@ import ProfileUpdate from "./components/ProfileUpdate";
 import AllUsers from "./components/AllUsers";
 import PanelMembers from "./components/CheckPanelMembers";
 import SelectPanelMembers from "./components/SelectPanelMembers";
+import Header from "./components/Header";
 
 function App() {
   const [token, setToken] = useState(false);
@@ -90,6 +91,7 @@ function App() {
 
   return (
     <div>
+      <Header />
       <ReactNotifications />
       <Router>
         <Route path="/" exact component={Main} />
@@ -137,8 +139,6 @@ function App() {
         <Route path="/AllCreateTypes" component={AllCreateTypes} />
         <Route path="/MarkingList" component={MarkingList} />
         <Route path="/EditMarking" component={EditMarking} />
-
-        <Route path="/" exact component={Main} />
         <Route path="/doc" exact component={DocumentEvaluation} />
         <Route path="/allDoc" component={AllDocuments} />
         <Route
