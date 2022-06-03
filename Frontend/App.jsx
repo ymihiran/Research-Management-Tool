@@ -92,11 +92,13 @@ function App() {
     <div>
       <ReactNotifications />
       <Router>
+        <Route path="/" exact component={Main} />
 
-        <Route path="/"  exact component={Main} />
-  
-        <Route path="/updateadmin/:id" exact component={isAdmin? ProfileUpdate: NotFound} />
- 
+        <Route
+          path="/updateadmin/:id"
+          exact
+          component={isAdmin ? ProfileUpdate : NotFound}
+        />
 
         <Route
           path="/profile"
@@ -137,7 +139,7 @@ function App() {
         <Route path="/EditMarking" component={EditMarking} />
 
         <Route path="/" exact component={Main} />
-        <Route path="/SubmitTypes" component={SubmitTypes} />
+
         <Route path="/doc" exact component={DocumentEvaluation} />
         <Route path="/allDoc" component={AllDocuments} />
         <Route
@@ -145,7 +147,6 @@ function App() {
           exact
           component={isLogged ? RequestCoSupervisor : Login}
         />
-        <Route path="/UpdateTemplate" component={UpdateUploadTemplate} />
 
         <Route path="/DownloadTemplate" component={DownloadTemplate} />
         <Route path="/StudentGroup" component={StudentGroup} />
