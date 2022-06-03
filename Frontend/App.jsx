@@ -134,7 +134,7 @@ function App() {
         <Route path="/SubmitTypes" component={SubmitTypes} />
         <Route path="/doc" exact component={DocumentEvaluation} />
         <Route path="/allDoc" component={AllDocuments} />
-        <Route path="/reqCoSuper" component={RequestCoSupervisor} />
+        <Route path="/reqCoSuper" exact component={RequestCoSupervisor} />
         <Route path="/UpdateTemplate" component={UpdateUploadTemplate} />
         <Route path="/DownloadTemplate" component={DownloadTemplate} />
         <Route path="/StudentGroup" component={StudentGroup} />
