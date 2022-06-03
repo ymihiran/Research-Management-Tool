@@ -185,6 +185,18 @@ tr {
   background-color: #00a592 !important;
   transition: all 0.7s;
 }
+
+.btn_reply {
+  background-color: #0f0934 !important;
+  color: #ffff;
+  width: 100px;
+}
+
+.btn_reply:hover {
+  color: #000 !important;
+  background-color: #00a592 !important;
+  transition: all 0.7s;
+}
 .btn_submit {
   background-color: #0f0934 !important;
   color: #ffffff;

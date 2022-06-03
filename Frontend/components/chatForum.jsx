@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Card, Button } from "react-bootstrap";
 import { Store } from "react-notifications-component";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 export default function chatForum() {
   // const [groupID, setGroupID] = useState();
@@ -166,7 +167,7 @@ export default function chatForum() {
       <div className="right_container">
         {allMsg?.map((allMsg, index) => (
           <div key={index}>
-            <Card className="mb-3 mt-5">
+            <Card className="mb-3 mt-5" style={{ backgroundColor: "#918CAB" }}>
               <Card.Header>{allMsg.stdName}</Card.Header>
               <Card.Body>
                 <Card.Title>{allMsg.subject}</Card.Title>
@@ -174,13 +175,37 @@ export default function chatForum() {
                   <p>{allMsg.createdAt}</p>
                   {allMsg.message}
                 </Card.Text>
-                <div className="modal-footer">
-                  <Button
+                <div style={{ marginLeft: "550px" }}>
+                  <a
+                    type="number"
+                    min="0"
+                    max="25"
+                    className="form-control "
+                    style={{
+                      width: "70px",
+                      backgroundColor: "#918CAB",
+                      border: "none",
+                    }}
+                    onClick={(e) => deleteReply(e, replyMsg._id)}
+                  >
+                    <DeleteForeverIcon
+                      fontSize="large"
+                      sx={{
+                        "&:hover": {
+                          color: "red",
+                        },
+                        color: "#BB2D3B",
+                        disabled: false,
+                      }}
+                    />
+                  </a>
+                  {/* <Button
                     variant="danger"
                     onClick={(e) => deleteMsg(e, allMsg._id)}
+                    style={{ marginLeft: "500px" }}
                   >
                     Delete
-                  </Button>
+                  </Button> */}
                 </div>
               </Card.Body>
             </Card>
