@@ -47,13 +47,11 @@ export default function DocumentEvaluation() {
     }
   }
 
-  //Supervisor, co-supervisor authentication
+  //Panel Member authentication
   function presentationAuthenticate() {
     if (
       JSON.parse(localStorage.getItem("user") || "[]").user_role !=
-        "Supervisor" &&
-      JSON.parse(localStorage.getItem("user") || "[]").user_role !=
-        "Co-Supervisor"
+      "Panel Member"
     ) {
       history.push("/login");
       Store.addNotification({
@@ -90,6 +88,9 @@ export default function DocumentEvaluation() {
       localStorage.getItem("DocType") == "Progress Presentation" ||
       localStorage.getItem("DocType") == "Final Presentation"
     ) {
+      setTimeout(() => {
+        presentationAuthenticate();
+      }, 0);
       axios
         .get(
           `http://localhost:8070/markingScheme/one/${localStorage.getItem(
@@ -124,6 +125,9 @@ export default function DocumentEvaluation() {
           });
         });
     } else {
+      setTimeout(() => {
+        DocumentAuthenticate();
+      }, 0);
       axios
         .get(
           `http://localhost:8070/markingScheme/one/${localStorage.getItem(
