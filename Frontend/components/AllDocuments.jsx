@@ -2,11 +2,49 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import "./Styles/styles.css";
 import { useHistory } from "react-router";
+import { Store } from "react-notifications-component";
 
 export default function AllDocuments() {
   const [docList, setDocList] = useState([]);
   const history = useHistory();
+
+  //User authentication
+  function authenticate() {
+    if (
+      JSON.parse(localStorage.getItem("user") || "[]").user_role !=
+        "Supervisor" &&
+      JSON.parse(localStorage.getItem("user") || "[]").user_role !=
+        "Co-Supervisor" &&
+      JSON.parse(localStorage.getItem("user") || "[]").user_role !=
+        "Panel Member"
+    ) {
+      history.push("/login");
+      Store.addNotification({
+        title: "You are not allowed!",
+        message:
+          "You are not allowed to access this page! Please login as Supervisor, Co-Supervisor or Panel Member",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        type: "danger",
+        insert: "top",
+        container: "top-right",
+
+        dismiss: {
+          duration: 2500,
+          onScreen: true,
+          showIcon: true,
+        },
+
+        width: 400,
+      });
+    }
+  }
+
   useEffect(() => {
+    setTimeout(() => {
+      authenticate();
+    }, 0);
+
     axios
       .get(`http://localhost:8070/document/`)
       .then((res) => {
@@ -71,12 +109,12 @@ export default function AllDocuments() {
                   <td>{docList.ResearchField}</td>
                   <td>{docList.DocType}</td>
                   <td>{docList.Comment}</td>
-                  {docList.Status == "pending" ? (
+                  {docList.Status == "Pending" ? (
                     <td className="text-danger fw-bold">{docList.Status}</td>
                   ) : (
                     <td className="text-success fw-bold">{docList.Status}</td>
                   )}
-                  {docList.Status == "pending" ? (
+                  {docList.Status == "Pending" ? (
                     <td>
                       <button
                         type="submit"

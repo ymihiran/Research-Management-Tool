@@ -4,15 +4,50 @@ import "./Styles/styles.css";
 import { useHistory } from "react-router";
 import { Card, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import { Store } from "react-notifications-component";
 
 export default function chatGroupSupervisor() {
   const [allMsg, setAllMsg] = useState();
   const [replyMsg, setReplyMsg] = useState();
   const history = useHistory();
 
+  //User authentication
+  function authenticate() {
+    if (
+      JSON.parse(localStorage.getItem("user") || "[]").user_role !=
+        "Supervisor" ||
+      JSON.parse(localStorage.getItem("user") || "[]").user_role !=
+        "Co-Supervisor"
+    ) {
+      history.push("/login");
+      Store.addNotification({
+        title: "You are not allowed!",
+        message:
+          "You are not allowed to access this page! Please login as Supervisor or Co-Supervisor",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        type: "danger",
+        insert: "top",
+        container: "top-right",
+
+        dismiss: {
+          duration: 3500,
+          onScreen: true,
+          showIcon: true,
+        },
+
+        width: 400,
+      });
+    }
+  }
+
   useEffect(() => {
+    setTimeout(() => {
+      authenticate();
+    }, 0);
+
+    //get messages from db
     const getAllMsg = async () => {
-      //get messages from db
       const allChat = await axios
         .get(`http://localhost:8070/chat/`)
         .then((res) => {
@@ -21,8 +56,8 @@ export default function chatGroupSupervisor() {
         .catch((err) => {});
     };
 
+    //get replies from db
     const getAllReply = async () => {
-      //get messages from db
       const allReplys = await axios
         .get(`http://localhost:8070/chatReplies/group/replyMsgs`)
         .then((res) => {
