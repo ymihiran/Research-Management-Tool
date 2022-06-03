@@ -3,6 +3,7 @@ import axios from "axios";
 import { ClassNames } from "@emotion/react";
 import "./CSS/st.css";
 import FileInput from "./FileInput";
+import { Store } from "react-notifications-component";
 
 export default function SubmitDocs() {
   const [type, setType] = useState();
@@ -41,8 +42,24 @@ export default function SubmitDocs() {
       console.log(res);
       console.log(data);
 
-      alert("Successfully");
-      e.target.reset(); // to clear input fiels after submission
+      Store.addNotification({
+        title: "Submit Doc Successfully.",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        type: "success",
+        insert: "top",
+        container: "top-right",
+
+        dismiss: {
+          duration: 1500,
+          onScreen: true,
+          showIcon: true,
+        },
+
+        width: 400,
+      });
+
+      window.location.reload(false);
     } catch (error) {
       console.log(error);
     }

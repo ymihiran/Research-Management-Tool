@@ -3,6 +3,7 @@ import axios from "axios";
 import "./CSS/st.css";
 import "./CSS/stgrup.css";
 import { Button } from "react-bootstrap";
+import { Store } from "react-notifications-component";
 
 export default function AllCreateTypes() {
   const [type, setTypes] = useState([]);
@@ -38,6 +39,22 @@ export default function AllCreateTypes() {
       axios
         .delete(`http://localhost:8070/template/${_id}`)
         .then((res) => {
+          Store.addNotification({
+            title: "Delete Succesfully.",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            type: "success",
+            insert: "top",
+            container: "top-right",
+
+            dismiss: {
+              duration: 1500,
+              onScreen: true,
+              showIcon: true,
+            },
+
+            width: 400,
+          });
           console.log(res);
           window.location.reload(false);
         })
