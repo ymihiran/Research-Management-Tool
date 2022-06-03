@@ -32,8 +32,19 @@ export default function AllCreateTypes() {
   };
 
   const onDelete = (_id) => {
-    axios.delete(`http://localhost:8070/template/${_id}`);
-    window.location.reload(false);
+    let ans = window.confirm("Do you want to delete this type ?");
+
+    if (ans) {
+      axios
+        .delete(`http://localhost:8070/template/${_id}`)
+        .then((res) => {
+          console.log(res);
+          window.location.reload(false);
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    }
   };
 
   return (
