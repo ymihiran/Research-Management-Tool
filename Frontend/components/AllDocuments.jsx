@@ -107,7 +107,16 @@ export default function AllDocuments() {
                 <tr key={index} className="" style={{ height: "80px" }}>
                   <td>{docList.GroupID}</td>
                   <td>{docList.ResearchField}</td>
-                  <td>{docList.DocType}</td>
+                  {docList.DocType == "Proposal Presentation" ||
+                  docList.DocType == "Progress Presentation" ||
+                  docList.DocType == "Final Presentation" ? (
+                    <td className=" fw-bold" style={{ color: "blue" }}>
+                      {docList.DocType}
+                    </td>
+                  ) : (
+                    <td className=" fw-bold">{docList.DocType}</td>
+                  )}
+
                   <td>{docList.Comment}</td>
                   {docList.Status == "Pending" ? (
                     <td className="text-danger fw-bold">{docList.Status}</td>

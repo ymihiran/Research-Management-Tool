@@ -130,16 +130,20 @@ function App() {
         <Route path="/AllCreateTypes" component={AllCreateTypes} />
         <Route path="/MarkingList" component={MarkingList} />
         <Route path="/EditMarking" component={EditMarking} />
-        <Route path="/Main" component={Main} />
+        <Route path="/" exact component={Main} />
         <Route path="/SubmitTypes" component={SubmitTypes} />
         <Route path="/doc" exact component={DocumentEvaluation} />
         <Route path="/allDoc" component={AllDocuments} />
-        <Route path="/reqCoSuper" exact component={RequestCoSupervisor} />
+        <Route
+          path="/reqCoSuper"
+          exact
+          component={isLogged ? RequestCoSupervisor : Login}
+        />
         <Route path="/UpdateTemplate" component={UpdateUploadTemplate} />
         <Route path="/DownloadTemplate" component={DownloadTemplate} />
         <Route path="/StudentGroup" component={StudentGroup} />
         <Route path="/UploadTemplate" component={UploadTemplate} />
-        <Route path="/chat" exact component={isLogged ? chatForum : NotFound} />
+        <Route path="/chat" exact component={isLogged ? chatForum : Login} />
         <Route path="/chatGroup" exact component={chatGroupSupervisor} />
         <Route path="/reply" component={MsgReplyForm} />
         <Route path="/AllSubmitDoc" component={AllSubmitDoc} />

@@ -25,9 +25,9 @@ export default function DocumentEvaluation() {
       JSON.parse(localStorage.getItem("user") || "[]").user_role !=
         "Co-Supervisor"
     ) {
-      history.push("/login");
+      history.push("/allDoc");
       Store.addNotification({
-        title: "You are not allowed!",
+        title: "You are not allowed Documentation Evaluation!",
         message:
           "You are not allowed to access this page! Please login as Supervisor, Co-Supervisor",
         animationIn: ["animate__animated", "animate__fadeIn"],
@@ -53,11 +53,11 @@ export default function DocumentEvaluation() {
       JSON.parse(localStorage.getItem("user") || "[]").user_role !=
       "Panel Member"
     ) {
-      history.push("/login");
+      history.push("/allDoc");
       Store.addNotification({
-        title: "You are not allowed!",
+        title: "You are not allowed to Presentation Evaluation!",
         message:
-          "You are not allowed to access this page! Please login as Supervisor, Co-Supervisor",
+          "You are not allowed to access this page! Please login as Panel Member",
         animationIn: ["animate__animated", "animate__fadeIn"],
         animationOut: ["animate__animated", "animate__fadeOut"],
         type: "danger",
