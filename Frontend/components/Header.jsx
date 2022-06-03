@@ -1,11 +1,18 @@
 import React from "react";
 
 export default function Header() {
+
+  const logout=async ()=>{
+
+    localStorage.clear()
+    window.location.href = "/login";
+  }
+
   return (
     <div>
       <header>
         {/* Navbar */}
-        <nav className="navbar navbar-expand-lg navbar-light bg-white">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-black">
           <div className="container-fluid">
             <button
               className="navbar-toggler"
@@ -35,6 +42,13 @@ export default function Header() {
                     About
                   </a>
                 </li>
+
+                <li className="nav-item">
+                  <a onClick={logout} style={{marginLeft:"1600%"}} className="nav-link" href="#">
+                    Logout
+                  </a>
+                </li>
+
                 {/* <li className="nav-item">
                   <a className="nav-link" href="#">
                     About
