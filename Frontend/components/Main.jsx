@@ -1,9 +1,26 @@
 import "./CSS/topicsub.css";
 import "./CSS/btrap.css";
 
-import {MDBAccordion, MDBAccordionItem ,MDBIcon ,MDBInput ,MDBBtn, MDBContainer ,MDBFooter ,MDBCardOverlay,  MDBCardHeader, MDBCard, MDBCardImage, MDBCardBody, MDBCardTitle, MDBCardText, MDBRow, MDBCol } from 'mdb-react-ui-kit'
-import React, { useState,useEffect } from "react";
-import { useHistory } from 'react-router';
+import {
+  MDBAccordion,
+  MDBAccordionItem,
+  MDBIcon,
+  MDBInput,
+  MDBBtn,
+  MDBContainer,
+  MDBFooter,
+  MDBCardOverlay,
+  MDBCardHeader,
+  MDBCard,
+  MDBCardImage,
+  MDBCardBody,
+  MDBCardTitle,
+  MDBCardText,
+  MDBRow,
+  MDBCol,
+} from "mdb-react-ui-kit";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router";
 
 import {
   MDBAccordion,
@@ -1250,7 +1267,7 @@ export default function Main() {
                 <a href="/allDoc">
                   {" "}
                   <button className="btn l-btn-accepted main-side-button">
-                    Evaluate presentation
+                    Evaluate Document / presentation
                   </button>
                 </a>{" "}
                 <br />
