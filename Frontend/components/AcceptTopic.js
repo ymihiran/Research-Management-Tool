@@ -7,6 +7,8 @@ import emailjs from "emailjs-com";
 
 import { Store } from "react-notifications-component";
 
+//function
+
 export default function AcceptTopic() {
   const [tid, settid] = useState();
   const [id, setid] = useState();
@@ -32,8 +34,8 @@ export default function AcceptTopic() {
         title: "You are not allowed!",
         message:
           "You are not allowed to access this page! Please login as Supervisor or Co-Supervisor",
-        animationIn: ["animate__animated", "animate__fadeIn"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
+        animationIn: ["animate_animated", "animate_fadeIn"],
+        animationOut: ["animate_animated", "animate_fadeOut"],
         type: "danger",
         insert: "top",
         container: "top-right",
@@ -77,7 +79,6 @@ export default function AcceptTopic() {
       sts = "Rejected";
     } else {
       //no button pressed
-
     }
 
     const updateTopic = {
@@ -99,8 +100,8 @@ export default function AcceptTopic() {
         .then(() => {
           Store.addNotification({
             title: "Status Updated Successfully.",
-            animationIn: ["animate__animated", "animate__fadeIn"],
-            animationOut: ["animate__animated", "animate__fadeOut"],
+            animationIn: ["animate_animated", "animate_fadeIn"],
+            animationOut: ["animate_animated", "animate_fadeOut"],
             type: "success",
             insert: "top",
             container: "top-right",
