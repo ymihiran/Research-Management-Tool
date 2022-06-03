@@ -3,7 +3,6 @@ import axios from "axios";
 import { ClassNames } from "@emotion/react";
 import "./CSS/st.css";
 
-
 import { useHistory } from "react-router-dom";
 
 export default function DownloadTemplate() {
@@ -120,6 +119,17 @@ export default function DownloadTemplate() {
                   <div className="mb-1 " style={{ marginLeft: "15px" }}>
                     <label className="t-form-label">
                       <h6>{data.Description}</h6>
+                    </label>
+                  </div>
+
+                  <div className="mb-1 " style={{ marginLeft: "15px" }}>
+                    <label className="t-form-label">
+                      <h6 style={{ backgroundColor: "#fefe33" }}>
+                        {" "}
+                        <b>DEADLINE :</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        {data.DeadlineDate} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        {data.DeadlineTime}
+                      </h6>
                     </label>
                   </div>
                 </div>

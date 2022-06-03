@@ -17,6 +17,13 @@ const UploadTemplateSchema = new Schema(
       required: true,
     },
 
+    DeadlineDate: {
+      type: Date,
+    },
+    DeadlineTime: {
+      type: "String",
+    },
+
     Template: {
       type: String,
     },

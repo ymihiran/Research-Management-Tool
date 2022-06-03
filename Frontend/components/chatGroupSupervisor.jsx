@@ -144,14 +144,13 @@ export default function chatGroupSupervisor() {
       </div>
 
       {/* Popup modal */}
-      <Modal size="lg" isOpen={modal} toggle={() => setModal(!modal)}>
+      <Modal centered size="lg" isOpen={modal} toggle={() => setModal(!modal)}>
         <ModalHeader toggle={() => setModal(!modal)}>
-          <h3>Reply to message</h3>
+          <h5>Reply:</h5>
         </ModalHeader>
         <ModalBody>
           <form onSubmit={handelSendReplyModal}>
             <div className="form-group mb-3">
-              <label>Reply</label>
               <textarea
                 required
                 className="form-control"
@@ -162,11 +161,14 @@ export default function chatGroupSupervisor() {
                 }}
               />
             </div>
-            <div className="modal-footer">
-              <button type="submit" className="btn btn-success ">
-                Send
-              </button>
-            </div>
+
+            <button
+              type="submit"
+              className="btn btn_reply "
+              style={{ marginLeft: "650px" }}
+            >
+              Send
+            </button>
           </form>
         </ModalBody>
       </Modal>
@@ -176,18 +178,17 @@ export default function chatGroupSupervisor() {
         {allMsg?.map((allMsg, index) => (
           <div key={index}>
             {console.log("allMsg", allMsg)}
-            <div className="p-5">
+            <div>
               <h3>{allMsg.groupID}</h3>
 
-              <Card className="mb-1 mt-5">
+              <Card className=" mt-1" style={{ backgroundColor: "#918CAB" }}>
                 <Card.Header>{allMsg.stdName}</Card.Header>
                 <Card.Body>
                   <Card.Title>{allMsg.subject}</Card.Title>
                   <Card.Text>{allMsg.message}</Card.Text>
-                  <div className="modal-footer">
+                  <div style={{ marginLeft: "700px" }}>
                     <Button
-                      className="me-5"
-                      style={{ backgroundColor: "#0f0934" }}
+                      className="me-5 btn_reply"
                       onClick={(e) => handleReply(e, allMsg._id)}
                     >
                       Reply
@@ -222,7 +223,11 @@ export default function chatGroupSupervisor() {
                                 </p>
                                 <p className="ms-4">{replyMsg.message}</p>
                               </Card.Text>
-                              <div style={{ marginLeft: "450px" }}>
+                              <div
+                                style={{
+                                  marginLeft: "450px",
+                                }}
+                              >
                                 <a
                                   type="number"
                                   min="0"
@@ -239,9 +244,9 @@ export default function chatGroupSupervisor() {
                                     fontSize="large"
                                     sx={{
                                       "&:hover": {
-                                        color: "#00D8B6",
+                                        color: "red",
                                       },
-                                      color: "red",
+                                      color: "#BB2D3B",
                                       disabled: false,
                                     }}
                                   />
