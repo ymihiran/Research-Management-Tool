@@ -15,7 +15,7 @@ export default function chatGroupSupervisor() {
   function authenticate() {
     if (
       JSON.parse(localStorage.getItem("user") || "[]").user_role !=
-        "Supervisor" ||
+        "Supervisor" &&
       JSON.parse(localStorage.getItem("user") || "[]").user_role !=
         "Co-Supervisor"
     ) {
