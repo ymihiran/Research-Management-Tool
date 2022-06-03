@@ -100,26 +100,26 @@ export default function AllCreateTypes() {
   };
 
   //SEARCH BAR FUNCTION
-  const filterData = (stype, searchkey) => {
-    const result = stype.filter(
-      (UploadTemplate) =>
-        UploadTemplate.SchemaType.toLowerCase().includes(searchkey) ||
-        UploadTemplate.SchemaType.toUpperCase().includes(searchkey) ||
-        UploadTemplate.SchemaType.includes(searchkey)
-    );
+  // const filterData = (stype, searchkey) => {
+  //   const result = stype.filter(
+  //     (UploadTemplate) =>
+  //       UploadTemplate.SchemaType.toLowerCase().includes(searchkey) ||
+  //       UploadTemplate.SchemaType.toUpperCase().includes(searchkey) ||
+  //       UploadTemplate.SchemaType.includes(searchkey)
+  //   );
 
-    setTypes(result);
-  };
+  //   setTypes(result);
+  // };
 
-  function handleSearch(e) {
-    const searchkey = e.currentTarget.value;
+  // function handleSearch(e) {
+  //   const searchkey = e.currentTarget.value;
 
-    axios.get("http://localhost:8070/template").then((res) => {
-      if (res.data.success) {
-        filterData(res.data.schema, searchkey);
-      }
-    });
-  }
+  //   axios.get("http://localhost:8070/template").then((res) => {
+  //     if (res.data.success) {
+  //       filterData(res.data.schema, searchkey);
+  //     }
+  //   });
+  // }
 
   return (
     <div>
@@ -144,7 +144,7 @@ export default function AllCreateTypes() {
 
           <section className="py-4 container mt-2">
             {/* search bar */}
-            <div className="row" style={{ marginLeft: "10px" }}>
+            {/* <div className="row" style={{ marginLeft: "10px" }}>
               <div className="col-lg-3 mt-2 mb-2">
                 <input
                   className="form-control"
@@ -154,7 +154,7 @@ export default function AllCreateTypes() {
                   onChange={handleSearch}
                 ></input>
               </div>
-            </div>
+            </div> */}
             <div className="py-2 container">
               <table class="table border shadow" id="emp-table">
                 <thead class="thread-dark">
