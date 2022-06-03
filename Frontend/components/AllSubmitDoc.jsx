@@ -71,7 +71,7 @@ export default function AllSubmitDoc() {
                           "chk ",
                           data.Status == "Pending"
                         )}
-                        {data.Status == "pending" ? (
+                        {data.Status == "Pending" ? (
                           <td scope="col">{data.Status}</td>
                         ) : (
                           <td
