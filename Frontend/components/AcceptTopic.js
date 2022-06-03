@@ -24,7 +24,7 @@ export default function AcceptTopic()  {
 
     function authenticate() {
 
-        if((JSON.parse(localStorage.getItem('user')|| "[]")).user_role!="Supervisor" || (JSON.parse(localStorage.getItem('user')|| "[]")).user_role!="Co-Supervisor"){
+        if((JSON.parse(localStorage.getItem('user')|| "[]")).user_role!="Supervisor" && (JSON.parse(localStorage.getItem('user')|| "[]")).user_role!="Co-Supervisor"){
             history.push("/login");
             Store.addNotification({
                 title: "You are not allowed!",

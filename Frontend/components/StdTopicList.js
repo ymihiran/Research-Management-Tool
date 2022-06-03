@@ -107,7 +107,12 @@ export default function TopicList()  {
                         </thead>
                         <tbody>
 
-                        {request.map((data,index)=>(
+                        {request.filter(val=>{
+                                let tmp = (JSON.parse(localStorage.getItem('user')|| "[]")).email;
+                               
+                                if(val.leaderEmail.toLowerCase().includes(tmp.toLocaleLowerCase())){
+                                    return val}
+                            }).map((data,index)=>(
 
                             <tr key={index}>
                                 <th scope="row">{index+1}</th>
