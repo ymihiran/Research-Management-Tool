@@ -6,6 +6,7 @@ import { Card, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { Store } from "react-notifications-component";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 export default function chatGroupSupervisor() {
   const [allMsg, setAllMsg] = useState();
@@ -202,28 +203,55 @@ export default function chatGroupSupervisor() {
                 {replyMsg?.map((replyMsg, index) => (
                   <div key={index}>
                     {allMsg._id === replyMsg.messageID ? (
-                      <Card
-                        className="mb-3"
-                        style={{ backgroundColor: "#ece9ff" }}
-                      >
-                        <Card.Body>
-                          <Card.Text>
-                            <p>{replyMsg.createdAt}</p>
-                            <p>
-                              <b>Reply by:</b> {replyMsg.userSup}
-                            </p>
-                            <p className="ms-4">{replyMsg.message}</p>
-                          </Card.Text>
-                          <div className="modal-footer">
-                            <Button
-                              variant="danger"
-                              onClick={(e) => deleteReply(e, replyMsg._id)}
-                            >
-                              Delete
-                            </Button>
+                      <div style={{ width: "550px", marginLeft: "350px" }}>
+                        <Card
+                          className="mb-3"
+                          style={{ backgroundColor: "#ece9ff" }}
+                        >
+                          <div style={{ height: "180px" }}>
+                            <Card.Body>
+                              <Card.Text>
+                                <p>{replyMsg.createdAt}</p>
+                                <p>
+                                  <b>Reply by:</b> {replyMsg.userSup}
+                                </p>
+                                <p className="ms-4">{replyMsg.message}</p>
+                              </Card.Text>
+                              <div style={{ marginLeft: "450px" }}>
+                                <a
+                                  type="number"
+                                  min="0"
+                                  max="25"
+                                  className="form-control "
+                                  style={{
+                                    width: "70px",
+                                    backgroundColor: "#ece9ff",
+                                    border: "none",
+                                  }}
+                                  onClick={(e) => deleteReply(e, replyMsg._id)}
+                                >
+                                  <DeleteForeverIcon
+                                    fontSize="large"
+                                    sx={{
+                                      "&:hover": {
+                                        color: "#00D8B6",
+                                      },
+                                      color: "red",
+                                      disabled: false,
+                                    }}
+                                  />
+                                </a>
+                                {/* <Button
+                                  variant="danger"
+                                  onClick={(e) => deleteReply(e, replyMsg._id)}
+                                >
+                                  Delete
+                                </Button> */}
+                              </div>
+                            </Card.Body>
                           </div>
-                        </Card.Body>
-                      </Card>
+                        </Card>
+                      </div>
                     ) : (
                       <div></div>
                     )}
