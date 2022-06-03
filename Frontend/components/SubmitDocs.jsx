@@ -79,13 +79,23 @@ export default function SubmitDocs() {
             </div>
           </div>
           <div style={{ backgroundColor: "white" }}>
-            <div className="t-list-head-container">
+            {/* <div className="t-list-head-container">
               <label className="h-text" style={{ color: "#FF5631" }}>
                 {" "}
-                Template
               </label>{" "}
               <br className="br1" />
               <label className="h-text">{type}</label>
+            </div> */}
+
+            <div
+              className="ms-5 mt-5 me-5"
+              style={{
+                backgroundColor: "#0F0934",
+                height: "30px",
+                color: "white",
+              }}
+            >
+              <h4 className="ms-2">{type} Submission</h4>
             </div>
 
             <div className="t-list-tb-container mt-3">
